@@ -109,7 +109,6 @@ module.exports = async function scraper(page) {
   } catch (error) {
     console.log(error);
     setTimeout(async () => {
-      await scraper(page);
-    }, millisecondsBeforeRerunningScraper);
+    }, 20000);
   }
 };
