@@ -33,36 +33,61 @@ console.log("playSound: ", playSound);
 
 // -------------------
 
+const usernameToBeNofiedOf = "InvestAnswers";
+const millisecondsBeforeScrapingAgain = 1000;
+
 module.exports = async function scraper(page) {
   try {
     console.log("🏁🏁🏁🏁🏁🏁");
-    let newMessageMade = false;
 
     setTimeout(async () => {
       await page.click("[data-dnd-name=InvestAnswers]");
       setTimeout(async () => {
         await page.click("[data-list-item-id=channels___1177004340024709180]");
-        function checkForJamesMsg() {
+        function checkForJamesMsg(prevMessage) {
+          let newMessageMade = false;
+          let lastMessageText;
           setTimeout(async () => {
+            console.log("🔎🔎🔎🔎🔎🔎");
+
             const usersThatSentMsgs = await page.$$(
               '[class="headerText_bd68ec"]'
             );
 
             const lastUsersThatSentMsgs = usersThatSentMsgs.slice(-1);
 
-            console.log("🚀 ~ lastUsersThatSentMsgs:", lastUsersThatSentMsgs);
             for (let msg of lastUsersThatSentMsgs) {
-              const innerText = await page.evaluate((el) => el.innerText, msg);
-              console.log("🚀 ~ innerText:", innerText);
-              if (innerText == "InvestAnswers") {
-                newMessageMade = true;
-                break;
+              const usernameThatPosted = await page.evaluate(
+                (el) => el.innerText,
+                msg
+              );
+              console.log("🙋‍♂️ Last message sent by: ", usernameThatPosted);
+              if (usernameThatPosted === usernameToBeNofiedOf) {
+                const messages = await page.$$(
+                  '[class="markup_a7e664 messageContent_abea64"]'
+                );
+
+                let lastMessage = messages.slice(-1);
+
+                lastMessageText = await page.evaluate((el) => {
+                  return el.innerText;
+                }, lastMessage[0]);
+                console.log("📬 Last message: ", lastMessageText);
+
+                console.log("📭 Previous message: ", prevMessage);
+
+                if (!prevMessage) {
+                  prevMessage = lastMessageText;
+                }
+
+                if (lastMessageText !== prevMessage) {
+                  newMessageMade = true;
+                  break;
+                }
               }
             }
 
             if (newMessageMade) {
-              // const messages = await page.$$('[class="messageContent_abea64"]');
-              // console.log("🚀 ~ messages:", messages);
               console.log(
                 "🎉🎉🎉 InvestAnswers sent message in Sol-Alts channel!!!"
               );
@@ -70,17 +95,17 @@ module.exports = async function scraper(page) {
                 if (err) throw err;
               });
               setTimeout(async () => {
-                await scraper(page);
+                checkForJamesMsg(lastMessageText);
               }, 5000);
             } else {
-              console.log("👌 He has not posted 👌");
-              checkForJamesMsg();
+              console.log("👌 He has not sent a msg 👌");
+              checkForJamesMsg(lastMessageText);
             }
-          }, "1000");
+          }, millisecondsBeforeScrapingAgain);
         }
-        checkForJamesMsg();
-      }, "500");
-    }, "1000");
+        checkForJamesMsg(null);
+      }, 500);
+    }, 1000);
   } catch (error) {
     console.log(error);
     setTimeout(async () => {
