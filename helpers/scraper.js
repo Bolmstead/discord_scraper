@@ -44,7 +44,7 @@ module.exports = async function scraper(page) {
       await page.click("[data-dnd-name=InvestAnswers]");
       setTimeout(async () => {
         await page.click("[data-list-item-id=channels___1177004340024709180]");
-        function checkForJamesMsg(prevMessage) {
+        function checkForMessage(prevMessage) {
           let newMessageMade = false;
           let lastMessageText;
           setTimeout(async () => {
@@ -95,20 +95,19 @@ module.exports = async function scraper(page) {
                 if (err) throw err;
               });
               setTimeout(async () => {
-                checkForJamesMsg(lastMessageText);
+                checkForMessage(lastMessageText);
               }, 5000);
             } else {
               console.log("👌 He has not sent a msg 👌");
-              checkForJamesMsg(lastMessageText);
+              checkForMessage(lastMessageText);
             }
           }, millisecondsBeforeScrapingAgain);
         }
-        checkForJamesMsg(null);
+        checkForMessage(null);
       }, 500);
     }, 1000);
   } catch (error) {
     console.log(error);
-    setTimeout(async () => {
-    }, 20000);
+    setTimeout(async () => {}, 20000);
   }
 };

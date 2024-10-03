@@ -1,4 +1,4 @@
-const scraper = require("./helpers/scraper");
+const scraper = require("./helpers/moneyClubScraper");
 const puppeteer = require("puppeteer-extra");
 
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
@@ -16,16 +16,6 @@ async function logIntoDiscord(email, password) {
   await page.goto(`https://discord.com/login`, { waitUntil: "load" });
 
   setTimeout(async () => {
-    await page.type('input[name="email"]', email);
-
-    await page.click("[type=password]");
-
-    setTimeout(async () => {
-      await page.type('input[type="password"]', password);
-      await page.click("[type=submit]");
-      setTimeout(async () => {
-        await scraper(page);
-      }, "5000");
-    }, "2000");
+    await scraper(page);
   }, "5000");
 }
