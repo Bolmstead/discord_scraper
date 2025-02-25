@@ -1,4 +1,4 @@
-const scraper = require("./helpers/moneyClubScraper");
+const scraper = require("./helpers/twitterTrackerScraper");
 const puppeteer = require("puppeteer-extra");
 
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
@@ -17,5 +17,5 @@ async function logIntoDiscord(email, password) {
 
   setTimeout(async () => {
     await scraper(page);
-  }, "5000");
+  }, "30000");
 }
