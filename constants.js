@@ -38,6 +38,7 @@ const twitterAccounts = [
         slippage: 100,
         priorityFee: 0.1,
       },
+      // --------- TEST COIN ---------
       {
         name: "test - Kekius Maximus",
         ticker: "test - KM",
@@ -125,10 +126,12 @@ const twitterAccounts = [
       },
     ],
   },
+  // --------- Mario Nawfal (test account) ---------
   {
     username: "MarioNawfal",
     name: "Mario Nawfal",
     coins: [
+      // --------- TEST COIN ---------
       {
         name: "test - Kekius Maximus",
         ticker: "test - KM",
