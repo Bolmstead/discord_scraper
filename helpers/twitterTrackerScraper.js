@@ -4,6 +4,7 @@ require("dotenv").config();
 
 var player = require("play-sound")((opts = {}));
 const { startCreatingToken, buyTokens } = require("../memecoinHelpers/index");
+const { determineIfMemecoinBuy } = require("./determineIfMemecoinBuy");
 
 // ----- config ------
 const millisecondsBeforeRerunningScraper = 1000;
@@ -23,40 +24,47 @@ module.exports = async function scraper(page) {
       let elonTweeted = false;
       let elonTweetObj = {
         name: "Elon Musk",
-        handle: "elonmusk",
+        username: "elonmusk",
         text: "",
       };
       // Get data from the last 5 tweets
       for (let i = startIndex; i < tweetElements.length; i++) {
         const element = tweetElements[i];
 
-        // Get the Twitter handle
+        // Get the Twitter username
         const authorElement = await element.$(".embedAuthorNameLink__623de");
-        const handle = await authorElement?.evaluate((el) => el.textContent);
-
-        if (handle.includes("(elonmusk)")) {
-          elonTweeted = true;
-          elonTweetObj.text = text;
-          console.log("Elon tweeted!!!!");
-          player.play("Success2.mp3", function (err) {
-            if (err) throw err;
-          });
-          break;
-        }
+        const username = await authorElement?.evaluate((el) => el.textContent);
 
         // Get the tweet text
         const descriptionElement = await element.$(".embedDescription__623de");
         const text = await descriptionElement?.evaluate((el) => el.textContent);
 
+        const coin = await determineIfMemecoinBuy({
+          username,
+          text,
+        });
+
+        if (coin) {
+          console.log("‼️‼️‼️‼️‼️‼️‼️‼️‼️");
+          break;
+        }
+
         tweets.push({
-          handle,
+          username,
           text,
         });
       }
 
-      if (elonTweeted) {
-        console.log("Starting to create token...");
-        await startCreatingToken(elonTweetObj);
+      if (coin) {
+        console.log("Starting to buy token...");
+
+        // await buyTokens(coin);
+        player.play("Success2.mp3", function (err) {
+          if (err) throw err;
+        });
+        setTimeout(async () => {
+          scraper(page);
+        }, 60000);
       }
 
       if (!elonTweeted) {
@@ -68,6 +76,8 @@ module.exports = async function scraper(page) {
     }, millisecondsBeforeRerunningScraper);
   } catch (error) {
     console.log("❌ Error in Twitter tracker scraper:", error);
-    setTimeout(async () => {}, 20000);
+    setTimeout(async () => {
+      scraper(page);
+    }, 20000);
   }
 };
