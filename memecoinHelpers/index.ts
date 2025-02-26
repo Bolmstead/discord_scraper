@@ -119,6 +119,19 @@ export const buyTokens = async (sdk: any, testAccount: any, mint: any) => {
   console.log("🛍️ Starting buyTokens function");
   console.log("🎯 Attempting to buy tokens...");
 
+  // --------- Coin ---------
+
+  // {
+  //   ticker: "SWF",
+  //   name: "Sovereign Wealth Fund",
+  //   address: "FtBXDMyD4SvAa6keQPAGk4sgRVuUECsxGU1X2dLWpump",
+  //   timeToSell: 90 * 1000,
+  //   keywords: ["sovereign wealth fund"],
+  //   amountToBuy: 1,
+  //   slippage: 30,
+  //   priorityFee: 0.05,
+  // },
+
   // --------- Buy Function ---------
   // async buy(
   //   buyer: Keypair,
@@ -332,9 +345,3 @@ export const startCreatingToken = async (latestTweet: any) => {
 // };
 
 // Start the process
-console.log("🚀 Starting application with test tweet...");
-startCreatingToken({
-  name: "Elon Musk",
-  handle: "elonmusk",
-  text: "Hello, world!",
-});

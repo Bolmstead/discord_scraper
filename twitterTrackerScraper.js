@@ -3,8 +3,11 @@
 require("dotenv").config();
 
 var player = require("play-sound")((opts = {}));
-const { startCreatingToken, buyTokens } = require("../memecoinHelpers/index");
-const { determineIfMemecoinBuy } = require("./determineIfMemecoinBuy");
+const {
+  determineIfMemecoinBuy,
+} = require("./helpers/determineIfMemecoinBuy.js");
+const { extractNameFromParentheses } = require("./helpers/stringParser.js");
+const { swapOnJupiter } = require("./helpers/jupiterFunctions.js");
 
 // ----- config ------
 const millisecondsBeforeRerunningScraper = 1000;
@@ -21,25 +24,24 @@ module.exports = async function scraper(page) {
       // Calculate starting index to get last 5 tweets
       const startIndex = Math.max(0, tweetElements.length - 5);
 
-      let elonTweeted = false;
-      let elonTweetObj = {
-        name: "Elon Musk",
-        username: "elonmusk",
-        text: "",
-      };
+      let coin = null;
+
       // Get data from the last 5 tweets
       for (let i = startIndex; i < tweetElements.length; i++) {
         const element = tweetElements[i];
 
         // Get the Twitter username
         const authorElement = await element.$(".embedAuthorNameLink__623de");
-        const username = await authorElement?.evaluate((el) => el.textContent);
+        const usernameFullText = await authorElement?.evaluate(
+          (el) => el.textContent
+        );
+        const username = extractNameFromParentheses(usernameFullText);
 
         // Get the tweet text
         const descriptionElement = await element.$(".embedDescription__623de");
         const text = await descriptionElement?.evaluate((el) => el.textContent);
 
-        const coin = await determineIfMemecoinBuy({
+        coin = await determineIfMemecoinBuy({
           username,
           text,
         });
@@ -67,8 +69,8 @@ module.exports = async function scraper(page) {
         }, 60000);
       }
 
-      if (!elonTweeted) {
-        console.log("Latest 5 tweets:", tweets);
+      if (!coin) {
+        console.log("Last tweet:", tweets[tweets.length - 1]);
 
         // Recursively call scraper to keep monitoring
         await scraper(page);
@@ -81,3 +83,12 @@ module.exports = async function scraper(page) {
     }, 20000);
   }
 };
+
+const solToUsdcTx = await swapOnJupiter({
+  privateKey: process.env.PRIVATE_KEY,
+  inputMint: "So11111111111111111111111111111111111111112", // SOL
+  outputMint: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", // USDC
+  amount: 0.01, // 0.1 SOL in lamports
+  slippageBps: 50, // 0.5%
+});
+console.log(`SOL to USDC swap: ${solToUsdcTx}`);

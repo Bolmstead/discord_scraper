@@ -1,3 +1,5 @@
+const { twitterAccounts } = require("../constants");
+
 async function determineIfMemecoinBuy(tweetObj) {
   const { username, text } = tweetObj;
   const account = twitterAccounts.find(
@@ -36,5 +38,4 @@ async function determineIfMemecoinBuy(tweetObj) {
     return null;
   }
 }
-
 module.exports = { determineIfMemecoinBuy };

@@ -1,13 +1,11 @@
-const scraper = require("./helpers/twitterTrackerScraper");
+const scraper = require("./twitterTrackerScraper");
 const puppeteer = require("puppeteer-extra");
 
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 puppeteer.use(StealthPlugin());
 require("dotenv").config();
 
-logIntoDiscord("olms2074@gmail.com", process.env.DISCORD_PASSWORD);
-
-async function logIntoDiscord(email, password) {
+async function logIntoDiscord() {
   const browser = await puppeteer.launch({
     headless: false,
     defaultViewport: false,
@@ -19,3 +17,5 @@ async function logIntoDiscord(email, password) {
     await scraper(page);
   }, "30000");
 }
+
+logIntoDiscord();

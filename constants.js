@@ -2,8 +2,6 @@
 
 const twitterAccounts = [
   // --------- Elon Musk ---------
-  // Adrian Dittmann
-  // The Dogefather
   {
     username: "elonmusk",
     name: "Elon Musk",
@@ -13,7 +11,12 @@ const twitterAccounts = [
         ticker: "BIGBALLS",
         address: "7mHCx9iXPJ7EJDbDAUGmej39Kme8cxZfeVi1EAvEpump",
         timeToSell: 120 * 1000,
-        keywords: ["big balls", "big balls edward", "edward coristine"],
+        keywords: [
+          "big balls",
+          "big balls edward",
+          "edward coristine",
+          "coristine",
+        ],
         amountToBuy: 5,
         slippage: 100,
         priorityFee: 0.1,
@@ -23,7 +26,7 @@ const twitterAccounts = [
         ticker: "KM",
         address: "HuAncxDEsakCDgZS2Yfo9xJbHmtHXMnxxkT9jqdXnHhm",
         timeToSell: 120 * 1000,
-        keywords: ["kekius", "kekius maximus"],
+        keywords: ["kekius", "kekius maximus", "maximus"],
         amountToBuy: 10,
         slippage: 100,
         priorityFee: 0.1,
@@ -38,20 +41,42 @@ const twitterAccounts = [
         slippage: 100,
         priorityFee: 0.1,
       },
-      // --------- TEST COIN ---------
       {
-        name: "test - Kekius Maximus",
-        ticker: "test - KM",
-        address: "HuAncxDEsakCDgZS2Yfo9xJbHmtHXMnxxkT9jqdXnHhm",
-        timeToSell: 30 * 1000,
-        keywords: [],
-        amountToBuy: 0.01,
-        slippage: 2,
-        priorityFee: 0.01,
-        automaticBuy: true,
+        name: "Adrian Dittmann",
+        ticker: "Adrian",
+        address: "6Em4veHJFxfnEvu2cyQhkn2BszvHxycPba8fL3Psx4gY",
+        timeToSell: 90 * 1000,
+        keywords: ["adrian", "dittmann"],
+        amountToBuy: 5,
+        slippage: 100,
+        priorityFee: 0.1,
       },
+      {
+        name: "Dogefather",
+        ticker: "DOGEFATHER",
+        address: "EcYK2XNG4wWr2vDg2M2Hrts6SrU2QB4NzXLBf888pump",
+        timeToSell: 90 * 1000,
+        keywords: ["dogefather"],
+        amountToBuy: 5,
+        slippage: 50,
+        priorityFee: 0.1,
+      },
+      // --------- TEST COIN ---------
+      // {
+      //   name: "test - Kekius Maximus",
+      //   ticker: "test - KM",
+      //   address: "HuAncxDEsakCDgZS2Yfo9xJbHmtHXMnxxkT9jqdXnHhm",
+      //   timeToSell: 30 * 1000,
+      //   keywords: [],
+      //   amountToBuy: 0.01,
+      //   slippage: 2,
+      //   priorityFee: 0.01,
+      //   automaticBuy: true,
+      // },
     ],
   },
+  // --------- Dave Portnoy ---------
+  // Greed 3, Davey Day Trader Global, Jailstool
   {
     username: "stoolpresidente",
     name: "Dave Portnoy",
@@ -73,7 +98,7 @@ const twitterAccounts = [
         timeToSell: 120 * 1000,
         keywords: ["$ddtg"],
         amountToBuy: 3,
-        slippage: 20,
+        slippage: 30,
         priorityFee: 0.05,
       },
       {
@@ -83,11 +108,22 @@ const twitterAccounts = [
         timeToSell: 120 * 1000,
         keywords: ["jailstool"],
         amountToBuy: 3,
-        slippage: 50,
+        slippage: 30,
+        priorityFee: 0.05,
+      },
+      {
+        name: "Stoole Presidente (jailstool)",
+        ticker: "jailstool",
+        address: "AxriehR6Xw3adzHopnvMn7GcpRFcD41ddpiTWMg6pump",
+        timeToSell: 120 * 1000,
+        keywords: ["jailstool"],
+        amountToBuy: 3,
+        slippage: 30,
         priorityFee: 0.05,
       },
     ],
   },
+  // --------- SBF ---------
   {
     username: "SBF_FTX",
     name: "SBF",
@@ -98,18 +134,13 @@ const twitterAccounts = [
         address: "9Nuzd5BZMfeiP2TSXXGqYcrtqYEyFkGoEbm39CB3pump",
         timeToSell: 120 * 1000,
         keywords: [],
-        amountToBuy: 3,
+        amountToBuy: 1,
         slippage: 50,
-        priorityFee: 0.1,
+        priorityFee: 0.05,
       },
     ],
   },
   // --------- Watcher Guru ---------
-  // Gold Card
-  // Big balls
-  // HKU5
-  // SWF
-
   {
     username: "WatcherGuru",
     name: "Watcher Guru",
@@ -124,27 +155,87 @@ const twitterAccounts = [
         slippage: 20,
         priorityFee: 0.05,
       },
-    ],
-  },
-  // --------- Mario Nawfal (test account) ---------
-  {
-    username: "MarioNawfal",
-    name: "Mario Nawfal",
-    coins: [
-      // --------- TEST COIN ---------
       {
-        name: "test - Kekius Maximus",
-        ticker: "test - KM",
-        address: "HuAncxDEsakCDgZS2Yfo9xJbHmtHXMnxxkT9jqdXnHhm",
-        timeToSell: 30 * 1000,
-        keywords: [],
-        amountToBuy: 0.01,
-        slippage: 2,
-        priorityFee: 0.01,
-        automaticBuy: true,
+        ticker: "HKU5",
+        name: "New China coronavirus",
+        address: "HRqNoAHzcvxRwMf64gz9C6DHKW1icgjebjvK23ikpump",
+        timeToSell: 90 * 1000,
+        keywords: ["hku5"],
+        amountToBuy: 3,
+        slippage: 30,
+        priorityFee: 0.05,
+      },
+      {
+        ticker: "SWF",
+        name: "Sovereign Wealth Fund",
+        address: "FtBXDMyD4SvAa6keQPAGk4sgRVuUECsxGU1X2dLWpump",
+        timeToSell: 90 * 1000,
+        keywords: ["sovereign wealth fund"],
+        amountToBuy: 1,
+        slippage: 30,
+        priorityFee: 0.05,
+      },
+      {
+        name: "Edward Coristine",
+        ticker: "BIGBALLS",
+        address: "7mHCx9iXPJ7EJDbDAUGmej39Kme8cxZfeVi1EAvEpump",
+        timeToSell: 120 * 1000,
+        keywords: ["big balls", "big balls edward", "edward coristine"],
+        amountToBuy: 3,
+        slippage: 30,
+        priorityFee: 0.05,
+      },
+      {
+        name: "TRUMP GOLD CARDS",
+        ticker: "TGC",
+        address: "3LuA7cib588PogacQvxpjWJoon9KoXEGHL4WMroCmnrg",
+        timeToSell: 120 * 1000,
+        keywords: ["trump gold card", "gold card"],
+        amountToBuy: 3,
+        slippage: 30,
+        priorityFee: 0.05,
       },
     ],
   },
+
+  // --------- Mario Nawfal (test account) ---------
+  // {
+  //   username: "MarioNawfal",
+  //   name: "Mario Nawfal",
+  //   coins: [
+  //     // --------- TEST COIN ---------
+  //     {
+  //       name: "test - Kekius Maximus",
+  //       ticker: "test - KM",
+  //       address: "HuAncxDEsakCDgZS2Yfo9xJbHmtHXMnxxkT9jqdXnHhm",
+  //       timeToSell: 30 * 1000,
+  //       keywords: [],
+  //       amountToBuy: 0.01,
+  //       slippage: 2,
+  //       priorityFee: 0.01,
+  //       automaticBuy: true,
+  //     },
+  //   ],
+  // },
+  // --------- Toly (test account) ---------
+  // {
+  //   username: "aeyakovenko",
+  //   name: "toly🇺🇸",
+  //   coins: [
+  //     // --------- TEST COIN ---------
+  //     {
+  //       name: "test - Kekius Maximus",
+  //       ticker: "test - KM",
+  //       address: "HuAncxDEsakCDgZS2Yfo9xJbHmtHXMnxxkT9jqdXnHhm",
+  //       timeToSell: 30 * 1000,
+  //       keywords: [],
+  //       amountToBuy: 0.01,
+  //       slippage: 2,
+  //       priorityFee: 0.01,
+  //       automaticBuy: true,
+  //     },
+  //   ],
+  // },
 ];
 
 module.exports = { twitterAccounts };
