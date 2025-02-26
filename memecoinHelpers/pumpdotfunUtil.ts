@@ -33,6 +33,22 @@ export function getOrCreateKeypair(dir: string, keyName: string): Keypair {
   }
 }
 
+export function createKeypair(dir: string, keyName: string): Keypair {
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  const authorityKey = dir + "/" + keyName + ".json";
+
+  const keypair = Keypair.generate();
+  keypair.secretKey;
+  fs.writeFileSync(
+    authorityKey,
+    JSON.stringify({
+      secretKey: bs58.encode(keypair.secretKey),
+      publicKey: keypair.publicKey.toBase58(),
+    })
+  );
+  return keypair;
+}
+
 export const printSOLBalance = async (
   connection: Connection,
   pubKey: PublicKey,

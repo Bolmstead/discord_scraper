@@ -12,20 +12,21 @@ import {
   getSPLBalance,
   printSOLBalance,
   printSPLBalance,
+  createKeypair,
 } from "./pumpdotfunUtil";
 import assert from "node:assert";
-import { Scraper } from "@the-convocation/twitter-scraper";
+// import { Scraper } from "@the-convocation/twitter-scraper";
 import { generateTweetImage } from "./tweetToImage";
 
 // Store the last processed tweet ID to avoid duplicates
 let lastProcessedTweetId: string | undefined = undefined;
 
-const KEYS_FOLDER = __dirname + "/.keys";
-const SLIPPAGE_BASIS_POINTS = 100n;
+export const KEYS_FOLDER = __dirname + "/.keys";
+export const SLIPPAGE_BASIS_POINTS = 100n;
 
-const scraper = new Scraper();
+// export const scraper = new Scraper();
 
-const getProvider = () => {
+export const getProvider = () => {
   if (!process.env.HELIUS_RPC_URL) {
     throw new Error("Please set HELIUS_RPC_URL in .env file");
   }
@@ -36,18 +37,18 @@ const getProvider = () => {
 };
 
 // Add type for SDK parameters
-interface TokenMetadata {
+export interface TokenMetadata {
   name: string;
   symbol: string;
   description: string;
   filePath: string;
 }
 
-interface PriceParams {
+export interface PriceParams {
   unitLimit: number;
   unitPrice: number;
 }
-interface TweetData {
+export interface TweetData {
   username: string;
   handle: string;
   text: string;
@@ -56,78 +57,111 @@ interface TweetData {
   timestamp?: string;
 }
 
-const createAndBuyToken = async (
+export const createAndBuyToken = async (
   sdk: any,
   testAccount: any,
   mint: any,
-  tokenMetadata: TokenMetadata
+  tokenMetadata: TokenMetadata,
+  sell: boolean = true
 ) => {
+  console.log("🚀 Starting createAndBuyToken function");
+  console.log("📦 Token Metadata:", tokenMetadata);
+  console.log("👀 sell? :", sell);
+
   const buyAmount = BigInt(0.0001 * LAMPORTS_PER_SOL);
-  const priorityFee = {
-    unitLimit: 250000,
-    unitPrice: 250000,
+  console.log("💰 Buy amount:", buyAmount.toString());
+
+  const tokenMetadataFinal = {
+    name: tokenMetadata.name,
+    symbol: tokenMetadata.symbol,
+    description: tokenMetadata.description,
+    file: await fs.openAsBlob(tokenMetadata.filePath),
   };
-  // --------------------------
-  // createAndBuy Parameters explanation:
-  // --------------------------
-  // async createAndBuy(
-  //   creator: Keypair,
-  //   mint: Keypair,
-  //   createTokenMetadata: CreateTokenMetadata,
+  console.log("📄 Final token metadata prepared:", {
+    name: tokenMetadataFinal.name,
+    symbol: tokenMetadataFinal.symbol,
+    description: tokenMetadataFinal.description,
+  });
+
+  console.log("🎯 Attempting to create and buy token...");
+  const createResults = await sdk.createAndBuy(
+    testAccount,
+    mint,
+    tokenMetadataFinal,
+    BigInt(0.01 * LAMPORTS_PER_SOL),
+    100n
+  );
+  console.log("✨ Create and buy results:", createResults);
+
+  if (createResults.success) {
+    console.log("✅ Token creation successful!");
+    console.log(
+      "🔗 Token URL:",
+      `https://pump.fun/${mint.publicKey.toBase58()}`
+    );
+    await printSPLBalance(
+      sdk.connection,
+      mint.publicKey,
+      testAccount.publicKey
+    );
+    if (sell) {
+      console.log("⏳ Waiting 10 seconds before selling tokens...");
+      await new Promise((resolve) => setTimeout(resolve, 10000)); // 10 second delay
+      console.log("⏰ Timeout complete, proceeding with sell...");
+      await sellTokens(sdk, testAccount, mint);
+    }
+  } else {
+    console.log("❌ Create and Buy failed");
+  }
+};
+
+export const buyTokens = async (sdk: any, testAccount: any, mint: any) => {
+  console.log("🛍️ Starting buyTokens function");
+  console.log("🎯 Attempting to buy tokens...");
+
+  // --------- Buy Function ---------
+  // async buy(
+  //   buyer: Keypair,
+  //   mint: PublicKey,
   //   buyAmountSol: bigint,
   //   slippageBasisPoints: bigint = 500n,
   //   priorityFees?: PriorityFee,
   //   commitment: Commitment = DEFAULT_COMMITMENT,
   //   finality: Finality = DEFAULT_FINALITY
   // ): Promise<TransactionResult>
-  // --------------------------
-  const tokenMetadatanFinal = {
-    name: tokenMetadata.name,
-    symbol: tokenMetadata.symbol,
-    description: tokenMetadata.description,
-    file: await fs.openAsBlob(tokenMetadata.filePath),
-  };
-  const createResults = await sdk.createAndBuy(
-    testAccount,
-    mint,
-    tokenMetadatanFinal,
-    0,
-    SLIPPAGE_BASIS_POINTS
-  );
-  console.log("🚀 ~ createResults:", createResults);
 
-  if (createResults.success) {
-    console.log("Success:", `https://pump.fun/${mint.publicKey.toBase58()}`);
-    printSPLBalance(sdk.connection, mint.publicKey, testAccount.publicKey);
-  } else {
-    console.log("Create and Buy failed");
-  }
-};
+  //  Buys a specified amount of tokens.
+  // - Parameters:
+  //      buyer: The keypair of the buyer.
+  //      mint: The public key of the mint account.
+  //      buyAmountSol: Amount of SOL to buy.
+  //      slippageBasisPoints: Slippage in basis points (default: 500).
+  //      priorityFees: Priority fees (optional).
+  //      commitment: Commitment level (default: DEFAULT_COMMITMENT).
+  //      finality: Finality level (default: DEFAULT_FINALITY).
 
-const buyTokens = async (sdk: any, testAccount: any, mint: any) => {
   const buyResults = await sdk.buy(
     testAccount,
     mint.publicKey,
-    BigInt(0.0001 * LAMPORTS_PER_SOL),
-    SLIPPAGE_BASIS_POINTS,
-    {
-      unitLimit: 250000,
-      unitPrice: 250000,
-    }
+    BigInt(0.00001 * LAMPORTS_PER_SOL),
+    SLIPPAGE_BASIS_POINTS
   );
 
   if (buyResults.success) {
-    printSPLBalance(sdk.connection, mint.publicKey, testAccount.publicKey);
-    console.log(
-      "Bonding curve after buy",
-      await sdk.getBondingCurveAccount(mint.publicKey)
+    console.log("✅ Token purchase successful!");
+    await printSPLBalance(
+      sdk.connection,
+      mint.publicKey,
+      testAccount.publicKey
     );
+    const bondingCurve = await sdk.getBondingCurveAccount(mint.publicKey);
+    console.log("📈 Bonding curve after buy:", bondingCurve);
   } else {
-    console.log("Buy failed");
+    console.log("❌ Buy failed");
   }
 };
 
-const sellTokens = async (sdk: any, testAccount: any, mint: any) => {
+export const sellTokens = async (sdk: any, testAccount: any, mint: any) => {
   const currentSPLBalance = await getSPLBalance(
     sdk.connection,
     mint.publicKey,
@@ -140,11 +174,7 @@ const sellTokens = async (sdk: any, testAccount: any, mint: any) => {
       testAccount,
       mint.publicKey,
       BigInt(currentSPLBalance * Math.pow(10, DEFAULT_DECIMALS)),
-      SLIPPAGE_BASIS_POINTS,
-      {
-        unitLimit: 250000,
-        unitPrice: 250000,
-      }
+      SLIPPAGE_BASIS_POINTS
     );
 
     if (sellResults.success) {
@@ -169,114 +199,142 @@ const sellTokens = async (sdk: any, testAccount: any, mint: any) => {
   }
 };
 
-const startCreatingToken = async (latestTweet: any) => {
+export const startCreatingToken = async (latestTweet: any) => {
   try {
+    console.log("🎬 Starting token creation process");
+    console.log("🐦 Tweet data:", latestTweet);
+
     const provider = getProvider();
     const sdk = new PumpFunSDK(provider);
     const connection = provider.connection;
 
-    console.log("KEYS_FOLDER:: ", KEYS_FOLDER);
+    console.log("📂 KEYS_FOLDER location:", KEYS_FOLDER);
 
     const testAccount = getOrCreateKeypair(KEYS_FOLDER, "test-account");
-    console.log("🚀 ~ startCreatingToken ~ testAccount:", testAccount);
-    const mint = getOrCreateKeypair(KEYS_FOLDER, "mint");
-    console.log("🚀 ~ startCreatingToken ~ mint:", mint);
+    console.log("👤 Test account created:", testAccount.publicKey.toString());
 
+    const mint = createKeypair(KEYS_FOLDER, "mint");
+    console.log("🎫 Mint account created:", mint.publicKey.toString());
+
+    console.log("💰 Checking SOL balance...");
     await printSOLBalance(
       connection,
       testAccount.publicKey,
       "Test Account keypair"
     );
 
+    console.log("🌐 Getting global account...");
     const globalAccount = await sdk.getGlobalAccount();
-    console.log(globalAccount);
+    console.log("🌍 Global account:", globalAccount);
 
     const currentSolBalance = await connection.getBalance(
       testAccount.publicKey
     );
+    console.log("💳 Current SOL balance:", currentSolBalance);
+
     if (currentSolBalance === 0) {
-      console.log(
-        "Please send some SOL to the test-account:",
-        testAccount.publicKey.toBase58()
-      );
+      console.log("⚠️ No SOL balance found!");
+      console.log("🏦 Please send SOL to:", testAccount.publicKey.toBase58());
       return;
     }
 
     const tweetData: TweetData = {
       username: latestTweet.name,
-      handle: latestTweet.username,
+      handle: latestTweet.handle,
       text: latestTweet.text,
       verified: true,
       avatar:
         "https://pbs.twimg.com/profile_images/1892722746817236992/-pDs8pfw_400x400.jpg",
-      timestamp: new Date(latestTweet.timeParsed).toLocaleDateString("en-US", {
+      timestamp: new Date().toLocaleDateString("en-US", {
         month: "short",
         day: "numeric",
         year: "numeric",
       }),
     };
-    console.log("🚀 ~ startCreatingToken ~ tweetData:", tweetData);
-    await generateTweetImage(tweetData);
+    console.log("📝 Prepared tweet data:", tweetData);
 
-    console.log("completed!!");
+    console.log("🎨 Generating tweet image...");
+    await generateTweetImage(tweetData);
+    console.log("🖼️ Tweet image generated!");
 
     const tokenMetadata: TokenMetadata = {
-      name: latestTweet.text,
-      symbol: "test",
-      description: latestTweet.permanentUrl,
-      filePath: "src/images/tweet.png",
+      name: latestTweet.text.substring(0, 10),
+      symbol: latestTweet.text.substring(0, 10),
+      description: latestTweet.text,
+      filePath: "images/tweet.png",
     };
+    console.log("📋 Token metadata prepared:", tokenMetadata);
 
-    // First verify the image exists
     if (!fs.existsSync(tokenMetadata.filePath)) {
+      console.log("❌ Image file not found at:", tokenMetadata.filePath);
       throw new Error(
         `Image file not found at path: ${tokenMetadata.filePath}`
       );
     }
+    console.log("✅ Image file verified");
 
-    await createAndBuyToken(sdk, testAccount, mint, tokenMetadata);
-    const bondingCurveAccount = await sdk.getBondingCurveAccount(
-      mint.publicKey
-    );
-    console.log(
-      "🚀 ~ startCreatingToken ~ bondingCurveAccount:",
-      bondingCurveAccount
-    );
+    console.log("🔍 Checking global account...");
+    console.log(await sdk.getGlobalAccount());
+
+    console.log("📊 Checking bonding curve account...");
+    let bondingCurveAccount = await sdk.getBondingCurveAccount(mint.publicKey);
+    console.log("📈 Initial bonding curve:", bondingCurveAccount);
+
+    if (!bondingCurveAccount) {
+      console.log("🆕 No bonding curve found, creating new token...");
+      await createAndBuyToken(sdk, testAccount, mint, tokenMetadata);
+      bondingCurveAccount = await sdk.getBondingCurveAccount(mint.publicKey);
+      console.log("📈 New bonding curve created:", bondingCurveAccount);
+    }
+
+    if (bondingCurveAccount) {
+      console.log("🔄 Executing token operations...");
+      await buyTokens(sdk, testAccount, mint);
+      // await sellTokens(sdk, testAccount, mint);
+      await createAndBuyToken(sdk, testAccount, mint, tokenMetadata);
+      console.log("✅ Token operations completed");
+    }
   } catch (error) {
-    console.error("An error occurred:", error);
+    console.error("❌ An error occurred:", error);
   }
 };
 
-const logInToTwitter = async () => {
-  await scraper.login(
-    process.env.TWITTER_USERNAME!,
-    process.env.TWITTER_PASSWORD!,
-    process.env.TWITTER_EMAIL!
-  );
+// export const logInToTwitter = async () => {
+//   await scraper.login(
+//     process.env.TWITTER_USERNAME!,
+//     process.env.TWITTER_PASSWORD!,
+//     process.env.TWITTER_EMAIL!
+//   );
 
-  let lastProcessedTweetId: string | undefined = undefined;
+//   let lastProcessedTweetId: string | undefined = undefined;
 
-  setInterval(async () => {
-    try {
-      const latestTweet = await scraper.getLatestTweet("brocTestBot");
-      console.log("🚀 ~ setInterval ~ latestTweet:", latestTweet);
-      if (!lastProcessedTweetId) {
-        lastProcessedTweetId = latestTweet?.id;
-        console.log("No Processed Tweet yet");
-        return;
-      }
-      if (!latestTweet) {
-        console.log("No tweet found");
-        return;
-      }
-      if (latestTweet?.id !== lastProcessedTweetId) {
-        lastProcessedTweetId = latestTweet?.id;
-        await startCreatingToken(latestTweet);
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  }, 10000);
-};
+//   setInterval(async () => {
+//     try {
+//       const latestTweet = await scraper.getLatestTweet("brocTestBot");
+//       console.log("🚀 ~ setInterval ~ latestTweet:", latestTweet);
+//       if (!lastProcessedTweetId) {
+//         lastProcessedTweetId = latestTweet?.id;
+//         console.log("No Processed Tweet yet");
+//         return;
+//       }
+//       if (!latestTweet) {
+//         console.log("No tweet found");
+//         return;
+//       }
+//       if (latestTweet?.id !== lastProcessedTweetId) {
+//         lastProcessedTweetId = latestTweet?.id;
+//         await startCreatingToken(latestTweet);
+//       }
+//     } catch (error) {
+//       console.error("An error occurred:", error);
+//     }
+//   }, 10000);
+// };
 
-logInToTwitter();
+// Start the process
+console.log("🚀 Starting application with test tweet...");
+startCreatingToken({
+  name: "Elon Musk",
+  handle: "elonmusk",
+  text: "Hello, world!",
+});
