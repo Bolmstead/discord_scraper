@@ -1,7 +1,8 @@
 // double check the addresses
 
-const twitterAccounts = [
+export const twitterAccounts = [
   // --------- Elon Musk ---------
+  // Big Balls, Kekius Maximus, Pnut, Adrian Dittmann, Dogefather
   {
     username: "elonmusk",
     name: "Elon Musk",
@@ -18,7 +19,7 @@ const twitterAccounts = [
           "coristine",
         ],
         amountToBuy: 5,
-        slippage: 100,
+        slippageBps: 5000,
         priorityFee: 0.1,
       },
       {
@@ -28,7 +29,7 @@ const twitterAccounts = [
         timeToSell: 120 * 1000,
         keywords: ["kekius", "kekius maximus", "maximus"],
         amountToBuy: 10,
-        slippage: 100,
+        slippageBps: 5000,
         priorityFee: 0.1,
       },
       {
@@ -38,7 +39,7 @@ const twitterAccounts = [
         timeToSell: 120 * 1000,
         keywords: ["pnut", "peanut"],
         amountToBuy: 5,
-        slippage: 100,
+        slippageBps: 5000,
         priorityFee: 0.1,
       },
       {
@@ -48,7 +49,7 @@ const twitterAccounts = [
         timeToSell: 90 * 1000,
         keywords: ["adrian", "dittmann"],
         amountToBuy: 5,
-        slippage: 100,
+        slippageBps: 5000,
         priorityFee: 0.1,
       },
       {
@@ -58,7 +59,7 @@ const twitterAccounts = [
         timeToSell: 90 * 1000,
         keywords: ["dogefather"],
         amountToBuy: 5,
-        slippage: 50,
+        slippageBps: 5000,
         priorityFee: 0.1,
       },
       // --------- TEST COIN ---------
@@ -88,7 +89,7 @@ const twitterAccounts = [
         timeToSell: 50 * 1000,
         keywords: ["greed3", "greed 3"],
         amountToBuy: 3,
-        slippage: 20,
+        slippageBps: 2000,
         priorityFee: 0.05,
       },
       {
@@ -108,7 +109,7 @@ const twitterAccounts = [
         timeToSell: 120 * 1000,
         keywords: ["jailstool"],
         amountToBuy: 3,
-        slippage: 30,
+        slippageBps: 3000,
         priorityFee: 0.05,
       },
       {
@@ -118,12 +119,13 @@ const twitterAccounts = [
         timeToSell: 120 * 1000,
         keywords: ["jailstool"],
         amountToBuy: 3,
-        slippage: 30,
+        slippageBps: 3000,
         priorityFee: 0.05,
       },
     ],
   },
   // --------- SBF ---------
+  // any tweet
   {
     username: "SBF_FTX",
     name: "SBF",
@@ -135,12 +137,13 @@ const twitterAccounts = [
         timeToSell: 120 * 1000,
         keywords: [],
         amountToBuy: 1,
-        slippage: 50,
+        slippageBps: 5000,
         priorityFee: 0.05,
       },
     ],
   },
   // --------- Watcher Guru ---------
+  // Greenland, HKU5, SWF, BIGBALLS, TGC
   {
     username: "WatcherGuru",
     name: "Watcher Guru",
@@ -152,7 +155,7 @@ const twitterAccounts = [
         timeToSell: 120 * 1000,
         keywords: ["greenland"],
         amountToBuy: 3,
-        slippage: 20,
+        slippageBps: 2000,
         priorityFee: 0.05,
       },
       {
@@ -162,7 +165,7 @@ const twitterAccounts = [
         timeToSell: 90 * 1000,
         keywords: ["hku5"],
         amountToBuy: 3,
-        slippage: 30,
+        slippageBps: 3000,
         priorityFee: 0.05,
       },
       {
@@ -172,7 +175,7 @@ const twitterAccounts = [
         timeToSell: 90 * 1000,
         keywords: ["sovereign wealth fund"],
         amountToBuy: 1,
-        slippage: 30,
+        slippageBps: 3000,
         priorityFee: 0.05,
       },
       {
@@ -182,7 +185,7 @@ const twitterAccounts = [
         timeToSell: 120 * 1000,
         keywords: ["big balls", "big balls edward", "edward coristine"],
         amountToBuy: 3,
-        slippage: 30,
+        slippageBps: 3000,
         priorityFee: 0.05,
       },
       {
@@ -192,7 +195,7 @@ const twitterAccounts = [
         timeToSell: 120 * 1000,
         keywords: ["trump gold card", "gold card"],
         amountToBuy: 3,
-        slippage: 30,
+        slippageBps: 3000,
         priorityFee: 0.05,
       },
     ],
@@ -211,7 +214,7 @@ const twitterAccounts = [
   //       timeToSell: 30 * 1000,
   //       keywords: [],
   //       amountToBuy: 0.01,
-  //       slippage: 2,
+  //       slippageBps: 2,
   //       priorityFee: 0.01,
   //       automaticBuy: true,
   //     },
@@ -230,7 +233,7 @@ const twitterAccounts = [
   //       timeToSell: 30 * 1000,
   //       keywords: [],
   //       amountToBuy: 0.01,
-  //       slippage: 2,
+  //       slippageBps: 2,
   //       priorityFee: 0.01,
   //       automaticBuy: true,
   //     },
@@ -238,4 +241,4 @@ const twitterAccounts = [
   // },
 ];
 
-module.exports = { twitterAccounts };
+export const buyAllCAsSettings = {};

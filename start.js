@@ -1,9 +1,9 @@
-const scraper = require("./twitterTrackerScraper");
-const puppeteer = require("puppeteer-extra");
+import puppeteer from "puppeteer-extra";
+import StealthPlugin from "puppeteer-extra-plugin-stealth";
+import { scraper } from "./testSwap.js";
+import "dotenv/config";
 
-const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 puppeteer.use(StealthPlugin());
-require("dotenv").config();
 
 async function logIntoDiscord() {
   const browser = await puppeteer.launch({
@@ -15,7 +15,7 @@ async function logIntoDiscord() {
 
   setTimeout(async () => {
     await scraper(page);
-  }, "30000");
+  }, 30000);
 }
 
 logIntoDiscord();

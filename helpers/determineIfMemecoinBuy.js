@@ -1,6 +1,6 @@
-const { twitterAccounts } = require("../constants");
+import { twitterAccounts } from "../constants.js";
 
-async function determineIfMemecoinBuy(tweetObj) {
+export async function determineIfMemecoinBuy(tweetObj) {
   const { username, text } = tweetObj;
   const account = twitterAccounts.find(
     (account) => account.username === username
@@ -38,4 +38,3 @@ async function determineIfMemecoinBuy(tweetObj) {
     return null;
   }
 }
-module.exports = { determineIfMemecoinBuy };

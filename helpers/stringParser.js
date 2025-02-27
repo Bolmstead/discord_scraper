@@ -3,7 +3,7 @@
  * @param {string} text - The input text (e.g. '@jason (@Jason)')
  * @returns {string|null} - The name within parentheses without @ symbol, or null if not found
  */
-function extractNameFromParentheses(text) {
+export function extractNameFromParentheses(text) {
   const parenthesesRegex = /\([@]?([^)]+)\)/;
   const match = text.match(parenthesesRegex);
 
@@ -13,7 +13,3 @@ function extractNameFromParentheses(text) {
   }
   return null;
 }
-
-module.exports = {
-  extractNameFromParentheses,
-};

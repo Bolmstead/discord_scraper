@@ -1,19 +1,17 @@
 // AFFILIATE TAKOVER SCRAPER
-
-require("dotenv").config();
-
-var player = require("play-sound")((opts = {}));
-const {
-  determineIfMemecoinBuy,
-} = require("./helpers/determineIfMemecoinBuy.js");
-const { extractNameFromParentheses } = require("./helpers/stringParser.js");
-const { swapOnJupiter } = require("./helpers/jupiterFunctions.js");
+import "dotenv/config";
+import playSound from "play-sound";
+import { determineIfMemecoinBuy } from "./helpers/determineIfMemecoinBuy.js";
+import { extractNameFromParentheses } from "./helpers/stringParser.js";
+import { swapOnJupiter } from "./jupiter/jupiterFunctions.js";
 
 // ----- config ------
 const millisecondsBeforeRerunningScraper = 1000;
 // -------------------
 
-module.exports = async function scraper(page) {
+const player = playSound({});
+
+export async function scraper(page) {
   try {
     console.log("🏁🏁🏁🏁🏁🏁 Starting Twitter tracker scraper");
     setTimeout(async () => {
@@ -82,13 +80,6 @@ module.exports = async function scraper(page) {
       scraper(page);
     }, 20000);
   }
-};
+}
 
-const solToUsdcTx = await swapOnJupiter({
-  privateKey: process.env.PRIVATE_KEY,
-  inputMint: "So11111111111111111111111111111111111111112", // SOL
-  outputMint: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", // USDC
-  amount: 0.01, // 0.1 SOL in lamports
-  slippageBps: 50, // 0.5%
-});
-console.log(`SOL to USDC swap: ${solToUsdcTx}`);
+
