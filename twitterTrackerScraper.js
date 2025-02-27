@@ -3,7 +3,7 @@ import "dotenv/config";
 import playSound from "play-sound";
 import { determineIfMemecoinBuy } from "./helpers/determineIfMemecoinBuy.js";
 import { extractNameFromParentheses } from "./helpers/stringParser.js";
-import { swapOnJupiter } from "./jupiter/jupiterFunctions.js";
+import { executeSwap } from "./jupiter/index.js";
 
 // ----- config ------
 const millisecondsBeforeRerunningScraper = 1000;
@@ -57,14 +57,57 @@ export async function scraper(page) {
 
       if (coin) {
         console.log("Starting to buy token...");
+        console.log("coin:", coin);
 
-        // await buyTokens(coin);
-        player.play("Success2.mp3", function (err) {
-          if (err) throw err;
-        });
-        setTimeout(async () => {
+        const {
+          name,
+          ticker,
+          address,
+          timeToSell,
+          keywords,
+          amountToBuy,
+          slippageBps,
+          priorityFee,
+        } = coin;
+        const buyWasSuccessful = await executeSwap(
+          "buy",
+          name,
+          ticker,
+          address,
+          timeToSell,
+          keywords,
+          amountToBuy,
+          slippageBps,
+          priorityFee
+        );
+        console.log(" ~ buyWasSuccessful:", buyWasSuccessful);
+        if (!buyWasSuccessful) {
+          console.log("❌ Error in Twitter tracker scraper:");
           scraper(page);
-        }, 60000);
+        } else {
+          player.play("sounds/Success2.mp3", function (err) {
+            if (err) throw err;
+          });
+          setTimeout(async () => {
+            // const sellWasSuccessful = await executeSwap(
+            //   "sell",
+            //   name,
+            //   ticker,
+            //   outputMint,
+            //   timeToSell,
+            //   keywords,
+            //   amountToBuy,
+            //   slippageBps,
+            //   priorityFee
+            // );
+            const sellWasSuccessful = true;
+            console.log("🚀 ~ sellWasSuccessful:", sellWasSuccessful);
+            if (!sellWasSuccessful) {
+              console.log("❌ Error in Twitter tracker scraper:");
+              scraper(page);
+            }
+          }, coin.timeToSell * 1.5);
+        }
       }
 
       if (!coin) {
@@ -81,5 +124,3 @@ export async function scraper(page) {
     }, 20000);
   }
 }
-
-

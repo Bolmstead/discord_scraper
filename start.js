@@ -1,11 +1,11 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
-import { scraper } from "./testSwap.js";
+import { scraper } from "./twitterTrackerScraper.js";
 import "dotenv/config";
 
 puppeteer.use(StealthPlugin());
 
-async function logIntoDiscord() {
+async function openDiscord() {
   const browser = await puppeteer.launch({
     headless: false,
     defaultViewport: false,
@@ -18,4 +18,4 @@ async function logIntoDiscord() {
   }, 30000);
 }
 
-logIntoDiscord();
+openDiscord();

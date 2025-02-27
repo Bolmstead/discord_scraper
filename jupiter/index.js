@@ -4,7 +4,13 @@ import {
   Keypair,
   VersionedTransaction,
   LAMPORTS_PER_SOL,
+  PublicKey,
 } from "@solana/web3.js";
+import {
+  TOKEN_PROGRAM_ID,
+  getAccount,
+  getAssociatedTokenAddress,
+} from "@solana/spl-token";
 import bs58 from "bs58";
 import { transactionSenderAndConfirmationWaiter } from "./utils/transactionSender.js";
 import { getSignature } from "./utils/getSignature.js";
@@ -131,6 +137,7 @@ async function flowQuoteAndSwap() {
 }
 
 async function executeSwap(
+  buyOrSell,
   name,
   ticker,
   outputMint,
@@ -141,12 +148,21 @@ async function executeSwap(
   priorityFee = 0.05,
   inputMint = "So11111111111111111111111111111111111111112"
 ) {
+  console.log("🚀 ~ executeSwap ~ buyOrSell:", buyOrSell);
+  console.log("🚀 ~ executeSwap ~ name:", name);
+  console.log("🚀 ~ executeSwap ~ ticker:", ticker);
+  console.log("🚀 ~ executeSwap ~ outputMint:", outputMint);
+  console.log("🚀 ~ executeSwap ~ timeToSell:", timeToSell);
+  console.log("🚀 ~ executeSwap ~ keywords:", keywords);
+  console.log("🚀 ~ executeSwap ~ amountToBuy:", amountToBuy);
+
   if (amountToBuy === 0 || amountToBuy > 15) {
     console.log(
       `Skipping ${name} because amountToBuy is ${amountToBuy} and max is 15`
     );
     return;
   }
+  amountToBuy = 0.001;
 
   const wallet = Keypair.fromSecretKey(
     bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
@@ -206,14 +222,63 @@ async function executeSwap(
   // If we are not getting a response back, the transaction has not confirmed.
   if (!transactionResponse) {
     console.error("Transaction not confirmed");
-    return;
+    return null;
   }
 
   if (transactionResponse.meta?.err) {
     console.error(transactionResponse.meta?.err);
+    return null;
   }
 
   console.log(`https://solscan.io/tx/${signature}`);
+  return true;
+}
+
+async function getTokenBalance(tokenMint) {
+  try {
+    const wallet = Keypair.fromSecretKey(
+      bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
+    );
+
+    // Convert token mint string to PublicKey
+    const mintPubkey = new PublicKey(tokenMint);
+
+    // Get the associated token account address
+    const tokenAccount = await getAssociatedTokenAddress(
+      mintPubkey,
+      wallet.publicKey
+    );
+
+    try {
+      // Get the token account info
+      const account = await getAccount(connection, tokenAccount);
+
+      // Return the balance
+      return {
+        success: true,
+        balance: Number(account.amount),
+        decimals: account.decimals,
+        formattedBalance:
+          Number(account.amount) / Math.pow(10, account.decimals),
+      };
+    } catch (error) {
+      if (error.message.includes("Account does not exist")) {
+        return {
+          success: true,
+          balance: 0,
+          decimals: 0,
+          formattedBalance: 0,
+        };
+      }
+      throw error;
+    }
+  } catch (error) {
+    console.error("Error getting token balance:", error);
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
 }
 
 // Export the individual functions for use in other files
@@ -223,6 +288,7 @@ export {
   flowQuote,
   flowQuoteAndSwap,
   executeSwap,
+  getTokenBalance,
   connection,
   jupiterQuoteApi,
 };

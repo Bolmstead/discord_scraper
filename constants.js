@@ -202,43 +202,43 @@ export const twitterAccounts = [
   },
 
   // --------- Mario Nawfal (test account) ---------
-  // {
-  //   username: "MarioNawfal",
-  //   name: "Mario Nawfal",
-  //   coins: [
-  //     // --------- TEST COIN ---------
-  //     {
-  //       name: "test - Kekius Maximus",
-  //       ticker: "test - KM",
-  //       address: "HuAncxDEsakCDgZS2Yfo9xJbHmtHXMnxxkT9jqdXnHhm",
-  //       timeToSell: 30 * 1000,
-  //       keywords: [],
-  //       amountToBuy: 0.01,
-  //       slippageBps: 2,
-  //       priorityFee: 0.01,
-  //       automaticBuy: true,
-  //     },
-  //   ],
-  // },
+  {
+    username: "MarioNawfal",
+    name: "Mario Nawfal",
+    coins: [
+      // --------- TEST COIN ---------
+      {
+        name: "test - Kekius Maximus",
+        ticker: "test - KM",
+        address: "HuAncxDEsakCDgZS2Yfo9xJbHmtHXMnxxkT9jqdXnHhm",
+        timeToSell: 30 * 1000,
+        keywords: [],
+        amountToBuy: 0.001,
+        slippageBps: 2,
+        priorityFee: 0.01,
+        automaticBuy: true,
+      },
+    ],
+  },
   // --------- Toly (test account) ---------
-  // {
-  //   username: "aeyakovenko",
-  //   name: "toly🇺🇸",
-  //   coins: [
-  //     // --------- TEST COIN ---------
-  //     {
-  //       name: "test - Kekius Maximus",
-  //       ticker: "test - KM",
-  //       address: "HuAncxDEsakCDgZS2Yfo9xJbHmtHXMnxxkT9jqdXnHhm",
-  //       timeToSell: 30 * 1000,
-  //       keywords: [],
-  //       amountToBuy: 0.01,
-  //       slippageBps: 2,
-  //       priorityFee: 0.01,
-  //       automaticBuy: true,
-  //     },
-  //   ],
-  // },
+  {
+    username: "aeyakovenko",
+    name: "toly🇺🇸",
+    coins: [
+      // --------- TEST COIN ---------
+      {
+        name: "test - Kekius Maximus",
+        ticker: "test - KM",
+        address: "HuAncxDEsakCDgZS2Yfo9xJbHmtHXMnxxkT9jqdXnHhm",
+        timeToSell: 30 * 1000,
+        keywords: [],
+        amountToBuy: 0.001,
+        slippageBps: 2,
+        priorityFee: 0.01,
+        automaticBuy: true,
+      },
+    ],
+  },
 ];
 
 export const buyAllCAsSettings = {};
