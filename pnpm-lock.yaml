@@ -62,6 +62,10 @@ importers:
       puppeteer-extra-plugin-stealth:
         specifier: ^2.11.2
         version: 2.11.2(puppeteer-extra@3.3.6(puppeteer-core@23.2.2(bufferutil@4.0.9)(utf-8-validate@5.0.10))(puppeteer@22.15.0(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)))
+    devDependencies:
+      axios:
+        specifier: '>=1.7.4'
+        version: 1.7.9
 
 packages:
 
