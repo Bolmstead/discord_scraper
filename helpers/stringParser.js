@@ -4,6 +4,7 @@
  * @returns {string|null} - The name within parentheses without @ symbol, or null if not found
  */
 export function extractNameFromParentheses(text) {
+  if (!text) return "";
   const parenthesesRegex = /\([@]?([^)]+)\)/;
   const match = text.match(parenthesesRegex);
 
@@ -11,5 +12,5 @@ export function extractNameFromParentheses(text) {
     // Return the captured group without any @ symbol
     return match[1].replace("@", "");
   }
-  return null;
+  return "";
 }

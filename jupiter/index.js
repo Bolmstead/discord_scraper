@@ -162,7 +162,7 @@ async function executeSwap(
     );
     return;
   }
-  amountToBuy = 0.001;
+  amountToBuy = 0.25;
 
   const wallet = Keypair.fromSecretKey(
     bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")

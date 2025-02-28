@@ -19,19 +19,29 @@ export async function determineIfMemecoinBuy(tweetObj) {
     return null;
   }
 
-  for (const coin of coins) {
-    const { automaticBuy } = coin;
+  let coin = null;
+  let triggeredKeyword = null;
+  for (const potentialCoin of coins) {
+    const { automaticBuy, keywords } = potentialCoin;
     if (automaticBuy) {
       console.log(`🧪🧪🧪 ${name} has automatic buy enabled`);
-      return coin;
+      return potentialCoin;
     }
+    for (const keyword of keywords) {
+      if (text.toLowerCase().includes(keyword)) {
+        console.log(`✨ Matched keyword: "${keyword}"`);
+        coin = potentialCoin;
+        triggeredKeyword = keyword;
+        break;
+      }
+    }
+    if (coin) break;
   }
 
-  const coin = coins.find((coin) =>
-    coin.keywords.some((keyword) => text.toLowerCase().includes(keyword))
-  );
   if (coin) {
-    console.log(`${name} tweeted about ${coin.name}`);
+    console.log(
+      `${name} tweeted about ${coin.name}. Keyword: ${triggeredKeyword}`
+    );
     return coin;
   } else {
     console.log(`${name} did not tweet about any memecoin`);

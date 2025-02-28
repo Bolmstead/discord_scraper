@@ -1,0 +1,719 @@
+{
+  "data": {
+    "threaded_conversation_with_injections_v2": {
+      "instructions": [
+        {
+          "type": "TimelineAddEntries",
+          "entries": [
+            {
+              "entryId": "tweet-1895296963379167526",
+              "sortIndex": "7328075073475608281",
+              "content": {
+                "entryType": "TimelineTimelineItem",
+                "__typename": "TimelineTimelineItem",
+                "itemContent": {
+                  "itemType": "TimelineTweet",
+                  "__typename": "TimelineTweet",
+                  "tweet_results": {
+                    "result": {
+                      "__typename": "Tweet",
+                      "rest_id": "1895296963379167526",
+                      "has_birdwatch_notes": false,
+                      "core": {
+                        "user_results": {
+                          "result": {
+                            "__typename": "User",
+                            "id": "VXNlcjoxMzE5Mjg3NzYxMDQ4NzIzNDU4",
+                            "rest_id": "1319287761048723458",
+                            "affiliates_highlighted_label": {
+                              "label": {
+                                "url": {
+                                  "url": "https://twitter.com/RoundtableSpace",
+                                  "urlType": "DeepLink"
+                                },
+                                "badge": {
+                                  "url": "https://pbs.twimg.com/profile_images/1750481240983994368/ijRW1a6Y_bigger.jpg"
+                                },
+                                "description": "Mario Nawfal’s Roundtable",
+                                "userLabelType": "BusinessLabel",
+                                "userLabelDisplayType": "Badge"
+                              }
+                            },
+                            "has_graduated_access": true,
+                            "parody_commentary_fan_label": "None",
+                            "is_blue_verified": true,
+                            "profile_image_shape": "Circle",
+                            "legacy": {
+                              "following": true,
+                              "can_dm": true,
+                              "can_media_tag": true,
+                              "created_at": "Thu Oct 22 14:42:25 +0000 2020",
+                              "default_profile": true,
+                              "default_profile_image": false,
+                              "description": "Largest Show on X | Founder @ibcgroupio | Investor 500+ Startups",
+                              "entities": {
+                                "description": {
+                                  "urls": []
+                                },
+                                "url": {
+                                  "urls": [
+                                    {
+                                      "display_url": "roundtable.live",
+                                      "expanded_url": "https://roundtable.live",
+                                      "url": "https://t.co/Lru9VAixI8",
+                                      "indices": [0, 23]
+                                    }
+                                  ]
+                                }
+                              },
+                              "fast_followers_count": 0,
+                              "favourites_count": 146627,
+                              "followers_count": 2105926,
+                              "friends_count": 45180,
+                              "has_custom_timelines": true,
+                              "is_translator": false,
+                              "listed_count": 8947,
+                              "location": "",
+                              "media_count": 85140,
+                              "name": "Mario Nawfal",
+                              "normal_followers_count": 2105926,
+                              "pinned_tweet_ids_str": ["1895216706366177689"],
+                              "possibly_sensitive": false,
+                              "profile_banner_url": "https://pbs.twimg.com/profile_banners/1319287761048723458/1740669499",
+                              "profile_image_url_https": "https://pbs.twimg.com/profile_images/1670905743619268609/pYItlWat_normal.jpg",
+                              "profile_interstitial_type": "",
+                              "screen_name": "MarioNawfal",
+                              "statuses_count": 114968,
+                              "translator_type": "none",
+                              "url": "https://t.co/Lru9VAixI8",
+                              "verified": false,
+                              "want_retweets": true,
+                              "withheld_in_countries": []
+                            },
+                            "professional": {
+                              "rest_id": "1480816032101064705",
+                              "professional_type": "Business",
+                              "category": [
+                                {
+                                  "id": 199,
+                                  "name": "Investment Company",
+                                  "icon_name": "IconBriefcaseStroke"
+                                }
+                              ]
+                            },
+                            "tipjar_settings": {},
+                            "super_follow_eligible": true
+                          }
+                        }
+                      },
+                      "unmention_data": {},
+                      "edit_control": {
+                        "edit_tweet_ids": ["1895296963379167526"],
+                        "editable_until_msecs": "1740712583000",
+                        "is_edit_eligible": true,
+                        "edits_remaining": "5"
+                      },
+                      "is_translatable": false,
+                      "views": {
+                        "count": "1496",
+                        "state": "EnabledWithCount"
+                      },
+                      "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+                      "note_tweet": {
+                        "is_expandable": false,
+                        "note_tweet_results": {
+                          "result": {
+                            "id": "Tm90ZVR3ZWV0OjE4OTUyOTY5NjMzMDc3OTg1Mjg=",
+                            "text": "BITCOIN DROPS UNDER $82K BEFORE SLIGHT RECOVERY",
+                            "entity_set": {
+                              "hashtags": [],
+                              "symbols": [],
+                              "urls": [],
+                              "user_mentions": []
+                            },
+                            "richtext": {
+                              "richtext_tags": [
+                                {
+                                  "from_index": 0,
+                                  "to_index": 47,
+                                  "richtext_types": ["Bold"]
+                                }
+                              ]
+                            },
+                            "media": {
+                              "inline_media": []
+                            }
+                          }
+                        }
+                      },
+                      "grok_analysis_button": true,
+                      "quoted_status_result": {
+                        "result": {
+                          "__typename": "Tweet",
+                          "rest_id": "1894821853006270638",
+                          "has_birdwatch_notes": false,
+                          "core": {
+                            "user_results": {
+                              "result": {
+                                "__typename": "User",
+                                "id": "VXNlcjoxMzE5Mjg3NzYxMDQ4NzIzNDU4",
+                                "rest_id": "1319287761048723458",
+                                "affiliates_highlighted_label": {
+                                  "label": {
+                                    "url": {
+                                      "url": "https://twitter.com/RoundtableSpace",
+                                      "urlType": "DeepLink"
+                                    },
+                                    "badge": {
+                                      "url": "https://pbs.twimg.com/profile_images/1750481240983994368/ijRW1a6Y_bigger.jpg"
+                                    },
+                                    "description": "Mario Nawfal’s Roundtable",
+                                    "userLabelType": "BusinessLabel",
+                                    "userLabelDisplayType": "Badge"
+                                  }
+                                },
+                                "has_graduated_access": true,
+                                "parody_commentary_fan_label": "None",
+                                "is_blue_verified": true,
+                                "profile_image_shape": "Circle",
+                                "legacy": {
+                                  "following": true,
+                                  "can_dm": true,
+                                  "can_media_tag": true,
+                                  "created_at": "Thu Oct 22 14:42:25 +0000 2020",
+                                  "default_profile": true,
+                                  "default_profile_image": false,
+                                  "description": "Largest Show on X | Founder @ibcgroupio | Investor 500+ Startups",
+                                  "entities": {
+                                    "description": {
+                                      "urls": []
+                                    },
+                                    "url": {
+                                      "urls": [
+                                        {
+                                          "display_url": "roundtable.live",
+                                          "expanded_url": "https://roundtable.live",
+                                          "url": "https://t.co/Lru9VAixI8",
+                                          "indices": [0, 23]
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "fast_followers_count": 0,
+                                  "favourites_count": 146627,
+                                  "followers_count": 2105926,
+                                  "friends_count": 45180,
+                                  "has_custom_timelines": true,
+                                  "is_translator": false,
+                                  "listed_count": 8947,
+                                  "location": "",
+                                  "media_count": 85140,
+                                  "name": "Mario Nawfal",
+                                  "normal_followers_count": 2105926,
+                                  "pinned_tweet_ids_str": [
+                                    "1895216706366177689"
+                                  ],
+                                  "possibly_sensitive": false,
+                                  "profile_banner_url": "https://pbs.twimg.com/profile_banners/1319287761048723458/1740669499",
+                                  "profile_image_url_https": "https://pbs.twimg.com/profile_images/1670905743619268609/pYItlWat_normal.jpg",
+                                  "profile_interstitial_type": "",
+                                  "screen_name": "MarioNawfal",
+                                  "statuses_count": 114968,
+                                  "translator_type": "none",
+                                  "url": "https://t.co/Lru9VAixI8",
+                                  "verified": false,
+                                  "want_retweets": true,
+                                  "withheld_in_countries": []
+                                },
+                                "professional": {
+                                  "rest_id": "1480816032101064705",
+                                  "professional_type": "Business",
+                                  "category": [
+                                    {
+                                      "id": 199,
+                                      "name": "Investment Company",
+                                      "icon_name": "IconBriefcaseStroke"
+                                    }
+                                  ]
+                                },
+                                "tipjar_settings": {},
+                                "super_follow_eligible": true
+                              }
+                            }
+                          },
+                          "unmention_data": {},
+                          "edit_control": {
+                            "edit_tweet_ids": ["1894821853006270638"],
+                            "editable_until_msecs": "1740599308000",
+                            "is_edit_eligible": true,
+                            "edits_remaining": "5"
+                          },
+                          "is_translatable": false,
+                          "views": {
+                            "count": "198677",
+                            "state": "EnabledWithCount"
+                          },
+                          "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+                          "grok_analysis_button": true,
+                          "quotedRefResult": {
+                            "result": {
+                              "__typename": "Tweet",
+                              "rest_id": "1894404599974367601"
+                            }
+                          },
+                          "legacy": {
+                            "bookmark_count": 21,
+                            "bookmarked": false,
+                            "created_at": "Wed Feb 26 18:48:28 +0000 2025",
+                            "conversation_id_str": "1894821853006270638",
+                            "display_text_range": [0, 35],
+                            "entities": {
+                              "hashtags": [],
+                              "media": [
+                                {
+                                  "display_url": "pic.x.com/TVqD6XtwV8",
+                                  "expanded_url": "https://x.com/MarioNawfal/status/1894821853006270638/photo/1",
+                                  "id_str": "1894821765781630976",
+                                  "indices": [36, 59],
+                                  "media_key": "3_1894821765781630976",
+                                  "media_url_https": "https://pbs.twimg.com/media/GkvCW1YXsAA418V.jpg",
+                                  "type": "photo",
+                                  "url": "https://t.co/TVqD6XtwV8",
+                                  "ext_media_availability": {
+                                    "status": "Available"
+                                  },
+                                  "features": {
+                                    "large": {
+                                      "faces": []
+                                    },
+                                    "medium": {
+                                      "faces": []
+                                    },
+                                    "small": {
+                                      "faces": []
+                                    },
+                                    "orig": {
+                                      "faces": []
+                                    }
+                                  },
+                                  "sizes": {
+                                    "large": {
+                                      "h": 681,
+                                      "w": 1051,
+                                      "resize": "fit"
+                                    },
+                                    "medium": {
+                                      "h": 681,
+                                      "w": 1051,
+                                      "resize": "fit"
+                                    },
+                                    "small": {
+                                      "h": 441,
+                                      "w": 680,
+                                      "resize": "fit"
+                                    },
+                                    "thumb": {
+                                      "h": 150,
+                                      "w": 150,
+                                      "resize": "crop"
+                                    }
+                                  },
+                                  "original_info": {
+                                    "height": 681,
+                                    "width": 1051,
+                                    "focus_rects": [
+                                      {
+                                        "x": 0,
+                                        "y": 0,
+                                        "w": 1051,
+                                        "h": 589
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": 0,
+                                        "w": 681,
+                                        "h": 681
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": 0,
+                                        "w": 597,
+                                        "h": 681
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": 0,
+                                        "w": 341,
+                                        "h": 681
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": 0,
+                                        "w": 1051,
+                                        "h": 681
+                                      }
+                                    ]
+                                  },
+                                  "media_results": {
+                                    "result": {
+                                      "media_key": "3_1894821765781630976"
+                                    }
+                                  }
+                                }
+                              ],
+                              "symbols": [],
+                              "timestamps": [],
+                              "urls": [],
+                              "user_mentions": []
+                            },
+                            "extended_entities": {
+                              "media": [
+                                {
+                                  "display_url": "pic.x.com/TVqD6XtwV8",
+                                  "expanded_url": "https://x.com/MarioNawfal/status/1894821853006270638/photo/1",
+                                  "id_str": "1894821765781630976",
+                                  "indices": [36, 59],
+                                  "media_key": "3_1894821765781630976",
+                                  "media_url_https": "https://pbs.twimg.com/media/GkvCW1YXsAA418V.jpg",
+                                  "type": "photo",
+                                  "url": "https://t.co/TVqD6XtwV8",
+                                  "ext_media_availability": {
+                                    "status": "Available"
+                                  },
+                                  "features": {
+                                    "large": {
+                                      "faces": []
+                                    },
+                                    "medium": {
+                                      "faces": []
+                                    },
+                                    "small": {
+                                      "faces": []
+                                    },
+                                    "orig": {
+                                      "faces": []
+                                    }
+                                  },
+                                  "sizes": {
+                                    "large": {
+                                      "h": 681,
+                                      "w": 1051,
+                                      "resize": "fit"
+                                    },
+                                    "medium": {
+                                      "h": 681,
+                                      "w": 1051,
+                                      "resize": "fit"
+                                    },
+                                    "small": {
+                                      "h": 441,
+                                      "w": 680,
+                                      "resize": "fit"
+                                    },
+                                    "thumb": {
+                                      "h": 150,
+                                      "w": 150,
+                                      "resize": "crop"
+                                    }
+                                  },
+                                  "original_info": {
+                                    "height": 681,
+                                    "width": 1051,
+                                    "focus_rects": [
+                                      {
+                                        "x": 0,
+                                        "y": 0,
+                                        "w": 1051,
+                                        "h": 589
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": 0,
+                                        "w": 681,
+                                        "h": 681
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": 0,
+                                        "w": 597,
+                                        "h": 681
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": 0,
+                                        "w": 341,
+                                        "h": 681
+                                      },
+                                      {
+                                        "x": 0,
+                                        "y": 0,
+                                        "w": 1051,
+                                        "h": 681
+                                      }
+                                    ]
+                                  },
+                                  "media_results": {
+                                    "result": {
+                                      "media_key": "3_1894821765781630976"
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            "favorite_count": 775,
+                            "favorited": false,
+                            "full_text": "🚨BREAKING: BITCOIN FALLS BELOW $85k https://t.co/TVqD6XtwV8",
+                            "is_quote_status": true,
+                            "lang": "en",
+                            "possibly_sensitive": false,
+                            "possibly_sensitive_editable": true,
+                            "quote_count": 16,
+                            "quoted_status_id_str": "1894404599974367601",
+                            "quoted_status_permalink": {
+                              "url": "https://t.co/aylc3fuINk",
+                              "expanded": "https://twitter.com/MarioNawfal/status/1894404599974367601",
+                              "display": "x.com/MarioNawfal/st…"
+                            },
+                            "reply_count": 154,
+                            "retweet_count": 101,
+                            "retweeted": false,
+                            "user_id_str": "1319287761048723458",
+                            "id_str": "1894821853006270638"
+                          }
+                        }
+                      },
+                      "legacy": {
+                        "bookmark_count": 2,
+                        "bookmarked": false,
+                        "created_at": "Fri Feb 28 02:16:23 +0000 2025",
+                        "conversation_id_str": "1895296963379167526",
+                        "display_text_range": [0, 47],
+                        "entities": {
+                          "hashtags": [],
+                          "media": [
+                            {
+                              "display_url": "pic.x.com/f53rd19ApE",
+                              "expanded_url": "https://x.com/MarioNawfal/status/1895296963379167526/photo/1",
+                              "id_str": "1895296125898248192",
+                              "indices": [48, 71],
+                              "media_key": "3_1895296125898248192",
+                              "media_url_https": "https://pbs.twimg.com/media/Gk1xyOhW0AAzYUU.png",
+                              "type": "photo",
+                              "url": "https://t.co/f53rd19ApE",
+                              "ext_media_availability": {
+                                "status": "Available"
+                              },
+                              "features": {
+                                "large": {
+                                  "faces": []
+                                },
+                                "medium": {
+                                  "faces": []
+                                },
+                                "small": {
+                                  "faces": []
+                                },
+                                "orig": {
+                                  "faces": []
+                                }
+                              },
+                              "sizes": {
+                                "large": {
+                                  "h": 597,
+                                  "w": 695,
+                                  "resize": "fit"
+                                },
+                                "medium": {
+                                  "h": 597,
+                                  "w": 695,
+                                  "resize": "fit"
+                                },
+                                "small": {
+                                  "h": 584,
+                                  "w": 680,
+                                  "resize": "fit"
+                                },
+                                "thumb": {
+                                  "h": 150,
+                                  "w": 150,
+                                  "resize": "crop"
+                                }
+                              },
+                              "original_info": {
+                                "height": 597,
+                                "width": 695,
+                                "focus_rects": [
+                                  {
+                                    "x": 0,
+                                    "y": 0,
+                                    "w": 695,
+                                    "h": 389
+                                  },
+                                  {
+                                    "x": 0,
+                                    "y": 0,
+                                    "w": 597,
+                                    "h": 597
+                                  },
+                                  {
+                                    "x": 0,
+                                    "y": 0,
+                                    "w": 524,
+                                    "h": 597
+                                  },
+                                  {
+                                    "x": 0,
+                                    "y": 0,
+                                    "w": 299,
+                                    "h": 597
+                                  },
+                                  {
+                                    "x": 0,
+                                    "y": 0,
+                                    "w": 695,
+                                    "h": 597
+                                  }
+                                ]
+                              },
+                              "media_results": {
+                                "result": {
+                                  "media_key": "3_1895296125898248192"
+                                }
+                              }
+                            }
+                          ],
+                          "symbols": [],
+                          "timestamps": [],
+                          "urls": [],
+                          "user_mentions": []
+                        },
+                        "extended_entities": {
+                          "media": [
+                            {
+                              "display_url": "pic.x.com/f53rd19ApE",
+                              "expanded_url": "https://x.com/MarioNawfal/status/1895296963379167526/photo/1",
+                              "id_str": "1895296125898248192",
+                              "indices": [48, 71],
+                              "media_key": "3_1895296125898248192",
+                              "media_url_https": "https://pbs.twimg.com/media/Gk1xyOhW0AAzYUU.png",
+                              "type": "photo",
+                              "url": "https://t.co/f53rd19ApE",
+                              "ext_media_availability": {
+                                "status": "Available"
+                              },
+                              "features": {
+                                "large": {
+                                  "faces": []
+                                },
+                                "medium": {
+                                  "faces": []
+                                },
+                                "small": {
+                                  "faces": []
+                                },
+                                "orig": {
+                                  "faces": []
+                                }
+                              },
+                              "sizes": {
+                                "large": {
+                                  "h": 597,
+                                  "w": 695,
+                                  "resize": "fit"
+                                },
+                                "medium": {
+                                  "h": 597,
+                                  "w": 695,
+                                  "resize": "fit"
+                                },
+                                "small": {
+                                  "h": 584,
+                                  "w": 680,
+                                  "resize": "fit"
+                                },
+                                "thumb": {
+                                  "h": 150,
+                                  "w": 150,
+                                  "resize": "crop"
+                                }
+                              },
+                              "original_info": {
+                                "height": 597,
+                                "width": 695,
+                                "focus_rects": [
+                                  {
+                                    "x": 0,
+                                    "y": 0,
+                                    "w": 695,
+                                    "h": 389
+                                  },
+                                  {
+                                    "x": 0,
+                                    "y": 0,
+                                    "w": 597,
+                                    "h": 597
+                                  },
+                                  {
+                                    "x": 0,
+                                    "y": 0,
+                                    "w": 524,
+                                    "h": 597
+                                  },
+                                  {
+                                    "x": 0,
+                                    "y": 0,
+                                    "w": 299,
+                                    "h": 597
+                                  },
+                                  {
+                                    "x": 0,
+                                    "y": 0,
+                                    "w": 695,
+                                    "h": 597
+                                  }
+                                ]
+                              },
+                              "media_results": {
+                                "result": {
+                                  "media_key": "3_1895296125898248192"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "favorite_count": 21,
+                        "favorited": false,
+                        "full_text": "BITCOIN DROPS UNDER $82K BEFORE SLIGHT RECOVERY https://t.co/f53rd19ApE",
+                        "is_quote_status": true,
+                        "lang": "en",
+                        "possibly_sensitive": false,
+                        "possibly_sensitive_editable": true,
+                        "quote_count": 0,
+                        "quoted_status_id_str": "1894821853006270638",
+                        "quoted_status_permalink": {
+                          "url": "https://t.co/dVjH4EqTfR",
+                          "expanded": "https://twitter.com/MarioNawfal/status/1894821853006270638",
+                          "display": "x.com/MarioNawfal/st…"
+                        },
+                        "reply_count": 14,
+                        "retweet_count": 3,
+                        "retweeted": false,
+                        "user_id_str": "1319287761048723458",
+                        "id_str": "1895296963379167526"
+                      },
+                      "quick_promote_eligibility": {
+                        "eligibility": "IneligibleNotProfessional"
+                      }
+                    }
+                  },
+                  "tweetDisplayType": "Tweet",
+                  "hasModeratedReplies": false
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
