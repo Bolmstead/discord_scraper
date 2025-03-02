@@ -15,7 +15,7 @@ async function openDiscord() {
 
   setTimeout(async () => {
     await scraper(page);
-  }, 30000);
+  }, 20000);
 }
 
 openDiscord();

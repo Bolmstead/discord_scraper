@@ -149,10 +149,11 @@ async function executeSwap(
   timeToSell = 90 * 1000,
   keywords = [],
   amountToBuy = 1,
-  slippageBps = 20000,
+  slippageBps = 2000,
   priorityFee = 0.05,
   inputMint = "So11111111111111111111111111111111111111112"
 ) {
+  let wallet = null;
   console.log("🚀 ~ executeSwap ~ walletName:", walletName);
   console.log("🚀 ~ executeSwap ~ buyOrSell:", buyOrSell);
   console.log("🚀 ~ executeSwap ~ name:", name);
@@ -195,13 +196,23 @@ async function executeSwap(
     return null;
   }
   if (walletName === "me") {
+    console.log("private key:", process.env.TEST_WALLET_PRIVATE_KEY);
     wallet = Keypair.fromSecretKey(
       bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
+    );
+    console.log("🚀 ~ wallet:", wallet);
+    console.log("🚀 ~ wallet.publicKey:", wallet.publicKey);
+    console.log("🚀 ~ wallet.secretKey:", wallet.secretKey);
+
+    console.log(
+      "🚀 ~ wallet.publicKey.toString():",
+      wallet.publicKey.toString()
     );
   } else if (walletName === "Sharif") {
     wallet = Keypair.fromSecretKey(
       bs58.decode(process.env.SHARIF_WALLET_PRIVATE_KEY || "")
     );
+    console.log("🚀 ~ wallet:", wallet);
   }
 
   // ####### REMOVE THIS #######
@@ -213,11 +224,10 @@ async function executeSwap(
   const amountToBuyLamports = amountToBuy * LAMPORTS_PER_SOL;
 
   try {
-    // Initialize wallet once
-    const wallet = Keypair.fromSecretKey(
-      bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
-    );
-
+    if (!wallet) {
+      console.error("Wallet not found");
+      return null;
+    }
     // Get quote and prepare swap
     const quote = await getQuote(
       inputMint,
@@ -292,7 +302,7 @@ async function executeSwap(
     console.log(`Transaction successful: https://solscan.io/tx/${signature}`);
     return true;
   } catch (error) {
-    console.error("Swap execution failed:", error.message);
+    console.error("Swap execution failed:", error);
     return null;
   }
 }
@@ -309,7 +319,7 @@ async function getTokenBalance(tokenMint) {
     // Get the associated token account address
     const tokenAccount = await getAssociatedTokenAddress(
       mintPubkey,
-      wallet.publicKey
+      wallet.publicKey.toString()
     );
 
     try {

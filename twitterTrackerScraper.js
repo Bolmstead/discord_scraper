@@ -12,6 +12,7 @@ const CONFIG = {
   MAX_TWEETS_TO_SCAN: 3,
   ERROR_RETRY_DELAY: 10000,
 };
+const IS_TEST = false;
 
 const player = playSound({});
 
@@ -92,7 +93,7 @@ export async function scraper(page) {
     // Process each tweet for trading opportunities in parallel
     for (const tweet of validTweets) {
       const { username, text } = tweet;
-      coin = await determineIfMemecoinBuy({ username, text });
+      coin = await determineIfMemecoinBuy(username, text, IS_TEST);
       if (coin) {
         tweetedUsername = username;
         break;

@@ -151,6 +151,11 @@ export const coins = {
 
 export const twitterAccounts = [
   // --------- TEST ACCOUNTS ---------
+  {
+    username: "testCoin",
+    name: "testCoin",
+    coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
+  },
   // {
   //   username: "MarioNawfal",
   //   name: "Mario Nawfal (test)",
@@ -161,6 +166,18 @@ export const twitterAccounts = [
   //   name: "New York Post (test)",
   //   coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
   // },
+
+  // {
+  //   username: "ABC",
+  //   name: "ABC",
+  //   coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
+  // },
+  // {
+  //   username: "teslaownersSV",
+  //   name: "teslaownersSV",
+  //   coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
+  // },
+
   // ---------------------------------
   {
     username: "SimonKaggwaNjal",

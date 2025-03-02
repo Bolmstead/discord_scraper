@@ -1,15 +1,23 @@
 import { twitterAccounts } from "../constants.js";
 import { determineIfTextHasCA } from "./determineIfTextHasCA.js";
 
-export async function determineIfMemecoinBuy(tweetObj) {
+export async function determineIfMemecoinBuy(username, text, isTest) {
   try {
     // Input validation
-    if (!tweetObj?.username || !tweetObj?.text) {
+    if (!username || !text) {
       console.log("Invalid tweet object: missing username or text");
       return null;
     }
 
-    const { username, text } = tweetObj;
+    if (isTest) {
+      const testAccount = twitterAccounts.find(
+        (account) => account.username === "testCoin"
+      );
+      if (testAccount) {
+        return testAccount.coins[0];
+      }
+    }
+
     const account = twitterAccounts.find(
       (account) => account.username === username
     );
