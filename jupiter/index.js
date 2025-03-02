@@ -141,6 +141,7 @@ async function flowQuoteAndSwap() {
 }
 
 async function executeSwap(
+  walletName,
   buyOrSell,
   name = "????",
   ticker = "????",
@@ -152,6 +153,7 @@ async function executeSwap(
   priorityFee = 0.05,
   inputMint = "So11111111111111111111111111111111111111112"
 ) {
+  console.log("🚀 ~ executeSwap ~ walletName:", walletName);
   console.log("🚀 ~ executeSwap ~ buyOrSell:", buyOrSell);
   console.log("🚀 ~ executeSwap ~ name:", name);
   console.log("🚀 ~ executeSwap ~ ticker:", ticker);
@@ -162,17 +164,12 @@ async function executeSwap(
   console.log("🚀 ~ executeSwap ~ slippageBps:", slippageBps);
   console.log("🚀 ~ executeSwap ~ priorityFee:", priorityFee);
   console.log("🚀 ~ executeSwap ~ inputMint:", inputMint);
+
   if (buyOrSell !== "sell" && buyOrSell !== "buy") {
     console.error("Invalid buyOrSell value");
     return null;
   }
 
-  if (buyOrSell !== "sell" && buyOrSell !== "buy") {
-    console.log("🚀 ~ executeSwap ~ sell:", {
-      name,
-      ticker,
-    });
-  }
   // Early validation to prevent unnecessary processing
   if (!outputMint || !inputMint) {
     console.error("Missing required mint addresses");
@@ -196,6 +193,15 @@ async function executeSwap(
       `Skipping ${name}: amount ${amountToBuy} outside valid range (0-15)`
     );
     return null;
+  }
+  if (walletName === "me") {
+    wallet = Keypair.fromSecretKey(
+      bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
+    );
+  } else if (walletName === "Sharif") {
+    wallet = Keypair.fromSecretKey(
+      bs58.decode(process.env.SHARIF_WALLET_PRIVATE_KEY || "")
+    );
   }
 
   // ####### REMOVE THIS #######

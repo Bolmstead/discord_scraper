@@ -108,43 +108,44 @@ export const coins = {
   },
   BROC: {
     name: "Broccoli",
-    address: "Broccoli12341234567890123456789012345678pump",
+    address: "D13VkjDiCxtgRJsH4s1VCxKS4bFZq5UEz2iRsSbapump",
     keywords: ["broccoli"],
   },
   ZACK: {
     name: "Zacktardio",
-    address: "Zacktardio1234567890123456789012345678pump",
+    address: "2mN3yfFwanRmgLVpLWcCskUuyhTr8zKoBw6nwiivpump",
     keywords: ["zacktardio"],
   },
   TRUMPBILL: {
     name: "Trump 250 Bill",
-    address: "TrumpBill1234567890123456789012345678pump",
+    address: "7nEx3cF6bgD2LDh3MimokRPbAV97TFsGKQyjRKN7pump",
     keywords: ["trump bill", "250 bill", "trump 250", "250 dollarbill"],
   },
   LEAF: {
     name: "Leaf Erikson",
-    address: "LeafErikson1234567890123456789012345678pump",
+    address: "7vqkjrxbtVazEwREnHB2nv2poYmzr9Yr4KdWp64Bpump",
     keywords: ["leaf", "erikson", "leaf erikson"],
   },
   ROGER: {
     name: "Free Roger",
-    address: "FreeRoger1234567890123456789012345678pump",
+    address: "4NS4nxNunN7KJ1oe2PRCnh1KbBBut2fTqYHqU7Gtpump",
     keywords: ["free roger", "roger ver"],
   },
-  PUFF: {
-    name: "Free Puff",
-    address: "FreePuff12341234567890123456789012345678pump",
-    keywords: ["free puff"],
-  },
+
   SWASTI: {
     name: "Swasticoin",
-    address: "Swasticoin1234567890123456789012345678pump",
+    address: "D91JAEfzeFZspHc6PrY8n1p234oEKXzhM3EM73Vppump",
     keywords: ["swasticoin"],
   },
   SWASTA: {
     name: "Swastachain",
-    address: "Swastachain234567890123456789012345678pump",
+    address: "DVzbUXeAQGyDLsn9FkGxm6q2q9hs7tUK4cimmmQpump",
     keywords: ["swastachain"],
+  },
+  BABYDEER: {
+    name: "Baby Deer",
+    address: "6pKHwNCpzgZuC9o5FzvCZkYSUGfQddhUYtMyDbEVpump",
+    keywords: ["baby deer", "deer"],
   },
 };
 
@@ -170,15 +171,7 @@ export const twitterAccounts = [
     timeToSellForAnyPostedCA: 120 * 1000,
     priorityFeeForAnyPostedCA: 0.1,
   },
-  {
-    username: "10Ronaldinho",
-    name: "Ronaldinho",
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 3,
-    slippageBpsForAnyPostedCA: 30000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-  },
+
   {
     username: "stoolpresidente",
     name: "Dave Portnoy",
@@ -208,6 +201,7 @@ export const twitterAccounts = [
       { ...coins.ASSANGE, amountToBuy: 5 },
       { ...coins.HARAMBE, amountToBuy: 5 },
       { ...coins.TRUTHGPT, amountToBuy: 3 },
+      { ...coins.BABYDEER, amountToBuy: 10 },
     ],
   },
   {
@@ -284,7 +278,7 @@ export const twitterAccounts = [
   {
     username: "cz_binance",
     name: "CZ",
-    coins: [{ ...coins.BROC, amountToBuy: 3 }],
+    coins: [{ ...coins.BROC, amountToBuy: 10 }],
     buyAnyPostedCA: true,
     amountToBuyForAnyPostedCA: 8,
     slippageBpsForAnyPostedCA: 50000,
@@ -294,7 +288,7 @@ export const twitterAccounts = [
   {
     username: "MrZackMorris",
     name: "Zack Morris",
-    coins: [{ ...coins.ZACK, amountToBuy: 3 }],
+    coins: [{ ...coins.ZACK, amountToBuy: 2 }],
     buyAnyPostedCA: true,
     amountToBuyForAnyPostedCA: 3,
     slippageBpsForAnyPostedCA: 30000,
@@ -328,8 +322,8 @@ export const twitterAccounts = [
     username: "RealRossU",
     name: "Ross Ulbricht",
     coins: [
-      { ...coins.LEAF, amountToBuy: 3 },
-      { ...coins.ROGER, amountToBuy: 3 },
+      { ...coins.LEAF, amountToBuy: 10 },
+      { ...coins.ROGER, amountToBuy: 10 },
     ],
     buyAnyPostedCA: true,
     amountToBuyForAnyPostedCA: 8,
@@ -341,7 +335,6 @@ export const twitterAccounts = [
     username: "kanyewest",
     name: "Kanye West",
     coins: [
-      { ...coins.PUFF, amountToBuy: 3 },
       { ...coins.SWASTI, amountToBuy: 3 },
       { ...coins.SWASTA, amountToBuy: 3 },
     ],
@@ -353,6 +346,16 @@ export const twitterAccounts = [
   },
   {
     username: "DavidSacks",
+    name: "David Sacks",
+    coins: [],
+    buyAnyPostedCA: true,
+    amountToBuyForAnyPostedCA: 8,
+    slippageBpsForAnyPostedCA: 50000,
+    timeToSellForAnyPostedCA: 120 * 1000,
+    priorityFeeForAnyPostedCA: 0.1,
+  },
+  {
+    username: "davidsacks47",
     name: "David Sacks",
     coins: [],
     buyAnyPostedCA: true,

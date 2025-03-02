@@ -79,6 +79,7 @@ export async function scraper(page) {
       })
     );
     let coin = null;
+    let tweetedUsername = null;
 
     // Filter out null results and duplicates
     const validTweets = tweets.filter((tweet) => tweet !== null);
@@ -93,6 +94,7 @@ export async function scraper(page) {
       const { username, text } = tweet;
       coin = await determineIfMemecoinBuy({ username, text });
       if (coin) {
+        tweetedUsername = username;
         break;
       }
     }
@@ -113,7 +115,8 @@ export async function scraper(page) {
         priorityFee,
       } = coin;
 
-      const buyWasSuccessful = await executeSwap(
+      const myBuyWasSuccessful = await executeSwap(
+        "me",
         "buy",
         name,
         ticker,
@@ -125,7 +128,23 @@ export async function scraper(page) {
         priorityFee
       );
 
-      if (buyWasSuccessful) {
+      if (myBuyWasSuccessful) {
+        const determineSharifBuyAmount = await determineSharifBuyAmount(
+          tweetedUsername,
+          coin
+        );
+        const sharifBuyWasSuccessful = await executeSwap(
+          "Sharif",
+          "buy",
+          name,
+          ticker,
+          address,
+          timeToSell,
+          keywords,
+          amountToBuy,
+          slippageBps,
+          priorityFee
+        );
         player.play("sounds/Success2.mp3", (err) => {
           if (err) console.error("Error playing sound:", err);
         });
