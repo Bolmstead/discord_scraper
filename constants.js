@@ -166,7 +166,7 @@ export const twitterAccounts = [
     username: "SimonKaggwaNjal",
     name: "Simon Kaggwa Njala",
     buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 5,
+    amountToBuyForAnyPostedCA: 10,
     slippageBpsForAnyPostedCA: 4000,
     timeToSellForAnyPostedCA: 120 * 1000,
     priorityFeeForAnyPostedCA: 0.1,
