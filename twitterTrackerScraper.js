@@ -129,22 +129,22 @@ export async function scraper(page) {
       );
 
       if (myBuyWasSuccessful) {
-        const determineSharifBuyAmount = await determineSharifBuyAmount(
-          tweetedUsername,
-          coin
-        );
-        const sharifBuyWasSuccessful = await executeSwap(
-          "Sharif",
-          "buy",
-          name,
-          ticker,
-          address,
-          timeToSell,
-          keywords,
-          amountToBuy,
-          slippageBps,
-          priorityFee
-        );
+        // const determineSharifBuyAmount = await determineSharifBuyAmount(
+        //   tweetedUsername,
+        //   coin
+        // );
+        // const sharifBuyWasSuccessful = await executeSwap(
+        //   "Sharif",
+        //   "buy",
+        //   name,
+        //   ticker,
+        //   address,
+        //   timeToSell,
+        //   keywords,
+        //   amountToBuy,
+        //   slippageBps,
+        //   priorityFee
+        // );
         player.play("sounds/Success2.mp3", (err) => {
           if (err) console.error("Error playing sound:", err);
         });
