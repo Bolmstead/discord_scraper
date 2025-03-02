@@ -6,6 +6,11 @@ export const coins = {
     address: "7mHCx9iXPJ7EJDbDAUGmej39Kme8cxZfeVi1EAvEpump",
     keywords: ["is", "the", "in", "he", "she", "it", "they", "we", "you"],
   },
+  FREESHLOMO: {
+    name: "FREESHLOMO",
+    address: "9L1SWjsBFaCeUP9sh9s7wty7n69vTrTPCJx41DcPpump",
+    keywords: ["shlomo"],
+  },
   BIGBALLS: {
     name: "Edward Coristine",
     address: "7mHCx9iXPJ7EJDbDAUGmej39Kme8cxZfeVi1EAvEpump",
@@ -219,6 +224,7 @@ export const twitterAccounts = [
       { ...coins.HARAMBE, amountToBuy: 5 },
       { ...coins.TRUTHGPT, amountToBuy: 3 },
       { ...coins.BABYDEER, amountToBuy: 10 },
+      { ...coins.FREESHLOMO, amountToBuy: 10 },
     ],
   },
   {
