@@ -1,8 +1,7 @@
 // Compile regex pattern once at module level for better performance
 const SOLANA_ADDRESS_REGEX = /[1-9A-HJ-NP-Za-km-z]{32,44}/g;
 
-export async function determineIfTextHasCA(tweetObj) {
-  const { text } = tweetObj;
+export async function determineIfTextHasCA(text) {
   const matches = text.match(SOLANA_ADDRESS_REGEX);
   return matches ? matches[0] : null;
 }

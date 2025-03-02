@@ -27,6 +27,10 @@ const connection = new Connection(
 );
 const jupiterQuoteApi = createJupiterApiClient();
 
+// --------- config ---------
+
+const DEFAULT_AMOUNT_TO_BUY = null;
+
 async function getQuote(inputMint, outputMint, amount, slippageBps) {
   console.log(
     "🚀 ~ getQuote ~ inputMint, outputMint, amount, slippageBps:",
@@ -138,13 +142,13 @@ async function flowQuoteAndSwap() {
 
 async function executeSwap(
   buyOrSell,
-  name,
-  ticker,
+  name = "????",
+  ticker = "????",
   outputMint,
   timeToSell = 90 * 1000,
   keywords = [],
   amountToBuy = 1,
-  slippageBps = 1000,
+  slippageBps = 20000,
   priorityFee = 0.05,
   inputMint = "So11111111111111111111111111111111111111112"
 ) {
@@ -155,83 +159,136 @@ async function executeSwap(
   console.log("🚀 ~ executeSwap ~ timeToSell:", timeToSell);
   console.log("🚀 ~ executeSwap ~ keywords:", keywords);
   console.log("🚀 ~ executeSwap ~ amountToBuy:", amountToBuy);
+  console.log("🚀 ~ executeSwap ~ slippageBps:", slippageBps);
+  console.log("🚀 ~ executeSwap ~ priorityFee:", priorityFee);
+  console.log("🚀 ~ executeSwap ~ inputMint:", inputMint);
+  if (buyOrSell !== "sell" && buyOrSell !== "buy") {
+    console.error("Invalid buyOrSell value");
+    return null;
+  }
 
+  if (buyOrSell !== "sell" && buyOrSell !== "buy") {
+    console.log("🚀 ~ executeSwap ~ sell:", {
+      name,
+      ticker,
+    });
+  }
+  // Early validation to prevent unnecessary processing
+  if (!outputMint || !inputMint) {
+    console.error("Missing required mint addresses");
+    return null;
+  }
+
+  // Single log for trade parameters
+  console.log("Trade Parameters:", {
+    buyOrSell,
+    name,
+    ticker,
+    outputMint,
+    timeToSell,
+    keywords,
+    amountToBuy,
+  });
+
+  // Validate amount and adjust if needed
   if (amountToBuy === 0 || amountToBuy > 15) {
     console.log(
-      `Skipping ${name} because amountToBuy is ${amountToBuy} and max is 15`
+      `Skipping ${name}: amount ${amountToBuy} outside valid range (0-15)`
     );
-    return;
+    return null;
   }
-  amountToBuy = 0.001;
 
-  const wallet = Keypair.fromSecretKey(
-    bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
-  );
-  console.log("Wallet:", wallet.publicKey.toString());
+  // ####### REMOVE THIS #######
+  if (DEFAULT_AMOUNT_TO_BUY) {
+    amountToBuy = DEFAULT_AMOUNT_TO_BUY;
+  }
+  // ###########################
 
   const amountToBuyLamports = amountToBuy * LAMPORTS_PER_SOL;
 
-  const quote = await getQuote(
-    inputMint,
-    outputMint,
-    amountToBuyLamports,
-    slippageBps
-  );
-  console.dir(quote, { depth: null });
-  const swapResponse = await getSwapResponse(wallet, quote);
-  console.dir(swapResponse, { depth: null });
+  try {
+    // Initialize wallet once
+    const wallet = Keypair.fromSecretKey(
+      bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
+    );
 
-  // Serialize the transaction
-  const swapTransactionBuf = Uint8Array.from(
-    Buffer.from(swapResponse.swapTransaction, "base64")
-  );
-  const transaction = VersionedTransaction.deserialize(swapTransactionBuf);
+    // Get quote and prepare swap
+    const quote = await getQuote(
+      inputMint,
+      outputMint,
+      amountToBuyLamports,
+      slippageBps
+    );
 
-  // Sign the transaction
-  transaction.sign([wallet]);
-  const signature = getSignature(transaction);
+    if (!quote) {
+      console.error("Failed to get quote");
+      return null;
+    }
 
-  // We first simulate whether the transaction would be successful
-  const { value: simulatedTransactionResponse } =
-    await connection.simulateTransaction(transaction, {
-      replaceRecentBlockhash: true,
-      commitment: "processed",
+    const swapResponse = await getSwapResponse(wallet, quote);
+    if (!swapResponse) {
+      console.error("Failed to get swap response");
+      return null;
+    }
+
+    // Prepare transaction (reuse Buffer to avoid extra allocation)
+    const transactionBuffer = Buffer.from(
+      swapResponse.swapTransaction,
+      "base64"
+    );
+    const transaction = VersionedTransaction.deserialize(
+      Uint8Array.from(transactionBuffer)
+    );
+
+    // Sign and get signature in one step
+    transaction.sign([wallet]);
+    const signature = getSignature(transaction);
+
+    // Simulate transaction
+    const { value: simulated } = await connection.simulateTransaction(
+      transaction,
+      {
+        replaceRecentBlockhash: true,
+        commitment: "processed",
+      }
+    );
+
+    if (simulated.err) {
+      console.error("Simulation failed:", {
+        error: simulated.err,
+        logs: simulated.logs,
+      });
+      return null;
+    }
+
+    // Prepare and send transaction
+    const serializedTx = transaction.serialize();
+    const txResponse = await transactionSenderAndConfirmationWaiter({
+      connection,
+      serializedTransaction: Buffer.from(serializedTx),
+      blockhashWithExpiryBlockHeight: {
+        blockhash: transaction.message.recentBlockhash,
+        lastValidBlockHeight: swapResponse.lastValidBlockHeight,
+      },
     });
-  const { err, logs } = simulatedTransactionResponse;
 
-  if (err) {
-    // Simulation error, we can check the logs for more details
-    // If you are getting an invalid account error, make sure that you have the input mint account to actually swap from.
-    console.error("Simulation Error:");
-    console.error({ err, logs });
-    return;
-  }
+    // Check transaction result
+    if (!txResponse) {
+      console.error("Transaction not confirmed");
+      return null;
+    }
 
-  const serializedTransaction = Buffer.from(transaction.serialize());
-  const blockhash = transaction.message.recentBlockhash;
+    if (txResponse.meta?.err) {
+      console.error("Transaction error:", txResponse.meta.err);
+      return null;
+    }
 
-  const transactionResponse = await transactionSenderAndConfirmationWaiter({
-    connection,
-    serializedTransaction,
-    blockhashWithExpiryBlockHeight: {
-      blockhash,
-      lastValidBlockHeight: swapResponse.lastValidBlockHeight,
-    },
-  });
-
-  // If we are not getting a response back, the transaction has not confirmed.
-  if (!transactionResponse) {
-    console.error("Transaction not confirmed");
+    console.log(`Transaction successful: https://solscan.io/tx/${signature}`);
+    return true;
+  } catch (error) {
+    console.error("Swap execution failed:", error.message);
     return null;
   }
-
-  if (transactionResponse.meta?.err) {
-    console.error(transactionResponse.meta?.err);
-    return null;
-  }
-
-  console.log(`https://solscan.io/tx/${signature}`);
-  return true;
 }
 
 async function getTokenBalance(tokenMint) {
