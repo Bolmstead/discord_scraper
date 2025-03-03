@@ -1,40 +1,44 @@
-import { trumpAccountMap, trumpKeywordMap } from "../constants.js";
+import {
+  trumpAccountMap,
+  trumpKeywordMap,
+  testKeywordMap,
+} from "../constants.js";
 import { determineIfTextHasCA } from "./determineIfTextHasCA.js";
+
+// Pre-process maps at module level
+const trumpCombinedKeywords = new Map();
+for (const [keyword, matches] of trumpKeywordMap) {
+  trumpCombinedKeywords.set(keyword.toLowerCase(), { matches, type: "trump" });
+}
+console.log("🚀 ~ trumpCombinedKeywords:", trumpCombinedKeywords);
+
+const testCombinedKeywords = new Map();
+for (const [keyword, matches] of testKeywordMap) {
+  testCombinedKeywords.set(keyword.toLowerCase(), { matches, type: "test" });
+}
+console.log("🚀 ~ testCombinedKeywords:", testCombinedKeywords);
 
 export function determineIfTrumpCoinBuy(text, testMode = false) {
   try {
-    let coin;
-    // Input validation
-    if (!text) {
-      console.log("Invalid tweet object: missing username or text");
-      return null;
-    }
+    if (!text) return null;
+
+    const account = trumpAccountMap.get("trump");
+    if (!account) return null;
 
     const {
-      coins = [],
-      name,
       buyAnyPostedCA,
       amountToBuyForAnyPostedCA,
       slippageBpsForAnyPostedCA,
       timeToSellForAnyPostedCA,
       priorityFeeForAnyPostedCA,
-    } = trumpAccountMap.get("trump");
+    } = account;
 
-    console.log("coins:: ", coins);
-    console.log("name:: ", name);
-    console.log("buyAnyPostedCA:: ", buyAnyPostedCA);
-    console.log("amountToBuyForAnyPostedCA:: ", amountToBuyForAnyPostedCA);
-    console.log("slippageBpsForAnyPostedCA:: ", slippageBpsForAnyPostedCA);
-    console.log("timeToSellForAnyPostedCA:: ", timeToSellForAnyPostedCA);
-    console.log("priorityFeeForAnyPostedCA:: ", priorityFeeForAnyPostedCA);
-
-    // Check for CA first since it's highest priority
+    // Check CA first (highest priority)
     if (buyAnyPostedCA) {
-      console.log(`🧪🧪🧪 ${name} has buy any posted CA enabled`);
       const ca = determineIfTextHasCA(text);
       if (ca) {
         return {
-          name: `Trump posted CA!!!!`,
+          name: "Trump posted CA!!!!",
           ticker: "????",
           address: ca,
           amountToBuy: amountToBuyForAnyPostedCA,
@@ -45,36 +49,27 @@ export function determineIfTrumpCoinBuy(text, testMode = false) {
           caWasPosted: true,
         };
       }
-      console.log(`${name} did not post a CA`);
     }
 
-    // Check for keyword matches using the trumpKeywordMap
-    const truthPostText = text.toLowerCase();
-    for (const [keyword, matches] of trumpKeywordMap) {
-      if (truthPostText.includes(keyword.toLowerCase())) {
-        const match = matches.find((m) => m.username === username);
-        if (match) {
-          console.log(`✨ Matched TRUMP keyword: "${keyword}"`);
+    const combinedKeywords = testMode
+      ? testCombinedKeywords
+      : trumpCombinedKeywords;
 
+    // Single pass through text for keyword matching
+    const keywordTracker = [];
+    const lowerText = text.toLowerCase();
+    for (const [keyword, { matches, type }] of combinedKeywords) {
+      keywordTracker.push(keyword);
+      if (lowerText.includes(keyword)) {
+        const match = matches.find((m) => m.username === "trump");
+
+        if (match) {
+          console.log(`✨ Matched ${type} keyword: "${keyword}"`);
           return match.coin;
         }
       }
     }
-    console.log(`${name} did not post a TRUMP keyword`);
-    if (testMode) {
-      for (const [keyword, matches] of testKeywordMap) {
-        if (truthPostText.includes(keyword.toLowerCase())) {
-          const match = matches.find((m) => m.username === username);
-          if (match) {
-            console.log(`✨ Matched TEST TRUMP keyword: "${keyword}"`);
-            return match.coin;
-          }
-        }
-      }
-      console.log(`${name} did not post a TEST TRUMP keyword`);
-    }
-    console.log(`Trump did not tweet about any memecoin`);
-
+    console.log("Tried keywords: ", keywordTracker);
     return null;
   } catch (error) {
     console.error("Error in determineIf:", error);

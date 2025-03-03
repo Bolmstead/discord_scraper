@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "twitterTracker": "node scrapeTwitterTracker.js",
+    "twitter": "node scrapeTwitterTracker.js",
     "truth": "node scrapeTruthSocial.js",
     "testSwap": "node testSwap.js"
   },

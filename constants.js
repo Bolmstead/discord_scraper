@@ -5,7 +5,7 @@ const coins = {
   TRUMP: {
     name: "OFFICIAL TRUMP",
     address: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN",
-    keywords: ["trump", "donald trump"],
+    keywords: ["$trump"],
   },
   FREESHLOMO: {
     name: "FREESHLOMO",
@@ -487,6 +487,7 @@ const testAccountMap = new Map([
     "elonmusk",
     {
       name: "Elon Musk",
+      username: "elonmusk",
       coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
     },
   ],
@@ -494,6 +495,7 @@ const testAccountMap = new Map([
     "binance",
     {
       name: "binance",
+      username: "binance",
       coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
     },
   ],
@@ -501,6 +503,7 @@ const testAccountMap = new Map([
     "MarioNawfal",
     {
       name: "Mario Nawfal",
+      username: "MarioNawfal",
       coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
     },
   ],
@@ -508,6 +511,7 @@ const testAccountMap = new Map([
     "nypost",
     {
       name: "New York Post (test)",
+      username: "nypost",
       coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
     },
   ],
@@ -515,6 +519,7 @@ const testAccountMap = new Map([
     "ABC",
     {
       name: "ABC",
+      username: "ABC",
       coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
     },
   ],
@@ -522,6 +527,7 @@ const testAccountMap = new Map([
     "teslaownersSV",
     {
       name: "teslaownersSV",
+      username: "teslaownersSV",
       coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
     },
   ],
@@ -529,6 +535,7 @@ const testAccountMap = new Map([
     "trump",
     {
       name: "Donald Trump",
+      username: "trump",
       coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
     },
   ],
