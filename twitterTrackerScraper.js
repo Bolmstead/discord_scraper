@@ -13,8 +13,8 @@ const CONFIG = {
   MAX_TWEETS_TO_SCAN: 3,
   ERROR_RETRY_DELAY: 10000,
 };
-const IS_TEST = false;
-const IS_SHARIF_TEST = false;
+const IS_TEST_AUTOMATIC_BUY = false;
+const IS_TEST_SCRAPE_TWEET = false;
 
 const player = playSound({});
 
@@ -30,7 +30,7 @@ let lastProcessedTweetIds = [];
 
 export async function scraper(page) {
   const scanStart = Date.now();
-  if (IS_TEST) {
+  if (IS_TEST_AUTOMATIC_BUY) {
     console.log("🚨🚨🚨🚨🚨 IN TEST MODE 🚨🚨🚨🚨🚨");
   } else {
     console.log("✅✅✅✅✅ IN PRODUCTION MODE ✅✅✅✅✅");
@@ -100,7 +100,7 @@ export async function scraper(page) {
     // Process each tweet for trading opportunities in parallel
     for (const tweet of validTweets) {
       const { username, text } = tweet;
-      coin = determineIfMemecoinBuy(username, text, IS_TEST);
+      coin = determineIfMemecoinBuy(username, text, IS_TEST_AUTOMATIC_BUY);
       if (coin) {
         tweetedUsername = username;
         break;
@@ -112,7 +112,7 @@ export async function scraper(page) {
       console.log("Starting to buy token...");
       console.log("coin:", coin);
 
-      const {
+      let {
         name,
         ticker,
         address,
@@ -123,6 +123,9 @@ export async function scraper(page) {
         priorityFee,
         caWasPosted,
       } = coin;
+      if (IS_TEST_SCRAPE_TWEET || IS_TEST_AUTOMATIC_BUY) {
+        amountToBuy = 0.001;
+      }
 
       const myBuyWasSuccessful = await executeSwap(
         "me",
@@ -144,7 +147,7 @@ export async function scraper(page) {
           coin
         );
         if (sharifShouldBuy) {
-          if (IS_SHARIF_TEST) {
+          if (IS_TEST_SCRAPE_TWEET) {
             sharifAmtToBuy = 0.001;
           }
           sharifBuyWasSuccessful = await executeSwap(
@@ -169,7 +172,7 @@ export async function scraper(page) {
         setTimeout(() => {
           console.log("Scheduling sell operation");
           scraper(page);
-        }, 5 * 60 * 1000);
+        }, 10 * 1000);
 
         return;
       }

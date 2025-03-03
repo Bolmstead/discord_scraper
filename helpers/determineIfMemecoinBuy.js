@@ -1,4 +1,4 @@
-import { twitterAccounts } from "../constants.js";
+import { accountMap, keywordMap } from "../constants.js";
 import { determineIfTextHasCA } from "./determineIfTextHasCA.js";
 
 export function determineIfMemecoinBuy(username, text, isTest) {
@@ -10,18 +10,13 @@ export function determineIfMemecoinBuy(username, text, isTest) {
     }
 
     if (isTest) {
-      const testAccount = twitterAccounts.find(
-        (account) => account.username === "testCoin"
-      );
+      const testAccount = accountMap.get("testCoin");
       if (testAccount) {
         return testAccount.coins[0];
       }
     }
 
-    const account = twitterAccounts.find(
-      (account) => account.username === username
-    );
-
+    const account = accountMap.get(username);
     if (!account) {
       console.log(`Account ${username} not found`);
       return null;
@@ -38,6 +33,7 @@ export function determineIfMemecoinBuy(username, text, isTest) {
       priorityFeeForAnyPostedCA,
     } = account;
 
+    // Check for CA first since it's highest priority
     if (buyAnyPostedCA) {
       console.log(`🧪🧪🧪 ${name} has buy any posted CA enabled`);
       const ca = determineIfTextHasCA(text);
@@ -56,47 +52,25 @@ export function determineIfMemecoinBuy(username, text, isTest) {
       }
     }
 
-    if (!Array.isArray(coins) || coins.length === 0) {
-      console.log(`${name} has no memecoin to buy`);
-      return null;
+    // Check for automatic buy coins
+    if (Array.isArray(coins)) {
+      const automaticBuyCoin = coins.find((coin) => coin.automaticBuy);
+      if (automaticBuyCoin) {
+        console.log(`🧪🧪🧪 ${name} has automatic buy enabled`);
+        return automaticBuyCoin;
+      }
     }
 
-    let coin = null;
-    let triggeredKeyword = null;
-    const tweetText = text.toLowerCase().trim();
-
-    for (let i = coins.length - 1; i >= 0; i--) {
-      const potentialCoin = coins[i];
-
-      if (!potentialCoin) {
-        console.log("Invalid coin entry found, skipping...");
-        continue;
-      }
-
-      const { automaticBuy = false, keywords = [] } = potentialCoin;
-
-      // Debug log to help identify issues
-      console.log(`Checking coin: ${potentialCoin.name || "unnamed"}`);
-      console.log("Keywords:", keywords);
-
-      if (automaticBuy) {
-        console.log(`🧪🧪🧪 ${name} has automatic buy enabled`);
-        return potentialCoin;
-      }
-      for (const keyword of keywords) {
-        if (text.toLowerCase().includes(keyword)) {
+    // Check for keyword matches using the keywordMap
+    const tweetText = text.toLowerCase();
+    for (const [keyword, matches] of keywordMap) {
+      if (tweetText.includes(keyword.toLowerCase())) {
+        const match = matches.find((m) => m.username === username);
+        if (match) {
           console.log(`✨ Matched keyword: "${keyword}"`);
-          coin = potentialCoin;
-          triggeredKeyword = keyword;
-          break;
+          return match.coin;
         }
       }
-      if (coin) break;
-    }
-
-    if (coin) {
-      console.log(`MEME COIN BUY!!!`);
-      return coin;
     }
 
     console.log(`${name} did not tweet about any memecoin`);

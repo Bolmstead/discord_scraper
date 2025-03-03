@@ -1,6 +1,7 @@
 // double check the addresses
 
-export const coins = {
+// Compile lookup maps at module level for better performance
+const coins = {
   TestCoin: {
     name: "test!!!",
     address: "7mHCx9iXPJ7EJDbDAUGmej39Kme8cxZfeVi1EAvEpump",
@@ -21,7 +22,7 @@ export const coins = {
     address: "HuAncxDEsakCDgZS2Yfo9xJbHmtHXMnxxkT9jqdXnHhm",
     keywords: ["kekius", "kekius maximus"],
   },
-  Pnut: {
+  PNUT: {
     name: "Peanut the Squirrel",
     address: "2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump",
     keywords: ["pnut", "peanut"],
@@ -124,7 +125,7 @@ export const coins = {
   TRUMPBILL: {
     name: "Trump 250 Bill",
     address: "7nEx3cF6bgD2LDh3MimokRPbAV97TFsGKQyjRKN7pump",
-    keywords: ["trump bill", "250 bill", "trump 250", "250 dollarbill"],
+    keywords: ["$250", "250 dollar bill"],
   },
   LEAF: {
     name: "Leaf Erikson",
@@ -152,249 +153,337 @@ export const coins = {
     address: "6pKHwNCpzgZuC9o5FzvCZkYSUGfQddhUYtMyDbEVpump",
     keywords: ["baby deer", "deer"],
   },
+
+  $100BILL: {
+    name: "$100",
+    address: "7Eg4Bin1U4SNggFJFrKuGTo6e7ShuzjYyW9Quxtxpump",
+    keywords: ["golden age act", "$100 bill", "brandon gill"],
+  },
+  CSR: {
+    name: "Crypto Strategic Reserve",
+    address: "EqQFU4AoRVKJjQrpshmp89YxHAgNecCpJdMS8PJLpump",
+    keywords: ["crypto strategic reserve"],
+  },
+  TRUMPSEASON: {
+    name: "Trump Season",
+    address: "8qiVWSZ1HYsnA7Z79j3jwhbDJTxqjosZVWAsajSkpump",
+    keywords: ["trump season", "trump szn"],
+  },
 };
 
-export const twitterAccounts = [
-  // --------- TEST ACCOUNTS ---------
-  {
-    username: "testCoin",
-    name: "testCoin",
-    coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
-  },
-  // {
-  //   username: "MarioNawfal",
-  //   name: "Mario Nawfal (test)",
-  //   coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
-  // },
-  // {
-  //   username: "nypost",
-  //   name: "New York Post (test)",
-  //   coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
-  // },
+// Create efficient lookup maps
+const accountMap = new Map([
+  // Test accounts
+  [
+    "testCoin",
+    {
+      name: "testCoin",
+      coins: [{ ...coins.TestCoin, amountToBuy: 0.001 }],
+    },
+  ],
+  // [
+  //   "elonmusk",
+  //   {
+  //     name: "Elon Musk",
+  //     coins: [{ ...coins.TestCoin, amountToBuy: 0.001 }],
+  //   },
+  // ],
+  // [
+  //   "binance",
+  //   {
+  //     name: "Elon Musk",
+  //     coins: [{ ...coins.TestCoin, amountToBuy: 0.001 }],
+  //   },
+  // ],
+  // [
+  //   "MarioNawfal",
+  //   {
+  //     name: "Mario Nawfal",
+  //     coins: [{ ...coins.TestCoin, amountToBuy: 0.001 }],
+  //   },
+  // ],
+  // [
+  //   "nypost",
+  //   {
+  //     name: "New York Post (test)",
+  //     coins: [{ ...coins.TestCoin, amountToBuy: 0.001 }],
+  //   },
+  // ],
+  // [
+  //   "ABC",
+  //   {
+  //     name: "ABC",
+  //     coins: [{ ...coins.TestCoin, amountToBuy: 0.001 }],
+  //   },
+  // ],
+  // [
+  //   "teslaownersSV",
+  //   {
+  //     name: "teslaownersSV",
+  //     coins: [{ ...coins.TestCoin, amountToBuy: 0.001 }],
+  //   },
+  // ],
 
-  // {
-  //   username: "ABC",
-  //   name: "ABC",
-  //   coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
-  // },
-  // {
-  //   username: "teslaownersSV",
-  //   name: "teslaownersSV",
-  //   coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
-  // },
+  // Active accounts
+  [
+    "SimonKaggwaNjal",
+    {
+      name: "Simon Kaggwa Njala",
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 5,
+      slippageBpsForAnyPostedCA: 4000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+    },
+  ],
+  [
+    "stoolpresidente",
+    {
+      name: "Dave Portnoy",
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 8,
+      slippageBpsForAnyPostedCA: 5000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+      coins: [
+        { ...coins.DDTG, amountToBuy: 3 },
+        { ...coins.JAILSTOOL, amountToBuy: 1 },
+      ],
+    },
+  ],
+  [
+    "elonmusk",
+    {
+      name: "Elon Musk",
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 8,
+      slippageBpsForAnyPostedCA: 5000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+      coins: [
+        { ...coins.BIGBALLS, amountToBuy: 5 },
+        { ...coins.KM, amountToBuy: 10 },
+        { ...coins.PNUT, amountToBuy: 5 },
+        { ...coins.DOGEFATHER, amountToBuy: 5 },
+        { ...coins.NOLAND, amountToBuy: 5 },
+        { ...coins.LUIGI, amountToBuy: 5 },
+        { ...coins.ASSANGE, amountToBuy: 5 },
+        { ...coins.HARAMBE, amountToBuy: 5 },
+        { ...coins.TRUTHGPT, amountToBuy: 3 },
+        { ...coins.BABYDEER, amountToBuy: 10 },
+        { ...coins.FREESHLOMO, amountToBuy: 10 },
+        { ...coins.$100BILL, amountToBuy: 5 },
+        { ...coins.CSR, amountToBuy: 10 },
+        { ...coins.TRUMPSEASON, amountToBuy: 5 },
+        { ...coins.TRUMPBILL, amountToBuy: 5 },
+      ],
+    },
+  ],
+  [
+    "SBF_FTX",
+    {
+      name: "SBF",
+      coins: [{ ...coins.SBF, amountToBuy: 10, automaticBuy: true }],
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 8,
+      slippageBpsForAnyPostedCA: 5000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+    },
+  ],
+  [
+    "WatcherGuru",
+    {
+      name: "Watcher Guru",
+      coins: [
+        { ...coins.GREENLAND, amountToBuy: 3 },
+        { ...coins.HKU5, amountToBuy: 3 },
+        { ...coins.SWF, amountToBuy: 3 },
+        { ...coins.BIGBALLS, amountToBuy: 3 },
+        { ...coins.TGC, amountToBuy: 3 },
+        { ...coins.POPE, amountToBuy: 3 },
+        { ...coins.KNOX, amountToBuy: 3 },
+        { ...coins.$100BILL, amountToBuy: 5 },
+        { ...coins.CSR, amountToBuy: 10 },
+        { ...coins.TRUMPSEASON, amountToBuy: 5 },
+        { ...coins.TRUMPBILL, amountToBuy: 5 },
+      ],
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 8,
+      slippageBpsForAnyPostedCA: 5000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+    },
+  ],
+  [
+    "DeItaone",
+    {
+      name: "Walter Bloomberg",
+      coins: [
+        { ...coins.GREENLAND, amountToBuy: 3 },
+        { ...coins.HKU5, amountToBuy: 3 },
+        { ...coins.SWF, amountToBuy: 1 },
+        { ...coins.BIGBALLS, amountToBuy: 3 },
+        { ...coins.TGC, amountToBuy: 3 },
+        { ...coins.$100BILL, amountToBuy: 5 },
+        { ...coins.TRUMPSEASON, amountToBuy: 5 },
+        { ...coins.TRUMPBILL, amountToBuy: 5 },
+      ],
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 8,
+      slippageBpsForAnyPostedCA: 5000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+    },
+  ],
+  [
+    "aeyakovenko",
+    {
+      name: "toly🇺🇸",
+      coins: [],
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 8,
+      slippageBpsForAnyPostedCA: 5000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+    },
+  ],
+  [
+    "cz_binance",
+    {
+      name: "CZ",
+      coins: [{ ...coins.BROC, amountToBuy: 10 }],
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 8,
+      slippageBpsForAnyPostedCA: 5000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+    },
+  ],
+  [
+    "MrZackMorris",
+    {
+      name: "Zack Morris",
+      coins: [{ ...coins.ZACK, amountToBuy: 2 }],
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 3,
+      slippageBpsForAnyPostedCA: 3000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+    },
+  ],
+  [
+    "BNONews",
+    {
+      name: "BNO News",
+      coins: [
+        { ...coins.GREENLAND, amountToBuy: 5 },
+        { ...coins.HKU5, amountToBuy: 3 },
+        { ...coins.SWF, amountToBuy: 1 },
+        { ...coins.BIGBALLS, amountToBuy: 3 },
+        { ...coins.TGC, amountToBuy: 5 },
+        { ...coins.BIGBALLS, amountToBuy: 5 },
+        { ...coins.KM, amountToBuy: 10 },
+        { ...coins.PNUT, amountToBuy: 5 },
+        { ...coins.ADRIAN, amountToBuy: 5 },
+        { ...coins.DOGEFATHER, amountToBuy: 5 },
+        { ...coins.ASSANGE, amountToBuy: 5 },
+        { ...coins.HARAMBE, amountToBuy: 5 },
+        { ...coins.$100BILL, amountToBuy: 5 },
+        { ...coins.CSR, amountToBuy: 10 },
+        { ...coins.TRUMPSEASON, amountToBuy: 5 },
+        { ...coins.TRUMPBILL, amountToBuy: 5 },
+      ],
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 8,
+      slippageBpsForAnyPostedCA: 5000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+    },
+  ],
+  [
+    "RealRossU",
+    {
+      name: "Ross Ulbricht",
+      coins: [
+        { ...coins.LEAF, amountToBuy: 10 },
+        { ...coins.ROGER, amountToBuy: 10 },
+      ],
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 8,
+      slippageBpsForAnyPostedCA: 5000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+    },
+  ],
+  [
+    "kanyewest",
+    {
+      name: "Kanye West",
+      coins: [
+        { ...coins.SWASTI, amountToBuy: 3 },
+        { ...coins.SWASTA, amountToBuy: 3 },
+      ],
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 8,
+      slippageBpsForAnyPostedCA: 5000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+    },
+  ],
+  [
+    "DavidSacks",
+    {
+      name: "David Sacks",
+      coins: [
+        { ...coins.$100BILL, amountToBuy: 5 },
+        { ...coins.CSR, amountToBuy: 10 },
+        { ...coins.TRUMPSEASON, amountToBuy: 5 },
+        { ...coins.SWF, amountToBuy: 5 },
+        { ...coins.TRUMPBILL, amountToBuy: 5 },
+      ],
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 8,
+      slippageBpsForAnyPostedCA: 5000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+    },
+  ],
+  [
+    "davidsacks47",
+    {
+      name: "David Sacks",
+      coins: [
+        { ...coins.$100BILL, amountToBuy: 5 },
+        { ...coins.CSR, amountToBuy: 10 },
+        { ...coins.TRUMPSEASON, amountToBuy: 5 },
+        { ...coins.SWF, amountToBuy: 5 },
+        { ...coins.TRUMPBILL, amountToBuy: 5 },
+      ],
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 8,
+      slippageBpsForAnyPostedCA: 5000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+    },
+  ],
+]);
 
-  // ---------------------------------
-  {
-    username: "SimonKaggwaNjal",
-    name: "Simon Kaggwa Njala",
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 5,
-    slippageBpsForAnyPostedCA: 4000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-  },
-  {
-    username: "gaysolmeme",
-    name: "Gay Sol Meme",
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 5,
-    slippageBpsForAnyPostedCA: 4000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-  },
+// Create keyword lookup map for faster matching
+const keywordMap = new Map();
+for (const [username, account] of accountMap) {
+  if (account.coins) {
+    for (const coin of account.coins) {
+      if (coin.keywords) {
+        for (const keyword of coin.keywords) {
+          if (!keywordMap.has(keyword)) {
+            keywordMap.set(keyword, []);
+          }
+          keywordMap.get(keyword).push({ username, coin });
+        }
+      }
+    }
+  }
+}
 
-  {
-    username: "stoolpresidente",
-    name: "Dave Portnoy",
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 8,
-    slippageBpsForAnyPostedCA: 5000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-  },
-
-  {
-    username: "elonmusk",
-    name: "Elon Musk",
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 8,
-    slippageBpsForAnyPostedCA: 5000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-    coins: [
-      { ...coins.BIGBALLS, amountToBuy: 5 },
-      { ...coins.KM, amountToBuy: 10 },
-      { ...coins.PNUT, amountToBuy: 5 },
-      { ...coins.DOGEFATHER, amountToBuy: 5 },
-      { ...coins.NOLAND, amountToBuy: 5 },
-      { ...coins.LUIGI, amountToBuy: 5 },
-      { ...coins.ASSANGE, amountToBuy: 5 },
-      { ...coins.HARAMBE, amountToBuy: 5 },
-      { ...coins.TRUTHGPT, amountToBuy: 3 },
-      { ...coins.BABYDEER, amountToBuy: 10 },
-      { ...coins.FREESHLOMO, amountToBuy: 10 },
-    ],
-  },
-  {
-    username: "stoolpresidente",
-    name: "Dave Portnoy",
-    coins: [
-      { ...coins.GREED3, amountToBuy: 3 },
-      { ...coins.DDTG, amountToBuy: 3 },
-      { ...coins.JAILSTOOL, amountToBuy: 1 },
-    ],
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 8,
-    slippageBpsForAnyPostedCA: 5000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-  },
-  // --------- SBF ---------
-  // any tweet
-  {
-    username: "SBF_FTX",
-    name: "SBF",
-    coins: [{ ...coins.SBF, amountToBuy: 10, automaticBuy: true }],
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 8,
-    slippageBpsForAnyPostedCA: 5000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-  },
-  {
-    username: "WatcherGuru",
-    name: "Watcher Guru",
-    coins: [
-      { ...coins.GREENLAND, amountToBuy: 3 },
-      { ...coins.HKU5, amountToBuy: 3 },
-      { ...coins.SWF, amountToBuy: 1 },
-      { ...coins.BIGBALLS, amountToBuy: 3 },
-      { ...coins.TGC, amountToBuy: 3 },
-      { ...coins.POPE, amountToBuy: 4 },
-      { ...coins.KNOX, amountToBuy: 3 },
-    ],
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 8,
-    slippageBpsForAnyPostedCA: 5000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-  },
-
-  {
-    username: "DeItaone",
-    name: "Walter Bloomberg",
-    coins: [
-      { ...coins.GREENLAND, amountToBuy: 3 },
-      { ...coins.HKU5, amountToBuy: 3 },
-      { ...coins.SWF, amountToBuy: 1 },
-      { ...coins.BIGBALLS, amountToBuy: 3 },
-      { ...coins.TGC, amountToBuy: 3 },
-    ],
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 8,
-    slippageBpsForAnyPostedCA: 5000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-  },
-  {
-    username: "aeyakovenko",
-    name: "toly🇺🇸",
-    coins: [],
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 8,
-    slippageBpsForAnyPostedCA: 5000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-  },
-  {
-    username: "cz_binance",
-    name: "CZ",
-    coins: [{ ...coins.BROC, amountToBuy: 10 }],
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 8,
-    slippageBpsForAnyPostedCA: 5000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-  },
-  {
-    username: "MrZackMorris",
-    name: "Zack Morris",
-    coins: [{ ...coins.ZACK, amountToBuy: 2 }],
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 3,
-    slippageBpsForAnyPostedCA: 3000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-  },
-  {
-    username: "BNONews",
-    name: "BNO News",
-    coins: [
-      { ...coins.GREENLAND, amountToBuy: 5 },
-      { ...coins.HKU5, amountToBuy: 3 },
-      { ...coins.SWF, amountToBuy: 1 },
-      { ...coins.BIGBALLS, amountToBuy: 3 },
-      { ...coins.TGC, amountToBuy: 5 },
-      { ...coins.BIGBALLS, amountToBuy: 5 },
-      { ...coins.KM, amountToBuy: 10 },
-      { ...coins.PNUT, amountToBuy: 5 },
-      { ...coins.ADRIAN, amountToBuy: 5 },
-      { ...coins.DOGEFATHER, amountToBuy: 5 },
-      { ...coins.ASSANGE, amountToBuy: 5 },
-      { ...coins.HARAMBE, amountToBuy: 5 },
-    ],
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 8,
-    slippageBpsForAnyPostedCA: 5000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-  },
-  {
-    username: "RealRossU",
-    name: "Ross Ulbricht",
-    coins: [
-      { ...coins.LEAF, amountToBuy: 10 },
-      { ...coins.ROGER, amountToBuy: 10 },
-    ],
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 8,
-    slippageBpsForAnyPostedCA: 5000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-  },
-  {
-    username: "kanyewest",
-    name: "Kanye West",
-    coins: [
-      { ...coins.SWASTI, amountToBuy: 3 },
-      { ...coins.SWASTA, amountToBuy: 3 },
-    ],
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 8,
-    slippageBpsForAnyPostedCA: 5000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-  },
-  {
-    username: "DavidSacks",
-    name: "David Sacks",
-    coins: [],
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 8,
-    slippageBpsForAnyPostedCA: 5000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-  },
-  {
-    username: "davidsacks47",
-    name: "David Sacks",
-    coins: [],
-    buyAnyPostedCA: true,
-    amountToBuyForAnyPostedCA: 8,
-    slippageBpsForAnyPostedCA: 5000,
-    timeToSellForAnyPostedCA: 120 * 1000,
-    priorityFeeForAnyPostedCA: 0.1,
-  },
-];
-
-console.log(JSON.stringify(twitterAccounts, null, 2));
+export { coins, accountMap, keywordMap };

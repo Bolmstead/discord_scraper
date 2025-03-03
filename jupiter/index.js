@@ -73,73 +73,6 @@ async function getSwapResponse(wallet, quote) {
   return swapResponse;
 }
 
-async function flowQuote() {
-  const quote = await getQuote();
-  console.dir(quote, { depth: null });
-}
-
-async function flowQuoteAndSwap() {
-  const wallet = Keypair.fromSecretKey(
-    bs58.decode(process.env.PRIVATE_KEY || "")
-  );
-  console.log("Wallet:", wallet.publicKey.toString());
-
-  const quote = await getQuote();
-  console.log("🚀 ~ flowQuoteAndSwap ~ quote:", quote);
-  const swapResponse = await getSwapResponse(wallet, quote);
-  console.log("🚀 ~ flowQuoteAndSwap ~ swapResponse:", swapResponse);
-
-  // Serialize the transaction
-  const swapTransactionBuf = Uint8Array.from(
-    Buffer.from(swapResponse.swapTransaction, "base64")
-  );
-  const transaction = VersionedTransaction.deserialize(swapTransactionBuf);
-
-  // Sign the transaction
-  transaction.sign([wallet]);
-  const signature = getSignature(transaction);
-
-  // We first simulate whether the transaction would be successful
-  const { value: simulatedTransactionResponse } =
-    await connection.simulateTransaction(transaction, {
-      replaceRecentBlockhash: true,
-      commitment: "processed",
-    });
-  const { err, logs } = simulatedTransactionResponse;
-
-  if (err) {
-    // Simulation error, we can check the logs for more details
-    // If you are getting an invalid account error, make sure that you have the input mint account to actually swap from.
-    console.error("Simulation Error:");
-    console.error({ err, logs });
-    return;
-  }
-
-  const serializedTransaction = Buffer.from(transaction.serialize());
-  const blockhash = transaction.message.recentBlockhash;
-
-  const transactionResponse = await transactionSenderAndConfirmationWaiter({
-    connection,
-    serializedTransaction,
-    blockhashWithExpiryBlockHeight: {
-      blockhash,
-      lastValidBlockHeight: swapResponse.lastValidBlockHeight,
-    },
-  });
-
-  // If we are not getting a response back, the transaction has not confirmed.
-  if (!transactionResponse) {
-    console.error("Transaction not confirmed");
-    return;
-  }
-
-  if (transactionResponse.meta?.err) {
-    console.error(transactionResponse.meta?.err);
-  }
-
-  console.log(`https://solscan.io/tx/${signature}`);
-}
-
 async function executeSwap(
   walletName,
   buyOrSell,
@@ -264,29 +197,11 @@ async function executeSwap(
       Uint8Array.from(transactionBuffer)
     );
 
-    // Sign and get signature in one step
+    // Just sign and send
     transaction.sign([wallet]);
     const signature = getSignature(transaction);
-
-    // Simulate transaction
-    const { value: simulated } = await connection.simulateTransaction(
-      transaction,
-      {
-        replaceRecentBlockhash: true,
-        commitment: "processed",
-      }
-    );
-
-    if (simulated.err) {
-      console.error("Simulation failed:", {
-        error: simulated.err,
-        logs: simulated.logs,
-      });
-      return null;
-    }
-
-    // Prepare and send transaction
     const serializedTx = transaction.serialize();
+
     const txResponse = await transactionSenderAndConfirmationWaiter({
       connection,
       serializedTransaction: Buffer.from(serializedTx),
@@ -366,8 +281,6 @@ async function getTokenBalance(tokenMint) {
 export {
   getQuote,
   getSwapResponse,
-  flowQuote,
-  flowQuoteAndSwap,
   executeSwap,
   getTokenBalance,
   connection,
