@@ -28,6 +28,11 @@ let lastProcessedTweetIds = [];
 
 export async function scraper(page) {
   const scanStart = Date.now();
+  if (IS_TEST) {
+    console.log("🚨🚨🚨🚨🚨 IN TEST MODE 🚨🚨🚨🚨🚨");
+  } else {
+    console.log("✅✅✅✅✅ IN PRODUCTION MODE ✅✅✅✅✅");
+  }
 
   try {
     console.log("🏁🏁🏁🏁🏁🏁 Starting Twitter tracker scraper");
