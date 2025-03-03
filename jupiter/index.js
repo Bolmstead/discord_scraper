@@ -176,6 +176,10 @@ async function executeSwap(
     console.error("Missing required mint addresses");
     return null;
   }
+  if (slippageBps > 10000) {
+    console.error("Slippagebps too high");
+    return null;
+  }
 
   // Single log for trade parameters
   console.log("Trade Parameters:", {
