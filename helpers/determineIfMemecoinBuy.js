@@ -1,7 +1,17 @@
-import { accountMap, keywordMap } from "../constants.js";
+import {
+  accountMap,
+  keywordMap,
+  testAccountMap,
+  testKeywordMap,
+} from "../constants.js";
 import { determineIfTextHasCA } from "./determineIfTextHasCA.js";
 
-export function determineIfMemecoinBuy(username, text, isTest) {
+export function determineIfMemecoinBuy(
+  username,
+  text,
+  testingAutoBuy = false,
+  testingScrapeTweet = false
+) {
   try {
     // Input validation
     if (!username || !text) {
@@ -9,14 +19,24 @@ export function determineIfMemecoinBuy(username, text, isTest) {
       return null;
     }
 
-    if (isTest) {
+    if (testingAutoBuy) {
+      console.log("🚨🚨🚨🚨🚨 IN TEST AUTO BUY MODE 🚨🚨🚨🚨🚨");
       const testAccount = accountMap.get("testCoin");
       if (testAccount) {
         return testAccount.coins[0];
       }
     }
 
-    const account = accountMap.get(username);
+    let account = null;
+
+    if (testingScrapeTweet) {
+      console.log("🚨🚨🚨🚨🚨 IN TEST SCRAPE TWEET MODE 🚨🚨🚨🚨🚨");
+      account = testAccountMap.get(username);
+    } else {
+      console.log("✅✅✅✅✅ IN PRODUCTION MODE ✅✅✅✅✅");
+      account = accountMap.get(username);
+    }
+
     if (!account) {
       console.log(`Account ${username} not found`);
       return null;
@@ -52,22 +72,24 @@ export function determineIfMemecoinBuy(username, text, isTest) {
       }
     }
 
-    // Check for automatic buy coins
-    if (Array.isArray(coins)) {
-      const automaticBuyCoin = coins.find((coin) => coin.automaticBuy);
-      if (automaticBuyCoin) {
-        console.log(`🧪🧪🧪 ${name} has automatic buy enabled`);
-        return automaticBuyCoin;
-      }
-    }
-
     // Check for keyword matches using the keywordMap
     const tweetText = text.toLowerCase();
+    console.log("🚀 ~ tweetText:", tweetText);
     for (const [keyword, matches] of keywordMap) {
       if (tweetText.includes(keyword.toLowerCase())) {
         const match = matches.find((m) => m.username === username);
         if (match) {
           console.log(`✨ Matched keyword: "${keyword}"`);
+          return match.coin;
+        }
+      }
+    }
+
+    for (const [keyword, matches] of testKeywordMap) {
+      if (tweetText.includes(keyword.toLowerCase())) {
+        const match = matches.find((m) => m.username === username);
+        if (match) {
+          console.log(`✨ Matched TEST keyword: "${keyword}"`);
           return match.coin;
         }
       }

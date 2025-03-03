@@ -1,20 +1,20 @@
 // AFFILIATE TAKOVER SCRAPER
 import "dotenv/config";
 import playSound from "play-sound";
-import { determineIfMemecoinBuy } from "./helpers/determineIfMemecoinBuy.js";
-import { determineIfTextHasCA } from "./helpers/determineIfTextHasCA.js";
-import { extractNameFromParentheses } from "./helpers/stringParser.js";
-import { executeSwap } from "./jupiter/index.js";
-import { determineSharifBuyAmount } from "./helpers/determineSharifBuyAmount.js";
+import { determineIfMemecoinBuy } from "../helpers/determineIfMemecoinBuy.js";
+import { extractNameFromParentheses } from "../helpers/stringParser.js";
+import { executeSwap } from "../jupiter/index.js";
+import { determineSharifBuyAmount } from "../helpers/determineSharifBuyAmount.js";
 
 // ----- config ------
 const CONFIG = {
   SCAN_INTERVAL: 500,
   MAX_TWEETS_TO_SCAN: 3,
   ERROR_RETRY_DELAY: 10000,
+  SCAN_INTERVAL_AFTER_BUY: 5 * 60 * 1000,
 };
 const IS_TEST_AUTOMATIC_BUY = false;
-const IS_TEST_SCRAPE_TWEET = false;
+const IS_TEST_SCRAPE_TWEET = true;
 
 const player = playSound({});
 
@@ -25,11 +25,12 @@ const SELECTORS = {
   DESCRIPTION: ".embedDescription__623de",
 };
 
-// Track last processed tweet to avoid duplicates
-let lastProcessedTweetIds = [];
-
-export async function scraper(page) {
-  const scanStart = Date.now();
+export async function twitterTrackerScraper(page) {
+  const scanStart = new Date().toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
   if (IS_TEST_AUTOMATIC_BUY) {
     console.log("🚨🚨🚨🚨🚨 IN TEST MODE 🚨🚨🚨🚨🚨");
   } else {
@@ -57,11 +58,6 @@ export async function scraper(page) {
             (el) =>
               el.getAttribute("data-tweet-id") || el.innerHTML.slice(0, 50)
           );
-
-          // Skip if we've already processed this tweet
-          // if (tweetId === lastProcessedTweetId.contains) {
-          //   return null;
-          // }
 
           // Get both username and text in parallel
           const [authorElement, descriptionElement] = await Promise.all([
@@ -93,14 +89,15 @@ export async function scraper(page) {
     const validTweets = tweets.filter((tweet) => tweet !== null);
     console.log("🚀 ~ scraper ~ validTweets:", validTweets);
 
-    // if (validTweets.length > 0) {
-    //   lastProcessedTweetId = validTweets[validTweets.length - 1].tweetId;
-    // }
-
     // Process each tweet for trading opportunities in parallel
     for (const tweet of validTweets) {
       const { username, text } = tweet;
-      coin = determineIfMemecoinBuy(username, text, IS_TEST_AUTOMATIC_BUY);
+      coin = determineIfMemecoinBuy(
+        username,
+        text,
+        IS_TEST_AUTOMATIC_BUY,
+        IS_TEST_SCRAPE_TWEET
+      );
       if (coin) {
         tweetedUsername = username;
         break;
@@ -147,7 +144,7 @@ export async function scraper(page) {
           coin
         );
         if (sharifShouldBuy) {
-          if (IS_TEST_SCRAPE_TWEET) {
+          if (IS_TEST_SCRAPE_TWEET || IS_TEST_AUTOMATIC_BUY) {
             sharifAmtToBuy = 0.001;
           }
           sharifBuyWasSuccessful = await executeSwap(
@@ -171,18 +168,18 @@ export async function scraper(page) {
 
         setTimeout(() => {
           console.log("Scheduling sell operation");
-          scraper(page);
-        }, 10 * 1000);
+          twitterTrackerScraper(page);
+        }, CONFIG.SCAN_INTERVAL_AFTER_BUY);
 
         return;
       }
     } else {
-      setTimeout(() => scraper(page), CONFIG.SCAN_INTERVAL);
+      setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
     }
 
     // Reset processing flag and schedule next scan with dynamic interval
   } catch (error) {
     console.log("❌ Error in Twitter tracker scraper:", error);
-    setTimeout(() => scraper(page), CONFIG.ERROR_RETRY_DELAY);
+    setTimeout(() => twitterTrackerScraper(page), CONFIG.ERROR_RETRY_DELAY);
   }
 }

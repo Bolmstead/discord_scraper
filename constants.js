@@ -2,10 +2,10 @@
 
 // Compile lookup maps at module level for better performance
 const coins = {
-  TestCoin: {
-    name: "test!!!",
-    address: "7mHCx9iXPJ7EJDbDAUGmej39Kme8cxZfeVi1EAvEpump",
-    keywords: ["is", "the", "in", "he", "she", "it", "they", "we", "you"],
+  TRUMP: {
+    name: "OFFICIAL TRUMP",
+    address: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN",
+    keywords: ["trump", "donald trump"],
   },
   FREESHLOMO: {
     name: "FREESHLOMO",
@@ -170,60 +170,73 @@ const coins = {
     keywords: ["trump season", "trump szn"],
   },
 };
+const testCoins = {
+  TESTCOIN: {
+    name: "Test",
+    address: "7mHCx9iXPJ7EJDbDAUGmej39Kme8cxZfeVi1EAvEpump",
+    keywords: [
+      "is",
+      "the",
+      "in",
+      "he",
+      "she",
+      "it",
+      "they",
+      "we",
+      "you",
+      "this",
+      "that",
+      "there",
+      "here",
+      "there",
+      "when",
+      "where",
+      "how",
+      "why",
+      "what",
+      "which",
+      "who",
+      "whom",
+      "this",
+      "these",
+      "those",
+    ],
+  },
+  TESTTRUMP: {
+    name: "TestTrump",
+    address: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN",
+    keywords: [
+      "is",
+      "the",
+      "in",
+      "he",
+      "she",
+      "it",
+      "they",
+      "we",
+      "you",
+      "this",
+      "that",
+      "there",
+      "here",
+      "there",
+      "when",
+      "where",
+      "how",
+      "why",
+      "what",
+      "which",
+      "who",
+      "whom",
+      "this",
+      "these",
+      "those",
+    ],
+  },
+};
 
 // Create efficient lookup maps
 const accountMap = new Map([
-  // Test accounts
-  [
-    "testCoin",
-    {
-      name: "testCoin",
-      coins: [{ ...coins.TestCoin, amountToBuy: 0.001 }],
-    },
-  ],
-  // [
-  //   "elonmusk",
-  //   {
-  //     name: "Elon Musk",
-  //     coins: [{ ...coins.TestCoin, amountToBuy: 0.001 }],
-  //   },
-  // ],
-  // [
-  //   "binance",
-  //   {
-  //     name: "Elon Musk",
-  //     coins: [{ ...coins.TestCoin, amountToBuy: 0.001 }],
-  //   },
-  // ],
-  // [
-  //   "MarioNawfal",
-  //   {
-  //     name: "Mario Nawfal",
-  //     coins: [{ ...coins.TestCoin, amountToBuy: 0.001 }],
-  //   },
-  // ],
-  // [
-  //   "nypost",
-  //   {
-  //     name: "New York Post (test)",
-  //     coins: [{ ...coins.TestCoin, amountToBuy: 0.001 }],
-  //   },
-  // ],
-  // [
-  //   "ABC",
-  //   {
-  //     name: "ABC",
-  //     coins: [{ ...coins.TestCoin, amountToBuy: 0.001 }],
-  //   },
-  // ],
-  // [
-  //   "teslaownersSV",
-  //   {
-  //     name: "teslaownersSV",
-  //     coins: [{ ...coins.TestCoin, amountToBuy: 0.001 }],
-  //   },
-  // ],
-
   // Active accounts
   [
     "SimonKaggwaNjal",
@@ -283,7 +296,7 @@ const accountMap = new Map([
     "SBF_FTX",
     {
       name: "SBF",
-      coins: [{ ...coins.SBF, amountToBuy: 10, automaticBuy: true }],
+      coins: [{ ...coins.SBF, amountToBuy: 10 }],
       buyAnyPostedCA: true,
       amountToBuyForAnyPostedCA: 8,
       slippageBpsForAnyPostedCA: 5000,
@@ -469,6 +482,85 @@ const accountMap = new Map([
   ],
 ]);
 
+const testAccountMap = new Map([
+  [
+    "elonmusk",
+    {
+      name: "Elon Musk",
+      coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
+    },
+  ],
+  [
+    "binance",
+    {
+      name: "binance",
+      coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
+    },
+  ],
+  [
+    "MarioNawfal",
+    {
+      name: "Mario Nawfal",
+      coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
+    },
+  ],
+  [
+    "nypost",
+    {
+      name: "New York Post (test)",
+      coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
+    },
+  ],
+  [
+    "ABC",
+    {
+      name: "ABC",
+      coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
+    },
+  ],
+  [
+    "teslaownersSV",
+    {
+      name: "teslaownersSV",
+      coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
+    },
+  ],
+  [
+    "trump",
+    {
+      name: "Donald Trump",
+      coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
+    },
+  ],
+]);
+
+const trumpAccountMap = new Map([
+  [
+    "trump",
+    {
+      name: "Donald Trump",
+      coins: [
+        { ...coins.TRUMP, amountToBuy: 10 },
+        { ...coins.GREENLAND, amountToBuy: 10 },
+        { ...coins.HKU5, amountToBuy: 5 },
+        { ...coins.SWF, amountToBuy: 10 },
+        { ...coins.TGC, amountToBuy: 10 },
+        { ...coins.POPE, amountToBuy: 10 },
+        { ...coins.KNOX, amountToBuy: 10 },
+        { ...coins.$100BILL, amountToBuy: 10 },
+        { ...coins.CSR, amountToBuy: 10 },
+        { ...coins.TRUMPSEASON, amountToBuy: 10 },
+        { ...coins.TRUMPBILL, amountToBuy: 10 },
+      ],
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 8,
+      slippageBpsForAnyPostedCA: 5000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+    },
+  ],
+]);
+
 // Create keyword lookup map for faster matching
 const keywordMap = new Map();
 for (const [username, account] of accountMap) {
@@ -486,4 +578,43 @@ for (const [username, account] of accountMap) {
   }
 }
 
-export { coins, accountMap, keywordMap };
+const testKeywordMap = new Map();
+for (const [username, account] of testAccountMap) {
+  if (account.coins) {
+    for (const coin of account.coins) {
+      if (coin.keywords) {
+        for (const keyword of coin.keywords) {
+          if (!testKeywordMap.has(keyword)) {
+            testKeywordMap.set(keyword, []);
+          }
+          testKeywordMap.get(keyword).push({ username, coin });
+        }
+      }
+    }
+  }
+}
+
+const trumpKeywordMap = new Map();
+for (const [username, account] of trumpAccountMap) {
+  for (const coin of account.coins) {
+    if (coin.keywords) {
+      for (const keyword of coin.keywords) {
+        if (!trumpKeywordMap.has(keyword)) {
+          trumpKeywordMap.set(keyword, []);
+        }
+        trumpKeywordMap.get(keyword).push({ username, coin });
+      }
+    }
+  }
+}
+
+export {
+  coins,
+  accountMap,
+  keywordMap,
+  trumpAccountMap,
+  trumpKeywordMap,
+  testKeywordMap,
+  testAccountMap,
+  testCoins,
+};

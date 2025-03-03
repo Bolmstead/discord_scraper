@@ -6,7 +6,7 @@ const PRIORITY_AMOUNTS = {
 
 const DEFAULT_AMOUNT = 0.25;
 
-export function determineSharifBuyAmount(tweetedUsername, coin) {
+export function determineSharifBuyAmount(tweetedUsername, coin, isTestMode) {
   try {
     if (coin.caWasPosted) {
       return { sharifShouldBuy: false, sharifAmtToBuy: DEFAULT_AMOUNT };
