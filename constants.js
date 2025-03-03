@@ -161,27 +161,27 @@ export const twitterAccounts = [
     name: "testCoin",
     coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
   },
-  // {
-  //   username: "MarioNawfal",
-  //   name: "Mario Nawfal (test)",
-  //   coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
-  // },
-  // {
-  //   username: "nypost",
-  //   name: "New York Post (test)",
-  //   coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
-  // },
+  {
+    username: "MarioNawfal",
+    name: "Mario Nawfal (test)",
+    coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
+  },
+  {
+    username: "nypost",
+    name: "New York Post (test)",
+    coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
+  },
 
-  // {
-  //   username: "ABC",
-  //   name: "ABC",
-  //   coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
-  // },
-  // {
-  //   username: "teslaownersSV",
-  //   name: "teslaownersSV",
-  //   coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
-  // },
+  {
+    username: "ABC",
+    name: "ABC",
+    coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
+  },
+  {
+    username: "teslaownersSV",
+    name: "teslaownersSV",
+    coins: [{ ...coins.TestCoin, amountToBuy: 0.01 }],
+  },
 
   // ---------------------------------
   {
@@ -225,7 +225,6 @@ export const twitterAccounts = [
       { ...coins.BIGBALLS, amountToBuy: 5 },
       { ...coins.KM, amountToBuy: 10 },
       { ...coins.PNUT, amountToBuy: 5 },
-      { ...coins.ADRIAN, amountToBuy: 5 },
       { ...coins.DOGEFATHER, amountToBuy: 5 },
       { ...coins.NOLAND, amountToBuy: 5 },
       { ...coins.LUIGI, amountToBuy: 5 },

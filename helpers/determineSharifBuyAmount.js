@@ -9,11 +9,11 @@ const DEFAULT_AMOUNT = 0.25;
 export function determineSharifBuyAmount(tweetedUsername, coin) {
   try {
     if (coin.caWasPosted) {
-      return { shouldBuy: false, sharifAmtToBuy: DEFAULT_AMOUNT };
+      return { sharifShouldBuy: false, sharifAmtToBuy: DEFAULT_AMOUNT };
     }
 
     return {
-      shouldBuy: true,
+      sharifShouldBuy: true,
       sharifAmtToBuy: PRIORITY_AMOUNTS[tweetedUsername] || DEFAULT_AMOUNT,
     };
   } catch (error) {

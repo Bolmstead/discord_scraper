@@ -14,6 +14,7 @@ const CONFIG = {
   ERROR_RETRY_DELAY: 10000,
 };
 const IS_TEST = false;
+const IS_SHARIF_TEST = false;
 
 const player = playSound({});
 
@@ -99,7 +100,7 @@ export async function scraper(page) {
     // Process each tweet for trading opportunities in parallel
     for (const tweet of validTweets) {
       const { username, text } = tweet;
-      coin = await determineIfMemecoinBuy(username, text, IS_TEST);
+      coin = determineIfMemecoinBuy(username, text, IS_TEST);
       if (coin) {
         tweetedUsername = username;
         break;
@@ -135,17 +136,18 @@ export async function scraper(page) {
         slippageBps,
         priorityFee
       );
+      let sharifBuyWasSuccessful = false;
 
       if (myBuyWasSuccessful) {
-        let { shouldBuy, sharifAmtToBuy } = await determineSharifBuyAmount(
+        let { sharifShouldBuy, sharifAmtToBuy } = determineSharifBuyAmount(
           tweetedUsername,
           coin
         );
-        if (shouldBuy) {
-          if (IS_TEST) {
+        if (sharifShouldBuy) {
+          if (IS_SHARIF_TEST) {
             sharifAmtToBuy = 0.001;
           }
-          const sharifBuyWasSuccessful = await executeSwap(
+          sharifBuyWasSuccessful = await executeSwap(
             "Sharif",
             "buy",
             name,
@@ -164,7 +166,6 @@ export async function scraper(page) {
           }
         }
 
-        // Schedule next scan and sell
         setTimeout(() => {
           console.log("Scheduling sell operation");
           scraper(page);

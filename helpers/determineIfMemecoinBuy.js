@@ -1,7 +1,7 @@
 import { twitterAccounts } from "../constants.js";
 import { determineIfTextHasCA } from "./determineIfTextHasCA.js";
 
-export async function determineIfMemecoinBuy(username, text, isTest) {
+export function determineIfMemecoinBuy(username, text, isTest) {
   try {
     // Input validation
     if (!username || !text) {
@@ -40,7 +40,7 @@ export async function determineIfMemecoinBuy(username, text, isTest) {
 
     if (buyAnyPostedCA) {
       console.log(`🧪🧪🧪 ${name} has buy any posted CA enabled`);
-      const ca = await determineIfTextHasCA(text);
+      const ca = determineIfTextHasCA(text);
       if (ca) {
         return {
           name: `${username}'s posted CA!!!!`,
