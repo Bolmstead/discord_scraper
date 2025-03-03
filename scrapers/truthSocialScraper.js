@@ -21,6 +21,10 @@ export async function truthSocialScraper(page) {
     month: "long",
     day: "numeric",
     year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: true,
   });
   if (IS_TEST_AUTOMATIC_BUY) {
     console.log("🚨🚨🚨🚨🚨 IN TEST AUTOMATIC BUY MODE 🚨🚨🚨🚨🚨");
@@ -36,7 +40,6 @@ export async function truthSocialScraper(page) {
     await page.waitForSelector(
       '[data-id] .status__content-wrapper p[data-markup="true"] p'
     );
-    console.log("🚀 ~ page.waitForSelector ~ page.waitForSelector:");
 
     // Extract text from the first post
     const postText = await page.evaluate(() => {

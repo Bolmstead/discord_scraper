@@ -74,7 +74,9 @@ export function determineIfMemecoinBuy(
 
     // Check for keyword matches using the keywordMap
     const tweetText = text.toLowerCase();
-    console.log("🚀 ~ tweetText:", tweetText);
+    console.log("🕊️🕊️🕊️🕊️🕊️ Keyword Map:", keywordMap);
+    console.log("🕊️🕊️🕊️🕊️🕊️ Tweet Text:", tweetText);
+
     for (const [keyword, matches] of keywordMap) {
       if (tweetText.includes(keyword.toLowerCase())) {
         const match = matches.find((m) => m.username === username);

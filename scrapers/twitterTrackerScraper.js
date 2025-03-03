@@ -30,6 +30,10 @@ export async function twitterTrackerScraper(page) {
     month: "long",
     day: "numeric",
     year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: true,
   });
   if (IS_TEST_AUTOMATIC_BUY) {
     console.log("🚨🚨🚨🚨🚨 IN TEST MODE 🚨🚨🚨🚨🚨");
