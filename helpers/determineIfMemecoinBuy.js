@@ -51,6 +51,7 @@ export async function determineIfMemecoinBuy(username, text, isTest) {
           timeToSell: timeToSellForAnyPostedCA,
           priorityFee: priorityFeeForAnyPostedCA,
           keywords: [],
+          caWasPosted: true,
         };
       }
     }

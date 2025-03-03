@@ -5,6 +5,7 @@ import { determineIfMemecoinBuy } from "./helpers/determineIfMemecoinBuy.js";
 import { determineIfTextHasCA } from "./helpers/determineIfTextHasCA.js";
 import { extractNameFromParentheses } from "./helpers/stringParser.js";
 import { executeSwap } from "./jupiter/index.js";
+import { determineSharifBuyAmount } from "./helpers/determineSharifBuyAmount.js";
 
 // ----- config ------
 const CONFIG = {
@@ -35,7 +36,7 @@ export async function scraper(page) {
   }
 
   try {
-    console.log("🏁🏁🏁🏁🏁🏁 Starting Twitter tracker scraper");
+    console.log("🏁🏁🏁🏁🏁 Scrape Started at: ", scanStart);
 
     // Get all tweet containers at once
     const tweetElements = await page.$$(SELECTORS.TWEET_CONTAINER);
@@ -119,6 +120,7 @@ export async function scraper(page) {
         amountToBuy,
         slippageBps,
         priorityFee,
+        caWasPosted,
       } = coin;
 
       const myBuyWasSuccessful = await executeSwap(
@@ -135,25 +137,32 @@ export async function scraper(page) {
       );
 
       if (myBuyWasSuccessful) {
-        // const determineSharifBuyAmount = await determineSharifBuyAmount(
-        //   tweetedUsername,
-        //   coin
-        // );
-        // const sharifBuyWasSuccessful = await executeSwap(
-        //   "Sharif",
-        //   "buy",
-        //   name,
-        //   ticker,
-        //   address,
-        //   timeToSell,
-        //   keywords,
-        //   amountToBuy,
-        //   slippageBps,
-        //   priorityFee
-        // );
-        player.play("sounds/Success2.mp3", (err) => {
-          if (err) console.error("Error playing sound:", err);
-        });
+        let { shouldBuy, sharifAmtToBuy } = await determineSharifBuyAmount(
+          tweetedUsername,
+          coin
+        );
+        if (shouldBuy) {
+          if (IS_TEST) {
+            sharifAmtToBuy = 0.001;
+          }
+          const sharifBuyWasSuccessful = await executeSwap(
+            "Sharif",
+            "buy",
+            name,
+            ticker,
+            address,
+            timeToSell,
+            keywords,
+            sharifAmtToBuy,
+            slippageBps,
+            priorityFee
+          );
+          if (sharifBuyWasSuccessful) {
+            player.play("sounds/Success2.mp3", (err) => {
+              if (err) console.error("Error playing sound:", err);
+            });
+          }
+        }
 
         // Schedule next scan and sell
         setTimeout(() => {
