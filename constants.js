@@ -193,6 +193,15 @@ export const twitterAccounts = [
     timeToSellForAnyPostedCA: 120 * 1000,
     priorityFeeForAnyPostedCA: 0.1,
   },
+  {
+    username: "gaysolmeme",
+    name: "Gay Sol Meme",
+    buyAnyPostedCA: true,
+    amountToBuyForAnyPostedCA: 5,
+    slippageBpsForAnyPostedCA: 4000,
+    timeToSellForAnyPostedCA: 120 * 1000,
+    priorityFeeForAnyPostedCA: 0.1,
+  },
 
   {
     username: "stoolpresidente",
