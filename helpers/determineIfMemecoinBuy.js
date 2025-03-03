@@ -84,13 +84,14 @@ export function determineIfMemecoinBuy(
         }
       }
     }
-
-    for (const [keyword, matches] of testKeywordMap) {
-      if (tweetText.includes(keyword.toLowerCase())) {
-        const match = matches.find((m) => m.username === username);
-        if (match) {
-          console.log(`✨ Matched TEST keyword: "${keyword}"`);
-          return match.coin;
+    if (testingScrapeTweet) {
+      for (const [keyword, matches] of testKeywordMap) {
+        if (tweetText.includes(keyword.toLowerCase())) {
+          const match = matches.find((m) => m.username === username);
+          if (match) {
+            console.log(`✨ Matched TEST keyword: "${keyword}"`);
+            return match.coin;
+          }
         }
       }
     }
