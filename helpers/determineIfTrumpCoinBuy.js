@@ -45,6 +45,7 @@ export function determineIfTrumpCoinBuy(text, testMode = false) {
           caWasPosted: true,
         };
       }
+      console.log(`${name} did not post a CA`);
     }
 
     // Check for keyword matches using the trumpKeywordMap
@@ -53,21 +54,25 @@ export function determineIfTrumpCoinBuy(text, testMode = false) {
       if (truthPostText.includes(keyword.toLowerCase())) {
         const match = matches.find((m) => m.username === username);
         if (match) {
-          console.log(`✨ Matched keyword: "${keyword}"`);
+          console.log(`✨ Matched TRUMP keyword: "${keyword}"`);
 
           return match.coin;
         }
       }
     }
+    console.log(`${name} did not post a TRUMP keyword`);
     if (testMode) {
-      console.log("🚨TEST MODE TRUMP COIN BUY 🚨");
-      return {
-        name: "OFFICIAL TRUMP",
-        address: "7mHCx9iXPJ7EJDbDAUGmej39Kme8cxZfeVi1EAvEpump",
-        keywords: ["trump", "donald trump"],
-      };
+      for (const [keyword, matches] of testKeywordMap) {
+        if (truthPostText.includes(keyword.toLowerCase())) {
+          const match = matches.find((m) => m.username === username);
+          if (match) {
+            console.log(`✨ Matched TEST TRUMP keyword: "${keyword}"`);
+            return match.coin;
+          }
+        }
+      }
+      console.log(`${name} did not post a TEST TRUMP keyword`);
     }
-
     console.log(`Trump did not tweet about any memecoin`);
 
     return null;

@@ -84,6 +84,8 @@ export function determineIfMemecoinBuy(
         }
       }
     }
+    console.log(`${name} did not post a keyword`);
+
     if (testingScrapeTweet) {
       for (const [keyword, matches] of testKeywordMap) {
         if (tweetText.includes(keyword.toLowerCase())) {
@@ -94,6 +96,7 @@ export function determineIfMemecoinBuy(
           }
         }
       }
+      console.log(`${name} did not post a TEST keyword`);
     }
 
     console.log(`${name} did not tweet about any memecoin`);
