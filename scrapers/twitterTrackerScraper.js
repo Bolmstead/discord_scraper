@@ -88,7 +88,7 @@ export async function twitterTrackerScraper(page) {
     );
     let coin = null;
     let tweetedUsername = null;
-
+    let postText = null;
     // Filter out null results and duplicates
     const validTweets = tweets.filter((tweet) => tweet !== null);
     console.log("🚀 ~ scraper ~ validTweets:", validTweets);
@@ -104,6 +104,7 @@ export async function twitterTrackerScraper(page) {
       );
       if (coin) {
         tweetedUsername = username;
+        postText = text;
         break;
       }
     }
@@ -174,12 +175,12 @@ export async function twitterTrackerScraper(page) {
 🚨🚨🚨 Twitter Buy Alert 🚨🚨🚨
 ${IS_TEST_AUTOMATIC_BUY || IS_TEST_SCRAPE_TWEET ? "‼️TEST MODE‼️" : ""}
 @${tweetedUsername} tweeted!
-Ticker: ${ticker ? ticker : ""}
-Name: ${name ? name : ""}
-Address: ${address ? address : ""} 
-Keyword: ${chosenKeyword ? chosenKeyword : ""}
-        `);
-
+Ticker: ${ticker}
+Name: ${name}
+Address: ${address} 
+Keyword: ${chosenKeyword}`);
+        await sendTelegramMessage(`Full Tweet Text:
+${postText}`);
         setTimeout(() => {
           console.log("Scheduling sell operation");
           twitterTrackerScraper(page);

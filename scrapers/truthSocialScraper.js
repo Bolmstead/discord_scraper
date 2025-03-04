@@ -3,6 +3,7 @@ import playSound from "play-sound";
 
 import { determineIfTrumpCoinBuy } from "../helpers/determineIfTrumpCoinBuy.js";
 import { executeSwap } from "../jupiter/index.js";
+import sendTelegramMessage from "../helpers/sendTelegramMessage.js";
 
 // ----- config ------
 const CONFIG = {
@@ -11,8 +12,8 @@ const CONFIG = {
   ERROR_RETRY_DELAY: 10000,
   SCAN_INTERVAL_AFTER_BUY: 10 * 60 * 1000,
 };
-const IS_TEST_AUTOMATIC_BUY = false;
-const IS_TEST_SCRAPE_TWEET = false;
+const IS_TEST_AUTOMATIC_BUY = true;
+const IS_TEST_SCRAPE_TWEET = true;
 
 const player = playSound({});
 
@@ -86,6 +87,7 @@ export async function truthSocialScraper(page) {
         slippageBps,
         priorityFee,
         caWasPosted,
+        chosenKeyword,
       } = coin;
 
       const myBuyWasSuccessful = await executeSwap(
@@ -126,6 +128,16 @@ export async function truthSocialScraper(page) {
             if (err) console.error("Error playing sound:", err);
           });
         }
+        await sendTelegramMessage(`
+🚨🚨🚨 Truth Social Buy Alert 🚨🚨🚨
+${IS_TEST_AUTOMATIC_BUY || IS_TEST_SCRAPE_TWEET ? "‼️TEST MODE‼️" : ""}
+Trump Posted!
+Keyword: ${chosenKeyword}
+Ticker: ${ticker}
+Name: ${name}
+Address: ${address} `);
+        await sendTelegramMessage(`Full Truth Social Post:
+${postText}`);
 
         setTimeout(() => {
           console.log("Scheduling sell operation");

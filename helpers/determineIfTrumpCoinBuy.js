@@ -65,7 +65,10 @@ export function determineIfTrumpCoinBuy(text, testMode = false) {
 
         if (match) {
           console.log(`✨ Matched ${type} keyword: "${keyword}"`);
-          return match.coin;
+          return {
+            ...match.coin,
+            chosenKeyword: keyword,
+          };
         }
       }
     }

@@ -12,6 +12,7 @@ async function sendTelegramMessage(text) {
         text: text,
       }
     );
+    
   } catch (error) {
     console.error("Error sending Telegram message:", error);
   }
