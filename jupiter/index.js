@@ -133,13 +133,9 @@ async function executeSwap(
     return null;
   }
   if (walletName === "me") {
-    console.log("private key:", process.env.TEST_WALLET_PRIVATE_KEY);
     wallet = Keypair.fromSecretKey(
       bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
     );
-    console.log("🚀 ~ wallet:", wallet);
-    console.log("🚀 ~ wallet.publicKey:", wallet.publicKey);
-    console.log("🚀 ~ wallet.secretKey:", wallet.secretKey);
 
     console.log(
       "🚀 ~ wallet.publicKey.toString():",
