@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "twitter": "node scrapeTwitterTracker.js",
-    "truth": "node scrapeTruthSocial.js",
+    "twitter": "nodemon scrapeTwitterTracker.js",
+    "truth": "nodemon scrapeTruthSocial.js",
     "testSwap": "node testSwap.js"
   },
   "author": "",
@@ -24,6 +24,7 @@
     "js-sha256": "^0.11.0",
     "mailgun.js": "^10.2.1",
     "node-html-to-image": "^5.0.0",
+    "nodemon": "^3.1.9",
     "play-sound": "^1.1.6",
     "promise-retry": "^2.0.1",
     "pumpdotfun-sdk": "^1.3.2",
@@ -32,6 +33,6 @@
     "puppeteer-extra-plugin-stealth": "^2.11.2"
   },
   "devDependencies": {
-    "axios": ">=1.7.4"
+    "axios": "^1.7.9"
   }
 }

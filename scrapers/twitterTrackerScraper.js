@@ -5,7 +5,7 @@ import { determineIfMemecoinBuy } from "../helpers/determineIfMemecoinBuy.js";
 import { extractNameFromParentheses } from "../helpers/stringParser.js";
 import { executeSwap } from "../jupiter/index.js";
 import { determineSharifBuyAmount } from "../helpers/determineSharifBuyAmount.js";
-
+import sendTelegramMessage from "../helpers/sendTelegramMessage.js";
 // ----- config ------
 const CONFIG = {
   SCAN_INTERVAL: 500,
@@ -123,6 +123,7 @@ export async function twitterTrackerScraper(page) {
         slippageBps,
         priorityFee,
         caWasPosted,
+        chosenKeyword,
       } = coin;
       if (IS_TEST_SCRAPE_TWEET || IS_TEST_AUTOMATIC_BUY) {
         amountToBuy = 0.001;
@@ -169,6 +170,15 @@ export async function twitterTrackerScraper(page) {
             });
           }
         }
+        await sendTelegramMessage(`
+🚨🚨🚨 Twitter Buy Alert 🚨🚨🚨
+${IS_TEST_AUTOMATIC_BUY || IS_TEST_SCRAPE_TWEET ? "‼️TEST MODE‼️" : ""}
+@${tweetedUsername} tweeted!
+Ticker: ${ticker ? ticker : ""}
+Name: ${name ? name : ""}
+Address: ${address ? address : ""} 
+Keyword: ${chosenKeyword ? chosenKeyword : ""}
+        `);
 
         setTimeout(() => {
           console.log("Scheduling sell operation");

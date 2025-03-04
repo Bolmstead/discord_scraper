@@ -82,7 +82,10 @@ export function determineIfMemecoinBuy(
         const match = matches.find((m) => m.username === username);
         if (match) {
           console.log(`✨ Matched keyword: "${keyword}"`);
-          return match.coin;
+          return {
+            ...match.coin,
+            chosenKeyword: keyword,
+          };
         }
       }
     }
@@ -94,7 +97,10 @@ export function determineIfMemecoinBuy(
           const match = matches.find((m) => m.username === username);
           if (match) {
             console.log(`✨ Matched TEST keyword: "${keyword}"`);
-            return match.coin;
+            return {
+              ...match.coin,
+              chosenKeyword: keyword,
+            };
           }
         }
       }
