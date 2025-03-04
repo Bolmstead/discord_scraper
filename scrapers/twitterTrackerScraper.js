@@ -13,8 +13,8 @@ const CONFIG = {
   ERROR_RETRY_DELAY: 10000,
   SCAN_INTERVAL_AFTER_BUY: 5 * 60 * 1000,
 };
-const IS_TEST_AUTOMATIC_BUY = false;
-const IS_TEST_SCRAPE_TWEET = false;
+const IS_TEST_AUTOMATIC_BUY = true;
+const IS_TEST_SCRAPE_TWEET = true;
 
 const player = playSound({});
 

@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "twitter": "nodemon scrapeTwitterTracker.js",
-    "truth": "nodemon scrapeTruthSocial.js",
+    "twitter": "node scrapeTwitterTracker.js",
+    "truth": "node scrapeTruthSocial.js",
     "testSwap": "node testSwap.js"
   },
   "author": "",
