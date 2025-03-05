@@ -91,7 +91,7 @@ export async function twitterTrackerScraper(page) {
     let postText = null;
     // Filter out null results and duplicates
     const validTweets = tweets.filter((tweet) => tweet !== null);
-    console.log("🚀 ~ scraper ~ validTweets:", validTweets);
+    console.log("Valid Tweets:", validTweets);
 
     // Process each tweet for trading opportunities in parallel
     for (const tweet of validTweets) {
