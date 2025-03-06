@@ -127,7 +127,9 @@ export async function twitterTrackerScraper(page) {
         priorityFee,
         caWasPosted,
         chosenKeyword,
+        dontSell,
       } = coin;
+      console.log("🚀 ~ twitterTrackerScraper ~ dontSell:", dontSell);
       if (IS_TEST_SCRAPE_TWEET || IS_TEST_AUTOMATIC_BUY) {
         amountToBuy = 0.001;
       }
@@ -181,36 +183,38 @@ export async function twitterTrackerScraper(page) {
 
         setTimeout(
           async () => {
-            console.log("🤞 Selling tokens initiated...");
-            try {
-              // Start Sharif's sell operation 5 seconds later
-              const delayedSharifSell = new Promise((resolve) => {
-                if (BUY_FOR_OTHERS && sharifBuyWasSuccessful) {
-                  setTimeout(async () => {
-                    const result = await sellPercentOfTokenToZero(
-                      "Sharif",
-                      address,
-                      CONFIG.PERCENT_TO_SELL
-                    );
-                    resolve(result);
-                  }, 7000);
-                }
-              });
+            if (!dontSell) {
+              console.log("🤞 Selling tokens initiated...");
+              try {
+                // Start Sharif's sell operation 5 seconds later
+                const delayedSharifSell = new Promise((resolve) => {
+                  if (BUY_FOR_OTHERS && sharifBuyWasSuccessful) {
+                    setTimeout(async () => {
+                      const result = await sellPercentOfTokenToZero(
+                        "Sharif",
+                        address,
+                        CONFIG.PERCENT_TO_SELL
+                      );
+                      resolve(result);
+                    }, 7000);
+                  }
+                });
 
-              // Execute both operations
-              const [mySellResult, sharifSellResult] = await Promise.all([
-                sellPercentOfTokenToZero(
-                  "Berkley",
-                  address,
-                  CONFIG.PERCENT_TO_SELL
-                ),
-                delayedSharifSell,
-              ]);
+                // Execute both operations
+                const [mySellResult, sharifSellResult] = await Promise.all([
+                  sellPercentOfTokenToZero(
+                    "Berkley",
+                    address,
+                    CONFIG.PERCENT_TO_SELL
+                  ),
+                  delayedSharifSell,
+                ]);
 
-              console.log("My sell result:", mySellResult);
-              console.log("Sharif sell result:", sharifSellResult);
-            } catch (error) {
-              console.error("Error executing sell operations: ", error);
+                console.log("My sell result:", mySellResult);
+                console.log("Sharif sell result:", sharifSellResult);
+              } catch (error) {
+                console.error("Error executing sell operations: ", error);
+              }
             }
           },
           timeToSell ? timeToSell : 60 * 1000

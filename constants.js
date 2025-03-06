@@ -7,10 +7,25 @@ const coins = {
     address: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN",
     keywords: ["$trump"],
   },
+  GROK4: {
+    name: "Grok 4",
+    address: "GpDzQVu8gTLfnTEJdsbWiLBJo8SduQtkGpJfmEJnpump",
+    keywords: ["grok 4", "grok4"],
+  },
+  _8008: {
+    name: "8008",
+    address: "5puhwnyz2Tv8jSmmBD5DSqCwFVXwwPGZacymM7DQpump",
+    keywords: ["8008"],
+  },
   DJDANIEL: {
     name: "DJ Daniel",
     address: "6erH7v4KuJtEumAj5g2kcTn7d9QEy5hSuiKocKfoS4RL",
     keywords: ["dj daniel"],
+  },
+  PWEASE: {
+    name: "pwease",
+    address: "CniPCE4b3s8gSUPhUiyMjXnytrEqUrMfSsnbBjLCpump",
+    keywords: ["pwease"],
   },
   SBR: {
     name: "Strategic Bitcoin Reserve",
@@ -304,6 +319,9 @@ const trumpAccountMap = new Map([
         { ...coins.JAILSTOOL, amountToBuy: 20 },
         { ...coins.ROGER, amountToBuy: 20 },
         { ...coins.DJDANIEL, amountToBuy: 20 },
+        { ...coins.PWEASE, amountToBuy: 20 },
+        { ...coins._8008, amountToBuy: 20 },
+        { ...coins.GROK4, amountToBuy: 10 },
       ],
       buyAnyPostedCA: true,
       amountToBuyForAnyPostedCA: 8,
@@ -316,21 +334,6 @@ const trumpAccountMap = new Map([
 // Create efficient lookup maps
 const accountMap = new Map([
   // Active accounts
-  [
-    "stoolpresidente",
-    {
-      name: "Dave Portnoy",
-      buyAnyPostedCA: true,
-      amountToBuyForAnyPostedCA: 8,
-      slippageBpsForAnyPostedCA: 7000,
-      timeToSellForAnyPostedCA: 120 * 1000,
-      priorityFeeForAnyPostedCA: 0.1,
-      coins: [
-        { ...coins.DDTG, amountToBuy: 5 },
-        // { ...coins.JAILSTOOL, amountToBuy: 1 },
-      ],
-    },
-  ],
   [
     "elonmusk",
     {
@@ -365,9 +368,43 @@ const accountMap = new Map([
         { ...coins.JAILSTOOL, amountToBuy: 15 },
         { ...coins.ROGER, amountToBuy: 15 },
         { ...coins.DJDANIEL, amountToBuy: 15 },
+        { ...coins.PWEASE, amountToBuy: 20 },
+        { ...coins._8008, amountToBuy: 20 },
+        { ...coins.GROK4, amountToBuy: 10 },
       ],
     },
   ],
+  [
+    "JDVance",
+    {
+      name: "JD Vance",
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 8,
+      slippageBpsForAnyPostedCA: 5000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+      coins: [
+        { ...coins.PWEASE, amountToBuy: 20, dontSell: true },
+        { ...coins.STRATEGICSOLANARESERVE, amountToBuy: 20 },
+      ],
+    },
+  ],
+  [
+    "stoolpresidente",
+    {
+      name: "Dave Portnoy",
+      buyAnyPostedCA: true,
+      amountToBuyForAnyPostedCA: 8,
+      slippageBpsForAnyPostedCA: 7000,
+      timeToSellForAnyPostedCA: 120 * 1000,
+      priorityFeeForAnyPostedCA: 0.1,
+      coins: [
+        { ...coins.DDTG, amountToBuy: 5 },
+        // { ...coins.JAILSTOOL, amountToBuy: 1 },
+      ],
+    },
+  ],
+
   // [
   //   "SBF_FTX",
   //   {
