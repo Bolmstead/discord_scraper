@@ -140,7 +140,6 @@ async function executeSwap(
     wallet = Keypair.fromSecretKey(
       bs58.decode(process.env.SHARIF_WALLET_PRIVATE_KEY || "")
     );
-    console.log("🚀 ~ wallet:", wallet);
     console.log(
       "🚀 ~ wallet.publicKey.toString():",
       wallet.publicKey.toString()
