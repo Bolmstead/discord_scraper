@@ -121,11 +121,12 @@ async function executeSwap(
   });
 
   // Validate amount and adjust if needed
-  if (amountToBuy === 0 || amountToBuy > 15) {
-    console.log(
-      `Skipping ${name}: amount ${amountToBuy} outside valid range (0-15)`
-    );
+  if (amountToBuy < 0.000001) {
+    console.log(`Skipping ${name}: amount is too low`);
     return null;
+  }
+  if (amountToBuy > 20) {
+    amountToBuy = 20;
   }
   if (walletName === "Berkley" || walletName === "me") {
     wallet = Keypair.fromSecretKey(
