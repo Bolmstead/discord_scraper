@@ -133,7 +133,7 @@ export async function twitterTrackerScraper(page) {
       }
 
       const myBuyWasSuccessful = await executeSwap(
-        "me",
+        "Berkley",
         "buy",
         name,
         address,
@@ -177,7 +177,7 @@ export async function twitterTrackerScraper(page) {
             if (err) console.error("Error playing sound:", err);
           });
         }
-        console.log("⏱️ Waiting to sell...");
+        console.log("⏱️  Waiting to sell...");
 
         setTimeout(
           async () => {
@@ -199,7 +199,11 @@ export async function twitterTrackerScraper(page) {
 
               // Execute both operations
               const [mySellResult, sharifSellResult] = await Promise.all([
-                sellPercentOfTokenToZero("me", address, CONFIG.PERCENT_TO_SELL),
+                sellPercentOfTokenToZero(
+                  "Berkley",
+                  address,
+                  CONFIG.PERCENT_TO_SELL
+                ),
                 delayedSharifSell,
               ]);
 

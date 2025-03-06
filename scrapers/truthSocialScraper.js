@@ -92,7 +92,7 @@ export async function truthSocialScraper(page) {
       } = coin;
 
       const myBuyWasSuccessful = await executeSwap(
-        "me",
+        "Berkley",
         "buy",
         name,
         address,
@@ -157,7 +157,11 @@ export async function truthSocialScraper(page) {
 
               // Execute both operations
               const [mySellResult, sharifSellResult] = await Promise.all([
-                sellPercentOfTokenToZero("me", address, CONFIG.PERCENT_TO_SELL),
+                sellPercentOfTokenToZero(
+                  "Berkley",
+                  address,
+                  CONFIG.PERCENT_TO_SELL
+                ),
                 delayedSharifSell,
               ]);
 

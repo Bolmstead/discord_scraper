@@ -127,7 +127,7 @@ async function executeSwap(
     );
     return null;
   }
-  if (walletName === "me") {
+  if (walletName === "Berkley" || walletName === "me") {
     wallet = Keypair.fromSecretKey(
       bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
     );
@@ -225,7 +225,7 @@ async function executeSwap(
 async function getTokenBalance(tokenMint, walletName) {
   try {
     let wallet = null;
-    if (walletName === "me") {
+    if (walletName === "Berkley") {
       wallet = Keypair.fromSecretKey(
         bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
       );
@@ -288,7 +288,7 @@ async function sellTokenPercent(
   console.log(`📊 Percentage to sell: ${percentToSell}%`);
 
   let wallet = null;
-  if (walletName === "me") {
+  if (walletName === "Berkley") {
     wallet = Keypair.fromSecretKey(
       bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
     );
@@ -428,25 +428,28 @@ const sellPercentOfTokenToZero = async (
           amountToSell
         );
       if (!success) {
-        console.error("❌ Error selling tokens:", error);
+        console.error(
+          `❌ ${walletName} wallet: ❌ Error selling tokens:`,
+          error
+        );
       } else {
         totalPercentSold += percentToSell;
         numberOfTries++;
         amountToSell = amountSold;
         console.log(
-          `✅ Successfully sold ${percentToSell}% of token for ${walletName}, total sold: ${totalPercentSold}%`
+          `✅ ${walletName} wallet: ✅ Successfully sold ${percentToSell}% of token, total sold: ${totalPercentSold}%`
         );
         console.log(`✅ TX: https://solscan.io/tx/${transactionSignature}`);
         if (totalPercentSold < 100 && numberOfTries < 10) {
           console.log(
             `⏳ Waiting ${
               millisecondsToWaitBetweenTries / 1000
-            } seconds before next try...`
+            } seconds before next try for ${walletName} wallet...`
           );
           await new Promise((resolve) =>
             setTimeout(resolve, millisecondsToWaitBetweenTries)
           );
-          console.log("⌛️ Done waiting");
+          console.log(`⌛️ Done waiting for ${walletName} wallet`);
         }
       }
     }
@@ -455,7 +458,7 @@ const sellPercentOfTokenToZero = async (
     console.log(`🎉 Total tries: ${numberOfTries}`);
     console.log(`🤑 🍾 🎉 💰 ✅ 💵 🏝️ 🥂`);
   } catch (error) {
-    console.error("❌ Error selling tokens:", error);
+    console.error(`❌ Error selling tokens for ${walletName} wallet:`, error);
   }
 };
 
