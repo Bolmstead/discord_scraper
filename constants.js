@@ -158,7 +158,7 @@ const coins = {
   $100BILL: {
     name: "$100",
     address: "7Eg4Bin1U4SNggFJFrKuGTo6e7ShuzjYyW9Quxtxpump",
-    keywords: ["golden age act", "100 bill"],
+    keywords: ["golden age act", "100 bill", "100 dollar bill"],
   },
   CSR: {
     name: "Crypto Strategic Reserve",
