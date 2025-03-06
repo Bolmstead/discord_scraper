@@ -1,9 +1,8 @@
 import "dotenv/config";
 import playSound from "play-sound";
-
 import { determineIfTrumpCoinBuy } from "../helpers/determineIfTrumpCoinBuy.js";
-import { executeSwap } from "../jupiter/index.js";
-import sendTelegramMessage from "../helpers/sendTelegramMessage.js";
+import { executeSwap, sellPercentOfTokenToZero } from "../jupiter/index.js";
+import { sendTelegramMessageThread } from "../helpers/sendTelegramMessage.js";
 
 // ----- config ------
 const CONFIG = {
@@ -11,9 +10,11 @@ const CONFIG = {
   MAX_TWEETS_TO_SCAN: 3,
   ERROR_RETRY_DELAY: 10000,
   SCAN_INTERVAL_AFTER_BUY: 10 * 60 * 1000,
+  PERCENT_TO_SELL: 25,
 };
 const IS_TEST_AUTOMATIC_BUY = true;
 const IS_TEST_SCRAPE_TWEET = true;
+const BUY_FOR_OTHERS = true;
 
 const player = playSound({});
 
@@ -94,9 +95,7 @@ export async function truthSocialScraper(page) {
         "me",
         "buy",
         name,
-        ticker,
         address,
-        timeToSell,
         keywords,
         amountToBuy,
         slippageBps,
@@ -109,35 +108,67 @@ export async function truthSocialScraper(page) {
         if (IS_TEST_SCRAPE_TWEET || IS_TEST_AUTOMATIC_BUY) {
           sharifAmtToBuy = 0.001;
         } else {
-          sharifAmtToBuy = 0.5;
+          sharifAmtToBuy = 1;
         }
         sharifBuyWasSuccessful = await executeSwap(
           "Sharif",
           "buy",
           name,
-          ticker,
           address,
-          timeToSell,
           keywords,
           sharifAmtToBuy,
           slippageBps,
           priorityFee
         );
+        if (!IS_TEST_AUTOMATIC_BUY && !IS_TEST_SCRAPE_TWEET) {
+          await sendTelegramMessageThread(
+            IS_TEST_AUTOMATIC_BUY || IS_TEST_SCRAPE_TWEET,
+            "Trump",
+            name,
+            address,
+            chosenKeyword,
+            postText
+          );
+        }
         if (sharifBuyWasSuccessful) {
           player.play("sounds/Success2.mp3", (err) => {
             if (err) console.error("Error playing sound:", err);
           });
         }
-        await sendTelegramMessage(`
-🚨🚨🚨 Truth Social Buy Alert 🚨🚨🚨
-${IS_TEST_AUTOMATIC_BUY || IS_TEST_SCRAPE_TWEET ? "‼️TEST MODE‼️" : ""}
-Trump Posted!
-Keyword: ${chosenKeyword}
-Ticker: ${ticker}
-Name: ${name}
-Address: ${address} `);
-        await sendTelegramMessage(`Full Truth Social Post:
-${postText}`);
+        console.log("⏱️ Waiting to sell...");
+
+        setTimeout(
+          async () => {
+            console.log("🤞 Selling tokens initiated...");
+            try {
+              // Start Sharif's sell operation 5 seconds later
+              const delayedSharifSell = new Promise((resolve) => {
+                if (BUY_FOR_OTHERS && sharifBuyWasSuccessful) {
+                  setTimeout(async () => {
+                    const result = await sellPercentOfTokenToZero(
+                      "Sharif",
+                      address,
+                      CONFIG.PERCENT_TO_SELL
+                    );
+                    resolve(result);
+                  }, 7000);
+                }
+              });
+
+              // Execute both operations
+              const [mySellResult, sharifSellResult] = await Promise.all([
+                sellPercentOfTokenToZero("me", address, CONFIG.PERCENT_TO_SELL),
+                delayedSharifSell,
+              ]);
+
+              console.log("My sell result:", mySellResult);
+              console.log("Sharif sell result:", sharifSellResult);
+            } catch (error) {
+              console.error("Error executing sell operations:", error);
+            }
+          },
+          timeToSell ? timeToSell : 60 * 1000
+        );
 
         setTimeout(() => {
           console.log("Scheduling sell operation");

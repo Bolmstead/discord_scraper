@@ -3,18 +3,20 @@ import "dotenv/config";
 import playSound from "play-sound";
 import { determineIfMemecoinBuy } from "../helpers/determineIfMemecoinBuy.js";
 import { extractNameFromParentheses } from "../helpers/stringParser.js";
-import { executeSwap } from "../jupiter/index.js";
-import { determineSharifBuyAmount } from "../helpers/determineSharifBuyAmount.js";
-import sendTelegramMessage from "../helpers/sendTelegramMessage.js";
+import { executeSwap, sellPercentOfTokenToZero } from "../jupiter/index.js";
+import { sendTelegramMessageThread } from "../helpers/sendTelegramMessage.js";
+
 // ----- config ------
 const CONFIG = {
   SCAN_INTERVAL: 500,
   MAX_TWEETS_TO_SCAN: 3,
   ERROR_RETRY_DELAY: 10000,
-  SCAN_INTERVAL_AFTER_BUY: 5 * 60 * 1000,
+  SCAN_INTERVAL_AFTER_BUY: 4 * 60 * 1000,
+  PERCENT_TO_SELL: 25,
 };
-const IS_TEST_AUTOMATIC_BUY = false;
-const IS_TEST_SCRAPE_TWEET = false;
+const IS_TEST_AUTOMATIC_BUY = true;
+const IS_TEST_SCRAPE_TWEET = true;
+const BUY_FOR_OTHERS = true;
 
 const player = playSound({});
 
@@ -134,9 +136,7 @@ export async function twitterTrackerScraper(page) {
         "me",
         "buy",
         name,
-        ticker,
         address,
-        timeToSell,
         keywords,
         amountToBuy,
         slippageBps,
@@ -145,44 +145,73 @@ export async function twitterTrackerScraper(page) {
       let sharifBuyWasSuccessful = false;
 
       if (myBuyWasSuccessful) {
-        let { sharifShouldBuy, sharifAmtToBuy } = determineSharifBuyAmount(
-          tweetedUsername,
-          coin
-        );
-        if (sharifShouldBuy) {
-          if (IS_TEST_SCRAPE_TWEET || IS_TEST_AUTOMATIC_BUY) {
-            sharifAmtToBuy = 0.001;
-          }
-          sharifBuyWasSuccessful = await executeSwap(
-            "Sharif",
-            "buy",
-            name,
-            ticker,
-            address,
-            timeToSell,
-            keywords,
-            sharifAmtToBuy,
-            slippageBps,
-            priorityFee
-          );
-          if (sharifBuyWasSuccessful) {
-            player.play("sounds/Success2.mp3", (err) => {
-              if (err) console.error("Error playing sound:", err);
-            });
-          }
+        let sharifAmtToBuy;
+        if (IS_TEST_SCRAPE_TWEET || IS_TEST_AUTOMATIC_BUY) {
+          sharifAmtToBuy = 0.001;
+        } else {
+          sharifAmtToBuy = 1;
         }
-        await sendTelegramMessage(`
-🚨🚨🚨 Twitter Buy Alert 🚨🚨🚨
-${IS_TEST_AUTOMATIC_BUY || IS_TEST_SCRAPE_TWEET ? "‼️TEST MODE‼️" : ""}
-@${tweetedUsername} tweeted!
-Ticker: ${ticker}
-Name: ${name}
-Address: ${address} 
-Keyword: ${chosenKeyword}`);
-        await sendTelegramMessage(`Full Tweet Text:
-${postText}`);
+        sharifBuyWasSuccessful = await executeSwap(
+          "Sharif",
+          "buy",
+          name,
+          address,
+          keywords,
+          sharifAmtToBuy,
+          slippageBps,
+          priorityFee
+        );
+
+        if (!IS_TEST_AUTOMATIC_BUY && !IS_TEST_SCRAPE_TWEET) {
+          await sendTelegramMessageThread(
+            IS_TEST_AUTOMATIC_BUY || IS_TEST_SCRAPE_TWEET,
+            tweetedUsername,
+            name,
+            address,
+            chosenKeyword,
+            postText
+          );
+        }
+        if (sharifBuyWasSuccessful) {
+          player.play("sounds/Success2.mp3", (err) => {
+            if (err) console.error("Error playing sound:", err);
+          });
+        }
+        console.log("⏱️ Waiting to sell...");
+
+        setTimeout(
+          async () => {
+            console.log("🤞 Selling tokens initiated...");
+            try {
+              // Start Sharif's sell operation 5 seconds later
+              const delayedSharifSell = new Promise((resolve) => {
+                if (BUY_FOR_OTHERS && sharifBuyWasSuccessful) {
+                  setTimeout(async () => {
+                    const result = await sellPercentOfTokenToZero(
+                      "Sharif",
+                      address,
+                      CONFIG.PERCENT_TO_SELL
+                    );
+                    resolve(result);
+                  }, 7000);
+                }
+              });
+
+              // Execute both operations
+              const [mySellResult, sharifSellResult] = await Promise.all([
+                sellPercentOfTokenToZero("me", address, CONFIG.PERCENT_TO_SELL),
+                delayedSharifSell,
+              ]);
+
+              console.log("My sell result:", mySellResult);
+              console.log("Sharif sell result:", sharifSellResult);
+            } catch (error) {
+              console.error("Error executing sell operations:", error);
+            }
+          },
+          timeToSell ? timeToSell : 60 * 1000
+        );
         setTimeout(() => {
-          console.log("Scheduling sell operation");
           twitterTrackerScraper(page);
         }, CONFIG.SCAN_INTERVAL_AFTER_BUY);
 

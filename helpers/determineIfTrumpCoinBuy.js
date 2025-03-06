@@ -16,7 +16,6 @@ const testCombinedKeywords = new Map();
 for (const [keyword, matches] of testKeywordMap) {
   testCombinedKeywords.set(keyword.toLowerCase(), { matches, type: "test" });
 }
-console.log("🚀 ~ testCombinedKeywords:", testCombinedKeywords);
 
 export function determineIfTrumpCoinBuy(text, testMode = false) {
   try {

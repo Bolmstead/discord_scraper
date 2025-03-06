@@ -11,11 +11,13 @@ async function openDiscord() {
     defaultViewport: false,
   });
   const page = await browser.newPage();
-  await page.goto(`https://discord.com/login`, { waitUntil: "load" });
 
+  await page.goto("https://discord.com/login", { waitUntil: "load" });
+
+  // Start the scraper
   setTimeout(async () => {
     await twitterTrackerScraper(page);
-  }, 20000);
+  }, 20 * 1000);
 }
 
 openDiscord();
