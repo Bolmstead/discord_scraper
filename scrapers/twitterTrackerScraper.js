@@ -14,8 +14,8 @@ const CONFIG = {
   SCAN_INTERVAL_AFTER_BUY: 4 * 60 * 1000,
   PERCENT_TO_SELL: 25,
 };
-const IS_TEST_AUTOMATIC_BUY = true;
-const IS_TEST_SCRAPE_TWEET = true;
+const IS_TEST_AUTOMATIC_BUY = false;
+const IS_TEST_SCRAPE_TWEET = false;
 const BUY_FOR_OTHERS = true;
 
 const player = playSound({});
