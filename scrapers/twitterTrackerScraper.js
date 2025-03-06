@@ -206,7 +206,7 @@ export async function twitterTrackerScraper(page) {
               console.log("My sell result:", mySellResult);
               console.log("Sharif sell result:", sharifSellResult);
             } catch (error) {
-              console.error("Error executing sell operations:", error);
+              console.error("Error executing sell operations: ", error);
             }
           },
           timeToSell ? timeToSell : 60 * 1000
