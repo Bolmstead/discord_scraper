@@ -79,6 +79,10 @@ export async function twitterTrackerScraper(page) {
             authorElement.evaluate((el) => el.textContent),
             descriptionElement.evaluate((el) => el.textContent),
           ]);
+          console.log(
+            "🚀 ~ tweetElements.slice ~ usernameFullText:",
+            usernameFullText
+          );
 
           const username = extractNameFromParentheses(usernameFullText);
           return { username, text, tweetId };
@@ -88,6 +92,7 @@ export async function twitterTrackerScraper(page) {
         }
       })
     );
+
     let coin = null;
     let tweetedUsername = null;
     let postText = null;
