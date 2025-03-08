@@ -12,7 +12,7 @@ const CONFIG = {
   MAX_TWEETS_TO_SCAN: 3,
   ERROR_RETRY_DELAY: 10000,
   SCAN_INTERVAL_AFTER_BUY: 4 * 60 * 1000,
-  PERCENT_TO_SELL: 25,
+  PERCENT_TO_SELL: 20,
 };
 const IS_TEST_AUTOMATIC_BUY = false;
 const IS_TEST_SCRAPE_TWEET = false;
@@ -193,10 +193,11 @@ export async function twitterTrackerScraper(page) {
                       const result = await sellPercentOfTokenToZero(
                         "Sharif",
                         address,
-                        CONFIG.PERCENT_TO_SELL
+                        CONFIG.PERCENT_TO_SELL,
+                        12000
                       );
                       resolve(result);
-                    }, 7000);
+                    }, 5000);
                   }
                 });
 
@@ -205,7 +206,8 @@ export async function twitterTrackerScraper(page) {
                   sellPercentOfTokenToZero(
                     "Berkley",
                     address,
-                    CONFIG.PERCENT_TO_SELL
+                    CONFIG.PERCENT_TO_SELL,
+                    12000
                   ),
                   delayedSharifSell,
                 ]);
@@ -217,7 +219,7 @@ export async function twitterTrackerScraper(page) {
               }
             }
           },
-          timeToSell ? timeToSell : 60 * 1000
+          timeToSell ? timeToSell : 20 * 1000
         );
         setTimeout(() => {
           twitterTrackerScraper(page);

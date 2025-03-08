@@ -2,82 +2,65 @@
 
 ## Donald Trump's Coins
 
-### Meme Coins
-
 1. **OFFICIAL TRUMP** (keywords: `$trump`)
-
-2. **Trump Gaza** (keywords: `trump gaza`)
-
-3. **Trump 250 Bill** (keywords: `250 bill`, `250 dollar bill`)
-
-4. **Trump Season** (keywords: `trump season`, `trump szn`)
-
+2. **America 51st State** (keywords: `greenland`)
+3. **New China coronavirus** (keywords: `hku5`)
+4. **Sovereign Wealth Fund** (keywords: `sovereign wealth fund`)
 5. **Trump Gold Cards** (keywords: `trump gold card`, `gold card`)
-
-6. **Melania Trump** (keywords: `$melania`)
-
-7. **America 51st State** (keywords: `greenland`)
-
-8. **$100 Bill** (keywords: `golden age act`, `100 bill`, `100 dollar bill`)
-
-9. **Crypto Strategic Reserve** (keywords: `crypto strategic reserve`)
-
-10. **Strategic Bitcoin Reserve** (keywords: `strategic bitcoin reserve`)
-
+6. **Official Fort Knox Coin** (keywords: `knox`)
+7. **$100 Bill** (keywords: `golden age act`, `100 bill`, `100 dollar bill`)
+8. **Crypto Strategic Reserve** (keywords: `crypto strategic reserve`)
+9. **Trump Season** (keywords: `trump season`, `trump szn`)
+10. **Trump 250 Bill** (keywords: `250 bill`, `250 dollar bill`)
 11. **Strategic Solana Reserve** (keywords: `strategic solana reserve`)
-
-12. **Official Fort Knox Coin** (keywords: `knox`)
-
-13. **Baby Deer Trump** (keywords: `baby deer`)
+12. **Melania Trump** (keywords: `$melania`)
+13. **Trump Gaza** (keywords: `trump gaza`)
+14. **Baby Deer Trump** (keywords: `baby deer`)
+15. **Peanut the Squirrel** (keywords: `pnut`)
+16. **Edward Coristine (Big Balls)** (keywords: `big balls`, `edward coristine`, `coristine`, `bolz`)
+17. **Kekius Maximus** (keywords: `kekius`, `kekius maximus`)
+18. **Dogefather** (keywords: `dogefather`)
+19. **Luigi Mangione** (keywords: `luigi`, `mangione`)
+20. **Julian Assange** (keywords: `assange`)
+21. **HARAMBE** (keywords: `harambe`)
+22. **Obi Pnut Kenobi** (keywords: `Obi PNut Kenobi`, `pnut kenobi`, `obi pnut`)
+23. **Strategic Bitcoin Reserve** (keywords: `strategic bitcoin reserve`)
+24. **Adrian Dittmann** (keywords: `adrian dittmann`)
+25. **Stoole Presidente (jailstool)** (keywords: `jailstool`)
+26. **Free Roger** (keywords: `free roger`, `roger ver`)
+27. **DJ Daniel** (keywords: `dj daniel`)
+28. **pwease** (keywords: `pwease`)
+29. **Grok 4** (keywords: `grok 4`, `grok4`)
+30. **Grok's Shitcoin** (keywords: `$doodoocoin`, `doodoo`, `$doodoo`, `doodoocoin`)
+31. **Grok Coin** (keywords: `$grokcoin`, `grokcoin`, `grok coin`)
 
 ## Elon Musk's Coins
 
-### Meme Coins
-
 1. **Edward Coristine (Big Balls)** (keywords: `big balls`, `edward coristine`, `coristine`, `bolz`)
-
 2. **Kekius Maximus** (keywords: `kekius`, `kekius maximus`)
-
 3. **Peanut the Squirrel** (keywords: `pnut`)
-
 4. **Dogefather** (keywords: `dogefather`)
-
 5. **The World's First AI Human** (keywords: `arbaugh`, `neuralink patient`)
-
 6. **Luigi Mangione** (keywords: `luigi`, `mangione`)
-
 7. **Julian Assange** (keywords: `assange`)
-
 8. **HARAMBE** (keywords: `harambe`)
-
-9. **Obi Pnut Kenobi** (keywords: `Obi PNut Kenobi`, `pnut kenobi`, `obi pnut`)
-
-10. **TruthGPT** (keywords: `truthgpt`, `truth gpt`)
-
-11. **Baby Deer** (keywords: `baby deer`, `deer`)
-
-12. **FREESHLOMO** (keywords: `shlomo`)
-
-13. **$100 Bill** (keywords: `golden age act`, `100 bill`, `100 dollar bill`)
-
-14. **Crypto Strategic Reserve** (keywords: `crypto strategic reserve`)
-
-15. **Trump Season** (keywords: `trump season`, `trump szn`)
-
-16. **Trump 250 Bill** (keywords: `250 bill`, `250 dollar bill`)
-
-17. **Strategic Solana Reserve** (keywords: `strategic solana reserve`)
-
-18. **Official Fort Knox Coin** (keywords: `knox`)
-
-19. **Trump Gaza** (keywords: `trump gaza`)
-
-20. **Obi Pnut Kenobi** (keywords: `Obi PNut Kenobi`, `pnut kenobi`, `obi pnut`)
-
-21. **Strategic Bitcoin Reserve** (keywords: `strategic bitcoin reserve`)
-
-22. **Trump Gold Cards** (keywords: `trump gold card`, `gold card`)
-
-23. **Stoole Presidente (jailstool)** (keywords: `jailstool`)
-
-24. **Free Roger** (keywords: `free roger`, `roger ver`)
+9. **TruthGPT** (keywords: `truthgpt`, `truth gpt`)
+10. **Baby Deer** (keywords: `baby deer`, `deer`)
+11. **FREESHLOMO** (keywords: `shlomo`)
+12. **$100 Bill** (keywords: `golden age act`, `100 bill`, `100 dollar bill`)
+13. **Crypto Strategic Reserve** (keywords: `crypto strategic reserve`)
+14. **Trump Season** (keywords: `trump season`, `trump szn`)
+15. **Trump 250 Bill** (keywords: `250 bill`, `250 dollar bill`)
+16. **Strategic Solana Reserve** (keywords: `strategic solana reserve`)
+17. **Official Fort Knox Coin** (keywords: `knox`)
+18. **Trump Gaza** (keywords: `trump gaza`)
+19. **Obi Pnut Kenobi** (keywords: `Obi PNut Kenobi`, `pnut kenobi`, `obi pnut`)
+20. **Trump Gold Cards** (keywords: `trump gold card`, `gold card`)
+21. **Stoole Presidente (jailstool)** (keywords: `jailstool`)
+22. **Free Roger** (keywords: `free roger`, `roger ver`)
+23. **DJ Daniel** (keywords: `dj daniel`)
+24. **pwease** (keywords: `pwease`)
+25. **8008** (keywords: `8008`)
+26. **Grok 4** (keywords: `grok 4`, `grok4`)
+27. **Grok's Shitcoin** (keywords: `$doodoocoin`, `doodoo`, `$doodoo`, `doodoocoin`)
+28. **Grok Coin** (keywords: `$grokcoin`, `grokcoin`, `grok coin`)
