@@ -54,23 +54,23 @@ export function determineIfMemecoinBuy(
     } = account;
 
     // Check for CA first since it's highest priority
-    if (buyAnyPostedCA) {
-      console.log(`🧪🧪🧪 ${name} has buy any posted CA enabled`);
-      const ca = determineIfTextHasCA(text);
-      if (ca) {
-        return {
-          name: `${username}'s posted CA!!!!`,
-          ticker: "????",
-          address: ca,
-          amountToBuy: amountToBuyForAnyPostedCA,
-          slippageBps: slippageBpsForAnyPostedCA,
-          timeToSell: timeToSellForAnyPostedCA,
-          priorityFee: priorityFeeForAnyPostedCA,
-          keywords: [],
-          caWasPosted: true,
-        };
-      }
-    }
+    // if (buyAnyPostedCA) {
+    //   console.log(`🧪🧪🧪 ${name} has buy any posted CA enabled`);
+    //   const ca = determineIfTextHasCA(text);
+    //   if (ca) {
+    //     return {
+    //       name: `${username}'s posted CA!!!!`,
+    //       ticker: "????",
+    //       address: ca,
+    //       amountToBuy: amountToBuyForAnyPostedCA,
+    //       slippageBps: slippageBpsForAnyPostedCA,
+    //       timeToSell: timeToSellForAnyPostedCA,
+    //       priorityFee: priorityFeeForAnyPostedCA,
+    //       keywords: [],
+    //       caWasPosted: true,
+    //     };
+    //   }
+    // }
 
     // Check for keyword matches using the keywordMap
     const tweetText = text.toLowerCase();
