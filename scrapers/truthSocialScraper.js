@@ -180,6 +180,8 @@ export async function truthSocialScraper(page) {
         }, CONFIG.SCAN_INTERVAL_AFTER_BUY);
 
         return;
+      } else {
+        setTimeout(() => truthSocialScraper(page), CONFIG.SCAN_INTERVAL);
       }
     } else {
       console.log("❌ No Trump coin found ❌");
