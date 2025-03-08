@@ -7,6 +7,11 @@ const coins = {
     address: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN",
     keywords: ["$trump"],
   },
+  EWON: {
+    name: "Ewon Wusk",
+    address: "2N8qruAsuSre8vEopvgEgBHigfnqBTFbmf9XTDw9pump",
+    keywords: ["ewon"],
+  },
   DOODOOCOIN: {
     name: "Grok's Shitcoin",
     address: "2N8qruAsuSre8vEopvgEgBHigfnqBTFbmf9XTDw9pump",
@@ -381,6 +386,7 @@ const accountMap = new Map([
         { ...coins.GROK4, amountToBuy: 10 },
         { ...coins.DOODOOCOIN, amountToBuy: 20 },
         { ...coins.GROKCOIN, amountToBuy: 20 },
+        { ...coins.EWON, amountToBuy: 20 },
       ],
     },
   ],
