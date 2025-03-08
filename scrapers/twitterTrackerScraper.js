@@ -231,6 +231,8 @@ export async function twitterTrackerScraper(page) {
         }, CONFIG.SCAN_INTERVAL_AFTER_BUY);
 
         return;
+      } else {
+        setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
       }
     } else {
       setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
