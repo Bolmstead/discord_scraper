@@ -22,7 +22,11 @@ const coins = {
     address: "3MadWqcN9cSrULn8ikDnan9mF3znoQmBPXtVy6BfSTDB",
     keywords: ["$grokcoin", "grokcoin", "grok coin"],
   },
-
+  CHESTNUT: {
+    name: "Chestnut",
+    address: "7oE4Ji977tfofxk9k1UosJ5mTz7rjPRNiSCyWFbPpump",
+    keywords: ["chestnut"],
+  },
   GROK4: {
     name: "Grok 4",
     address: "GpDzQVu8gTLfnTEJdsbWiLBJo8SduQtkGpJfmEJnpump",
@@ -416,6 +420,7 @@ const accountMap = new Map([
       priorityFeeForAnyPostedCA: 0.1,
       coins: [
         { ...coins.DDTG, amountToBuy: 5 },
+        { ...coins.CHESTNUT, amountToBuy: 5 },
         // { ...coins.JAILSTOOL, amountToBuy: 1 },
       ],
     },
