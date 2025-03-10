@@ -368,7 +368,6 @@ const accountMap = new Map([
         { ...coins.PNUT, amountToBuy: 20 },
         { ...coins.DOGEFATHER, amountToBuy: 15 },
         { ...coins.NOLAND, amountToBuy: 10 },
-        { ...coins.LUIGI, amountToBuy: 15 },
         { ...coins.ASSANGE, amountToBuy: 5 },
         { ...coins.HARAMBE, amountToBuy: 20 },
         { ...coins.TRUTHGPT, amountToBuy: 2 },
@@ -552,7 +551,8 @@ const accountMap = new Map([
     {
       name: "Ross Ulbricht",
       coins: [
-        { ...coins.LEAF, amountToBuy: 20 },
+        // need to add a 15 second sell here
+        { ...coins.LEAF, amountToBuy: 20,  },
         { ...coins.ROGER, amountToBuy: 20 },
         { ...coins.STRATEGICSOLANARESERVE, amountToBuy: 10 },
       ],
