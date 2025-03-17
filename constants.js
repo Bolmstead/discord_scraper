@@ -553,12 +553,14 @@ const keywordMap = new Map();
 for (const [username, account] of accountMap) {
   if (account.coins) {
     for (const coin of account.coins) {
-      if (coin.keywords) {
-        for (const keyword of coin.keywords) {
-          if (!keywordMap.has(keyword)) {
-            keywordMap.set(keyword, []);
+      if (coin) {
+        if (coin.keywords) {
+          for (const keyword of coin.keywords) {
+            if (!keywordMap.has(keyword)) {
+              keywordMap.set(keyword, []);
+            }
+            keywordMap.get(keyword).push({ username, coin });
           }
-          keywordMap.get(keyword).push({ username, coin });
         }
       }
     }
@@ -569,12 +571,14 @@ const testKeywordMap = new Map();
 for (const [username, account] of testAccountMap) {
   if (account.coins) {
     for (const coin of account.coins) {
-      if (coin.keywords) {
-        for (const keyword of coin.keywords) {
-          if (!testKeywordMap.has(keyword)) {
-            testKeywordMap.set(keyword, []);
+      if (coin) {
+        if (coin.keywords) {
+          for (const keyword of coin.keywords) {
+            if (!testKeywordMap.has(keyword)) {
+              testKeywordMap.set(keyword, []);
+            }
+            testKeywordMap.get(keyword).push({ username, coin });
           }
-          testKeywordMap.get(keyword).push({ username, coin });
         }
       }
     }
@@ -584,12 +588,14 @@ for (const [username, account] of testAccountMap) {
 const trumpKeywordMap = new Map();
 for (const [username, account] of trumpAccountMap) {
   for (const coin of account.coins) {
-    if (coin.keywords) {
-      for (const keyword of coin.keywords) {
-        if (!trumpKeywordMap.has(keyword)) {
-          trumpKeywordMap.set(keyword, []);
+    if (coin) {
+      if (coin.keywords) {
+        for (const keyword of coin.keywords) {
+          if (!trumpKeywordMap.has(keyword)) {
+            trumpKeywordMap.set(keyword, []);
+          }
+          trumpKeywordMap.get(keyword).push({ username, coin });
         }
-        trumpKeywordMap.get(keyword).push({ username, coin });
       }
     }
   }
