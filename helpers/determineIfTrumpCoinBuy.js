@@ -71,7 +71,6 @@ export function determineIfTrumpCoinBuy(text, testMode = false) {
         }
       }
     }
-    console.log("Tried keywords: ", keywordTracker);
     return null;
   } catch (error) {
     console.error("Error in determineIf:", error);
