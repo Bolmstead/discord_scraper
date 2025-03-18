@@ -2,6 +2,11 @@
 
 // Compile lookup maps at module level for better performance
 const coins = {
+  DOGEQUEST: {
+    name: "DOGEQUEST",
+    address: "GmcNY55weZBRgs7YC3KWijTKnPdv8XDy6DLuLLvdNHtU",
+    keywords: ["dogequest"],
+  },
   TRUMP: {
     name: "OFFICIAL TRUMP",
     address: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN",
@@ -387,6 +392,7 @@ const accountMap = new Map([
         { ...coins.DOODOOCOIN, amountToBuy: 10 },
         { ...coins.GROKCOIN, amountToBuy: 20 },
         { ...coins.EWON, amountToBuy: 20 },
+        { ...coins.DOGEQUEST, amountToBuy: 20 },
       ],
     },
   ],
@@ -439,6 +445,7 @@ const accountMap = new Map([
         { ...coins.STRATEGICSOLANARESERVE, amountToBuy: 10 },
         { ...coins.DOODOOCOIN, amountToBuy: 10 },
         { ...coins.GROKCOIN, amountToBuy: 10 },
+        { ...coins.DOGEQUEST, amountToBuy: 10 },
       ],
     },
   ],
