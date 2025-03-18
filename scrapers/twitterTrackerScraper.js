@@ -39,15 +39,14 @@ export async function twitterTrackerScraper(page) {
     second: "numeric",
     hour12: true,
   });
-  if (IS_TEST_AUTOMATIC_BUY) {
-    console.log("🚨🚨🚨🚨🚨 IN TEST MODE 🚨🚨🚨🚨🚨");
-  } else {
-    console.log("✅✅✅✅✅ IN PRODUCTION MODE ✅✅✅✅✅");
-  }
 
   try {
     console.log("🏁🏁🏁🏁🏁 Scrape Started at: ", scanStart);
-
+    if (IS_TEST_AUTOMATIC_BUY || IS_TEST_SCRAPE_TWEET) {
+      console.log("🚨🚨🚨🚨🚨 IN TEST MODE 🚨🚨🚨🚨🚨");
+    } else {
+      console.log("✅✅✅✅✅ IN PRODUCTION MODE ✅✅✅✅✅");
+    }
     // Get all tweet containers at once
     const tweetElements = await page.$$(SELECTORS.TWEET_CONTAINER);
 

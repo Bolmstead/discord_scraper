@@ -33,7 +33,6 @@ export function determineIfMemecoinBuy(
       console.log("🚨🚨🚨🚨🚨 IN TEST SCRAPE TWEET MODE 🚨🚨🚨🚨🚨");
       account = testAccountMap.get(username);
     } else {
-      console.log("✅✅✅✅✅ IN PRODUCTION MODE ✅✅✅✅✅");
       account = accountMap.get(username);
     }
 
