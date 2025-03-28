@@ -7,6 +7,11 @@ const coins = {
     address: "GmcNY55weZBRgs7YC3KWijTKnPdv8XDy6DLuLLvdNHtU",
     keywords: ["dogequest"],
   },
+  PROTESTPIKACHU: {
+    name: "PROTEST PIKACHU",
+    address: "6NUHnmB1vvM6byB2sCYAty6f9GGtvn1Yin6QoQimpump",
+    keywords: ["pikachu"],
+  },
   SARATOGA: {
     name: "SARATOGA",
     address: "3wth71poCxAckMcXKR6QLY7xKFoiSLwLgUShHRzXpump",
@@ -401,9 +406,10 @@ const accountMap = new Map([
         { ...coins.GROK4, amountToBuy: 10 },
         { ...coins.DOODOOCOIN, amountToBuy: 10 },
         { ...coins.GROKCOIN, amountToBuy: 20 },
-        { ...coins.EWON, amountToBuy: 20 },
+        { ...coins.EWON, amountToBuy: 10 },
         { ...coins.MORNINGROUTINE, amountToBuy: 20 },
         { ...coins.SARATOGA, amountToBuy: 20 },
+        { ...coins.PROTESTPIKACHU, amountToBuy: 20 },
       ],
     },
   ],
