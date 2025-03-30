@@ -6,7 +6,7 @@ import { sendTelegramMessageThread } from "../helpers/sendTelegramMessage.js";
 
 // ----- config ------
 const CONFIG = {
-  SCAN_INTERVAL: 1000,
+  SCAN_INTERVAL: 2000,
   MAX_TWEETS_TO_SCAN: 3,
   ERROR_RETRY_DELAY: 10000,
   SCAN_INTERVAL_AFTER_BUY: 10 * 60 * 1000,
