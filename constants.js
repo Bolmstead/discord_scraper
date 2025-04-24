@@ -404,6 +404,7 @@ const accountMap = new Map([
         { ...coins.HKU5, amountToBuy: 3 },
         { ...coins.SWF, amountToBuy: 10 },
         { ...coins.TGC, amountToBuy: 3 },
+        { ...coins.TRUMP2028, amountToBuy: 20 },
         { ...coins.KNOX, amountToBuy: 10 },
         { ...coins.$100BILL, amountToBuy: 2 },
         { ...coins.CSR, amountToBuy: 4 },
