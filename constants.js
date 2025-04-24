@@ -146,6 +146,11 @@ const coins = {
     address: "4FrXUwfQ7zp56N87ac8BX2aqmFoKmvo6Jp7SuTMZpump",
     keywords: ["assange"],
   },
+  TRUMP2028: {
+    name: "Trump 2028",
+    address: "5wQFpZ2Xstd6khM8WwtVdhegiNEjM48DYErMVVknpump",
+    keywords: ["trump 2028"],
+  },
   HARAMBE: {
     name: "HARAMBE",
     address: "Fch1oixTPri8zxBnmdCEADoJW2toyFHxqDZacQkwdvSP",
@@ -376,6 +381,7 @@ const trumpAccountMap = new Map([
         { ...coins.DICKBUTT, amountToBuy: 20 },
         { ...coins.TITCOIN, amountToBuy: 20 },
         { ...coins.BUTTCOIN, amountToBuy: 20 },
+        { ...coins.SBR, amountToBuy: 20 },
       ],
       buyAnyPostedCA: true,
       amountToBuyForAnyPostedCA: 8,
@@ -389,7 +395,7 @@ const trumpAccountMap = new Map([
 const accountMap = new Map([
   // Active accounts
   [
-    "trump",
+    "realDonaldTrump",
     {
       name: "Donald Trump",
       coins: [
@@ -450,6 +456,8 @@ const accountMap = new Map([
         { ...coins.NOLAND, amountToBuy: 20 },
         { ...coins.HARAMBE, amountToBuy: 20 },
         { ...coins.TRUTHGPT, amountToBuy: 2 },
+        { ...coins.TRUMP2028, amountToBuy: 20 },
+        { ...coins.SBR, amountToBuy: 20 },
         { ...coins.CSR, amountToBuy: 4 },
         { ...coins.TRUMPSEASON, amountToBuy: 2 },
         { ...coins.TRUMPBILL, amountToBuy: 4 },
