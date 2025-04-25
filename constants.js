@@ -2,11 +2,90 @@
 
 // Compile lookup maps at module level for better performance
 const coins = {
+  TRUMPSTESTCOIN: {
+    name: "TRUMPSTESTCOIN",
+    address: "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
+    keywords: [
+      "the",
+      "a",
+      "an",
+      "and",
+      "or",
+      "but",
+      "if",
+      "then",
+      "else",
+      "while",
+      "for",
+      "in",
+      "of",
+      "at",
+      "by",
+      "up",
+      "down",
+      "left",
+      "right",
+      "this",
+      "that",
+      "here",
+      "there",
+      "when",
+      "where",
+      "why",
+      "how",
+      "all",
+      "any",
+      "some",
+      "one",
+      "two",
+      "three",
+      "four",
+      "five",
+      "six",
+      "seven",
+      "eight",
+      "nine",
+      "ten",
+      "!",
+      "?",
+      ".",
+      ",",
+      ":",
+      ";",
+      "-",
+    ],
+  },
   DOGEQUEST: {
     name: "DOGEQUEST",
     address: "GmcNY55weZBRgs7YC3KWijTKnPdv8XDy6DLuLLvdNHtU",
     keywords: ["dogequest"],
   },
+  DOGWIFHAT: {
+    name: "DogWifHat",
+    address: "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
+    keywords: ["dogwifhat", "dog wif hat"],
+  },
+  POPCAT: {
+    name: "Popcat",
+    address: "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
+    keywords: ["popcat"],
+  },
+  FLOKI: {
+    name: "Floki",
+    address: "CP7xS4pHRuZS5M5FvnpRQXNfFwCpoPyHRNnupfkDHhah",
+    keywords: ["floki"],
+  },
+  AI16Z: {
+    name: "ai16z",
+    address: "HeLp6NuQkmYB4pYWo2zYs22mESHXPQYzXbB8n4V98jwC",
+    keywords: ["ai16z"],
+  },
+  GIGACHAD: {
+    name: "GIGA",
+    address: "63LfDmNb3MQ8mw9MtZ2To9bEA2M71kZUUGq5tiJxcqj9",
+    keywords: ["giga chad"],
+  },
+  ///////
   TITCOIN: {
     name: "TITCOIN",
     address: "FtUEW73K6vEYHfbkfpdBZfWpxgQar2HipGdbutEhpump",
@@ -126,6 +205,7 @@ const coins = {
     address: "6Em4veHJFxfnEvu2cyQhkn2BszvHxycPba8fL3Psx4gY",
     keywords: ["adrian dittmann"],
   },
+
   DOGEFATHER: {
     name: "Dogefather",
     address: "EcYK2XNG4wWr2vDg2M2Hrts6SrU2QB4NzXLBf888pump",
@@ -344,53 +424,6 @@ const testCoins = {
     ],
   },
 };
-const trumpAccountMap = new Map([
-  [
-    "trump",
-    {
-      name: "Donald Trump",
-      coins: [
-        { ...coins.TRUMP, amountToBuy: 20 },
-        { ...coins.GREENLAND, amountToBuy: 10 },
-        { ...coins.HKU5, amountToBuy: 3 },
-        { ...coins.SWF, amountToBuy: 10 },
-        { ...coins.TGC, amountToBuy: 3 },
-        { ...coins.KNOX, amountToBuy: 10 },
-        { ...coins.$100BILL, amountToBuy: 2 },
-        { ...coins.CSR, amountToBuy: 4 },
-        { ...coins.TRUMPSEASON, amountToBuy: 2 },
-        { ...coins.TRUMPBILL, amountToBuy: 4 },
-        { ...coins.STRATEGICSOLANARESERVE, amountToBuy: 20 },
-        { ...coins.MELANIA, amountToBuy: 20 },
-        { ...coins.TRUMPGAZA, amountToBuy: 2 },
-        { ...coins.PNUT, amountToBuy: 20 },
-        { ...coins.BIGBALLS, amountToBuy: 20 },
-        { ...coins.FARTCOIN, amountToBuy: 20 },
-        { ...coins.KM, amountToBuy: 20 },
-        { ...coins.DOGEFATHER, amountToBuy: 20 },
-        { ...coins.LUIGI, amountToBuy: 20 },
-        { ...coins.HARAMBE, amountToBuy: 20 },
-        { ...coins.OBIPNUTKENOBIN, amountToBuy: 20 },
-        { ...coins.JAILSTOOL, amountToBuy: 20 },
-        { ...coins.ROGER, amountToBuy: 20 },
-        { ...coins.PWEASE, amountToBuy: 20 },
-        { ...coins.GROK4, amountToBuy: 20 },
-        { ...coins.DOODOOCOIN, amountToBuy: 4 },
-        { ...coins.GROKCOIN, amountToBuy: 20 },
-        { ...coins.MORNINGROUTINE, amountToBuy: 10 },
-        { ...coins.DICKBUTT, amountToBuy: 20 },
-        { ...coins.TITCOIN, amountToBuy: 20 },
-        { ...coins.BUTTCOIN, amountToBuy: 20 },
-        { ...coins.SBR, amountToBuy: 20 },
-      ],
-      buyAnyPostedCA: true,
-      amountToBuyForAnyPostedCA: 8,
-      slippageBpsForAnyPostedCA: 5000,
-      timeToSellForAnyPostedCA: 120 * 1000,
-      priorityFeeForAnyPostedCA: 0.1,
-    },
-  ],
-]);
 // Create efficient lookup maps
 const accountMap = new Map([
   // Active accounts
@@ -399,17 +432,15 @@ const accountMap = new Map([
     {
       name: "Donald Trump",
       coins: [
-        { ...coins.TRUMP, amountToBuy: 20 },
+        { ...coins.TRUMPSTESTCOIN, amountToBuy: 0.001 },
         { ...coins.GREENLAND, amountToBuy: 10 },
         { ...coins.HKU5, amountToBuy: 3 },
-        { ...coins.SWF, amountToBuy: 10 },
-        { ...coins.TGC, amountToBuy: 3 },
-        { ...coins.TRUMP2028, amountToBuy: 20 },
-        { ...coins.KNOX, amountToBuy: 10 },
+        { ...coins.SWF, amountToBuy: 15 },
+        { ...coins.TGC, amountToBuy: 5 },
         { ...coins.$100BILL, amountToBuy: 2 },
-        { ...coins.CSR, amountToBuy: 4 },
+        { ...coins.CSR, amountToBuy: 7 },
         { ...coins.TRUMPSEASON, amountToBuy: 2 },
-        { ...coins.TRUMPBILL, amountToBuy: 4 },
+        { ...coins.TRUMPBILL, amountToBuy: 15 },
         { ...coins.STRATEGICSOLANARESERVE, amountToBuy: 20 },
         { ...coins.MELANIA, amountToBuy: 20 },
         { ...coins.TRUMPGAZA, amountToBuy: 2 },
@@ -425,12 +456,30 @@ const accountMap = new Map([
         { ...coins.ROGER, amountToBuy: 20 },
         { ...coins.PWEASE, amountToBuy: 20 },
         { ...coins.GROK4, amountToBuy: 20 },
-        { ...coins.DOODOOCOIN, amountToBuy: 4 },
+        { ...coins.DOODOOCOIN, amountToBuy: 15 },
         { ...coins.GROKCOIN, amountToBuy: 20 },
-        { ...coins.MORNINGROUTINE, amountToBuy: 10 },
         { ...coins.DICKBUTT, amountToBuy: 20 },
         { ...coins.TITCOIN, amountToBuy: 20 },
         { ...coins.BUTTCOIN, amountToBuy: 20 },
+        { ...coins.SBR, amountToBuy: 20 },
+        { ...coins.TRUMP2028, amountToBuy: 20 },
+        { ...coins.EWON, amountToBuy: 20 },
+        { ...coins.TRUTHGPT, amountToBuy: 10 },
+        { ...coins.OBIPNUTKENOBIN, amountToBuy: 20 },
+        { ...coins.STRATEGICSOLANARESERVE, amountToBuy: 20 },
+        { ...coins.KNOX, amountToBuy: 20 },
+        { ...coins.TGC, amountToBuy: 20 },
+        { ...coins.JAILSTOOL, amountToBuy: 20 },
+        { ...coins.ROGER, amountToBuy: 20 },
+        { ...coins.PWEASE, amountToBuy: 20 },
+        { ...coins._8008, amountToBuy: 20 },
+        { ...coins.GROK4, amountToBuy: 20 },
+        { ...coins.MORNINGROUTINE, amountToBuy: 20 },
+        { ...coins.DOGWIFHAT, amountToBuy: 20 },
+        { ...coins.FLOKI, amountToBuy: 20 },
+        { ...coins.AI16Z, amountToBuy: 20 },
+        { ...coins.GIGACHAD, amountToBuy: 20 },
+        { ...coins.POPCAT, amountToBuy: 20 },
       ],
       buyAnyPostedCA: true,
       amountToBuyForAnyPostedCA: 8,
@@ -449,26 +498,26 @@ const accountMap = new Map([
       timeToSellForAnyPostedCA: 120 * 1000,
       priorityFeeForAnyPostedCA: 0.1,
       coins: [
-        { ...coins.BIGBALLS, amountToBuy: 15 },
+        { ...coins.BIGBALLS, amountToBuy: 20 },
         { ...coins.FARTCOIN, amountToBuy: 20 },
-        { ...coins.KM, amountToBuy: 15 },
+        { ...coins.KM, amountToBuy: 20 },
         { ...coins.PNUT, amountToBuy: 20 },
         { ...coins.DOGEFATHER, amountToBuy: 20 },
         { ...coins.NOLAND, amountToBuy: 20 },
         { ...coins.HARAMBE, amountToBuy: 20 },
-        { ...coins.TRUTHGPT, amountToBuy: 2 },
+        { ...coins.TRUTHGPT, amountToBuy: 10 },
         { ...coins.TRUMP2028, amountToBuy: 20 },
         { ...coins.SBR, amountToBuy: 20 },
-        { ...coins.CSR, amountToBuy: 4 },
+        { ...coins.CSR, amountToBuy: 7 },
         { ...coins.TRUMPSEASON, amountToBuy: 2 },
-        { ...coins.TRUMPBILL, amountToBuy: 4 },
+        { ...coins.TRUMPBILL, amountToBuy: 10 },
         { ...coins.STRATEGICSOLANARESERVE, amountToBuy: 20 },
         { ...coins.KNOX, amountToBuy: 10 },
         { ...coins.DICKBUTT, amountToBuy: 20 },
         { ...coins.TITCOIN, amountToBuy: 20 },
         { ...coins.BUTTCOIN, amountToBuy: 20 },
         { ...coins.OBIPNUTKENOBIN, amountToBuy: 20 },
-        { ...coins.TGC, amountToBuy: 3 },
+        { ...coins.TGC, amountToBuy: 5 },
         { ...coins.JAILSTOOL, amountToBuy: 20 },
         { ...coins.ROGER, amountToBuy: 20 },
         { ...coins.PWEASE, amountToBuy: 20 },
@@ -477,9 +526,14 @@ const accountMap = new Map([
         { ...coins.DOODOOCOIN, amountToBuy: 4 },
         { ...coins.GROKCOIN, amountToBuy: 20 },
         { ...coins.EWON, amountToBuy: 5 },
-        { ...coins.MORNINGROUTINE, amountToBuy: 10 },
+        { ...coins.MORNINGROUTINE, amountToBuy: 20 },
         { ...coins.SWF, amountToBuy: 10 },
         { ...coins.HKU5, amountToBuy: 3 },
+        { ...coins.DOGWIFHAT, amountToBuy: 20 },
+        { ...coins.FLOKI, amountToBuy: 20 },
+        { ...coins.AI16Z, amountToBuy: 20 },
+        { ...coins.GIGACHAD, amountToBuy: 20 },
+        { ...coins.POPCAT, amountToBuy: 20 },
       ],
     },
   ],
@@ -499,7 +553,12 @@ const accountMap = new Map([
         { ...coins.DICKBUTT, amountToBuy: 20 },
         { ...coins.FARTCOIN, amountToBuy: 20 },
         { ...coins.HARAMBE, amountToBuy: 20 },
-        { ...coins.MORNINGROUTINE, amountToBuy: 10 },
+        { ...coins.MORNINGROUTINE, amountToBuy: 20 },
+        { ...coins.DOGWIFHAT, amountToBuy: 20 },
+        { ...coins.FLOKI, amountToBuy: 20 },
+        { ...coins.AI16Z, amountToBuy: 20 },
+        { ...coins.GIGACHAD, amountToBuy: 20 },
+        { ...coins.POPCAT, amountToBuy: 20 },
       ],
     },
   ],
@@ -524,14 +583,7 @@ const accountMap = new Map([
     "WatcherGuru",
     {
       name: "Watcher Guru",
-      coins: [
-        { ...coins.SWF, amountToBuy: 3 },
-        { ...coins.KNOX, amountToBuy: 3 },
-        { ...coins.TRUMPSEASON, amountToBuy: 2 },
-        { ...coins.STRATEGICSOLANARESERVE, amountToBuy: 10 },
-        { ...coins.DOODOOCOIN, amountToBuy: 4 },
-        { ...coins.GROKCOIN, amountToBuy: 10 },
-      ],
+      coins: [],
     },
   ],
   [
@@ -677,28 +729,26 @@ for (const [username, account] of testAccountMap) {
   }
 }
 
-const trumpKeywordMap = new Map();
-for (const [username, account] of trumpAccountMap) {
-  for (const coin of account.coins) {
-    if (coin) {
-      if (coin.keywords) {
-        for (const keyword of coin.keywords) {
-          if (!trumpKeywordMap.has(keyword)) {
-            trumpKeywordMap.set(keyword, []);
-          }
-          trumpKeywordMap.get(keyword).push({ username, coin });
-        }
-      }
-    }
-  }
-}
+// const trumpKeywordMap = new Map();
+// for (const [username, account] of trumpAccountMap) {
+//   for (const coin of account.coins) {
+//     if (coin) {
+//       if (coin.keywords) {
+//         for (const keyword of coin.keywords) {
+//           if (!trumpKeywordMap.has(keyword)) {
+//             trumpKeywordMap.set(keyword, []);
+//           }
+//           trumpKeywordMap.get(keyword).push({ username, coin });
+//         }
+//       }
+//     }
+//   }
+// }
 
 export {
   coins,
   accountMap,
   keywordMap,
-  trumpAccountMap,
-  trumpKeywordMap,
   testKeywordMap,
   testAccountMap,
   testCoins,

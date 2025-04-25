@@ -1,8 +1,8 @@
-const formData = require("form-data");
-const Mailgun = require("mailgun.js");
+import formData from "form-data";
+import Mailgun from "mailgun.js";
 const mailgun = new Mailgun(formData);
 
-module.exports =  mailgun.client({
-    username: "olms2074@gmail.com",
-    key: process.env.OLMS2074_MAILGUN_API_KEY,
-  });
+export default mailgun.client({
+  username: "olms2074@gmail.com",
+  key: process.env.OLMS2074_MAILGUN_API_KEY,
+});
