@@ -55,11 +55,17 @@ const coins = {
       "-",
     ],
   },
+  MENVSGORILLA: {
+    name: "100 Men Vs Gorilla",
+    address: "qRUZaCpgxaRH1s5V6opjPA6Hnpv5BM37LqkDBw7pump",
+    keywords: ["gorilla"],
+  },
   DOGEQUEST: {
     name: "DOGEQUEST",
     address: "GmcNY55weZBRgs7YC3KWijTKnPdv8XDy6DLuLLvdNHtU",
     keywords: ["dogequest"],
   },
+
   DOGWIFHAT: {
     name: "DogWifHat",
     address: "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
@@ -480,6 +486,7 @@ const accountMap = new Map([
         { ...coins.AI16Z, amountToBuy: 20 },
         { ...coins.GIGACHAD, amountToBuy: 20 },
         { ...coins.POPCAT, amountToBuy: 20 },
+        { ...coins.MENVSGORILLA, amountToBuy: 30 },
       ],
       buyAnyPostedCA: true,
       amountToBuyForAnyPostedCA: 8,
@@ -534,6 +541,7 @@ const accountMap = new Map([
         { ...coins.AI16Z, amountToBuy: 20 },
         { ...coins.GIGACHAD, amountToBuy: 20 },
         { ...coins.POPCAT, amountToBuy: 20 },
+        { ...coins.MENVSGORILLA, amountToBuy: 30 },
       ],
     },
   ],
