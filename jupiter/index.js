@@ -125,9 +125,7 @@ async function executeSwap(
     console.log(`Skipping ${name}: amount is too low`);
     return null;
   }
-  if (amountToBuy > 20) {
-    amountToBuy = 20;
-  }
+
   if (walletName === "Berkley" || walletName === "me") {
     wallet = Keypair.fromSecretKey(
       bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
