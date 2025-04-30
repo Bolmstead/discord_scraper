@@ -66,6 +66,12 @@ const coins = {
     keywords: ["dogequest"],
   },
 
+  GORK: {
+    name: "Gork",
+    address: "38PgzpJYu2HkiYvV8qePFakB8tuobPdGm2FFEn7Dpump",
+    keywords: ["gork"],
+  },
+
   RETARDFINDER: {
     name: "Retard Finder",
     address: "C3DwDjT17gDvvCYC2nsdGHxDHVmQRdhKfpAdqQ29pump",
@@ -527,6 +533,7 @@ const accountMap = new Map([
         { ...coins.BIGBALLS, amountToBuy: 20 },
         { ...coins.FARTCOIN, amountToBuy: 30 },
         { ...coins.RETARDFINDER, amountToBuy: 30 },
+        { ...coins.GORK, amountToBuy: 40 },
         { ...coins.KM, amountToBuy: 20 },
         { ...coins.PNUT, amountToBuy: 30 },
         { ...coins.NOLAND, amountToBuy: 20 },
