@@ -145,6 +145,7 @@ export async function twitterTrackerScraper(page) {
         "buy",
         name,
         address,
+        IS_TEST_AUTOMATIC_BUY || IS_TEST_SCRAPE_TWEET,
         keywords,
         amountToBuy,
         slippageBps,

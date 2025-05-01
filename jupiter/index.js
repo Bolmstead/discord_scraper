@@ -79,6 +79,7 @@ async function executeSwap(
   buyOrSell,
   name = "????",
   outputMint,
+  isTest = false,
   keywords = [],
   amountToBuy = 1,
   slippageBps = 2000,
@@ -96,6 +97,10 @@ async function executeSwap(
   console.log("🚀 ~ executeSwap ~ priorityFee:", priorityFee);
   console.log("🚀 ~ executeSwap ~ inputMint:", inputMint);
 
+  if (isTest) {
+    priorityFee = 0.001;
+    slippageBps = 500;
+  }
   if (buyOrSell !== "sell" && buyOrSell !== "buy") {
     console.error("Invalid buyOrSell value");
     return null;
@@ -399,7 +404,8 @@ const sellPercentOfTokenToZero = async (
   walletName,
   memeTokenAddress,
   percentToSell,
-  millisecondsToWaitBetweenTries = 15 * 1000
+  millisecondsToWaitBetweenTries = 15 * 1000,
+  maxNumberOfTries = 3
 ) => {
   try {
     let totalPercentSold = 0;
@@ -408,36 +414,70 @@ const sellPercentOfTokenToZero = async (
     console.log(
       `Starting sellPercentOfTokenToZero for ${walletName} with ${memeTokenAddress}`
     );
-    while (totalPercentSold < 100 && numberOfTries < 10) {
+    while (totalPercentSold < 100 && numberOfTries < maxNumberOfTries) {
       console.log(
         `💸 Trying to sell ${percentToSell}% of token, total sold: ${totalPercentSold}%`
       );
       console.log("🔄 Try #", numberOfTries);
-      const { success, transactionSignature, amountSold } =
-        await sellTokenPercent(
-          walletName,
-          memeTokenAddress,
-          percentToSell,
-          amountToSell
-        );
+
+      let success = false;
+      let transactionSignature = null;
+      let amountSold = null;
+
+      // Try to sell with retries
+      for (let attempt = 1; attempt <= maxNumberOfTries; attempt++) {
+        try {
+          console.log(`Sell attempt ${attempt} of ${maxNumberOfTries}`);
+
+          const result = await sellTokenPercent(
+            walletName,
+            memeTokenAddress,
+            percentToSell,
+            amountToSell,
+            undefined // Use default slippageBps
+          );
+
+          if (result && result.success) {
+            success = result.success;
+            transactionSignature = result.transactionSignature;
+            amountSold = result.amountSold;
+            console.log(`✅ Sell successful on attempt ${attempt}`);
+            break; // Exit retry loop on success
+          } else {
+            console.error(`❌ Sell attempt ${attempt} failed`);
+          }
+        } catch (error) {
+          console.error(`❌ Error on sell attempt ${attempt}:`, error);
+        }
+
+        // If we're not on the last attempt, wait before retrying
+        if (attempt < maxNumberOfTries) {
+          const waitTime = 2000;
+          console.log(`⏳ Waiting  before next attempt...`);
+          await new Promise((resolve) => setTimeout(resolve, waitTime));
+        }
+      }
+
       if (!success) {
         console.error(
-          `❌ ${walletName} wallet: ❌ Error selling tokens:`,
-          error
+          `❌ ${walletName} wallet: Failed to sell tokens after ${maxNumberOfTries} attempts`
         );
+        // Continue with the main loop instead of breaking completely
+        numberOfTries++;
       } else {
         totalPercentSold += percentToSell;
         numberOfTries++;
         amountToSell = amountSold;
         console.log(
-          `✅ ${walletName} wallet: ✅ Successfully sold ${percentToSell}% of token, total sold: ${totalPercentSold}%`
+          `✅ ${walletName} wallet: Successfully sold ${percentToSell}% of token, total sold: ${totalPercentSold}%`
         );
         console.log(`✅ TX: https://solscan.io/tx/${transactionSignature}`);
-        if (totalPercentSold < 100 && numberOfTries < 10) {
+
+        if (totalPercentSold < 100 && numberOfTries < maxNumberOfTries) {
           console.log(
             `⏳ Waiting ${
               millisecondsToWaitBetweenTries / 1000
-            } seconds before next try for ${walletName} wallet...`
+            } seconds before next batch sell for ${walletName} wallet...`
           );
           await new Promise((resolve) =>
             setTimeout(resolve, millisecondsToWaitBetweenTries)
@@ -446,12 +486,15 @@ const sellPercentOfTokenToZero = async (
         }
       }
     }
+
     console.log(`🎉 Done Selling for ${walletName}! 🎉`);
     console.log(`🎉 Total percent sold: ${totalPercentSold}%`);
     console.log(`🎉 Total tries: ${numberOfTries}`);
     console.log(`🤑 🍾 🎉 💰 ✅ 💵 🏝️ 🥂`);
+    return { success: true, totalPercentSold };
   } catch (error) {
     console.error(`❌ Error selling tokens for ${walletName} wallet:`, error);
+    return { success: false, error: error.message };
   }
 };
 
