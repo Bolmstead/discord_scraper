@@ -5,17 +5,17 @@ import { determineIfMemecoinBuy } from "../helpers/determineIfMemecoinBuy.js";
 import { extractNameFromParentheses } from "../helpers/stringParser.js";
 import { executeSwap, sellPercentOfTokenToZero } from "../jupiter/index.js";
 import { sendTelegramMessageThread } from "../helpers/sendTelegramMessage.js";
-import sendEmail from "../helpers/sendEmail.js";
+// import sendEmail from "../helpers/sendEmail.js";
 
 // ----- config ------
 const CONFIG = {
   SCAN_INTERVAL: 500,
   MAX_TWEETS_TO_SCAN: 3,
-  ERROR_RETRY_DELAY: 10000,
+  ERROR_RETRY_DELAY: 60 * 1000,
   SCAN_INTERVAL_AFTER_BUY: 4 * 60 * 1000,
   PERCENT_TO_SELL: 33,
   TIME_TO_WAIT_BETWEEN_SELLS: 10 * 1000,
-  DEFAULT_TIME_TO_WAIT_BEFORE_FIRST_SELL: 10 * 1000,
+  DEFAULT_TIME_TO_WAIT_BEFORE_FIRST_SELL: 15 * 1000,
 };
 const IS_TEST_AUTOMATIC_BUY = false;
 const IS_TEST_SCRAPE_TWEET = false;
@@ -166,10 +166,14 @@ export async function twitterTrackerScraper(page) {
           if (err) console.error("Error playing sound:", err);
         });
 
-        sendEmail(
-          "COIN BUY! From Discord Bot",
-          "Twitter Tracker code executed buy"
-        );
+        // try {
+        //   sendEmail(
+        //     "COIN BUY! From Discord Bot",
+        //     "Twitter Tracker code executed buy"
+        //   );
+        // } catch (error) {
+        //   console.error("Error sending email:", error);
+        // }
 
         console.log("⏱️  Waiting to sell...");
         setTimeout(async () => {

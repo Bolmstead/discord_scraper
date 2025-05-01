@@ -110,6 +110,10 @@ async function executeSwap(
     console.error("Slippagebps too high");
     return null;
   }
+  // if (isTest) {
+  //   amountToBuy = 0.001;
+  //   priorityFee = 0.01;
+  // }
 
   // Single log for trade parameters
   console.log("Trade Parameters:", {
@@ -135,21 +139,7 @@ async function executeSwap(
       "🚀 ~ wallet.publicKey.toString():",
       wallet.publicKey.toString()
     );
-  } else if (walletName === "Sharif") {
-    wallet = Keypair.fromSecretKey(
-      bs58.decode(process.env.SHARIF_WALLET_PRIVATE_KEY || "")
-    );
-    console.log(
-      "🚀 ~ wallet.publicKey.toString():",
-      wallet.publicKey.toString()
-    );
   }
-
-  // ####### REMOVE THIS #######
-  if (DEFAULT_AMOUNT_TO_BUY) {
-    amountToBuy = DEFAULT_AMOUNT_TO_BUY;
-  }
-  // ###########################
 
   const amountToBuyLamports = amountToBuy * LAMPORTS_PER_SOL;
 
@@ -280,7 +270,8 @@ async function sellTokenPercent(
   walletName,
   memeTokenAddress,
   percentToSell = 100,
-  amountToSell
+  amountToSell,
+  slippageBps = 2000
 ) {
   console.log("🚀 Starting sellTokenPercent function");
   console.log(`📝 Input token address: ${memeTokenAddress}`);
@@ -323,9 +314,12 @@ async function sellTokenPercent(
       userTokenAccount
     );
     let { amount, decimals, uiAmount } = tokenBalance.value;
-
+    console.log("🕵 ~ sellTokenPercent ~ tokenBalance:", tokenBalance);
+    console.log("🕵 ~ sellTokenPercent ~ amount:", amount);
+    console.log("🕵 ~ sellTokenPercent ~ decimals:", decimals);
+    console.log("🕵 ~ sellTokenPercent ~ uiAmount:", uiAmount);
     amount = Number(amount);
-
+    console.log("🕵 ~ sellTokenPercent ~ amount:", amount);
     if (!amountToSell) {
       console.log("🚀 ~ sellTokenPerce ~ tokenBalance:", tokenBalance);
       console.log(`📊 Raw token balance: ${JSON.stringify(amount)}`);
@@ -348,7 +342,7 @@ async function sellTokenPercent(
       memeTokenPublicKey.toString(),
       solanaAddress.toString(),
       Math.floor(amountToSell), // Convert percentage to raw amount
-      500
+      slippageBps
     );
     console.log("✅ Quote received:", quote);
 
