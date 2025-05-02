@@ -531,7 +531,6 @@ const accountMap = new Map([
       coins: [
         { ...coins.GORK, amountToBuy: 70 },
         { ...coins.LEMONDOG, amountToBuy: 30 }, // take this out asap
-        { ...coins.BIGBALLS, amountToBuy: 30 },
         { ...coins.FARTCOIN, amountToBuy: 30 },
         { ...coins.RETARDFINDER, amountToBuy: 30 },
         { ...coins.KM, amountToBuy: 20 },
