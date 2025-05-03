@@ -17,8 +17,8 @@ const CONFIG = {
   TIME_TO_WAIT_BETWEEN_SELLS: 10 * 1000,
   DEFAULT_TIME_TO_WAIT_BEFORE_FIRST_SELL: 15 * 1000,
 };
-const IS_TEST_AUTOMATIC_BUY = false;
-const IS_TEST_SCRAPE_TWEET = false;
+const IS_TEST_AUTOMATIC_BUY = true;
+const IS_TEST_SCRAPE_TWEET = true;
 
 const player = playSound({});
 

@@ -529,7 +529,7 @@ const accountMap = new Map([
       timeToSellForAnyPostedCA: 120 * 1000,
       priorityFeeForAnyPostedCA: 0.1,
       coins: [
-        { ...coins.GORK, amountToBuy: 70 },
+        { ...coins.GORK, amountToBuy: 20 },
         { ...coins.LEMONDOG, amountToBuy: 30 }, // take this out asap
         { ...coins.FARTCOIN, amountToBuy: 30 },
         { ...coins.RETARDFINDER, amountToBuy: 30 },

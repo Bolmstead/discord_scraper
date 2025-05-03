@@ -7,7 +7,8 @@
   "scripts": {
     "twitter": "node scrapeTwitterTracker.js",
     "truth": "node scrapeTruthSocial.js",
-    "testSwap": "node testSwap.js"
+    "testSwap": "node testSwap.js",
+    "createWallet": "node helpers/createWallet.js"
   },
   "author": "",
   "license": "ISC",
