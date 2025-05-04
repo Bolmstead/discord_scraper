@@ -60,6 +60,11 @@ const coins = {
     address: "qRUZaCpgxaRH1s5V6opjPA6Hnpv5BM37LqkDBw7pump",
     keywords: ["gorilla"],
   },
+  JEDIOFUSA: {
+    name: "JOTUS",
+    address: "5spzxsgCMetaWbZNnUCcxSGmnmCHHjL3WaCdtNNhBR7K",
+    keywords: ["may the 4", "may the 4th", "sith lord", "jedi"],
+  },
   DOGEQUEST: {
     name: "DOGEQUEST",
     address: "GmcNY55weZBRgs7YC3KWijTKnPdv8XDy6DLuLLvdNHtU",
@@ -510,6 +515,7 @@ const accountMap = new Map([
         { ...coins.POPCAT, amountToBuy: 30 },
         { ...coins.RETARDFINDER, amountToBuy: 30 },
         { ...coins.HOSICO, amountToBuy: 40 },
+        { ...coins.JEDIOFUSA, amountToBuy: 15 },
         // { ...coins.MENVSGORILLA, amountToBuy: 40 },
       ],
       buyAnyPostedCA: true,
