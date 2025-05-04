@@ -515,7 +515,7 @@ const accountMap = new Map([
         { ...coins.POPCAT, amountToBuy: 30 },
         { ...coins.RETARDFINDER, amountToBuy: 30 },
         { ...coins.HOSICO, amountToBuy: 40 },
-        { ...coins.JEDIOFUSA, amountToBuy: 15 },
+        { ...coins.JEDIOFUSA, amountToBuy: 10 },
         // { ...coins.MENVSGORILLA, amountToBuy: 40 },
       ],
       buyAnyPostedCA: true,
