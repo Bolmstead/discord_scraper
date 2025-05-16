@@ -225,7 +225,7 @@ const coins = {
   },
   KM: {
     name: "Kekius Maximus",
-    address: "HuAncxDEsakCDgZS2Yfo9xJbHmtHXMnxxkT9jqdXnHhm",
+    address: "FThrNpdic79XRV6i9aCWQ2UTp7oRQuCXAgUWtZR2cs42",
     keywords: ["kekius", "kekius maximus"],
   },
   PNUT: {
