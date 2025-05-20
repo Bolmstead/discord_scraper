@@ -678,6 +678,7 @@ const accountMap = new Map([
       coins: [
         // need to add a 15 second sell here
         { ...coins.ROGER, amountToBuy: 20 },
+        { ...coins.LEAF, amountToBuy: 20 },
       ],
       buyAnyPostedCA: true,
       amountToBuyForAnyPostedCA: 8,

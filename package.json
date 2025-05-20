@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "twitter": "node scrapeTwitterTracker.js",
+    "start": "node scrapeTwitterTracker.js",
     "truth": "node scrapeTruthSocial.js",
     "testSwap": "node testSwap.js",
     "createWallet": "node helpers/createWallet.js"

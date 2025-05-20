@@ -17,16 +17,16 @@ const CONFIG = {
   TIME_TO_WAIT_BETWEEN_SELLS: 10 * 1000,
   DEFAULT_TIME_TO_WAIT_BEFORE_FIRST_SELL: 15 * 1000,
 };
-const IS_TEST_AUTOMATIC_BUY = true;
-const IS_TEST_SCRAPE_TWEET = true;
+const IS_TEST_AUTOMATIC_BUY = false;
+const IS_TEST_SCRAPE_TWEET = false;
 
 const player = playSound({});
 
 // Cache selectors for better performance
 const SELECTORS = {
-  TWEET_CONTAINER: ".grid__623de",
-  AUTHOR_LINK: ".embedAuthorNameLink__623de",
-  DESCRIPTION: ".embedDescription__623de",
+  TWEET_CONTAINER: ".messageListItem__5126c",
+  AUTHOR_LINK: ".username_c19a55",
+  DESCRIPTION: ".grid__623de",
 };
 
 export async function twitterTrackerScraper(page) {
@@ -60,12 +60,6 @@ export async function twitterTrackerScraper(page) {
     const tweets = await Promise.all(
       tweetElements.slice(startIndex).map(async (element) => {
         try {
-          // Get tweet ID or some unique identifier to avoid duplicates
-          const tweetId = await element.evaluate(
-            (el) =>
-              el.getAttribute("data-tweet-id") || el.innerHTML.slice(0, 50)
-          );
-
           // Get both username and text in parallel
           const [authorElement, descriptionElement] = await Promise.all([
             element.$(SELECTORS.AUTHOR_LINK),
@@ -86,7 +80,7 @@ export async function twitterTrackerScraper(page) {
           );
 
           const username = extractNameFromParentheses(usernameFullText);
-          return { username, text, tweetId };
+          return { username, text };
         } catch (err) {
           console.error("Error processing tweet:", err);
           return null;
