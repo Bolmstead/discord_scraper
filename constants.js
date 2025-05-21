@@ -667,7 +667,7 @@ const accountMap = new Map([
     "DeItaone",
     {
       name: "Walter Bloomberg",
-      coins: [],
+      coins: [{ ...coins.SWF, amountToBuy: 15, dontSell: true }],
     },
   ],
 
@@ -698,14 +698,14 @@ const accountMap = new Map([
     "DavidSacks",
     {
       name: "David Sacks",
-      coins: [],
+      coins: [{ ...coins.SWF, amountToBuy: 15, dontSell: true }],
     },
   ],
   [
     "davidsacks47",
     {
       name: "David Sacks",
-      coins: [],
+      coins: [{ ...coins.SWF, amountToBuy: 15, dontSell: true }],
     },
   ],
 ]);
