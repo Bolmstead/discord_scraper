@@ -79,7 +79,13 @@ export async function twitterTrackerScraper(page) {
             usernameFullText
           );
 
-          const username = extractNameFromParentheses(usernameFullText);
+          let username = null;
+          if (usernameFullText.includes("TruthSocial Tracker")) {
+            username = "realDonaldTrump";
+          } else {
+            username = extractNameFromParentheses(usernameFullText);
+          }
+
           return { username, text };
         } catch (err) {
           console.error("Error processing tweet:", err);
