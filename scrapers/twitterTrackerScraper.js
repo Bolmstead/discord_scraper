@@ -49,7 +49,6 @@ export async function twitterTrackerScraper(page) {
     }
     // Get all tweet containers at once
     const tweetElements = await page.$$(SELECTORS.TWEET_CONTAINER);
-    console.log("🚀 ~ twitterTrackerScraper ~ tweetElements:", tweetElements);
 
     // Calculate starting index to get last N tweets
     const startIndex = Math.max(
