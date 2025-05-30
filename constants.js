@@ -335,11 +335,6 @@ const coins = {
     address: "D13VkjDiCxtgRJsH4s1VCxKS4bFZq5UEz2iRsSbapump",
     keywords: ["broccoli"],
   },
-  ZACK: {
-    name: "Zacktardio",
-    address: "2mN3yfFwanRmgLVpLWcCskUuyhTr8zKoBw6nwiivpump",
-    keywords: ["zacktardio"],
-  },
   TRUMPBILL: {
     name: "Trump 250 Bill",
     address: "7nEx3cF6bgD2LDh3MimokRPbAV97TFsGKQyjRKN7pump",

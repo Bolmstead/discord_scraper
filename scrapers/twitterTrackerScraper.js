@@ -24,9 +24,9 @@ const player = playSound({});
 
 // Cache selectors for better performance
 const SELECTORS = {
-  TWEET_CONTAINER: ".messageListItem__5126c",
-  AUTHOR_LINK: ".username_c19a55",
-  DESCRIPTION: ".grid__623de",
+  TWEET_CONTAINER: ".grid__623de",
+  AUTHOR_LINK: ".embedAuthorName__623de",
+  DESCRIPTION: ".embedDescription__623de",
 };
 
 export async function twitterTrackerScraper(page) {
@@ -49,6 +49,7 @@ export async function twitterTrackerScraper(page) {
     }
     // Get all tweet containers at once
     const tweetElements = await page.$$(SELECTORS.TWEET_CONTAINER);
+    console.log("🚀 ~ twitterTrackerScraper ~ tweetElements:", tweetElements);
 
     // Calculate starting index to get last N tweets
     const startIndex = Math.max(
@@ -65,6 +66,15 @@ export async function twitterTrackerScraper(page) {
             element.$(SELECTORS.AUTHOR_LINK),
             element.$(SELECTORS.DESCRIPTION),
           ]);
+
+          console.log(
+            "✍🏿 ~ twitterTrackerScraper ~ authorElement:",
+            authorElement
+          );
+          console.log(
+            "⿲ ~ twitterTrackerScraper ~ descriptionElement:",
+            descriptionElement
+          );
 
           if (!authorElement || !descriptionElement) {
             return null;
