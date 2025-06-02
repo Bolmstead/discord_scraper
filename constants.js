@@ -465,7 +465,7 @@ const accountMap = new Map([
     {
       name: "Donald Trump",
       coins: [
-        { ...coins.TRUMPSTESTCOIN, amountToBuy: 0.001 },
+        // { ...coins.TRUMPSTESTCOIN, amountToBuy: 0.001 },
         { ...coins.GREENLAND, amountToBuy: 10 },
         { ...coins.HKU5, amountToBuy: 3 },
         { ...coins.SWF, amountToBuy: 15 },
