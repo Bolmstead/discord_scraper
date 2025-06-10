@@ -70,6 +70,11 @@ const coins = {
     address: "GmcNY55weZBRgs7YC3KWijTKnPdv8XDy6DLuLLvdNHtU",
     keywords: ["dogequest"],
   },
+  TOLITHETRENCHER: {
+    name: "Toli",
+    address: "5C8LMqZ9dbQ3RWoe5pFk5fJPhgiBQtBYdMnzekfJpump",
+    keywords: ["toli", "the trencher"],
+  },
 
   GORK: {
     name: "Gork",
@@ -701,6 +706,13 @@ const accountMap = new Map([
     {
       name: "David Sacks",
       coins: [{ ...coins.SWF, amountToBuy: 15, dontSell: true }],
+    },
+  ],
+  [
+    "aeyakovenko",
+    {
+      name: "toly",
+      coins: [{ ...coins.TOLITHETRENCHER, amountToBuy: 70 }],
     },
   ],
 ]);
