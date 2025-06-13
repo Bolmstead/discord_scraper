@@ -75,6 +75,11 @@ const coins = {
     address: "5C8LMqZ9dbQ3RWoe5pFk5fJPhgiBQtBYdMnzekfJpump",
     keywords: ["toli", "the trencher"],
   },
+  SHORTNOY: {
+    name: "Shortnoy",
+    address: "4cPhM4VA8HdKVzLufEAwhwYDpg2FqWPzrZXXcSbZpump",
+    keywords: ["shortnoy"],
+  },
 
   GORK: {
     name: "Gork",
@@ -651,7 +656,7 @@ const accountMap = new Map([
       coins: [
         { ...coins.DDTG, amountToBuy: 3 },
         { ...coins.CHESTNUT, amountToBuy: 3 },
-        // { ...coins.JAILSTOOL, amountToBuy: 1 },
+        { ...coins.SHORTNOY, amountToBuy: 10 },
       ],
     },
   ],
