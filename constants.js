@@ -164,6 +164,26 @@ const coins = {
     address: "EF3Ln1DkUB5azvqcaCJgG3RR2qSUJEXxLo1q4ZHzpump",
     keywords: ["ewon"],
   },
+  GREED3: {
+    name: "Greed3",
+    address: "CPBQqugWWCcyehezHf4uSJtET2kmYNqPuhyb57H5pump",
+    keywords: ["greed3", "greed 3"],
+  },
+  GREED2: {
+    name: "Greed2",
+    address: "GoL6RVGQFzTD7MdoNEHUQmNp6SgXBn6f9khxAW5Bpump",
+    keywords: ["greed2", "greed 2"],
+  },
+  FARTSTOOL: {
+    name: "fartstool",
+    address: "4hr97GiyvAc2Ak57gETQVb1kfaoMeYwngMZZ9qe1pump",
+    keywords: ["fartstool"],
+  },
+  MISSPEACHES: {
+    name: "Miss Peaches",
+    address: "7qhwYUXBaPTfWkhUpgWTjHAvdG48wRj5TLmTQ5Topump",
+    keywords: ["peaches"],
+  },
   DOODOOCOIN: {
     name: "Grok's Shitcoin",
     address: "2N8qruAsuSre8vEopvgEgBHigfnqBTFbmf9XTDw9pump",
@@ -657,6 +677,11 @@ const accountMap = new Map([
         { ...coins.DDTG, amountToBuy: 3 },
         { ...coins.CHESTNUT, amountToBuy: 3 },
         { ...coins.SHORTNOY, amountToBuy: 10 },
+        { ...coins.JAILSTOOL, amountToBuy: 50 },
+        { ...coins.GREED3, amountToBuy: 70 },
+        { ...coins.GREED2, amountToBuy: 10 },
+        { ...coins.FARTSTOOL, amountToBuy: 5 },
+        { ...coins.MISSPEACHES, amountToBuy: 10 },
       ],
     },
   ],
