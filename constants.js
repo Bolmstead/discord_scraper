@@ -380,6 +380,11 @@ const coins = {
     address: "4NS4nxNunN7KJ1oe2PRCnh1KbBBut2fTqYHqU7Gtpump",
     keywords: ["free roger", "roger ver"],
   },
+  UNCONDITIONALSURRENDER: {
+    name: "Unconditional Surrender",
+    address: "FRRMj87PWN5xuXGyNBXTMh56ksWNiJTUq3KZumyS87zV",
+    keywords: ["unconditional surrender"],
+  },
 
   SWASTI: {
     name: "Swasticoin",
@@ -506,6 +511,7 @@ const accountMap = new Map([
         { ...coins.TRUMPBILL, amountToBuy: 5 },
         { ...coins.STRATEGICSOLANARESERVE, amountToBuy: 20 },
         { ...coins.MELANIA, amountToBuy: 30 },
+        { ...coins.UNCONDITIONALSURRENDER, amountToBuy: 3 },
         { ...coins.TRUMPGAZA, amountToBuy: 3 },
         { ...coins.PNUT, amountToBuy: 30 },
         { ...coins.BIGBALLS, amountToBuy: 40 },
