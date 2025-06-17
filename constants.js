@@ -299,6 +299,11 @@ const coins = {
     address: "5wQFpZ2Xstd6khM8WwtVdhegiNEjM48DYErMVVknpump",
     keywords: ["trump 2028"],
   },
+  JPMD: {
+    name: "jpmd",
+    address: "GgLyU28hTpmttqqkBFYm5fDZuC5TvVw36V1UdT2aZvrC",
+    keywords: ["jpmd"],
+  },
   HARAMBE: {
     name: "HARAMBE",
     address: "Fch1oixTPri8zxBnmdCEADoJW2toyFHxqDZacQkwdvSP",
@@ -309,6 +314,7 @@ const coins = {
     address: "5WGkdemJNEoAVKveDQdzQmDqTyxCraXGw9ACyrwCEUMS",
     keywords: ["Obi PNut Kenobi", "pnut kenobi", "obi pnut"],
   },
+
   TRUTHGPT: {
     name: "Elon OPENAI NAME",
     address: "DkVoFwo7aQTUeEMSegZgvUoigHti329Fm9wiMvfdpump",
@@ -696,17 +702,26 @@ const accountMap = new Map([
     "WatcherGuru",
     {
       name: "Watcher Guru",
-      coins: [],
+      coins: [{ ...coins.JPMD, amountToBuy: 8 }],
     },
   ],
   [
     "DeItaone",
     {
       name: "Walter Bloomberg",
-      coins: [{ ...coins.SWF, amountToBuy: 15, dontSell: true }],
+      coins: [
+        { ...coins.SWF, amountToBuy: 15, dontSell: true },
+        { ...coins.JPMD, amountToBuy: 8 },
+      ],
     },
   ],
-
+  [
+    "db",
+    {
+      name: "tier10k",
+      coins: [{ ...coins.JPMD, amountToBuy: 8 }],
+    },
+  ],
   [
     "RealRossU",
     {
