@@ -294,6 +294,11 @@ const coins = {
     address: "4FrXUwfQ7zp56N87ac8BX2aqmFoKmvo6Jp7SuTMZpump",
     keywords: ["assange"],
   },
+  GORBAGANA: {
+    name: "Gorbagana",
+    address: "71Jvq4Epe2FCJ7JFSF7jLXdNk1Wy4Bhqd9iL6bEFELvg",
+    keywords: ["gorbagana"],
+  },
   TRUMP2028: {
     name: "Trump 2028",
     address: "5wQFpZ2Xstd6khM8WwtVdhegiNEjM48DYErMVVknpump",
@@ -763,7 +768,10 @@ const accountMap = new Map([
     "aeyakovenko",
     {
       name: "toly",
-      coins: [{ ...coins.TOLITHETRENCHER, amountToBuy: 70 }],
+      coins: [
+        { ...coins.TOLITHETRENCHER, amountToBuy: 70 },
+        { ...coins.GORBAGANA, amountToBuy: 70 },
+      ],
     },
   ],
 ]);
