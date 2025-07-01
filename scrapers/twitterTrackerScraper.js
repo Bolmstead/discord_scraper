@@ -24,7 +24,7 @@ const player = playSound({});
 
 // Cache selectors for better performance
 const SELECTORS = {
-  TWEET_CONTAINER: ".grid__623de",
+  TWEET_CONTAINER: ".messageListItem__5126c",
   AUTHOR_LINK: ".embedAuthorName__623de",
   DESCRIPTION: ".embedDescription__623de",
 };

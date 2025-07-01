@@ -1,16 +1,20 @@
 /**
- * Extracts the name from within parentheses in a Twitter-style string
- * @param {string} text - The input text (e.g. '@jason (@Jason)')
- * @returns {string|null} - The name within parentheses without @ symbol, or null if not found
+ * Extracts the username from a string that starts with @
+ * @param {string} text - The input text (e.g. '@maxkeiser')
+ * @returns {string} - The username without @ symbol, or empty string if not found
  */
 export function extractNameFromParentheses(text) {
   if (!text) return "";
-  const parenthesesRegex = /\([@]?([^)]+)\)/;
-  const match = text.match(parenthesesRegex);
+
+  const atSymbolRegex = /@(\w+)/;
+  const match = text.match(atSymbolRegex);
+  console.log("🚀 ~ extractNameFromParentheses ~ match:", match);
 
   if (match && match[1]) {
-    // Return the captured group without any @ symbol
-    return match[1].replace("@", "");
+    const username = match[1];
+    console.log("🚀 ~ extractNameFromParentheses ~ username:", username);
+    return username;
   }
-  return "";
+
+  return "unable to extractNameFromParentheses";
 }
