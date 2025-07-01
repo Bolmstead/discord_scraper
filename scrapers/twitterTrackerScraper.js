@@ -209,15 +209,24 @@ export async function twitterTrackerScraper(page) {
 
         return;
       } else {
+        player.play("sounds/error.mp3", (err) => {
+          if (err) console.error("Error playing sound:", err);
+        });
         setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
       }
     } else {
+      player.play("sounds/error.mp3", (err) => {
+        if (err) console.error("Error playing sound:", err);
+      });
       setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
     }
 
     // Reset processing flag and schedule next scan with dynamic interval
   } catch (error) {
     console.log("❌ Error in Twitter tracker scraper:", error);
+    player.play("sounds/error.mp3", (err) => {
+      if (err) console.error("Error playing sound:", err);
+    });
     setTimeout(() => twitterTrackerScraper(page), CONFIG.ERROR_RETRY_DELAY);
   }
 }
