@@ -134,6 +134,11 @@ const coins = {
     address: "FtUEW73K6vEYHfbkfpdBZfWpxgQar2HipGdbutEhpump",
     keywords: ["titcoin", "tit coin"],
   },
+  THEAMERICAPARTY: {
+    name: "The america Party",
+    address: "766ivvadp4arnHKQ13RB3cD7PyvRDL42N2j7RCoMpump",
+    keywords: ["america party"],
+  },
   BUTTCOIN: {
     name: "Butt Coin",
     address: "FasH397CeZLNYWkd3wWK9vrmjd1z93n3b59DssRXpump",
@@ -303,6 +308,11 @@ const coins = {
     name: "Trump 2028",
     address: "5wQFpZ2Xstd6khM8WwtVdhegiNEjM48DYErMVVknpump",
     keywords: ["trump 2028"],
+  },
+  DEPORTLON: {
+    name: "Deportlon",
+    address: "5RcXsuKg6nWH9UEKdf22XLwwKJE2EmcGuHNadpgGDa9v",
+    keywords: ["deportlon"],
   },
   JPMD: {
     name: "jpmd",
@@ -517,6 +527,8 @@ const accountMap = new Map([
         { ...coins.SWF, amountToBuy: 15 },
         { ...coins.TGC, amountToBuy: 5 },
         { ...coins.$100BILL, amountToBuy: 2 },
+        { ...coins.THEAMERICAPARTY, amountToBuy: 70 },
+        { ...coins.DEPORTLON, amountToBuy: 30 },
         { ...coins.CSR, amountToBuy: 20 },
         { ...coins.TRUMPSEASON, amountToBuy: 2 },
         { ...coins.TRUMPBILL, amountToBuy: 5 },
@@ -596,6 +608,7 @@ const accountMap = new Map([
         { ...coins.KNOX, amountToBuy: 10 },
         { ...coins.DICKBUTT, amountToBuy: 30 },
         { ...coins.TITCOIN, amountToBuy: 70 },
+        { ...coins.THEAMERICAPARTY, amountToBuy: 70 },
         { ...coins.BUTTCOIN, amountToBuy: 50 },
         { ...coins.OBIPNUTKENOBIN, amountToBuy: 70 },
         { ...coins.TGC, amountToBuy: 5 },
@@ -615,6 +628,7 @@ const accountMap = new Map([
         { ...coins.GIGACHAD, amountToBuy: 50 },
         { ...coins.POPCAT, amountToBuy: 70 },
         { ...coins.MENVSGORILLA, amountToBuy: 30 },
+        { ...coins.DEPORTLON, amountToBuy: 30 },
       ],
     },
   ],
