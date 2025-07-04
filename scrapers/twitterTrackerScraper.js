@@ -64,7 +64,13 @@ export async function twitterTrackerScraper(page) {
           const [authorElement, descriptionElement] = await Promise.all([
             element.$(SELECTORS.AUTHOR_LINK),
             element.$(SELECTORS.DESCRIPTION),
-          ]);
+          ]); // Extract text content and check if it includes "realDonaldTrump"
+          const textContent = await element.evaluate((el) => el.textContent);
+          if (textContent.includes("realDonaldTrump")) {
+            player.play("sounds/Treasure.mp3", (err) => {
+              if (err) console.error("Error playing sound:", err);
+            });
+          }
 
           console.log(
             "✍🏿 ~ twitterTrackerScraper ~ authorElement:",
@@ -90,6 +96,10 @@ export async function twitterTrackerScraper(page) {
 
           let username = null;
           if (usernameFullText.includes("TruthSocial Tracker")) {
+            player.play("sounds/Treasure.mp3", (err) => {
+              if (err) console.error("Error playing sound:", err);
+            });
+            console.log("asdfasdfasdfase!@#!@#!@#$!@#%!@#");
             username = "realDonaldTrump";
           } else {
             username = extractNameFromParentheses(usernameFullText);
