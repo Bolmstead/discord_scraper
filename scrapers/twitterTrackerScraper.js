@@ -4,7 +4,10 @@ import playSound from "play-sound";
 import { determineIfMemecoinBuy } from "../helpers/determineIfMemecoinBuy.js";
 import { extractNameFromParentheses } from "../helpers/stringParser.js";
 import { executeSwap, sellPercentOfTokenToZero } from "../jupiter/index.js";
-import { sendTelegramMessageThread } from "../helpers/sendTelegramMessage.js";
+import {
+  sendTelegramMessage,
+  sendTelegramMessageThread,
+} from "../helpers/sendTelegramMessage.js";
 // import sendEmail from "../helpers/sendEmail.js";
 
 // ----- config ------
@@ -12,7 +15,7 @@ const CONFIG = {
   SCAN_INTERVAL: 500,
   MAX_TWEETS_TO_SCAN: 3,
   ERROR_RETRY_DELAY: 60 * 1000,
-  SCAN_INTERVAL_AFTER_BUY: 4 * 60 * 1000,
+  SCAN_INTERVAL_AFTER_BUY: 3 * 60 * 1000,
   PERCENT_TO_SELL: 33,
   TIME_TO_WAIT_BETWEEN_SELLS: 10 * 1000,
   DEFAULT_TIME_TO_WAIT_BEFORE_FIRST_SELL: 15 * 1000,
@@ -49,6 +52,7 @@ export async function twitterTrackerScraper(page) {
     }
     // Get all tweet containers at once
     const tweetElements = await page.$$(SELECTORS.TWEET_CONTAINER);
+    let makeAlertSound = false;
 
     // Calculate starting index to get last N tweets
     const startIndex = Math.max(
@@ -94,8 +98,12 @@ export async function twitterTrackerScraper(page) {
           if (usernameFullText.includes("TruthSocial Tracker")) {
             console.log("asdfasdfasdfase!@#!@#!@#$!@#%!@#");
             username = "realDonaldTrump";
+            makeAlertSound = true;
           } else {
             username = extractNameFromParentheses(usernameFullText);
+            if (username === "elonmusk") {
+              makeAlertSound = true;
+            }
           }
 
           return { username, text };
@@ -215,7 +223,20 @@ export async function twitterTrackerScraper(page) {
         setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
       }
     } else {
-      setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
+      if (makeAlertSound) {
+        player.play("sounds/Treasure.mp3", (err) => {
+          if (err) console.error("Error playing sound:", err);
+        });
+        sendTelegramMessage(`${tweetedUsername} is tweeting!
+          text: ${postText}
+          NO MEMECOIN MATCH!!`);
+        setTimeout(
+          () => twitterTrackerScraper(page),
+          CONFIG.SCAN_INTERVAL_AFTER_BUY
+        );
+      } else {
+        setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
+      }
     }
 
     // Reset processing flag and schedule next scan with dynamic interval
