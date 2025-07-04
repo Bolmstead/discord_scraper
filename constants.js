@@ -427,6 +427,11 @@ const coins = {
     address: "DVzbUXeAQGyDLsn9FkGxm6q2q9hs7tUK4cimmmQpump",
     keywords: ["swastachain"],
   },
+  SUPERGROK: {
+    name: "Super Grok",
+    address: "P79VPZFfDreHPQVEF9BHZtAipDpviczpcnBXHWspump",
+    keywords: ["super grok", "supergrok"],
+  },
   MELANIA: {
     name: "Melania Trump",
     address: "FUAfBo2jgks6gB4Z4LfZkqSZgzNucisEHqnNebaRxM1P",
@@ -596,6 +601,7 @@ const accountMap = new Map([
       priorityFeeForAnyPostedCA: 0.1,
       coins: [
         { ...coins.TRUMPSTESTCOIN, amountToBuy: 0.001 },
+        { ...coins.SUPERGROK, amountToBuy: 70 },
         { ...coins.LUIGI, amountToBuy: 70 },
         { ...coins.TRUMPGAZA, amountToBuy: 3 },
         { ...coins.FARTCOIN, amountToBuy: 70 },
