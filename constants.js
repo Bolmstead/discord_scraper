@@ -55,6 +55,11 @@ const coins = {
       "-",
     ],
   },
+  PRESIDENTVSELON: {
+    name: "PRESIDENTVSELON",
+    address: "8BjQHNfcMzNM36rdk6avoJj3c3CTcDGMU5S26Hhgpump",
+    keywords: ["elon", "musk"],
+  },
   MENVSGORILLA: {
     name: "100 Men Vs Gorilla",
     address: "qRUZaCpgxaRH1s5V6opjPA6Hnpv5BM37LqkDBw7pump",
@@ -532,6 +537,7 @@ const accountMap = new Map([
         { ...coins.SWF, amountToBuy: 10 },
         { ...coins.TGC, amountToBuy: 5 },
         { ...coins.THEAMERICAPARTY, amountToBuy: 70 },
+        { ...coins.PRESIDENTVSELON, amountToBuy: 70 },
         { ...coins.DEPORTLON, amountToBuy: 3 },
         { ...coins.CSR, amountToBuy: 40 },
         { ...coins.TRUMPSEASON, amountToBuy: 2 },
