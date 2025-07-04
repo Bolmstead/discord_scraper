@@ -16,6 +16,7 @@ import bs58 from "bs58";
 import { transactionSenderAndConfirmationWaiter } from "./utils/transactionSender.js";
 import { getSignature } from "./utils/getSignature.js";
 import dotenv from "dotenv";
+import { sendTelegramMessage } from "../helpers/sendTelegramMessage.js";
 
 dotenv.config();
 
@@ -154,21 +155,40 @@ async function executeSwap(
       return null;
     }
     // Get quote and prepare swap
-    const quote = await getQuote(
-      inputMint,
-      outputMint,
-      amountToBuyLamports,
-      slippageBps
-    );
+    let quote;
+    try {
+      quote = await getQuote(
+        inputMint,
+        outputMint,
+        amountToBuyLamports,
+        slippageBps
+      );
+    } catch (error) {
+      console.error("Error getting quote:", error);
+      sendTelegramMessage(`Error in executeSwap (getQuote): ${error.message}`);
+      return null;
+    }
 
     if (!quote) {
       console.error("Failed to get quote");
       return null;
     }
 
-    const swapResponse = await getSwapResponse(wallet, quote);
+    let swapResponse;
+    try {
+      swapResponse = await getSwapResponse(wallet, quote);
+    } catch (error) {
+      console.error("Error getting swap response:", error);
+      sendTelegramMessage(
+        `Error in executeSwap (getSwapResponse): ${error.message}`
+      );
+      return null;
+    }
     if (!swapResponse) {
       console.error("Failed to get swap response");
+      sendTelegramMessage(
+        `Error in executeSwap (getSwapResponse): ${error.message}`
+      );
       return null;
     }
 
@@ -186,18 +206,31 @@ async function executeSwap(
     const signature = getSignature(transaction);
     const serializedTx = transaction.serialize();
 
-    const txResponse = await transactionSenderAndConfirmationWaiter({
-      connection,
-      serializedTransaction: Buffer.from(serializedTx),
-      blockhashWithExpiryBlockHeight: {
-        blockhash: transaction.message.recentBlockhash,
-        lastValidBlockHeight: swapResponse.lastValidBlockHeight,
-      },
-    });
+    let txResponse;
+    try {
+      txResponse = await transactionSenderAndConfirmationWaiter({
+        connection,
+        serializedTransaction: Buffer.from(serializedTx),
+        blockhashWithExpiryBlockHeight: {
+          blockhash: transaction.message.recentBlockhash,
+          lastValidBlockHeight: swapResponse.lastValidBlockHeight,
+        },
+      });
+    } catch (error) {
+      console.error("Error sending transaction:", error);
+      sendTelegramMessage(
+        `Error in executeSwap (transaction): ${error.message}`
+      );
+      return null;
+    }
 
     // Check transaction result
     if (!txResponse) {
       console.error("Transaction not confirmed");
+      sendTelegramMessage(
+        `Error in executeSwap (transaction): ${error.message}`
+      );
+
       return null;
     }
 
@@ -212,6 +245,7 @@ async function executeSwap(
     return true;
   } catch (error) {
     console.error("Swap execution failed:", error);
+    sendTelegramMessage(`Error in executeSwap: ${error.message}`);
     return null;
   }
 }
@@ -233,17 +267,40 @@ async function getTokenBalance(tokenMint, walletName) {
     const mintPubkey = new PublicKey(tokenMint);
 
     // Get the associated token account address
-    const tokenAccount = await getAssociatedTokenAddress(
-      mintPubkey,
-      wallet.publicKey
-    );
+    let tokenAccount;
+    try {
+      tokenAccount = await getAssociatedTokenAddress(
+        mintPubkey,
+        wallet.publicKey
+      );
+    } catch (error) {
+      console.error("Error getting associated token address:", error);
+      sendTelegramMessage(
+        `Error getting associated token address: ${error.message}`
+      );
+      throw error;
+    }
 
     try {
-      const account = await getAccount(connection, tokenAccount);
+      let account;
+      try {
+        account = await getAccount(connection, tokenAccount);
+      } catch (error) {
+        console.error("Error getting token account:", error);
+        sendTelegramMessage(`Error getting token account: ${error.message}`);
+        throw error;
+      }
 
       // Get mint info to get decimals
-      const mintInfo = await getMint(connection, mintPubkey);
-      const decimals = mintInfo.decimals;
+      let mintInfo, decimals;
+      try {
+        mintInfo = await getMint(connection, mintPubkey);
+        decimals = mintInfo.decimals;
+      } catch (error) {
+        console.error("Error getting mint info:", error);
+        sendTelegramMessage(`Error getting mint info: ${error.message}`);
+        throw error;
+      }
 
       return {
         success: true,
@@ -252,6 +309,8 @@ async function getTokenBalance(tokenMint, walletName) {
         formattedBalance: Number(account.amount) / Math.pow(10, decimals),
       };
     } catch (error) {
+      sendTelegramMessage(`Error in getTokenBalance: ${error.message}`);
+
       if (error.message.includes("Account does not exist")) {
         return {
           success: true,
@@ -264,6 +323,8 @@ async function getTokenBalance(tokenMint, walletName) {
     }
   } catch (error) {
     console.error("Error getting token balance:", error);
+    sendTelegramMessage(`Error in getTokenBalance: ${error.message}`);
+
     return {
       success: false,
       error: error.message,
@@ -308,16 +369,32 @@ async function sellTokenPercent(
 
   try {
     console.log("🔍 Getting associated token account...");
-    const userTokenAccount = await getAssociatedTokenAddress(
-      memeTokenPublicKey,
-      wallet.publicKey
-    );
-    console.log(`📂 Associated token account: ${userTokenAccount.toString()}`);
+    let userTokenAccount;
+    try {
+      userTokenAccount = await getAssociatedTokenAddress(
+        memeTokenPublicKey,
+        wallet.publicKey
+      );
+      console.log(
+        `📂 Associated token account: ${userTokenAccount.toString()}`
+      );
+    } catch (error) {
+      console.error("Error getting associated token address:", error);
+      sendTelegramMessage(
+        `Error getting associated token address: ${error.message}`
+      );
+      throw error;
+    }
 
     console.log("💰 Checking token balance...");
-    const tokenBalance = await connection.getTokenAccountBalance(
-      userTokenAccount
-    );
+    let tokenBalance;
+    try {
+      tokenBalance = await connection.getTokenAccountBalance(userTokenAccount);
+    } catch (error) {
+      console.error("Error getting token balance:", error);
+      sendTelegramMessage(`Error getting token balance: ${error.message}`);
+      throw error;
+    }
     let { amount, decimals, uiAmount } = tokenBalance.value;
     console.log("🕵 ~ sellTokenPercent ~ tokenBalance:", tokenBalance);
     console.log("🕵 ~ sellTokenPercent ~ amount:", amount);
@@ -343,18 +420,36 @@ async function sellTokenPercent(
     }
     // Get quote using the API client
     console.log("🔍 Getting quote...");
-    const quote = await getQuote(
-      memeTokenPublicKey.toString(),
-      solanaAddress.toString(),
-      Math.floor(amountToSell), // Convert percentage to raw amount
-      slippageBps
-    );
-    console.log("✅ Quote received:", quote);
+    let quote;
+    try {
+      quote = await getQuote(
+        memeTokenPublicKey.toString(),
+        solanaAddress.toString(),
+        Math.floor(amountToSell), // Convert percentage to raw amount
+        slippageBps
+      );
+      console.log("✅ Quote received:", quote);
+    } catch (error) {
+      console.error("Error getting quote:", error);
+      sendTelegramMessage(
+        `Error in sellTokenPercent (getQuote): ${error.message}`
+      );
+      throw error;
+    }
 
     // Get swap response
     console.log("🔄 Getting swap response...");
-    const swapResponse = await getSwapResponse(wallet, quote);
-    console.log("✅ Swap response received");
+    let swapResponse;
+    try {
+      swapResponse = await getSwapResponse(wallet, quote);
+      console.log("✅ Swap response received");
+    } catch (error) {
+      console.error("Error getting swap response:", error);
+      sendTelegramMessage(
+        `Error in sellTokenPercent (getSwapResponse): ${error.message}`
+      );
+      throw error;
+    }
 
     // Prepare and send transaction
     console.log("⚡ Preparing transaction...");
@@ -393,6 +488,7 @@ async function sellTokenPercent(
   } catch (error) {
     console.error("❌ Error selling tokens:", error);
     console.error("Stack trace:", error.stack);
+    sendTelegramMessage(`Error in sellTokenPercent: ${error.message}`);
     return {
       success: false,
       error: error.message,
@@ -448,6 +544,9 @@ const sellPercentOfTokenToZero = async (
           }
         } catch (error) {
           console.error(`❌ Error on sell attempt ${attempt}:`, error);
+          sendTelegramMessage(
+            `Error in sellPercentOfTokenToZero: ${error.message}`
+          );
         }
 
         // If we're not on the last attempt, wait before retrying
@@ -494,6 +593,7 @@ const sellPercentOfTokenToZero = async (
     return { success: true, totalPercentSold };
   } catch (error) {
     console.error(`❌ Error selling tokens for ${walletName} wallet:`, error);
+    sendTelegramMessage(`Error in sellPercentOfTokenToZero: ${error.message}`);
     return { success: false, error: error.message };
   }
 };
