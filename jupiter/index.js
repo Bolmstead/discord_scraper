@@ -17,6 +17,7 @@ import { transactionSenderAndConfirmationWaiter } from "./utils/transactionSende
 import { getSignature } from "./utils/getSignature.js";
 import dotenv from "dotenv";
 import { sendTelegramMessage } from "../helpers/sendTelegramMessage.js";
+import axios from "axios";
 
 dotenv.config();
 
@@ -42,37 +43,77 @@ async function getQuote(inputMint, outputMint, amount, slippageBps) {
     slippageBps
   );
 
-  // get quote
-  const quote = await jupiterAPI.quoteGet({
-    inputMint,
-    outputMint,
-    amount,
-    slippageBps,
-  });
-  console.log("🚀 ~ getQuote ~ quote:", quote);
-  if (!quote) {
-    throw new Error("unable to quote");
+  let config = {
+    method: "get",
+    maxBodyLength: Infinity,
+    url: "https://lite-api.jup.ag/swap/v1/quote",
+    headers: {
+      Accept: "application/json",
+    },
+    params: {
+      inputMint,
+      outputMint,
+      amount,
+      slippageBps,
+    },
+  };
+
+  try {
+    const response = await axios.request(config);
+    const quote = response.data;
+    console.log("🚀 ~ getQuote ~ quote:", quote);
+    if (!quote) {
+      throw new Error("unable to quote");
+    }
+    return quote;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
-  return quote;
 }
 
 async function getSwapResponse(wallet, quote) {
-  // Get serialized transaction
-  const swapResponse = await jupiterAPI.swapPost({
-    swapRequest: {
-      quoteResponse: quote,
+  try {
+    console.log("GETSWAPRESPONSE");
+    let data = JSON.stringify({
       userPublicKey: wallet.publicKey.toString(),
-      dynamicComputeUnitLimit: true,
-      dynamicSlippage: true,
+      quoteResponse: quote,
       prioritizationFeeLamports: {
         priorityLevelWithMaxLamports: {
           maxLamports: 10000000,
-          priorityLevel: "veryHigh", // If you want to land transaction fast, set this to use `veryHigh`. You will pay on average higher priority fee.
+          priorityLevel: "veryHigh",
         },
       },
-    },
-  });
-  return swapResponse;
+      dynamicComputeUnitLimit: true,
+    });
+
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "https://lite-api.jup.ag/swap/v1/swap",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      data: data,
+    };
+    console.log("🚀 ~ getSwapResponse ~ config:", config);
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log("Inside axios");
+        console.log(JSON.stringify(response.data));
+        return response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+        throw error;
+      });
+  } catch (error) {
+    console.error("Error in getSwapResponse:", error);
+    throw error;
+  }
 }
 
 async function executeSwap(
@@ -250,87 +291,88 @@ async function executeSwap(
   }
 }
 
-async function getTokenBalance(tokenMint, walletName) {
-  try {
-    let wallet = null;
-    if (walletName === "Berkley") {
-      wallet = Keypair.fromSecretKey(
-        bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
-      );
-    } else if (walletName === "Sharif") {
-      wallet = Keypair.fromSecretKey(
-        bs58.decode(process.env.SHARIF_WALLET_PRIVATE_KEY || "")
-      );
-    }
+// async function getTokenBalance(tokenMint, walletName) {
+//   try {
+//     let wallet = null;
+//     if (walletName === "Berkley") {
+//       wallet = Keypair.fromSecretKey(
+//         bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
+//       );
+//     } else if (walletName === "Sharif") {
+//       wallet = Keypair.fromSecretKey(
+//         bs58.decode(process.env.SHARIF_WALLET_PRIVATE_KEY || "")
+//       );
+//     }
 
-    // Convert token mint string to PublicKey
-    const mintPubkey = new PublicKey(tokenMint);
+//     // Convert token mint string to PublicKey
+//     const mintPubkey = new PublicKey(tokenMint);
 
-    // Get the associated token account address
-    let tokenAccount;
-    try {
-      tokenAccount = await getAssociatedTokenAddress(
-        mintPubkey,
-        wallet.publicKey
-      );
-    } catch (error) {
-      console.error("Error getting associated token address:", error);
-      sendTelegramMessage(
-        `Error getting associated token address: ${error.message}`
-      );
-      throw error;
-    }
+//     // Get the associated token account address
+//     let tokenAccount;
+//     try {
+//       tokenAccount = await getAssociatedTokenAddress(
+//         mintPubkey,
+//         wallet.publicKey
+//       );
+//       console.log("🚀 ~ getTokenBalance ~ tokenAccount:", tokenAccount);
+//     } catch (error) {
+//       console.error("Error getting associated token address:", error);
+//       sendTelegramMessage(
+//         `Error getting associated token address: ${error.message}`
+//       );
+//       throw error;
+//     }
 
-    try {
-      let account;
-      try {
-        account = await getAccount(connection, tokenAccount);
-      } catch (error) {
-        console.error("Error getting token account:", error);
-        sendTelegramMessage(`Error getting token account: ${error.message}`);
-        throw error;
-      }
+//     try {
+//       let account;
+//       try {
+//         account = await getAccount(connection, tokenAccount);
+//       } catch (error) {
+//         console.error("Error getting token account:", error);
+//         sendTelegramMessage(`Error getting token account: ${error.message}`);
+//         throw error;
+//       }
 
-      // Get mint info to get decimals
-      let mintInfo, decimals;
-      try {
-        mintInfo = await getMint(connection, mintPubkey);
-        decimals = mintInfo.decimals;
-      } catch (error) {
-        console.error("Error getting mint info:", error);
-        sendTelegramMessage(`Error getting mint info: ${error.message}`);
-        throw error;
-      }
+//       // Get mint info to get decimals
+//       let mintInfo, decimals;
+//       try {
+//         mintInfo = await getMint(connection, mintPubkey);
+//         decimals = mintInfo.decimals;
+//       } catch (error) {
+//         console.error("Error getting mint info:", error);
+//         sendTelegramMessage(`Error getting mint info: ${error.message}`);
+//         throw error;
+//       }
 
-      return {
-        success: true,
-        balance: Number(account.amount),
-        decimals: decimals,
-        formattedBalance: Number(account.amount) / Math.pow(10, decimals),
-      };
-    } catch (error) {
-      sendTelegramMessage(`Error in getTokenBalance: ${error.message}`);
+//       return {
+//         success: true,
+//         balance: Number(account.amount),
+//         decimals: decimals,
+//         formattedBalance: Number(account.amount) / Math.pow(10, decimals),
+//       };
+//     } catch (error) {
+//       sendTelegramMessage(`Error in getTokenBalance: ${error.message}`);
 
-      if (error.message.includes("Account does not exist")) {
-        return {
-          success: true,
-          balance: 0,
-          decimals: 0,
-          formattedBalance: 0,
-        };
-      }
-      throw error;
-    }
-  } catch (error) {
-    console.error("Error getting token balance:", error);
-    sendTelegramMessage(`Error in getTokenBalance: ${error.message}`);
+//       if (error.message.includes("Account does not exist")) {
+//         return {
+//           success: true,
+//           balance: 0,
+//           decimals: 0,
+//           formattedBalance: 0,
+//         };
+//       }
+//       throw error;
+//     }
+//   } catch (error) {
+//     console.error("Error getting token balance:", error);
+//     sendTelegramMessage(`Error in getTokenBalance: ${error.message}`);
 
-    return {
-      success: false,
-      error: error.message,
-    };
-  }
-}
+//     return {
+//       success: false,
+//       error: error.message,
+//     };
+//   }
+// }
 
 async function sellTokenPercent(
   walletName,
@@ -598,14 +640,75 @@ const sellPercentOfTokenToZero = async (
   }
 };
 
+// Test function for getQuote
+async function testGetQuote() {
+  try {
+    console.log("🧪 Testing getQuote function...");
+
+    // Test parameters
+    const inputMint = "So11111111111111111111111111111111111111112"; // SOL
+    const outputMint = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"; // USDC
+    const amount = 1000000000; // 1 SOL in lamports
+    const slippageBps = 50; // 0.5% slippage
+
+    console.log("📝 Test parameters:");
+    console.log(`  Input Token (SOL): ${inputMint}`);
+    console.log(`  Output Token (USDC): ${outputMint}`);
+    console.log(`  Amount: ${amount} lamports (${amount / 1000000000} SOL)`);
+    console.log(
+      `  Slippage: ${slippageBps} basis points (${slippageBps / 100}%)`
+    );
+
+    const quote = await getQuote(inputMint, outputMint, amount, slippageBps);
+
+    console.log("✅ Quote received successfully!");
+    console.log("📊 Quote details:");
+    console.log(`  Input Amount: ${quote.inAmount}`);
+    console.log(`  Output Amount: ${quote.outAmount}`);
+    console.log(`  Price Impact: ${quote.priceImpactPct}%`);
+    console.log(`  Route Plan: ${quote.routePlan?.length || 0} steps`);
+
+    return quote;
+  } catch (error) {
+    console.error("❌ Test failed:", error.message);
+    throw error;
+  }
+}
+
 // Export the individual functions for use in other files
 export {
   getQuote,
   getSwapResponse,
   executeSwap,
-  getTokenBalance,
   connection,
   jupiterAPI,
   sellTokenPercent,
   sellPercentOfTokenToZero,
 };
+
+// Run test function if this file is executed directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  console.log("🚀 Running getTokenBalance test...");
+  getQuote(
+    "So11111111111111111111111111111111111111112",
+    "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+    10000,
+    50
+  )
+    .then((quote) => {
+      const wallet = Keypair.fromSecretKey(
+        bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
+      );
+      console.log("🚀 ~ getQuote ~ quote:", wallet.publicKey.toString());
+      getSwapResponse(wallet, quote);
+    })
+    .then((swapResponse) => {
+      console.log("🚀 ~ getQuote ~ swapResponse:", swapResponse);
+      console.log("✅ Test completed successfully!");
+      process.exit(0);
+    })
+    .catch((error) => {
+      console.error("❌ Test failed:", error);
+      process.exit(1);
+    });
+}
