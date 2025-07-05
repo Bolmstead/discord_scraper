@@ -600,7 +600,7 @@ const accountMap = new Map([
       timeToSellForAnyPostedCA: 120 * 1000,
       priorityFeeForAnyPostedCA: 0.1,
       coins: [
-        { ...coins.TRUMPSTESTCOIN, amountToBuy: 0.001 },
+        // { ...coins.TRUMPSTESTCOIN, amountToBuy: 0.001 },
         { ...coins.SUPERGROK, amountToBuy: 70 },
         { ...coins.LUIGI, amountToBuy: 70 },
         { ...coins.TRUMPGAZA, amountToBuy: 3 },
