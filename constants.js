@@ -2,8 +2,8 @@
 
 // Compile lookup maps at module level for better performance
 const coins = {
-  TRUMPSTESTCOIN: {
-    name: "TRUMPSTESTCOIN",
+  TESTCOIN: {
+    name: "TESTCOIN",
     address: "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
     keywords: [
       "the",
@@ -536,7 +536,6 @@ const accountMap = new Map([
     {
       name: "Donald Trump",
       coins: [
-        // { ...coins.TRUMPSTESTCOIN, amountToBuy: 0.001 },
         { ...coins.GREENLAND, amountToBuy: 10 },
         { ...coins.HKU5, amountToBuy: 3 },
         { ...coins.SWF, amountToBuy: 10 },
@@ -583,6 +582,7 @@ const accountMap = new Map([
         { ...coins.HOSICO, amountToBuy: 70 },
         { ...coins.MENVSGORILLA, amountToBuy: 20 },
         { ...coins.SUPERGROK, amountToBuy: 70 },
+        { ...coins.TESTCOIN, amountToBuy: 0.001 },
       ],
       buyAnyPostedCA: true,
       amountToBuyForAnyPostedCA: 8,
@@ -601,7 +601,6 @@ const accountMap = new Map([
       timeToSellForAnyPostedCA: 120 * 1000,
       priorityFeeForAnyPostedCA: 0.1,
       coins: [
-        // { ...coins.TRUMPSTESTCOIN, amountToBuy: 0.001 },
         { ...coins.SUPERGROK, amountToBuy: 70 },
         { ...coins.LUIGI, amountToBuy: 70 },
         { ...coins.TRUMPGAZA, amountToBuy: 3 },
@@ -644,6 +643,7 @@ const accountMap = new Map([
         { ...coins.POPCAT, amountToBuy: 70 },
         { ...coins.MENVSGORILLA, amountToBuy: 20 },
         { ...coins.DEPORTLON, amountToBuy: 3 },
+        { ...coins.TESTCOIN, amountToBuy: 0.001 },
       ],
     },
   ],
