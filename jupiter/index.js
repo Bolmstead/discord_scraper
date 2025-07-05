@@ -99,17 +99,10 @@ async function getSwapResponse(wallet, quote) {
     };
     console.log("🚀 ~ getSwapResponse ~ config:", config);
 
-    axios
-      .request(config)
-      .then((response) => {
-        console.log("Inside axios");
-        console.log(JSON.stringify(response.data));
-        return response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-        throw error;
-      });
+    const response = await axios.request(config);
+    console.log("Inside axios");
+    console.log(JSON.stringify(response.data));
+    return response.data;
   } catch (error) {
     console.error("Error in getSwapResponse:", error);
     throw error;
@@ -687,28 +680,27 @@ export {
 };
 
 // Run test function if this file is executed directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  console.log("🚀 Running getTokenBalance test...");
-  getQuote(
-    "So11111111111111111111111111111111111111112",
-    "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-    10000,
-    50
-  )
-    .then((quote) => {
-      const wallet = Keypair.fromSecretKey(
-        bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
-      );
-      console.log("🚀 ~ getQuote ~ quote:", wallet.publicKey.toString());
-      getSwapResponse(wallet, quote);
-    })
-    .then((swapResponse) => {
-      console.log("🚀 ~ getQuote ~ swapResponse:", swapResponse);
-      console.log("✅ Test completed successfully!");
-      process.exit(0);
-    })
-    .catch((error) => {
-      console.error("❌ Test failed:", error);
-      process.exit(1);
-    });
-}
+// if (import.meta.url === `file://${process.argv[1]}`) {
+//   console.log("🚀 Running getTokenBalance test...");
+//   getQuote(
+//     "So11111111111111111111111111111111111111112",
+//     "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+//     10000,
+//     50
+//   ).then((quote) => {
+//     const wallet = Keypair.fromSecretKey(
+//       bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
+//     );
+//     console.log("🚀 ~ getQuote ~ quote:", wallet.publicKey.toString());
+//     getSwapResponse(wallet, quote)
+//       .then((swapResponse) => {
+//         console.log("🚀 ~ getQuote ~ swapResponse:", swapResponse);
+//         console.log("✅ Test completed successfully!");
+//         process.exit(0);
+//       })
+//       .catch((error) => {
+//         console.error("❌ Test failed:", error);
+//         process.exit(1);
+//       });
+//   });
+// }
