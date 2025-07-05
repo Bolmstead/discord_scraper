@@ -236,10 +236,7 @@ export async function twitterTrackerScraper(page) {
         sendTelegramMessage(`${tweetedUsername} is tweeting!
           text: ${postText}
           NO MEMECOIN MATCH!!`);
-        setTimeout(
-          () => twitterTrackerScraper(page),
-          CONFIG.SCAN_INTERVAL_AFTER_BUY
-        );
+        setTimeout(() => twitterTrackerScraper(page), 20 * 1000);
       } else {
         setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
       }
