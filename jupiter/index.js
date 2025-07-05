@@ -34,13 +34,12 @@ const jupiterAPI = createJupiterApiClient();
 
 const DEFAULT_AMOUNT_TO_BUY = null;
 
-async function getQuote(inputMint, outputMint, amount, slippageBps) {
+async function getQuote(inputMint, outputMint, amount) {
   console.log(
-    "🚀 ~ getQuote ~ inputMint, outputMint, amount, slippageBps:",
+    "🚀 ~ getQuote ~ inputMint, outputMint, amount:",
     inputMint,
     outputMint,
-    amount,
-    slippageBps
+    amount
   );
 
   let config = {
@@ -54,7 +53,7 @@ async function getQuote(inputMint, outputMint, amount, slippageBps) {
       inputMint,
       outputMint,
       amount,
-      slippageBps,
+      dynamicSlippage: true,
     },
   };
 
@@ -679,28 +678,27 @@ export {
   sellPercentOfTokenToZero,
 };
 
-// Run test function if this file is executed directly
-// if (import.meta.url === `file://${process.argv[1]}`) {
-//   console.log("🚀 Running getTokenBalance test...");
-//   getQuote(
-//     "So11111111111111111111111111111111111111112",
-//     "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-//     10000,
-//     50
-//   ).then((quote) => {
-//     const wallet = Keypair.fromSecretKey(
-//       bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
-//     );
-//     console.log("🚀 ~ getQuote ~ quote:", wallet.publicKey.toString());
-//     getSwapResponse(wallet, quote)
-//       .then((swapResponse) => {
-//         console.log("🚀 ~ getQuote ~ swapResponse:", swapResponse);
-//         console.log("✅ Test completed successfully!");
-//         process.exit(0);
-//       })
-//       .catch((error) => {
-//         console.error("❌ Test failed:", error);
-//         process.exit(1);
-//       });
-//   });
-// }
+if (import.meta.url === `file://${process.argv[1]}`) {
+  console.log("🚀 Running getTokenBalance test...");
+  getQuote(
+    "So11111111111111111111111111111111111111112",
+    "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+    10000,
+    50
+  ).then((quote) => {
+    const wallet = Keypair.fromSecretKey(
+      bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
+    );
+    console.log("🚀 ~ getQuote ~ quote:", wallet.publicKey.toString());
+    getSwapResponse(wallet, quote)
+      .then((swapResponse) => {
+        console.log("🚀 ~ getQuote ~ swapResponse:", swapResponse);
+        console.log("✅ Test completed successfully!");
+        process.exit(0);
+      })
+      .catch((error) => {
+        console.error("❌ Test failed:", error);
+        process.exit(1);
+      });
+  });
+}

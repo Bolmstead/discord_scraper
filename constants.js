@@ -536,7 +536,7 @@ const accountMap = new Map([
     {
       name: "Donald Trump",
       coins: [
-        { ...coins.TRUMPSTESTCOIN, amountToBuy: 0.001 },
+        // { ...coins.TRUMPSTESTCOIN, amountToBuy: 0.001 },
         { ...coins.GREENLAND, amountToBuy: 10 },
         { ...coins.HKU5, amountToBuy: 3 },
         { ...coins.SWF, amountToBuy: 10 },
@@ -582,6 +582,7 @@ const accountMap = new Map([
         { ...coins.RETARDFINDER, amountToBuy: 70 },
         { ...coins.HOSICO, amountToBuy: 70 },
         { ...coins.MENVSGORILLA, amountToBuy: 20 },
+        { ...coins.SUPERGROK, amountToBuy: 70 },
       ],
       buyAnyPostedCA: true,
       amountToBuyForAnyPostedCA: 8,
