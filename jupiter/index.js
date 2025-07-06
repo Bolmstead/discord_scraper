@@ -34,13 +34,29 @@ const jupiterAPI = createJupiterApiClient();
 
 const DEFAULT_AMOUNT_TO_BUY = null;
 
-async function getQuote(inputMint, outputMint, amount) {
+async function getQuote(
+  inputMint,
+  outputMint,
+  amount,
+  slippageBps,
+  dynamicSlippage = false
+) {
   console.log(
     "🚀 ~ getQuote ~ inputMint, outputMint, amount:",
     inputMint,
     outputMint,
     amount
   );
+  let params = {
+    inputMint,
+    outputMint,
+    amount,
+  };
+  if (dynamicSlippage) {
+    params.dynamicSlippage = true;
+  } else {
+    params.slippageBps = slippageBps;
+  }
 
   let config = {
     method: "get",
@@ -49,12 +65,7 @@ async function getQuote(inputMint, outputMint, amount) {
     headers: {
       Accept: "application/json",
     },
-    params: {
-      inputMint,
-      outputMint,
-      amount,
-      dynamicSlippage: true,
-    },
+    params,
   };
 
   try {
@@ -535,7 +546,7 @@ const sellPercentOfTokenToZero = async (
   memeTokenAddress,
   percentToSell,
   millisecondsToWaitBetweenTries = 10 * 1000,
-  maxNumberOfTries = 3
+  maxNumberOfTries = 10
 ) => {
   try {
     let totalPercentSold = 0;
@@ -651,7 +662,13 @@ async function testGetQuote() {
       `  Slippage: ${slippageBps} basis points (${slippageBps / 100}%)`
     );
 
-    const quote = await getQuote(inputMint, outputMint, amount, slippageBps);
+    const quote = await getQuote(
+      inputMint,
+      outputMint,
+      amount,
+      slippageBps,
+      true
+    );
 
     console.log("✅ Quote received successfully!");
     console.log("📊 Quote details:");

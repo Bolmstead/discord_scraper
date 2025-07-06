@@ -739,7 +739,7 @@ const accountMap = new Map([
         { ...coins.KNOX, amountToBuy: 10 },
         { ...coins.DICKBUTT, amountToBuy: 20 },
         { ...coins.TITCOIN, amountToBuy: 70 },
-        { ...coins.THEAMERICAPARTY, amountToBuy: 70 },
+        // { ...coins.THEAMERICAPARTY, amountToBuy: 70 },
         { ...coins.BUTTCOIN, amountToBuy: 70 },
         { ...coins.GORBAGANA, amountToBuy: 70 },
         { ...coins.OBIPNUTKENOBI, amountToBuy: 70 },
