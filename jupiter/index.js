@@ -662,13 +662,7 @@ async function testGetQuote() {
       `  Slippage: ${slippageBps} basis points (${slippageBps / 100}%)`
     );
 
-    const quote = await getQuote(
-      inputMint,
-      outputMint,
-      amount,
-      slippageBps,
-      true
-    );
+    const quote = await getQuote(inputMint, outputMint, amount, slippageBps);
 
     console.log("✅ Quote received successfully!");
     console.log("📊 Quote details:");
