@@ -534,7 +534,7 @@ const sellPercentOfTokenToZero = async (
   walletName,
   memeTokenAddress,
   percentToSell,
-  millisecondsToWaitBetweenTries = 15 * 1000,
+  millisecondsToWaitBetweenTries = 10 * 1000,
   maxNumberOfTries = 3
 ) => {
   try {
