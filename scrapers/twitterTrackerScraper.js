@@ -122,8 +122,10 @@ export async function twitterTrackerScraper(page) {
     console.log("Valid Tweets:", validTweets);
 
     // Process each tweet for trading opportunities in parallel
+    let username, text;
     for (const tweet of validTweets) {
-      const { username, text } = tweet;
+      username = tweet.username;
+      text = tweet.text;
       coin = determineIfMemecoinBuy(
         username,
         text,
@@ -233,8 +235,8 @@ export async function twitterTrackerScraper(page) {
         player.play("sounds/Treasure.mp3", (err) => {
           if (err) console.error("Error playing sound:", err);
         });
-        sendTelegramMessage(`${tweetedUsername} is tweeting!
-          text: ${postText}
+        sendTelegramMessage(`${username} is tweeting!
+          text: ${text}
           NO MEMECOIN MATCH!!`);
         setTimeout(() => twitterTrackerScraper(page), 20 * 1000);
       } else {
