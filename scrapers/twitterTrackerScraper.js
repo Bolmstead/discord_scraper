@@ -36,6 +36,10 @@ let numOfRunsBeforeSellingAllTokens = 0;
 
 export async function twitterTrackerScraper(page) {
   numOfRunsBeforeSellingAllTokens++;
+  console.log(
+    "⏳ numOfRunsBeforeSellingAllTokens:",
+    numOfRunsBeforeSellingAllTokens
+  );
   if (numOfRunsBeforeSellingAllTokens > 1200) {
     await swapAllTokensToSolana();
     numOfRunsBeforeSellingAllTokens = 0;
