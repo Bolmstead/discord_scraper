@@ -767,7 +767,7 @@ const accountMap = new Map([
         { ...coins.POPCAT, amountToBuy: 70 },
         { ...coins.MENVSGORILLA, amountToBuy: 20 },
         { ...coins.DEPORTLON, amountToBuy: 3 },
-        // { ...coins.TESTCOIN, amountToBuy: 0.001 },
+        { ...coins.TESTCOIN, amountToBuy: 0.001 },
       ],
     },
   ],
@@ -926,6 +926,14 @@ const accountMap = new Map([
         { ...coins.TOLITHETRENCHER, amountToBuy: 70 },
         { ...coins.GORBAGANA, amountToBuy: 70 },
       ],
+    },
+  ],
+  [
+    "MarioNawfal",
+    {
+      name: "Mario Nawfal",
+      username: "MarioNawfal",
+      coins: [{ ...coins.TESTCOIN, amountToBuy: 0.001 }],
     },
   ],
 ]);
