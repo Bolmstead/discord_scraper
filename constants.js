@@ -685,7 +685,7 @@ const accountMap = new Map([
         { ...coins.HOSICO, amountToBuy: 70 },
         { ...coins.MENVSGORILLA, amountToBuy: 20 },
         { ...coins.SUPERGROK, amountToBuy: 30 },
-        { ...coins.TESTCOIN, amountToBuy: 0.001 },
+        // { ...coins.TESTCOIN, amountToBuy: 0.001 },
       ],
       buyAnyPostedCA: true,
       amountToBuyForAnyPostedCA: 8,
@@ -767,7 +767,7 @@ const accountMap = new Map([
         { ...coins.POPCAT, amountToBuy: 70 },
         { ...coins.MENVSGORILLA, amountToBuy: 20 },
         { ...coins.DEPORTLON, amountToBuy: 3 },
-        { ...coins.TESTCOIN, amountToBuy: 0.001 },
+        // { ...coins.TESTCOIN, amountToBuy: 0.001 },
       ],
     },
   ],
@@ -933,7 +933,7 @@ const accountMap = new Map([
     {
       name: "Mario Nawfal",
       username: "MarioNawfal",
-      coins: [{ ...coins.TESTCOIN, amountToBuy: 0.001 }],
+      coins: [],
     },
   ],
 ]);
