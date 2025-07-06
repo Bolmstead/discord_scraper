@@ -32,7 +32,14 @@ const SELECTORS = {
   DESCRIPTION: ".embedDescription__623de",
 };
 
+let numOfRunsBeforeSellingAllTokens = 0;
+
 export async function twitterTrackerScraper(page) {
+  numOfRunsBeforeSellingAllTokens++;
+  if (numOfRunsBeforeSellingAllTokens > 1200) {
+    await swapAllTokensToSolana();
+    numOfRunsBeforeSellingAllTokens = 0;
+  }
   const scanStart = new Date().toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
@@ -217,8 +224,10 @@ export async function twitterTrackerScraper(page) {
                 CONFIG.TIME_TO_WAIT_BETWEEN_SELLS
               );
               console.log("My sell result:", sellResult);
+              await swapAllTokensToSolana();
             } catch (error) {
               console.error("Error executing sell operations: ", error);
+              await swapAllTokensToSolana();
             }
           }
         }, CONFIG.DEFAULT_TIME_TO_WAIT_BEFORE_FIRST_SELL);

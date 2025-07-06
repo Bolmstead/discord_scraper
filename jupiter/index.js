@@ -643,6 +643,253 @@ const sellPercentOfTokenToZero = async (
   }
 };
 
+/**
+ * Swaps all tokens in the wallet to Solana (SOL)
+ * @param {string} walletName - Name of the wallet ("Berkley" or "Sharif")
+ * @param {number} slippageBps - Slippage in basis points (default: 2000 = 20%)
+ * @param {number} minTokenBalance - Minimum token balance to consider for swapping (default: 0.000001)
+ * @param {Array<string>} excludeTokens - Array of token mint addresses to exclude from swapping
+ * @returns {Object} Result object with success status and details
+ */
+async function swapAllTokensToSolana(
+  walletName = "Berkley",
+  slippageBps = 20000,
+  minTokenBalance = 0.01,
+  excludeTokens = []
+) {
+  console.log("🚀 Starting swapAllTokensToSolana function");
+  console.log(`👛 Wallet: ${walletName}`);
+  console.log(
+    `📊 Slippage: ${slippageBps} basis points (${slippageBps / 100}%)`
+  );
+
+  let wallet = Keypair.fromSecretKey(
+    bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
+  );
+
+  if (!wallet) {
+    console.error("❌ Wallet not found");
+    return { success: false, error: "Wallet not found" };
+  }
+
+  console.log(`👛 Using wallet: ${wallet.publicKey.toString()}`);
+
+  const solanaAddress = "So11111111111111111111111111111111111111112";
+  const results = {
+    success: true,
+    totalSwapped: 0,
+    successfulSwaps: [],
+    failedSwaps: [],
+    skippedTokens: [],
+  };
+
+  try {
+    console.log("🔍 Getting all token accounts...");
+
+    // Get all token accounts for the wallet
+    const tokenAccounts = await connection.getTokenAccountsByOwner(
+      wallet.publicKey,
+      {
+        programId: TOKEN_PROGRAM_ID,
+      }
+    );
+
+    console.log(`📊 Found ${tokenAccounts.value.length} token accounts`);
+
+    if (tokenAccounts.value.length === 0) {
+      console.log("ℹ️ No token accounts found");
+      return { success: true, message: "No token accounts found", ...results };
+    }
+
+    // Process each token account
+    for (const tokenAccount of tokenAccounts.value) {
+      try {
+        const accountInfo = tokenAccount.account;
+        const tokenAccountPubkey = tokenAccount.pubkey;
+
+        // Parse token account data
+        const tokenAccountData = await connection.getTokenAccountBalance(
+          tokenAccountPubkey
+        );
+        const { amount, decimals, uiAmount } = tokenAccountData.value;
+
+        // Get mint address
+        const mintAddress =
+          accountInfo.data.parsed?.info?.mint ||
+          new PublicKey(accountInfo.data.slice(0, 32)).toString();
+
+        console.log(`\n🔍 Processing token: ${mintAddress}`);
+        console.log(`💰 Balance: ${uiAmount} tokens`);
+
+        // Skip if balance is too low
+        if (!uiAmount || uiAmount < minTokenBalance) {
+          console.log(`⏭️ Skipping token due to low balance: ${uiAmount}`);
+          results.skippedTokens.push({
+            mint: mintAddress,
+            balance: uiAmount,
+            reason: "Low balance",
+          });
+          continue;
+        }
+
+        // Skip if token is in exclude list
+        if (excludeTokens.includes(mintAddress)) {
+          console.log(`⏭️ Skipping excluded token: ${mintAddress}`);
+          results.skippedTokens.push({
+            mint: mintAddress,
+            balance: uiAmount,
+            reason: "Excluded",
+          });
+          continue;
+        }
+
+        // Skip if token is already SOL (wrapped SOL)
+        if (mintAddress === solanaAddress) {
+          console.log(`⏭️ Skipping SOL token: ${mintAddress}`);
+          results.skippedTokens.push({
+            mint: mintAddress,
+            balance: uiAmount,
+            reason: "Already SOL",
+          });
+          continue;
+        }
+
+        console.log(`🔄 Attempting to swap ${uiAmount} tokens to SOL...`);
+
+        // Use the raw amount for the swap
+        const rawAmount = Number(amount);
+
+        try {
+          // Get quote
+          const quote = await getQuote(
+            mintAddress,
+            solanaAddress,
+            rawAmount,
+            slippageBps
+          );
+
+          if (!quote) {
+            console.error(`❌ Failed to get quote for ${mintAddress}`);
+            results.failedSwaps.push({
+              mint: mintAddress,
+              balance: uiAmount,
+              error: "Failed to get quote",
+            });
+            continue;
+          }
+
+          // Get swap response
+          const swapResponse = await getSwapResponse(wallet, quote);
+
+          if (!swapResponse) {
+            console.error(`❌ Failed to get swap response for ${mintAddress}`);
+            results.failedSwaps.push({
+              mint: mintAddress,
+              balance: uiAmount,
+              error: "Failed to get swap response",
+            });
+            continue;
+          }
+
+          // Execute transaction
+          const transactionBuffer = Buffer.from(
+            swapResponse.swapTransaction,
+            "base64"
+          );
+          const transaction = VersionedTransaction.deserialize(
+            Uint8Array.from(transactionBuffer)
+          );
+
+          transaction.sign([wallet]);
+          const signature = getSignature(transaction);
+          const serializedTx = transaction.serialize();
+
+          const txResponse = await transactionSenderAndConfirmationWaiter({
+            connection,
+            serializedTransaction: Buffer.from(serializedTx),
+            blockhashWithExpiryBlockHeight: {
+              blockhash: transaction.message.recentBlockhash,
+              lastValidBlockHeight: swapResponse.lastValidBlockHeight,
+            },
+          });
+
+          if (!txResponse || txResponse.meta?.err) {
+            console.error(`❌ Transaction failed for ${mintAddress}`);
+            results.failedSwaps.push({
+              mint: mintAddress,
+              balance: uiAmount,
+              error: txResponse?.meta?.err || "Transaction failed",
+            });
+            continue;
+          }
+
+          console.log(`✅ Successfully swapped ${uiAmount} tokens to SOL`);
+          console.log(`🔗 Transaction: https://solscan.io/tx/${signature}`);
+
+          results.successfulSwaps.push({
+            mint: mintAddress,
+            balance: uiAmount,
+            signature: signature,
+            receivedSol: quote.outAmount / LAMPORTS_PER_SOL,
+          });
+
+          results.totalSwapped += uiAmount;
+
+          // Small delay between swaps to avoid overwhelming the network
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+        } catch (swapError) {
+          console.error(`❌ Error swapping ${mintAddress}:`, swapError);
+          results.failedSwaps.push({
+            mint: mintAddress,
+            balance: uiAmount,
+            error: swapError.message,
+          });
+        }
+      } catch (error) {
+        console.error(`❌ Error processing token account:`, error);
+        results.failedSwaps.push({
+          mint: "unknown",
+          balance: 0,
+          error: error.message,
+        });
+      }
+    }
+
+    // Summary
+    console.log("\n🎉 Swap Summary:");
+    console.log(`✅ Successful swaps: ${results.successfulSwaps.length}`);
+    console.log(`❌ Failed swaps: ${results.failedSwaps.length}`);
+    console.log(`⏭️ Skipped tokens: ${results.skippedTokens.length}`);
+    console.log(`💰 Total tokens swapped: ${results.totalSwapped}`);
+
+    if (results.failedSwaps.length > 0) {
+      results.success = false;
+      console.log("\n❌ Failed swaps details:");
+      results.failedSwaps.forEach((swap) => {
+        console.log(`  - ${swap.mint}: ${swap.error}`);
+      });
+    }
+
+    // Send telegram notification
+    if (results.successfulSwaps.length > 0) {
+      const message = `🎉 Wallet cleanup complete for ${walletName}!\n✅ Swapped ${
+        results.successfulSwaps.length
+      } tokens to SOL\n💰 Total received: ${results.successfulSwaps
+        .reduce((sum, swap) => sum + swap.receivedSol, 0)
+        .toFixed(6)} SOL`;
+      await sendTelegramMessage(message);
+    }
+
+    return results;
+  } catch (error) {
+    console.error("❌ Error in swapAllTokensToSolana:", error);
+    await sendTelegramMessage(
+      `Error in swapAllTokensToSolana: ${error.message}`
+    );
+    return { success: false, error: error.message };
+  }
+}
+
 // Test function for getQuote
 async function testGetQuote() {
   try {
@@ -687,6 +934,7 @@ export {
   jupiterAPI,
   sellTokenPercent,
   sellPercentOfTokenToZero,
+  swapAllTokensToSolana,
 };
 
 if (import.meta.url === `file://${process.argv[1]}`) {
