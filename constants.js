@@ -306,6 +306,11 @@ const coins = {
     address: "5puhwnyz2Tv8jSmmBD5DSqCwFVXwwPGZacymM7DQpump",
     keywords: ["8008"],
   },
+  UNIPARTY: {
+    name: "Uniparty",
+    address: "GXBxFPMPavDzMygqHHjrxAqaAg6tBD8GMo5cSU6iAx1t",
+    keywords: ["uniparty"],
+  },
   DJDANIEL: {
     name: "DJ Daniel",
     address: "6erH7v4KuJtEumAj5g2kcTn7d9QEy5hSuiKocKfoS4RL",
@@ -671,6 +676,7 @@ const accountMap = new Map([
         { ...coins.TGC, amountToBuy: 5 },
         { ...coins._8008, amountToBuy: 10 },
         { ...coins.DOGWIFHAT, amountToBuy: 70 },
+        { ...coins.UNIPARTY, amountToBuy: 3 },
         { ...coins.FLOKI, amountToBuy: 20 },
         { ...coins.AI16Z, amountToBuy: 70 },
         { ...coins.GIGACHAD, amountToBuy: 70 },
