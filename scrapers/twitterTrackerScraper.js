@@ -200,11 +200,6 @@ export async function twitterTrackerScraper(page) {
             postText
           );
         }
-        if (makeAlertSound) {
-          player.play("sounds/Treasure.mp3", (err) => {
-            if (err) console.error("Error playing sound:", err);
-          });
-        }
 
         player.play("sounds/Siren.mp3", (err) => {
           if (err) console.error("Error playing sound:", err);
