@@ -229,7 +229,7 @@ const coins = {
   THEAMERICAPARTY: {
     name: "The america Party",
     address: "39zSVsSHFqNhARbVh6n8ZF78nCmhV3gSg8D39xhBNe73",
-    keywords: ["america party", "are you not entertained?"],
+    keywords: ["america party"],
   },
   BUTTCOIN: {
     name: "Butt Coin",
@@ -736,7 +736,7 @@ const accountMap = new Map([
         { ...coins.RETARDFINDER, amountToBuy: 70 },
         { ...coins.KM, amountToBuy: 15 },
         { ...coins.PNUT, amountToBuy: 70 },
-        { ...coins.NOLAND, amountToBuy: 30 },
+        { ...coins.NOLAND, amountToBuy: 25 },
         { ...coins.HARAMBE, amountToBuy: 70 },
         { ...coins.TRUTHGPT, amountToBuy: 2 },
         { ...coins.TRUMP2028, amountToBuy: 10 },
