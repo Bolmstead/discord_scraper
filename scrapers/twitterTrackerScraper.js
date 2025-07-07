@@ -16,9 +16,9 @@ const CONFIG = {
   MAX_TWEETS_TO_SCAN: 3,
   ERROR_RETRY_DELAY: 60 * 1000,
   SCAN_INTERVAL_AFTER_BUY: 3 * 60 * 1000,
-  PERCENT_TO_SELL: 20,
-  TIME_TO_WAIT_BETWEEN_SELLS: 7 * 1000,
-  DEFAULT_TIME_TO_WAIT_BEFORE_FIRST_SELL: 10 * 1000,
+  PERCENT_TO_SELL: 30,
+  TIME_TO_WAIT_BETWEEN_SELLS: 5 * 1000,
+  DEFAULT_TIME_TO_WAIT_BEFORE_FIRST_SELL: 5 * 1000,
 };
 const IS_TEST_AUTOMATIC_BUY = false;
 const IS_TEST_SCRAPE_TWEET = false;
@@ -221,11 +221,20 @@ export async function twitterTrackerScraper(page) {
             console.log("🤞 Selling tokens initiated...");
             try {
               // Execute both operations
+              let percentToSell = CONFIG.PERCENT_TO_SELL;
+              let timeToWaitBetweenSells = CONFIG.TIME_TO_WAIT_BETWEEN_SELLS;
+              if (
+                tweetedUsername === "@elonmusk" ||
+                tweetedUsername === "elonmusk"
+              ) {
+                percentToSell = 50;
+                timeToWaitBetweenSells = 4000;
+              }
               const sellResult = await sellPercentOfTokenToZero(
                 "Berkley",
                 address,
-                CONFIG.PERCENT_TO_SELL,
-                CONFIG.TIME_TO_WAIT_BETWEEN_SELLS
+                percentToSell,
+                timeToWaitBetweenSells
               );
               console.log("My sell result:", sellResult);
               await swapAllTokensToSolana();
@@ -244,17 +253,7 @@ export async function twitterTrackerScraper(page) {
         setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
       }
     } else {
-      if (makeAlertSound) {
-        player.play("sounds/Treasure.mp3", (err) => {
-          if (err) console.error("Error playing sound:", err);
-        });
-        sendTelegramMessage(`${username} is tweeting!
-          text: ${text}
-          NO MEMECOIN MATCH!!`);
-        setTimeout(() => twitterTrackerScraper(page), 20 * 1000);
-      } else {
-        setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
-      }
+      setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
     }
 
     // Reset processing flag and schedule next scan with dynamic interval

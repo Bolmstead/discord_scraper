@@ -298,7 +298,7 @@ const coins = {
   },
   GROK4: {
     name: "Grok 4",
-    address: "GpDzQVu8gTLfnTEJdsbWiLBJo8SduQtkGpJfmEJnpump",
+    address: "64iL9PFYdJC7GKNmo6PySvMY3KK3XggE1JAUyLQdbonk",
     keywords: ["grok 4", "grok4"],
   },
   _8008: {
@@ -357,7 +357,7 @@ const coins = {
   },
   KM: {
     name: "Kekius Maximus",
-    address: "FThrNpdic79XRV6i9aCWQ2UTp7oRQuCXAgUWtZR2cs42",
+    address: "XC78JjRHnSqaysrHiTrhR8eRngFbvX3rrHyRjWEpump",
     keywords: ["kekius", "kekius maximus"],
   },
   PNUT: {
@@ -656,7 +656,7 @@ const accountMap = new Map([
         { ...coins.PNUT, amountToBuy: 30 },
         { ...coins.BIGBALLS, amountToBuy: 40 },
         { ...coins.FARTCOIN, amountToBuy: 70 },
-        { ...coins.KM, amountToBuy: 70 },
+        { ...coins.KM, amountToBuy: 15 },
         { ...coins.DOGEFATHER, amountToBuy: 30 },
         { ...coins.LUIGI, amountToBuy: 70 },
         { ...coins.HARAMBE, amountToBuy: 70 },
@@ -729,7 +729,7 @@ const accountMap = new Map([
         { ...coins.TRUMPGAZA, amountToBuy: 3 },
         { ...coins.FARTCOIN, amountToBuy: 70 },
         { ...coins.RETARDFINDER, amountToBuy: 70 },
-        { ...coins.KM, amountToBuy: 70 },
+        { ...coins.KM, amountToBuy: 15 },
         { ...coins.PNUT, amountToBuy: 70 },
         { ...coins.NOLAND, amountToBuy: 30 },
         { ...coins.HARAMBE, amountToBuy: 70 },
@@ -754,7 +754,7 @@ const accountMap = new Map([
         { ...coins.ROGER, amountToBuy: 15 },
         { ...coins.PWEASE, amountToBuy: 70 },
         { ...coins._8008, amountToBuy: 10 },
-        { ...coins.GROK4, amountToBuy: 40 },
+        { ...coins.GROK4, amountToBuy: 20 },
         { ...coins.DOODOOCOIN, amountToBuy: 4 },
         { ...coins.GROKCOIN, amountToBuy: 50 },
         { ...coins.EWON, amountToBuy: 5 },
@@ -783,7 +783,7 @@ const accountMap = new Map([
       coins: [
         { ...coins.BIGBALLS, amountToBuy: 20 },
         { ...coins.RETARDFINDER, amountToBuy: 70 },
-        { ...coins.KM, amountToBuy: 70 },
+        { ...coins.KM, amountToBuy: 15 },
         { ...coins.HARAMBE, amountToBuy: 70 },
         { ...coins.TRUTHGPT, amountToBuy: 2 },
         { ...coins.TRUMP2028, amountToBuy: 10 },
