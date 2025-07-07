@@ -933,7 +933,7 @@ const accountMap = new Map([
     {
       name: "Mario Nawfal",
       username: "MarioNawfal",
-      coins: [{ ...coins.TESTCOIN, amountToBuy: 0.001 }],
+      coins: [],
     },
   ],
 ]);

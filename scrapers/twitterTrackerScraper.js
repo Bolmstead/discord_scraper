@@ -3,7 +3,11 @@ import "dotenv/config";
 import playSound from "play-sound";
 import { determineIfMemecoinBuy } from "../helpers/determineIfMemecoinBuy.js";
 import { extractNameFromParentheses } from "../helpers/stringParser.js";
-import { executeSwap, sellPercentOfTokenToZero } from "../jupiter/index.js";
+import {
+  executeSwap,
+  sellPercentOfTokenToZero,
+  swapAllTokensToSolana,
+} from "../jupiter/index.js";
 import {
   sendTelegramMessage,
   sendTelegramMessageThread,
