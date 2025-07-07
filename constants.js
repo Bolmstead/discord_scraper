@@ -406,6 +406,11 @@ const coins = {
     address: "5RcXsuKg6nWH9UEKdf22XLwwKJE2EmcGuHNadpgGDa9v",
     keywords: ["deportlon"],
   },
+  BONKHOUSE: {
+    name: "Bonk House",
+    address: "6fHPh6b1WrfoS8f6ZhoziVhNBzTs5LCLnAEtnzfMbonk",
+    keywords: ["bonk house", "bonkhouse"],
+  },
   JPMD: {
     name: "jpmd",
     address: "GgLyU28hTpmttqqkBFYm5fDZuC5TvVw36V1UdT2aZvrC",
@@ -934,6 +939,14 @@ const accountMap = new Map([
       name: "Mario Nawfal",
       username: "MarioNawfal",
       coins: [],
+    },
+  ],
+  [
+    "SolportTom",
+    {
+      name: "Bonk Guy",
+      username: "SolportTom",
+      coins: [{ ...coins.BONKHOUSE, amountToBuy: 70 }],
     },
   ],
 ]);
