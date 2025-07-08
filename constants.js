@@ -689,7 +689,12 @@ const accountMap = new Map([
         { ...coins.RETARDFINDER, amountToBuy: 70 },
         { ...coins.HOSICO, amountToBuy: 70 },
         { ...coins.MENVSGORILLA, amountToBuy: 20 },
-        { ...coins.SUPERGROK, amountToBuy: 30 },
+        {
+          ...coins.SUPERGROK,
+          amountToBuy: 40,
+          percentToSell: 20,
+          timeBetweenSells: 7,
+        },
         // { ...coins.TESTCOIN, amountToBuy: 0.001 },
       ],
       buyAnyPostedCA: true,
@@ -729,7 +734,12 @@ const accountMap = new Map([
         { ...coins.BUTTHOLE, amountToBuy: 70 },
         { ...coins.CHILLHOUSE, amountToBuy: 70 },
         { ...coins.SARATOGA, amountToBuy: 10 },
-        { ...coins.SUPERGROK, amountToBuy: 30 },
+        {
+          ...coins.SUPERGROK,
+          amountToBuy: 40,
+          percentToSell: 20,
+          timeBetweenSells: 7,
+        },
         { ...coins.LUIGI, amountToBuy: 70 },
         { ...coins.TRUMPGAZA, amountToBuy: 3 },
         { ...coins.FARTCOIN, amountToBuy: 70 },
@@ -759,7 +769,12 @@ const accountMap = new Map([
         { ...coins.ROGER, amountToBuy: 15 },
         { ...coins.PWEASE, amountToBuy: 70 },
         { ...coins._8008, amountToBuy: 10 },
-        { ...coins.GROK4, amountToBuy: 20 },
+        {
+          ...coins.GROK4,
+          amountToBuy: 40,
+          percentToSell: 20,
+          timeBetweenSells: 7,
+        },
         { ...coins.DOODOOCOIN, amountToBuy: 4 },
         { ...coins.GROKCOIN, amountToBuy: 50 },
         { ...coins.EWON, amountToBuy: 5 },
@@ -938,7 +953,14 @@ const accountMap = new Map([
     {
       name: "Mario Nawfal",
       username: "MarioNawfal",
-      coins: [],
+      coins: [
+        {
+          ...coins.TESTCOIN,
+          amountToBuy: 0.0001,
+          percentToSell: 25,
+          timeBetweenSells: 1000,
+        },
+      ],
     },
   ],
   [

@@ -20,7 +20,7 @@ const CONFIG = {
   MAX_TWEETS_TO_SCAN: 3,
   ERROR_RETRY_DELAY: 60 * 1000,
   SCAN_INTERVAL_AFTER_BUY: 3 * 60 * 1000,
-  PERCENT_TO_SELL: 30,
+  PERCENT_TO_SELL: 20,
   TIME_TO_WAIT_BETWEEN_SELLS: 5 * 1000,
   DEFAULT_TIME_TO_WAIT_BEFORE_FIRST_SELL: 5 * 1000,
 };
@@ -161,16 +161,15 @@ export async function twitterTrackerScraper(page) {
 
       let {
         name,
-        ticker,
         address,
-        timeToSell,
         keywords,
         amountToBuy,
         slippageBps,
         priorityFee,
-        caWasPosted,
         chosenKeyword,
         dontSell,
+        percentToSell,
+        timeBetweenSells,
       } = coin;
       console.log("🚀 ~ twitterTrackerScraper ~ dontSell:", dontSell);
       if (IS_TEST_SCRAPE_TWEET || IS_TEST_AUTOMATIC_BUY) {
@@ -219,21 +218,13 @@ export async function twitterTrackerScraper(page) {
           if (!dontSell) {
             console.log("🤞 Selling tokens initiated...");
             try {
-              // Execute both operations
-              let percentToSell = CONFIG.PERCENT_TO_SELL;
-              let timeToWaitBetweenSells = CONFIG.TIME_TO_WAIT_BETWEEN_SELLS;
-              if (
-                tweetedUsername === "@elonmusk" ||
-                tweetedUsername === "elonmusk"
-              ) {
-                percentToSell = 50;
-                timeToWaitBetweenSells = 4000;
-              }
               const sellResult = await sellPercentOfTokenToZero(
                 "Berkley",
                 address,
-                percentToSell,
-                timeToWaitBetweenSells
+                percentToSell ? percentToSell : CONFIG.PERCENT_TO_SELL,
+                timeBetweenSells
+                  ? timeBetweenSells
+                  : CONFIG.TIME_TO_WAIT_BETWEEN_SELLS
               );
               console.log("My sell result:", sellResult);
               await swapAllTokensToSolana();
