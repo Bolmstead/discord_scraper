@@ -67,7 +67,6 @@ export async function twitterTrackerScraper(page) {
     }
     // Get all tweet containers at once
     const tweetElements = await page.$$(SELECTORS.TWEET_CONTAINER);
-    let makeAlertSound = false;
 
     // Calculate starting index to get last N tweets
     const startIndex = Math.max(
@@ -111,14 +110,9 @@ export async function twitterTrackerScraper(page) {
 
           let username = null;
           if (usernameFullText.includes("TruthSocial Tracker")) {
-            console.log("asdfasdfasdfase!@#!@#!@#$!@#%!@#");
             username = "realDonaldTrump";
-            makeAlertSound = true;
           } else {
             username = extractNameFromParentheses(usernameFullText);
-            if (username === "elonmusk") {
-              makeAlertSound = true;
-            }
           }
 
           return { username, text };

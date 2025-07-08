@@ -234,7 +234,7 @@ const coins = {
   BUTTCOIN: {
     name: "Butt Coin",
     address: "FasH397CeZLNYWkd3wWK9vrmjd1z93n3b59DssRXpump",
-    keywords: ["buttcoin", "butt coin"],
+    keywords:["buttcoin", "butt coin"],
   },
   DICKBUTT: {
     name: "Dick Butt",
