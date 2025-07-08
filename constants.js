@@ -234,7 +234,7 @@ const coins = {
   BUTTCOIN: {
     name: "Butt Coin",
     address: "FasH397CeZLNYWkd3wWK9vrmjd1z93n3b59DssRXpump",
-    keywords:["buttcoin", "butt coin"],
+    keywords: ["buttcoin", "butt coin"],
   },
   DICKBUTT: {
     name: "Dick Butt",
@@ -311,11 +311,7 @@ const coins = {
     address: "GXBxFPMPavDzMygqHHjrxAqaAg6tBD8GMo5cSU6iAx1t",
     keywords: ["uniparty"],
   },
-  DJDANIEL: {
-    name: "DJ Daniel",
-    address: "6erH7v4KuJtEumAj5g2kcTn7d9QEy5hSuiKocKfoS4RL",
-    keywords: ["dj daniel"],
-  },
+
   PWEASE: {
     name: "pwease",
     address: "CniPCE4b3s8gSUPhUiyMjXnytrEqUrMfSsnbBjLCpump",
@@ -760,7 +756,12 @@ const accountMap = new Map([
         { ...coins.KNOX, amountToBuy: 10 },
         { ...coins.DICKBUTT, amountToBuy: 20 },
         { ...coins.TITCOIN, amountToBuy: 70 },
-        // { ...coins.THEAMERICAPARTY, amountToBuy: 70 },
+        {
+          ...coins.THEAMERICAPARTY,
+          amountToBuy: 70,
+          percentToSell: 25,
+          timeBetweenSells: 3000,
+        },
         { ...coins.BUTTCOIN, amountToBuy: 70 },
         { ...coins.GORBAGANA, amountToBuy: 70 },
         { ...coins.OBIPNUTKENOBI, amountToBuy: 70 },
@@ -869,7 +870,7 @@ const accountMap = new Map([
         { ...coins.GREED2, amountToBuy: 8 },
         { ...coins.FARTSTOOL, amountToBuy: 3 },
         { ...coins.MISSPEACHES, amountToBuy: 8 },
-        { ...coins.HOTDOG, amountToBuy: 10 },
+        { ...coins.HOTDOG, amountToBuy: 2 },
       ],
     },
   ],
@@ -885,7 +886,7 @@ const accountMap = new Map([
     "DeItaone",
     {
       name: "Walter Bloomberg",
-      coins: [{ ...coins.SWF, amountToBuy: 10, dontSell: true }],
+      coins: [],
     },
   ],
   [
@@ -902,7 +903,6 @@ const accountMap = new Map([
       coins: [
         // need to add a 15 second sell here
         { ...coins.ROGER, amountToBuy: 15 },
-        { ...coins.LEAF, amountToBuy: 20 },
       ],
       buyAnyPostedCA: true,
       amountToBuyForAnyPostedCA: 8,
@@ -954,12 +954,12 @@ const accountMap = new Map([
       name: "Mario Nawfal",
       username: "MarioNawfal",
       coins: [
-        {
-          ...coins.TESTCOIN,
-          amountToBuy: 0.0001,
-          percentToSell: 25,
-          timeBetweenSells: 1000,
-        },
+        // {
+        //   ...coins.TESTCOIN,
+        //   amountToBuy: 0.0001,
+        //   percentToSell: 25,
+        //   timeBetweenSells: 1000,
+        // },
       ],
     },
   ],
