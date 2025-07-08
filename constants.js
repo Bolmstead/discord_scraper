@@ -359,7 +359,7 @@ const coins = {
   PNUT: {
     name: "Peanut the Squirrel",
     address: "2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump",
-    keywords: ["pnut"],
+    keywords: ["pnut", "peanut"],
   },
   ADRIAN: {
     name: "Adrian Dittmann",
@@ -420,8 +420,7 @@ const coins = {
   OBIPNUTKENOBI: {
     name: "Obi Pnut Kenobi",
     address: "5WGkdemJNEoAVKveDQdzQmDqTyxCraXGw9ACyrwCEUMS",
-    // keywords: ["Obi PNut Kenobi", "pnut kenobi", "obi pnut"],
-    keywords: ["pnut"],
+    keywords: ["Obi PNut Kenobi", "pnut kenobi", "obi pnut"],
   },
 
   TRUTHGPT: {
@@ -644,8 +643,13 @@ const accountMap = new Map([
         { ...coins.HKU5, amountToBuy: 3 },
         { ...coins.SWF, amountToBuy: 10 },
         { ...coins.TGC, amountToBuy: 5 },
-        { ...coins.PRESIDENTVSELON, amountToBuy: 70 },
-        { ...coins.THEAMERICAPARTY, amountToBuy: 70 },
+        {
+          ...coins.PRESIDENTVSELON,
+          amountToBuy: 70,
+          percentToSell: 50,
+          timeBetweenSells: 2000,
+        },
+        // { ...coins.THEAMERICAPARTY, amountToBuy: 70 },
         { ...coins.DEPORTLON, amountToBuy: 3 },
         { ...coins.CSR, amountToBuy: 40 },
         { ...coins.TRUMPSEASON, amountToBuy: 2 },
@@ -764,7 +768,7 @@ const accountMap = new Map([
         },
         { ...coins.BUTTCOIN, amountToBuy: 70 },
         { ...coins.GORBAGANA, amountToBuy: 70 },
-        { ...coins.OBIPNUTKENOBI, amountToBuy: 70 },
+        { ...coins.OBIPNUTKENOBI, amountToBuy: 50 },
         { ...coins.TGC, amountToBuy: 5 },
         { ...coins.JAILSTOOL, amountToBuy: 70 },
         { ...coins.ROGER, amountToBuy: 15 },
