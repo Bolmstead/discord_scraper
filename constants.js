@@ -281,6 +281,16 @@ const coins = {
     address: "7qhwYUXBaPTfWkhUpgWTjHAvdG48wRj5TLmTQ5Topump",
     keywords: ["peaches"],
   },
+  FLOKICEO: {
+    name: "FLOKI CEO",
+    address: "AJ7J1nKHLKpPWhUrUqYMPCNCmhMuNQvpxfcP3bsHpump",
+    keywords: ["there was a time this cute yellow doge was the ceo"],
+  },
+  OPTIMUSCEO: {
+    name: "OPTIMUS CEO",
+    address: "BRxWb6owaksca92yrLJvTJSuiHEkcg5XJVLEEZLgpump",
+    keywords: ["optimus, the new ceo"],
+  },
   DOODOOCOIN: {
     name: "Grok's Shitcoin",
     address: "2N8qruAsuSre8vEopvgEgBHigfnqBTFbmf9XTDw9pump",
@@ -541,6 +551,11 @@ const coins = {
     address: "p5LZKhRE2qhCS9Ys8TjwB8r3DspxQVxSowcrc3tKgkz",
     keywords: ["scam altman"],
   },
+  LOFIMAGA: {
+    name: "lofi maga",
+    address: "DD9h7ubCk3EPDi8VCno9FCuF123eQyM3byyehVd8nFhG",
+    keywords: ["lo-fi"],
+  },
   CSR: {
     name: "Crypto Strategic Reserve",
     address: "EqQFU4AoRVKJjQrpshmp89YxHAgNecCpJdMS8PJLpump",
@@ -550,6 +565,11 @@ const coins = {
     name: "Trump Season",
     address: "8qiVWSZ1HYsnA7Z79j3jwhbDJTxqjosZVWAsajSkpump",
     keywords: ["trump season", "trump szn"],
+  },
+  ROARINGKITTY: {
+    name: "Roaring Kitty",
+    address: "EKEWAk7hfnwfR8DBb1cTayPPambqyC7pwNiYkaYQKQHp",
+    keywords: ["roaring kitty", "roaringkitty", "keith gill"],
   },
 };
 const testCoins = {
@@ -657,6 +677,7 @@ const accountMap = new Map([
         // { ...coins.THEAMERICAPARTY, amountToBuy: 70 },
         { ...coins.DEPORTLON, amountToBuy: 3 },
         { ...coins.CSR, amountToBuy: 40 },
+        { ...coins.ROARINGKITTY, amountToBuy: 70 },
         { ...coins.TRUMPSEASON, amountToBuy: 2 },
         { ...coins.TRUMPBILL, amountToBuy: 5 },
         { ...coins.STRATEGICSOLANARESERVE, amountToBuy: 20 },
@@ -674,6 +695,8 @@ const accountMap = new Map([
         { ...coins.ROGER, amountToBuy: 15 },
         { ...coins.PWEASE, amountToBuy: 70 },
         { ...coins.DOODOOCOIN, amountToBuy: 4 },
+        { ...coins.OPTIMUSCEO, amountToBuy: 2 },
+        { ...coins.FLOKICEO, amountToBuy: 2 },
         { ...coins.GROKCOIN, amountToBuy: 50 },
         { ...coins.DICKBUTT, amountToBuy: 20 },
         { ...coins.TITCOIN, amountToBuy: 70 },
@@ -694,6 +717,8 @@ const accountMap = new Map([
         { ...coins.RETARDFINDER, amountToBuy: 70 },
         { ...coins.HOSICO, amountToBuy: 70 },
         { ...coins.MENVSGORILLA, amountToBuy: 20 },
+        { ...coins.SCAMALTMAN, amountToBuy: 7 },
+        { ...coins.LOFIMAGA, amountToBuy: 3 },
         {
           ...coins.SUPERGROK,
           amountToBuy: 40,
@@ -779,6 +804,8 @@ const accountMap = new Map([
         { ...coins.JAILSTOOL, amountToBuy: 70 },
         { ...coins.ROGER, amountToBuy: 15 },
         { ...coins.PWEASE, amountToBuy: 70 },
+        { ...coins.ROARINGKITTY, amountToBuy: 70 },
+
         { ...coins._8008, amountToBuy: 10 },
         {
           ...coins.GROK4,
