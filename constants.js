@@ -283,7 +283,7 @@ const coins = {
   },
   FLOKICEO: {
     name: "FLOKI CEO",
-    address: "AJ7J1nKHLKpPWhUrUqYMPCNCmhMuNQvpxfcP3bsHpump",
+    address: "8bF933Z78MRpUhmPia6v68Muxa4caL4B9fZzdJTsbonk",
     keywords: ["there was a time this cute yellow doge was the ceo"],
   },
   OPTIMUSCEO: {
