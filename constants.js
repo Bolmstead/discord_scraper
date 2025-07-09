@@ -286,6 +286,11 @@ const coins = {
     address: "8bF933Z78MRpUhmPia6v68Muxa4caL4B9fZzdJTsbonk",
     keywords: ["there was a time this cute yellow doge was the ceo"],
   },
+  MRBEASTCEO: {
+    name: "Mr Beast CEO",
+    address: "cDkTvtXwJLqAS5NqpiwoTT2cbe6GkPBfBwkb5kppump",
+    keywords: ["I’ll fill the roll"],
+  },
   OPTIMUSCEO: {
     name: "OPTIMUS CEO",
     address: "BRxWb6owaksca92yrLJvTJSuiHEkcg5XJVLEEZLgpump",
@@ -825,6 +830,7 @@ const accountMap = new Map([
         { ...coins.POPCAT, amountToBuy: 70 },
         { ...coins.MENVSGORILLA, amountToBuy: 20 },
         { ...coins.DEPORTLON, amountToBuy: 3 },
+        { ...coins.MRBEASTCEO, amountToBuy: 70 },
         // { ...coins.TESTCOIN, amountToBuy: 0.001 },
       ],
     },
