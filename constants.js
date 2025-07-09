@@ -536,6 +536,11 @@ const coins = {
     address: "7Eg4Bin1U4SNggFJFrKuGTo6e7ShuzjYyW9Quxtxpump",
     keywords: ["golden age act", "100 bill", "100 dollar bill"],
   },
+  SCAMALTMAN: {
+    name: "Scam Altman",
+    address: "p5LZKhRE2qhCS9Ys8TjwB8r3DspxQVxSowcrc3tKgkz",
+    keywords: ["scam altman"],
+  },
   CSR: {
     name: "Crypto Strategic Reserve",
     address: "EqQFU4AoRVKJjQrpshmp89YxHAgNecCpJdMS8PJLpump",
@@ -734,6 +739,7 @@ const accountMap = new Map([
         { ...coins.BUTTHOLE, amountToBuy: 70 },
         { ...coins.CHILLHOUSE, amountToBuy: 70 },
         { ...coins.SARATOGA, amountToBuy: 10 },
+        { ...coins.SCAMALTMAN, amountToBuy: 7 },
         {
           ...coins.SUPERGROK,
           amountToBuy: 40,
