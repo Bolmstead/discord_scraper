@@ -796,12 +796,12 @@ const accountMap = new Map([
         { ...coins.KNOX, amountToBuy: 10 },
         { ...coins.DICKBUTT, amountToBuy: 20 },
         { ...coins.TITCOIN, amountToBuy: 70 },
-        {
-          ...coins.THEAMERICAPARTY,
-          amountToBuy: 70,
-          percentToSell: 25,
-          timeBetweenSells: 3000,
-        },
+        // {
+        //   ...coins.THEAMERICAPARTY,
+        //   amountToBuy: 70,
+        //   percentToSell: 25,
+        //   timeBetweenSells: 3000,
+        // },
         { ...coins.BUTTCOIN, amountToBuy: 70 },
         { ...coins.GORBAGANA, amountToBuy: 70 },
         { ...coins.OBIPNUTKENOBI, amountToBuy: 50 },
@@ -809,15 +809,10 @@ const accountMap = new Map([
         { ...coins.JAILSTOOL, amountToBuy: 70 },
         { ...coins.ROGER, amountToBuy: 15 },
         { ...coins.PWEASE, amountToBuy: 70 },
-        { ...coins.ROARINGKITTY, amountToBuy: 70 },
+        { ...coins.ROARINGKITTY, amountToBuy: 40 },
 
         { ...coins._8008, amountToBuy: 10 },
-        {
-          ...coins.GROK4,
-          amountToBuy: 40,
-          percentToSell: 20,
-          timeBetweenSells: 7,
-        },
+
         { ...coins.DOODOOCOIN, amountToBuy: 4 },
         { ...coins.GROKCOIN, amountToBuy: 50 },
         { ...coins.EWON, amountToBuy: 5 },
