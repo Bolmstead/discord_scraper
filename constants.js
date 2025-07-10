@@ -55,10 +55,15 @@ const coins = {
       "-",
     ],
   },
-  PRESIDENTVSELON: {
-    name: "PRESIDENTVSELON",
+  PVE: {
+    name: "PVE",
     address: "8BjQHNfcMzNM36rdk6avoJj3c3CTcDGMU5S26Hhgpump",
     keywords: ["elon", "musk"],
+  },
+  GROK420: {
+    name: "Grok 420",
+    address: "FK2R7xRtHzM2Spt7ZuNRRxnK3QGB4mjMz7iMj96zpump",
+    keywords: ["grok 4.20"],
   },
   MOODENG: {
     name: "Moodeng",
@@ -674,7 +679,7 @@ const accountMap = new Map([
         { ...coins.SWF, amountToBuy: 10 },
         { ...coins.TGC, amountToBuy: 5 },
         {
-          ...coins.PRESIDENTVSELON,
+          ...coins.PVE,
           amountToBuy: 70,
           percentToSell: 50,
           timeBetweenSells: 2000,
@@ -722,6 +727,7 @@ const accountMap = new Map([
         { ...coins.RETARDFINDER, amountToBuy: 70 },
         { ...coins.HOSICO, amountToBuy: 70 },
         { ...coins.MENVSGORILLA, amountToBuy: 20 },
+        { ...coins.GROK420, amountToBuy: 3 },
         { ...coins.SCAMALTMAN, amountToBuy: 7 },
         { ...coins.LOFIMAGA, amountToBuy: 3 },
         {
@@ -812,6 +818,8 @@ const accountMap = new Map([
         { ...coins.ROARINGKITTY, amountToBuy: 70 },
 
         { ...coins._8008, amountToBuy: 10 },
+        { ...coins.GROK420, amountToBuy: 3 },
+
         {
           ...coins.GROK4,
           amountToBuy: 40,
