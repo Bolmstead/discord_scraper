@@ -62,8 +62,8 @@ const coins = {
   },
   GROK420: {
     name: "Grok 420",
-    address: "FK2R7xRtHzM2Spt7ZuNRRxnK3QGB4mjMz7iMj96zpump",
-    keywords: ["grok 4.20"],
+    address: "23FH7fk4aLajVppQzr5BALeZh9fpnW8jkQevqRcgpump",
+    keywords: ["grok 4.20", "grok 420", "grok420", "grok4.20"],
   },
   MOODENG: {
     name: "Moodeng",
@@ -727,7 +727,7 @@ const accountMap = new Map([
         { ...coins.RETARDFINDER, amountToBuy: 70 },
         { ...coins.HOSICO, amountToBuy: 70 },
         { ...coins.MENVSGORILLA, amountToBuy: 20 },
-        { ...coins.GROK420, amountToBuy: 3 },
+        { ...coins.GROK420, amountToBuy: 50 },
         { ...coins.SCAMALTMAN, amountToBuy: 7 },
         { ...coins.LOFIMAGA, amountToBuy: 3 },
         {
