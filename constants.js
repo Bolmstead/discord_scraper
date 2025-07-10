@@ -776,12 +776,7 @@ const accountMap = new Map([
         { ...coins.CHILLHOUSE, amountToBuy: 70 },
         { ...coins.SARATOGA, amountToBuy: 10 },
         { ...coins.SCAMALTMAN, amountToBuy: 7 },
-        {
-          ...coins.SUPERGROK,
-          amountToBuy: 40,
-          percentToSell: 20,
-          timeBetweenSells: 7,
-        },
+
         { ...coins.LUIGI, amountToBuy: 70 },
         { ...coins.TRUMPGAZA, amountToBuy: 3 },
         { ...coins.FARTCOIN, amountToBuy: 70 },
@@ -820,12 +815,6 @@ const accountMap = new Map([
         { ...coins._8008, amountToBuy: 10 },
         { ...coins.GROK420, amountToBuy: 3 },
 
-        {
-          ...coins.GROK4,
-          amountToBuy: 40,
-          percentToSell: 20,
-          timeBetweenSells: 7,
-        },
         { ...coins.DOODOOCOIN, amountToBuy: 4 },
         { ...coins.GROKCOIN, amountToBuy: 50 },
         { ...coins.EWON, amountToBuy: 5 },
