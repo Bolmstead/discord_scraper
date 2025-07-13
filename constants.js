@@ -550,6 +550,11 @@ const coins = {
     address: "6pKHwNCpzgZuC9o5FzvCZkYSUGfQddhUYtMyDbEVpump",
     keywords: ["baby deer"],
   },
+  JEROMEPOWELL: {
+    name: "Jerome Powell",
+    address: "GKat8UhnNDRoS4iVpG9qvVG4Wn1rVhmLvraraoJVpump",
+    keywords: ["jerome powell"],
+  },
 
   $100BILL: {
     name: "$100",
@@ -681,14 +686,14 @@ const accountMap = new Map([
         { ...coins.POPCAT, amountToBuy: 70 },
         { ...coins.RETARDFINDER, amountToBuy: 70 },
         { ...coins.HOSICO, amountToBuy: 70 },
-        { ...coins.SARATOGA, amountToBuy: 8 },
+        { ...coins.SARATOGA, amountToBuy: 6 },
         { ...coins.GREENLAND, amountToBuy: 10 },
         { ...coins.HKU5, amountToBuy: 3 },
         { ...coins.SWF, amountToBuy: 10 },
-        { ...coins.TGC, amountToBuy: 15 },
+        { ...coins.TGC, amountToBuy: 20 },
         {
           ...coins.PVE,
-          amountToBuy: 70,
+          amountToBuy: 40,
           percentToSell: 20,
           timeBetweenSells: 4000,
         },
@@ -704,6 +709,12 @@ const accountMap = new Map([
           amountToBuy: 70,
           percentToSell: 20,
           timeBetweenSells: 7000,
+        },
+        {
+          ...coins.JEROMEPOWELL,
+          amountToBuy: 2,
+          percentToSell: 33,
+          timeBetweenSells: 10000,
         },
         { ...coins.UNCONDITIONALSURRENDER, amountToBuy: 3 },
         { ...coins.TRUMPGAZA, amountToBuy: 3 },
@@ -733,12 +744,12 @@ const accountMap = new Map([
         },
         { ...coins.FLOKI, amountToBuy: 10 },
         { ...coins.MENVSGORILLA, amountToBuy: 20 },
-        { ...coins.GROK420, amountToBuy: 30 },
+        { ...coins.GROK420, amountToBuy: 20 },
         { ...coins.SCAMALTMAN, amountToBuy: 7 },
         { ...coins.LOFIMAGA, amountToBuy: 3 },
         {
           ...coins.SUPERGROK,
-          amountToBuy: 40,
+          amountToBuy: 20,
           percentToSell: 20,
           timeBetweenSells: 7,
         },
@@ -824,7 +835,7 @@ const accountMap = new Map([
         { ...coins.ROARINGKITTY, amountToBuy: 40 },
 
         { ...coins._8008, amountToBuy: 10 },
-        { ...coins.GROK420, amountToBuy: 3 },
+        { ...coins.GROK420, amountToBuy: 20 },
 
         // {
         //   ...coins.GROK4,
