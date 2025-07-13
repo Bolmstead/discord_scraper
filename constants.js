@@ -361,6 +361,7 @@ const coins = {
     address: "9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump",
     keywords: ["fart coin", "fartcoin"],
   },
+
   TRUMPGAZA: {
     name: "Trump Gaza",
     address: "5eNm9kFBe3qsPGWXdn9SYovCMnA7Q1bWZkfacQqtpump",
@@ -493,6 +494,16 @@ const coins = {
     name: "Pietro Parolin",
     address: "7rnYT9QqS9RKYFJnDT14T14LxmG1c3xZo61pSVJRpump",
     keywords: ["pietro", "parolin"],
+  },
+  SIGMABOY: {
+    name: "Sigmaboy",
+    address: "4N5jkEmddTxtZQzjb4XowDJvHDzcxkByxMAf9Xa4bonk",
+    keywords: ["sigmaboy", "sigma boy"],
+  },
+  LUCKYCOIN: {
+    name: "Lucky Coin",
+    address: "3BtunCQ3KdpsYtXQU9SmkGopnDkaQHuEgG14Dy1Lbonk",
+    keywords: ["lucky coin", "luckycoin"],
   },
   KNOX: {
     name: "Official Fort Knox Coin",
@@ -654,6 +665,16 @@ const testCoins = {
 // Create efficient lookup maps
 const accountMap = new Map([
   // Active accounts
+  [
+    "theunipcs",
+    {
+      name: "Bonk Guy",
+      coins: [
+        { ...coins.LUCKYCOIN, amountToBuy: 70 },
+        { ...coins.SIGMABOY, amountToBuy: 70 },
+      ],
+    },
+  ],
   [
     "realDonaldTrump",
     {
