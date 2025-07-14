@@ -1092,7 +1092,7 @@ const accountMap = new Map([
       name: "toly",
       coins: [
         { ...coins.TOLITHETRENCHER, amountToBuy: 10 },
-        { ...coins.GORBAGANA, amountToBuy: 70 },
+        // { ...coins.GORBAGANA, amountToBuy: 70 },
       ],
     },
   ],
