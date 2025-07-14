@@ -428,6 +428,11 @@ const coins = {
     address: "9tqjeRS1swj36Ee5C1iGiwAxjQJNGAVCzaTLwFY8bonk",
     keywords: ["ani "],
   },
+  CHADCOMPANION: {
+    name: "Chad",
+    address: "Akd634sRBJQWKgosKCYDKQdxNuZr5J7r2VZ2Fwxmv6Zx",
+    keywords: ["chad"],
+  },
   DEPORTLON: {
     name: "Deportlon",
     address: "5RcXsuKg6nWH9UEKdf22XLwwKJE2EmcGuHNadpgGDa9v",
@@ -843,7 +848,8 @@ const accountMap = new Map([
         { ...coins.TRUTHGPT, amountToBuy: 2 },
         { ...coins.TRUMP2028, amountToBuy: 10 },
         { ...coins.RUDI, amountToBuy: 30 },
-        { ...coins.ANICOMPANION, amountToBuy: 30 },
+        { ...coins.ANICOMPANION, amountToBuy: 40 },
+        { ...coins.CHADCOMPANION, amountToBuy: 50 },
         { ...coins.SWF, amountToBuy: 10 },
         { ...coins.DOGEFATHER, amountToBuy: 30 },
         { ...coins.SBR, amountToBuy: 40 },
