@@ -671,7 +671,7 @@ const accountMap = new Map([
       name: "Bonk Guy",
       coins: [
         { ...coins.LUCKYCOIN, amountToBuy: 70 },
-        { ...coins.SIGMABOY, amountToBuy: 70 },
+        { ...coins.SIGMABOY, amountToBuy: 40 },
       ],
     },
   ],
@@ -718,6 +718,8 @@ const accountMap = new Map([
           percentToSell: 20,
           timeBetweenSells: 4000,
         },
+        { ...coins.GORK, amountToBuy: 70 },
+        { ...coins.SIGMABOY, amountToBuy: 40 },
         // { ...coins.THEAMERICAPARTY, amountToBuy: 70 },
         { ...coins.DEPORTLON, amountToBuy: 3 },
         { ...coins.CSR, amountToBuy: 30 },
