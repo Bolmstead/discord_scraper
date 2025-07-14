@@ -418,6 +418,16 @@ const coins = {
     address: "5wQFpZ2Xstd6khM8WwtVdhegiNEjM48DYErMVVknpump",
     keywords: ["trump 2028"],
   },
+  RUDI: {
+    name: "Bad Rudy",
+    address: "2rVgh6tcU1Hhk58XwD631E2D6iqLV28prSdpBXaLbonk",
+    keywords: ["rudi"],
+  },
+  ANICOMPANION: {
+    name: "Ani Companion",
+    address: "9tqjeRS1swj36Ee5C1iGiwAxjQJNGAVCzaTLwFY8bonk",
+    keywords: ["ani "],
+  },
   DEPORTLON: {
     name: "Deportlon",
     address: "5RcXsuKg6nWH9UEKdf22XLwwKJE2EmcGuHNadpgGDa9v",
@@ -832,6 +842,8 @@ const accountMap = new Map([
         { ...coins.HARAMBE, amountToBuy: 70 },
         { ...coins.TRUTHGPT, amountToBuy: 2 },
         { ...coins.TRUMP2028, amountToBuy: 10 },
+        { ...coins.RUDI, amountToBuy: 30 },
+        { ...coins.ANICOMPANION, amountToBuy: 30 },
         { ...coins.SWF, amountToBuy: 10 },
         { ...coins.DOGEFATHER, amountToBuy: 30 },
         { ...coins.SBR, amountToBuy: 40 },
