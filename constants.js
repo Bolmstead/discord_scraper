@@ -419,19 +419,24 @@ const coins = {
     keywords: ["trump 2028"],
   },
   RUDI: {
-    name: "Bad Rudy",
+    name: "Bad Rudi",
     address: "2rVgh6tcU1Hhk58XwD631E2D6iqLV28prSdpBXaLbonk",
     keywords: ["rudi"],
   },
   ANICOMPANION: {
     name: "Ani Companion",
     address: "9tqjeRS1swj36Ee5C1iGiwAxjQJNGAVCzaTLwFY8bonk",
-    keywords: ["ani "],
+    keywords: [" ani "],
   },
   CHADCOMPANION: {
     name: "Chad",
     address: "Akd634sRBJQWKgosKCYDKQdxNuZr5J7r2VZ2Fwxmv6Zx",
     keywords: ["chad"],
+  },
+  DOGECOMPANION: {
+    name: "Doge Companion",
+    address: "7RwbXSEBJwuLFEgXe9f7BxRQZwxbNvGTmNnJtLZrNF47",
+    keywords: ["Elon Musk should add a"],
   },
   DEPORTLON: {
     name: "Deportlon",
@@ -848,8 +853,9 @@ const accountMap = new Map([
         { ...coins.TRUTHGPT, amountToBuy: 2 },
         { ...coins.TRUMP2028, amountToBuy: 10 },
         { ...coins.RUDI, amountToBuy: 30 },
-        { ...coins.ANICOMPANION, amountToBuy: 40 },
+        { ...coins.ANICOMPANION, amountToBuy: 50 },
         { ...coins.CHADCOMPANION, amountToBuy: 50 },
+        { ...coins.DOGECOMPANION, amountToBuy: 2 },
         { ...coins.SWF, amountToBuy: 10 },
         { ...coins.DOGEFATHER, amountToBuy: 30 },
         { ...coins.SBR, amountToBuy: 40 },
