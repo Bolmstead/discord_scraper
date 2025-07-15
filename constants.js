@@ -852,8 +852,8 @@ const accountMap = new Map([
         { ...coins.HARAMBE, amountToBuy: 70 },
         { ...coins.TRUTHGPT, amountToBuy: 2 },
         { ...coins.TRUMP2028, amountToBuy: 10 },
-        { ...coins.RUDI, amountToBuy: 30 },
-        { ...coins.ANICOMPANION, amountToBuy: 50 },
+        // { ...coins.RUDI, amountToBuy: 30 },
+        // { ...coins.ANICOMPANION, amountToBuy: 50 },
         { ...coins.CHADCOMPANION, amountToBuy: 50 },
         { ...coins.DOGECOMPANION, amountToBuy: 2 },
         { ...coins.SWF, amountToBuy: 10 },
@@ -866,7 +866,6 @@ const accountMap = new Map([
         { ...coins.KNOX, amountToBuy: 10 },
         { ...coins.DICKBUTT, amountToBuy: 15 },
         { ...coins.TITCOIN, amountToBuy: 70 },
-        { ...coins.OPTIMUSCEO, amountToBuy: 2 },
         // {
         //   ...coins.THEAMERICAPARTY,
         //   amountToBuy: 70,
