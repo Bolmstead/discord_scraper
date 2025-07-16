@@ -842,7 +842,7 @@ const accountMap = new Map([
         { ...coins.CHADCOMPANION, amountToBuy: 70 },
         { ...coins.DOGECOMPANION, amountToBuy: 2 },
         { ...coins.TAKICOMPANION, amountToBuy: 70 },
-        { ...coins.MEKUNACOMPANION, amountToBuy: 15 },
+        { ...coins.MEKUNACOMPANION, amountToBuy: 60 },
 
         { ...coins.PENGU, amountToBuy: 70 },
         { ...coins.MOODENG, amountToBuy: 70 },

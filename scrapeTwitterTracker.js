@@ -17,7 +17,7 @@ async function openDiscord() {
   // Start the scraper
   setTimeout(async () => {
     await twitterTrackerScraper(page);
-  }, 20 * 1000);
+  }, 30 * 1000);
 }
 
 openDiscord();
