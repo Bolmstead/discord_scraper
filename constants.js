@@ -835,8 +835,8 @@ const accountMap = new Map([
       timeToSellForAnyPostedCA: 120 * 1000,
       priorityFeeForAnyPostedCA: 0.1,
       coins: [
-        { ...coins.KAICOMPANION, amountToBuy: 70 },
-        { ...coins.GOODRUDICOMPANION, amountToBuy: 70 },
+        { ...coins.KAICOMPANION, amountToBuy: 70 }, // beecee recommendation
+        { ...coins.GOODRUDICOMPANION, amountToBuy: 70 }, // beecee recommendation
         { ...coins.BADRUDICOMPANION, amountToBuy: 70 },
         // { ...coins.ANICOMPANION, amountToBuy: 50 },
         { ...coins.CHADCOMPANION, amountToBuy: 70 },
