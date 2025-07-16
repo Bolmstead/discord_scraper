@@ -438,6 +438,21 @@ const coins = {
     address: "9tqjeRS1swj36Ee5C1iGiwAxjQJNGAVCzaTLwFY8bonk",
     keywords: [" ani "],
   },
+  KORGCOMPANION: {
+    name: "Korg",
+    address: "GdTY2cGDU3oUpKFXvfL3Fo4uZU7EDr6X41XsdT1Qbonk",
+    keywords: ["korg"],
+  },
+  ANDREJCOMPANION: {
+    name: "Andrej",
+    address: "7Dmvq8fEFGVD6Fnu7Bjyni3AwnbnLCvuECxU5A4Zbonk",
+    keywords: ["andrej"],
+  },
+  NYXCOMPANION: {
+    name: "Nyx",
+    address: "EmHug88n8fxALLd45xpMqZHheU8rCqc3rw6xjy8bonk",
+    keywords: ["nyx"],
+  },
   CHADCOMPANION: {
     name: "Chad",
     address: "Akd634sRBJQWKgosKCYDKQdxNuZr5J7r2VZ2Fwxmv6Zx",
@@ -842,7 +857,10 @@ const accountMap = new Map([
         { ...coins.CHADCOMPANION, amountToBuy: 70 },
         { ...coins.DOGECOMPANION, amountToBuy: 2 },
         { ...coins.TAKICOMPANION, amountToBuy: 70 },
-        { ...coins.MEKUNACOMPANION, amountToBuy: 60 },
+        { ...coins.MEKUNACOMPANION, amountToBuy: 10 },
+        { ...coins.KORGCOMPANION, amountToBuy: 10 },
+        { ...coins.ANDREJCOMPANION, amountToBuy: 50 },
+        { ...coins.NYXCOMPANION, amountToBuy: 70 },
 
         { ...coins.PENGU, amountToBuy: 70 },
         { ...coins.MOODENG, amountToBuy: 70 },
