@@ -463,6 +463,11 @@ const coins = {
     address: "7RwbXSEBJwuLFEgXe9f7BxRQZwxbNvGTmNnJtLZrNF47",
     keywords: ["Elon Musk should add a"],
   },
+  DRAVENCOMPANION: {
+    name: "Draven",
+    address: "FQQQF143JrD55mAF4p48RKX8mkZR4FwugDERU1W6bonk",
+    keywords: ["draven"],
+  },
   TAKICOMPANION: {
     name: "Taki",
     address: "4AXnbEf3N3iLNChHL2TWHcyMnBKEvJLJ82okFFUFbonk",
@@ -565,6 +570,7 @@ const coins = {
     address: "4N8g7mw171aVC1oMMRV1pMrQuB1RwFHaJan2WYyBpump",
     keywords: ["knox"],
   },
+
   BROC: {
     name: "Broccoli",
     address: "D13VkjDiCxtgRJsH4s1VCxKS4bFZq5UEz2iRsSbapump",
@@ -861,6 +867,7 @@ const accountMap = new Map([
         { ...coins.KORGCOMPANION, amountToBuy: 10 },
         { ...coins.ANDREJCOMPANION, amountToBuy: 50 },
         { ...coins.NYXCOMPANION, amountToBuy: 70 },
+        { ...coins.DRAVENCOMPANION, amountToBuy: 3 },
 
         { ...coins.PENGU, amountToBuy: 70 },
         { ...coins.MOODENG, amountToBuy: 70 },
