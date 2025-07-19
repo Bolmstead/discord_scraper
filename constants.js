@@ -5,55 +5,12 @@ const coins = {
   TESTCOIN: {
     name: "TESTCOIN",
     address: "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
-    keywords: [
-      "the",
-      "a",
-      "an",
-      "and",
-      "or",
-      "but",
-      "if",
-      "then",
-      "else",
-      "while",
-      "for",
-      "in",
-      "of",
-      "at",
-      "by",
-      "up",
-      "down",
-      "left",
-      "right",
-      "this",
-      "that",
-      "here",
-      "there",
-      "when",
-      "where",
-      "why",
-      "how",
-      "all",
-      "any",
-      "some",
-      "one",
-      "two",
-      "three",
-      "four",
-      "five",
-      "six",
-      "seven",
-      "eight",
-      "nine",
-      "ten",
-      "!",
-      "?",
-      ".",
-      ",",
-      ":",
-      ";",
-      "-",
-    ],
+    keywords: ["a", "e", "i", "o", "u", "!", "?", ".", ",", ":", ";", "-"],
+  },
+  OPTIMUSCOMPANION: {
+    name: "Optimus Companion",
+    address: "AAsPWrftj7QeabkB8mbUFsjMsTsf1zCZ4DT5tNZ3bonk",
+    keywords: ["Optimus as a Grok companion"],
   },
   PVE: {
     name: "PVE",
@@ -93,7 +50,7 @@ const coins = {
   MICHI: {
     name: "michi",
     address: "5mbK36SZ7J19An8jFochhQS4of8g6BwUjbeCSxBSoWdp",
-    keywords: ["michi"],
+    keywords: ["michi ", " michi", "michi.", "michi,"],
   },
   CHILLGUY: {
     name: "Chill Guy",
@@ -139,7 +96,7 @@ const coins = {
   JEDIOFUSA: {
     name: "JOTUS",
     address: "5spzxsgCMetaWbZNnUCcxSGmnmCHHjL3WaCdtNNhBR7K",
-    keywords: ["sith lord", "jedi", "star wars"],
+    keywords: [],
   },
   MENVSGORILLA: {
     name: "100 Men Vs Gorilla",
@@ -219,7 +176,7 @@ const coins = {
   BUTTHOLE: {
     name: "BUTTHOLE COIN",
     address: "CboMcTUYUcy9E6B3yGdFn6aEsGUnYV6yWeoeukw6pump",
-    keywords: ["butthole coin"],
+    keywords: ["butthole coin", "$butthole"],
   },
   BRAINLET: {
     name: "Brainlet",
@@ -264,7 +221,7 @@ const coins = {
   EWON: {
     name: "Ewon Wusk",
     address: "EF3Ln1DkUB5azvqcaCJgG3RR2qSUJEXxLo1q4ZHzpump",
-    keywords: ["ewon"],
+    keywords: ["ewon wusk"],
   },
   GREED3: {
     name: "Greed3",
@@ -286,21 +243,12 @@ const coins = {
     address: "7qhwYUXBaPTfWkhUpgWTjHAvdG48wRj5TLmTQ5Topump",
     keywords: ["peaches"],
   },
-  FLOKICEO: {
-    name: "FLOKI CEO",
-    address: "8bF933Z78MRpUhmPia6v68Muxa4caL4B9fZzdJTsbonk",
-    keywords: ["there was a time this cute yellow doge was the ceo"],
-  },
   MRBEASTCEO: {
     name: "Mr Beast CEO",
     address: "cDkTvtXwJLqAS5NqpiwoTT2cbe6GkPBfBwkb5kppump",
     keywords: ["I’ll fill the roll"],
   },
-  OPTIMUSCEO: {
-    name: "OPTIMUS CEO",
-    address: "BRxWb6owaksca92yrLJvTJSuiHEkcg5XJVLEEZLgpump",
-    keywords: ["optimus, the new ceo"],
-  },
+
   DOODOOCOIN: {
     name: "Grok's Shitcoin",
     address: "2N8qruAsuSre8vEopvgEgBHigfnqBTFbmf9XTDw9pump",
@@ -316,20 +264,10 @@ const coins = {
     address: "7oE4Ji977tfofxk9k1UosJ5mTz7rjPRNiSCyWFbPpump",
     keywords: ["chestnut"],
   },
-  GROK4: {
-    name: "Grok 4",
-    address: "64iL9PFYdJC7GKNmo6PySvMY3KK3XggE1JAUyLQdbonk",
-    keywords: ["grok 4", "grok4"],
-  },
   _8008: {
     name: "8008",
     address: "5puhwnyz2Tv8jSmmBD5DSqCwFVXwwPGZacymM7DQpump",
     keywords: ["8008"],
-  },
-  UNIPARTY: {
-    name: "Uniparty",
-    address: "GXBxFPMPavDzMygqHHjrxAqaAg6tBD8GMo5cSU6iAx1t",
-    keywords: ["uniparty"],
   },
 
   PWEASE: {
@@ -438,56 +376,18 @@ const coins = {
     address: "9tqjeRS1swj36Ee5C1iGiwAxjQJNGAVCzaTLwFY8bonk",
     keywords: [" ani "],
   },
-  KORGCOMPANION: {
-    name: "Korg",
-    address: "GdTY2cGDU3oUpKFXvfL3Fo4uZU7EDr6X41XsdT1Qbonk",
-    keywords: ["korg"],
+  VALENTINECOMPANION: {
+    name: "Valentine",
+    address: "9GtvcnDUvGsuibktxiMjLQ2yyBq5akUahuBs8yANbonk",
+    keywords: ["valentine"],
   },
-  ANDREJCOMPANION: {
-    name: "Andrej",
-    address: "7Dmvq8fEFGVD6Fnu7Bjyni3AwnbnLCvuECxU5A4Zbonk",
-    keywords: ["andrej"],
-  },
-  NYXCOMPANION: {
-    name: "Nyx",
-    address: "EmHug88n8fxALLd45xpMqZHheU8rCqc3rw6xjy8bonk",
-    keywords: ["nyx"],
-  },
-  CHADCOMPANION: {
-    name: "Chad",
-    address: "Akd634sRBJQWKgosKCYDKQdxNuZr5J7r2VZ2Fwxmv6Zx",
-    keywords: ["chad"],
-  },
-  DOGECOMPANION: {
-    name: "Doge Companion",
-    address: "7RwbXSEBJwuLFEgXe9f7BxRQZwxbNvGTmNnJtLZrNF47",
-    keywords: ["Elon Musk should add a"],
-  },
-  DRAVENCOMPANION: {
-    name: "Draven",
-    address: "FQQQF143JrD55mAF4p48RKX8mkZR4FwugDERU1W6bonk",
-    keywords: ["draven"],
-  },
-  TAKICOMPANION: {
-    name: "Taki",
-    address: "4AXnbEf3N3iLNChHL2TWHcyMnBKEvJLJ82okFFUFbonk",
-    keywords: ["taki ", "taki.", "taki,", "taki!"],
-  },
-  MEKUNACOMPANION: {
-    name: "Mekuna",
-    address: "KfRRmwj3yDfPqRALKeCAY8H3KCxXPpKDH2zhrBrbonk",
-    keywords: ["mekuna"],
-  },
+
   DEPORTLON: {
     name: "Deportlon",
     address: "5RcXsuKg6nWH9UEKdf22XLwwKJE2EmcGuHNadpgGDa9v",
     keywords: ["deportlon"],
   },
-  BONKHOUSE: {
-    name: "Bonk House",
-    address: "6fHPh6b1WrfoS8f6ZhoziVhNBzTs5LCLnAEtnzfMbonk",
-    keywords: ["bonk house", "bonkhouse"],
-  },
+
   JPMD: {
     name: "jpmd",
     address: "GgLyU28hTpmttqqkBFYm5fDZuC5TvVw36V1UdT2aZvrC",
@@ -523,7 +423,7 @@ const coins = {
   SBF: {
     name: "Sam Bankman-Fried",
     address: "9Nuzd5BZMfeiP2TSXXGqYcrtqYEyFkGoEbm39CB3pump",
-    keywords: [],
+    keywords: ["a", "e", "i", "o", "u", "!", "?", ".", ",", ":", ";", "-"],
   },
   GREENLAND: {
     name: "America 51st State",
@@ -545,16 +445,7 @@ const coins = {
     address: "GsSUx3qENEAn5MDQLGYHYs7ThtPXsnwCkKwqv1ZWbonk",
     keywords: ["trump gold card", "gold card"],
   },
-  HOTDOG: {
-    name: "Hotdog",
-    address: "Anwdqnejtp1MuLPDzSW9uWhkLTKz6Ej3QC2wCXjspump",
-    keywords: ["hotdog"],
-  },
-  POPE: {
-    name: "Pietro Parolin",
-    address: "7rnYT9QqS9RKYFJnDT14T14LxmG1c3xZo61pSVJRpump",
-    keywords: ["pietro", "parolin"],
-  },
+
   SIGMABOY: {
     name: "Sigmaboy",
     address: "4N5jkEmddTxtZQzjb4XowDJvHDzcxkByxMAf9Xa4bonk",
@@ -571,7 +462,7 @@ const coins = {
     keywords: ["knox"],
   },
 
-  BROC: {
+  BROCCOLI: {
     name: "Broccoli",
     address: "D13VkjDiCxtgRJsH4s1VCxKS4bFZq5UEz2iRsSbapump",
     keywords: ["broccoli"],
@@ -597,16 +488,6 @@ const coins = {
     keywords: ["unconditional surrender"],
   },
 
-  SWASTI: {
-    name: "Swasticoin",
-    address: "D91JAEfzeFZspHc6PrY8n1p234oEKXzhM3EM73Vppump",
-    keywords: ["swasticoin"],
-  },
-  SWASTA: {
-    name: "Swastachain",
-    address: "DVzbUXeAQGyDLsn9FkGxm6q2q9hs7tUK4cimmmQpump",
-    keywords: ["swastachain"],
-  },
   SUPERGROK: {
     name: "Super Grok",
     address: "P79VPZFfDreHPQVEF9BHZtAipDpviczpcnBXHWspump",
@@ -658,69 +539,10 @@ const coins = {
     address: "EKEWAk7hfnwfR8DBb1cTayPPambqyC7pwNiYkaYQKQHp",
     keywords: ["roaring kitty", "roaringkitty", "keith gill"],
   },
-};
-const testCoins = {
-  TESTCOIN: {
-    name: "Test",
-    address: "7mHCx9iXPJ7EJDbDAUGmej39Kme8cxZfeVi1EAvEpump",
-    keywords: [
-      "is",
-      "the",
-      "in",
-      "he",
-      "she",
-      "it",
-      "they",
-      "we",
-      "you",
-      "this",
-      "that",
-      "there",
-      "here",
-      "there",
-      "when",
-      "where",
-      "how",
-      "why",
-      "what",
-      "which",
-      "who",
-      "whom",
-      "this",
-      "these",
-      "those",
-    ],
-  },
-  TESTTRUMP: {
-    name: "TestTrump",
-    address: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN",
-    keywords: [
-      "is",
-      "the",
-      "in",
-      "he",
-      "she",
-      "it",
-      "they",
-      "we",
-      "you",
-      "this",
-      "that",
-      "there",
-      "here",
-      "there",
-      "when",
-      "where",
-      "how",
-      "why",
-      "what",
-      "which",
-      "who",
-      "whom",
-      "this",
-      "these",
-      "those",
-    ],
+  BASEDELON: {
+    name: "Based Elon",
+    address: "37CK1GDT6y2YXKD3amHLwfkVXPmM1EMYAGmDKXiEbonk",
+    keywords: ["based elon"],
   },
 };
 // Create efficient lookup maps
@@ -732,7 +554,7 @@ const accountMap = new Map([
       name: "Bonk Guy",
       coins: [
         { ...coins.LUCKYCOIN, amountToBuy: 70 },
-        { ...coins.SIGMABOY, amountToBuy: 40 },
+        { ...coins.SIGMABOY, amountToBuy: 10 },
       ],
     },
   ],
@@ -781,7 +603,7 @@ const accountMap = new Map([
         },
         { ...coins.GORK, amountToBuy: 70 },
         { ...coins.SIGMABOY, amountToBuy: 40 },
-        // { ...coins.THEAMERICAPARTY, amountToBuy: 70 },
+        { ...coins.THEAMERICAPARTY, amountToBuy: 70 },
         { ...coins.DEPORTLON, amountToBuy: 3 },
         { ...coins.CSR, amountToBuy: 30 },
         { ...coins.ROARINGKITTY, amountToBuy: 70 },
@@ -806,7 +628,8 @@ const accountMap = new Map([
         { ...coins.BIGBALLS, amountToBuy: 40 },
         { ...coins.KM, amountToBuy: 30 },
         { ...coins.DOGEFATHER, amountToBuy: 40 },
-        { ...coins.LUIGI, amountToBuy: 70 },
+        { ...coins.LUIGI, amountToBuy: 30 },
+        { ...coins.ASSANGE, amountToBuy: 3 },
         { ...coins.HARAMBE, amountToBuy: 70 },
         { ...coins.JAILSTOOL, amountToBuy: 70 },
         { ...coins.ROGER, amountToBuy: 15 },
@@ -856,24 +679,21 @@ const accountMap = new Map([
       timeToSellForAnyPostedCA: 120 * 1000,
       priorityFeeForAnyPostedCA: 0.1,
       coins: [
-        { ...coins.KAICOMPANION, amountToBuy: 70 }, // beecee recommendation
-        { ...coins.GOODRUDICOMPANION, amountToBuy: 70 }, // beecee recommendation
-        { ...coins.BADRUDICOMPANION, amountToBuy: 70 },
-        // { ...coins.ANICOMPANION, amountToBuy: 50 },
-        { ...coins.CHADCOMPANION, amountToBuy: 70 },
-        { ...coins.DOGECOMPANION, amountToBuy: 2 },
-        { ...coins.TAKICOMPANION, amountToBuy: 70 },
-        { ...coins.MEKUNACOMPANION, amountToBuy: 10 },
-        { ...coins.KORGCOMPANION, amountToBuy: 10 },
-        { ...coins.ANDREJCOMPANION, amountToBuy: 50 },
-        { ...coins.NYXCOMPANION, amountToBuy: 70 },
-        { ...coins.DRAVENCOMPANION, amountToBuy: 3 },
-
+        { ...coins.OPTIMUSCOMPANION, amountToBuy: 15 },
+        { ...coins.KAICOMPANION, amountToBuy: 30 }, // beecee recommendation
+        { ...coins.BADRUDICOMPANION, amountToBuy: 40 },
+        { ...coins.GOODRUDICOMPANION, amountToBuy: 40 }, // beecee recommendation
+        { ...coins.VALENTINECOMPANION, amountToBuy: 20 },
         { ...coins.PENGU, amountToBuy: 70 },
+        {
+          ...coins.SUPERGROK,
+          amountToBuy: 15,
+        },
         { ...coins.MOODENG, amountToBuy: 70 },
         { ...coins.GOATSEUSMAXIMUS, amountToBuy: 70 },
         { ...coins.SHARKCAT, amountToBuy: 70 },
         { ...coins.PONKE, amountToBuy: 70 },
+        { ...coins.ASSANGE, amountToBuy: 3 },
         { ...coins.MICHI, amountToBuy: 70 },
         { ...coins.CHILLGUY, amountToBuy: 70 },
         { ...coins.ZEREBRO, amountToBuy: 70 },
@@ -890,13 +710,7 @@ const accountMap = new Map([
         { ...coins.CHILLHOUSE, amountToBuy: 70 },
         { ...coins.SARATOGA, amountToBuy: 10 },
         { ...coins.SCAMALTMAN, amountToBuy: 7 },
-        // {
-        //   ...coins.SUPERGROK,
-        //   amountToBuy: 40,
-        //   percentToSell: 20,
-        //   timeBetweenSells: 7,
-        // },
-        { ...coins.LUIGI, amountToBuy: 70 },
+        { ...coins.LUIGI, amountToBuy: 30 },
         { ...coins.TRUMPGAZA, amountToBuy: 3 },
         { ...coins.FARTCOIN, amountToBuy: 70 },
         { ...coins.RETARDFINDER, amountToBuy: 70 },
@@ -907,7 +721,7 @@ const accountMap = new Map([
         { ...coins.TRUTHGPT, amountToBuy: 2 },
         { ...coins.TRUMP2028, amountToBuy: 10 },
         { ...coins.SWF, amountToBuy: 10 },
-        { ...coins.DOGEFATHER, amountToBuy: 30 },
+        { ...coins.DOGEFATHER, amountToBuy: 40 },
         { ...coins.SBR, amountToBuy: 40 },
         { ...coins.CSR, amountToBuy: 70 },
         { ...coins.TRUMPSEASON, amountToBuy: 2 },
@@ -916,12 +730,10 @@ const accountMap = new Map([
         { ...coins.KNOX, amountToBuy: 10 },
         { ...coins.DICKBUTT, amountToBuy: 15 },
         { ...coins.TITCOIN, amountToBuy: 70 },
-        // {
-        //   ...coins.THEAMERICAPARTY,
-        //   amountToBuy: 70,
-        //   percentToSell: 25,
-        //   timeBetweenSells: 3000,
-        // },
+        {
+          ...coins.THEAMERICAPARTY,
+          amountToBuy: 40,
+        },
         { ...coins.BUTTCOIN, amountToBuy: 70 },
         { ...coins.GORBAGANA, amountToBuy: 70 },
         { ...coins.OBIPNUTKENOBI, amountToBuy: 50 },
@@ -929,7 +741,7 @@ const accountMap = new Map([
         { ...coins.ROGER, amountToBuy: 15 },
         { ...coins.PWEASE, amountToBuy: 70 },
         { ...coins.ROARINGKITTY, amountToBuy: 40 },
-
+        { ...coins.BASEDELON, amountToBuy: 30 },
         { ...coins._8008, amountToBuy: 10 },
         { ...coins.GROK420, amountToBuy: 20 },
 
@@ -942,17 +754,15 @@ const accountMap = new Map([
         { ...coins.DOODOOCOIN, amountToBuy: 4 },
         { ...coins.GROKCOIN, amountToBuy: 30 },
         { ...coins.EWON, amountToBuy: 5 },
-        { ...coins.MORNINGROUTINE, amountToBuy: 20 },
         { ...coins.HKU5, amountToBuy: 3 },
         { ...coins.DOGWIFHAT, amountToBuy: 70 },
-        { ...coins.FLOKICEO, amountToBuy: 2 },
         { ...coins.FLOKI, amountToBuy: 10 },
         { ...coins.AI16Z, amountToBuy: 70 },
         { ...coins.GIGACHAD, amountToBuy: 70 },
         { ...coins.POPCAT, amountToBuy: 70 },
         { ...coins.MENVSGORILLA, amountToBuy: 20 },
         { ...coins.DEPORTLON, amountToBuy: 3 },
-        { ...coins.MRBEASTCEO, amountToBuy: 70 },
+        { ...coins.MRBEASTCEO, amountToBuy: 30 },
         // { ...coins.TESTCOIN, amountToBuy: 0.001 },
       ],
     },
@@ -982,7 +792,6 @@ const accountMap = new Map([
         { ...coins.PWEASE, amountToBuy: 70 },
         { ...coins.DOODOOCOIN, amountToBuy: 4 },
         { ...coins.GROKCOIN, amountToBuy: 30 },
-        { ...coins.MORNINGROUTINE, amountToBuy: 20 },
       ],
     },
   ],
@@ -1056,8 +865,8 @@ const accountMap = new Map([
         { ...coins.SHORTNOY, amountToBuy: 3 },
         { ...coins.JAILSTOOL, amountToBuy: 70 },
         { ...coins.GREED3, amountToBuy: 40 },
-        { ...coins.GREED2, amountToBuy: 8 },
-        { ...coins.FARTSTOOL, amountToBuy: 3 },
+        { ...coins.GREED2, amountToBuy: 5 },
+        { ...coins.FARTSTOOL, amountToBuy: 2 },
         { ...coins.MISSPEACHES, amountToBuy: 8 },
         { ...coins.HOTDOG, amountToBuy: 2 },
       ],
@@ -1178,8 +987,19 @@ const accountMap = new Map([
         // {
         //   ...coins.TESTCOIN,
         //   amountToBuy: 0.0001,
-        //   percentToSell: 25,
-        //   timeBetweenSells: 1000,
+        // },
+      ],
+    },
+  ],
+  [
+    "nypost",
+    {
+      name: "NY Post",
+      username: "nypost",
+      coins: [
+        // {
+        //   ...coins.TESTCOIN,
+        //   amountToBuy: 0.0001,
         // },
       ],
     },
@@ -1189,67 +1009,23 @@ const accountMap = new Map([
     {
       name: "Bonk Guy",
       username: "SolportTom",
-      coins: [{ ...coins.BONKHOUSE, amountToBuy: 30 }],
-    },
-  ],
-]);
-
-const testAccountMap = new Map([
-  [
-    "elonmusk",
-    {
-      name: "Elon Musk",
-      username: "elonmusk",
-      coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
+      coins: [],
     },
   ],
   [
-    "binance",
+    "cz",
     {
-      name: "binance",
-      username: "binance",
-      coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
-    },
-  ],
-
-  [
-    "MarioNawfal",
-    {
-      name: "Mario Nawfal",
-      username: "MarioNawfal",
-      coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
+      name: "CZ Binance ",
+      username: "cz",
+      coins: [{ ...coins.BROCCOLI, amountToBuy: 30 }],
     },
   ],
   [
-    "nypost",
+    "SBF_FTX",
     {
-      name: "New York Post (test)",
-      username: "nypost",
-      coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
-    },
-  ],
-  [
-    "ABC",
-    {
-      name: "ABC",
-      username: "ABC",
-      coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
-    },
-  ],
-  [
-    "teslaownersSV",
-    {
-      name: "teslaownersSV",
-      username: "teslaownersSV",
-      coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
-    },
-  ],
-  [
-    "trump",
-    {
-      name: "Donald Trump",
-      username: "trump",
-      coins: [{ ...testCoins.TESTCOIN, amountToBuy: 0.001 }],
+      name: "SBF",
+      username: "SBF_FTX",
+      coins: [{ ...coins.SBF, amountToBuy: 20 }],
     },
   ],
 ]);
@@ -1273,24 +1049,6 @@ for (const [username, account] of accountMap) {
   }
 }
 
-const testKeywordMap = new Map();
-for (const [username, account] of testAccountMap) {
-  if (account.coins) {
-    for (const coin of account.coins) {
-      if (coin) {
-        if (coin.keywords) {
-          for (const keyword of coin.keywords) {
-            if (!testKeywordMap.has(keyword)) {
-              testKeywordMap.set(keyword, []);
-            }
-            testKeywordMap.get(keyword).push({ username, coin });
-          }
-        }
-      }
-    }
-  }
-}
-
 // const trumpKeywordMap = new Map();
 // for (const [username, account] of trumpAccountMap) {
 //   for (const coin of account.coins) {
@@ -1307,11 +1065,4 @@ for (const [username, account] of testAccountMap) {
 //   }
 // }
 
-export {
-  coins,
-  accountMap,
-  keywordMap,
-  testKeywordMap,
-  testAccountMap,
-  testCoins,
-};
+export { coins, accountMap, keywordMap };

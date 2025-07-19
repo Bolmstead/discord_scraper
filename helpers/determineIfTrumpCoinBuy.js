@@ -1,8 +1,4 @@
-import {
-  trumpAccountMap,
-  trumpKeywordMap,
-  testKeywordMap,
-} from "../constants.js";
+import { trumpAccountMap, trumpKeywordMap } from "../constants.js";
 import { determineIfTextHasCA } from "./determineIfTextHasCA.js";
 
 // Pre-process maps at module level
@@ -11,11 +7,6 @@ for (const [keyword, matches] of trumpKeywordMap) {
   trumpCombinedKeywords.set(keyword.toLowerCase(), { matches, type: "trump" });
 }
 console.log("🚀 ~ trumpCombinedKeywords:", trumpCombinedKeywords);
-
-const testCombinedKeywords = new Map();
-for (const [keyword, matches] of testKeywordMap) {
-  testCombinedKeywords.set(keyword.toLowerCase(), { matches, type: "test" });
-}
 
 export function determineIfTrumpCoinBuy(text, testMode = false) {
   try {

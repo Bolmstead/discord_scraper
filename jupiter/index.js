@@ -226,6 +226,7 @@ async function executeSwap(
       sendTelegramMessage(
         `Error in executeSwap (getSwapResponse): ${error.message}`
       );
+      sendTelegramMessage(`quote: ${JSON.stringify(quote)}`);
       return null;
     }
     if (!swapResponse) {
@@ -233,6 +234,8 @@ async function executeSwap(
       sendTelegramMessage(
         `Error in executeSwap (getSwapResponse): ${error.message}`
       );
+      sendTelegramMessage(`quote: ${JSON.stringify(quote)}`);
+
       return null;
     }
 
@@ -265,6 +268,13 @@ async function executeSwap(
       sendTelegramMessage(
         `Error in executeSwap (transaction): ${error.message}`
       );
+      try {
+        sendTelegramMessage(`quote: ${JSON.stringify(quote)}`);
+        sendTelegramMessage(`swapResponse: ${JSON.stringify(swapResponse)}`);
+      } catch (error) {
+        console.error("Error sending telegram message:", error);
+      }
+
       return null;
     }
 
@@ -274,6 +284,12 @@ async function executeSwap(
       sendTelegramMessage(
         `Error in executeSwap (transaction): ${error.message}`
       );
+      try {
+        sendTelegramMessage(`quote: ${JSON.stringify(quote)}`);
+        sendTelegramMessage(`swapResponse: ${JSON.stringify(swapResponse)}`);
+      } catch (error) {
+        console.error("Error sending telegram message:", error);
+      }
 
       return null;
     }
@@ -286,6 +302,12 @@ async function executeSwap(
     console.log(
       `✅ Transaction successful: https://solscan.io/tx/${signature}`
     );
+    try {
+      sendTelegramMessage(`quote: ${JSON.stringify(quote)}`);
+      sendTelegramMessage(`swapResponse: ${JSON.stringify(swapResponse)}`);
+    } catch (error) {
+      console.error("Error sending telegram message:", error);
+    }
     return true;
   } catch (error) {
     console.error("Swap execution failed:", error);

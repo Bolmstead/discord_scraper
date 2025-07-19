@@ -1,9 +1,4 @@
-import {
-  accountMap,
-  keywordMap,
-  testAccountMap,
-  testKeywordMap,
-} from "../constants.js";
+import { accountMap, keywordMap } from "../constants.js";
 import { determineIfTextHasCA } from "./determineIfTextHasCA.js";
 
 export function determineIfMemecoinBuy(
@@ -29,12 +24,7 @@ export function determineIfMemecoinBuy(
 
     let account = null;
 
-    if (testingScrapeTweet) {
-      console.log("🚨🚨🚨🚨🚨 IN TEST SCRAPE TWEET MODE 🚨🚨🚨🚨🚨");
-      account = testAccountMap.get(username);
-    } else {
-      account = accountMap.get(username);
-    }
+    account = accountMap.get(username);
 
     if (!account) {
       console.log(`Account ${username} not found`);
@@ -88,22 +78,6 @@ export function determineIfMemecoinBuy(
       }
     }
     console.log(`${name} did not post a keyword`);
-
-    if (testingScrapeTweet) {
-      for (const [keyword, matches] of testKeywordMap) {
-        if (tweetText.includes(keyword.toLowerCase())) {
-          const match = matches.find((m) => m.username === username);
-          if (match) {
-            console.log(`✨ Matched TEST keyword: "${keyword}"`);
-            return {
-              ...match.coin,
-              chosenKeyword: keyword,
-            };
-          }
-        }
-      }
-      console.log(`${name} did not post a TEST keyword`);
-    }
 
     console.log(`${name} did not tweet about any memecoin`);
     return null;
