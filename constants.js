@@ -10,7 +10,7 @@ const coins = {
   OPTIMUSCOMPANION: {
     name: "Optimus Companion",
     address: "AAsPWrftj7QeabkB8mbUFsjMsTsf1zCZ4DT5tNZ3bonk",
-    keywords: ["Optimus as a Grok companion"],
+    keywords: ["Optimus as a Grok companion", "optimus companion"],
   },
   PVE: {
     name: "PVE",
@@ -197,6 +197,11 @@ const coins = {
     name: "Butt Coin",
     address: "FasH397CeZLNYWkd3wWK9vrmjd1z93n3b59DssRXpump",
     keywords: ["buttcoin", "butt coin"],
+  },
+  BABYGROK: {
+    name: "Baby Grok",
+    address: "8uSFaAvg2BHZ3QYAnkshoi6AxErPJvJG53NsjKjDbonk",
+    keywords: ["baby grok", "babygrok"],
   },
   DICKBUTT: {
     name: "Dick Butt",
@@ -553,7 +558,7 @@ const accountMap = new Map([
     {
       name: "Bonk Guy",
       coins: [
-        { ...coins.LUCKYCOIN, amountToBuy: 70 },
+        { ...coins.LUCKYCOIN, amountToBuy: 10 },
         { ...coins.SIGMABOY, amountToBuy: 10 },
       ],
     },
@@ -597,13 +602,13 @@ const accountMap = new Map([
         { ...coins.TGC, amountToBuy: 20 },
         {
           ...coins.PVE,
-          amountToBuy: 40,
+          amountToBuy: 30,
           percentToSell: 20,
           timeBetweenSells: 4000,
         },
         { ...coins.GORK, amountToBuy: 70 },
-        { ...coins.SIGMABOY, amountToBuy: 40 },
-        { ...coins.THEAMERICAPARTY, amountToBuy: 70 },
+        { ...coins.SIGMABOY, amountToBuy: 10 },
+        { ...coins.THEAMERICAPARTY, amountToBuy: 50 },
         { ...coins.DEPORTLON, amountToBuy: 3 },
         { ...coins.CSR, amountToBuy: 30 },
         { ...coins.ROARINGKITTY, amountToBuy: 70 },
@@ -634,11 +639,11 @@ const accountMap = new Map([
         { ...coins.JAILSTOOL, amountToBuy: 70 },
         { ...coins.ROGER, amountToBuy: 15 },
         { ...coins.DOODOOCOIN, amountToBuy: 4 },
-        { ...coins.GROKCOIN, amountToBuy: 30 },
+        { ...coins.GROKCOIN, amountToBuy: 20 },
         { ...coins.DICKBUTT, amountToBuy: 15 },
         { ...coins.TITCOIN, amountToBuy: 70 },
         { ...coins.BUTTCOIN, amountToBuy: 70 },
-        { ...coins.SBR, amountToBuy: 70 },
+        { ...coins.SBR, amountToBuy: 50 },
         { ...coins.TRUMP2028, amountToBuy: 10 },
         { ...coins.EWON, amountToBuy: 5 },
         { ...coins.TRUTHGPT, amountToBuy: 2 },
@@ -680,11 +685,14 @@ const accountMap = new Map([
       priorityFeeForAnyPostedCA: 0.1,
       coins: [
         { ...coins.OPTIMUSCOMPANION, amountToBuy: 15 },
-        { ...coins.KAICOMPANION, amountToBuy: 30 }, // beecee recommendation
-        { ...coins.BADRUDICOMPANION, amountToBuy: 40 },
-        { ...coins.GOODRUDICOMPANION, amountToBuy: 40 }, // beecee recommendation
-        { ...coins.VALENTINECOMPANION, amountToBuy: 20 },
+        { ...coins.KAICOMPANION, amountToBuy: 25 }, // beecee recommendation
+        // { ...coins.BADRUDICOMPANION, amountToBuy: 10 },
+        // { ...coins.GOODRUDICOMPANION, amountToBuy: 10 }, // beecee recommendation
+        // { ...coins.VALENTINECOMPANION, amountToBuy: 20 },
+        { ...coins.BABYGROK, amountToBuy: 30 }, // CAUTION
         { ...coins.PENGU, amountToBuy: 70 },
+        { ...coins.BASEDELON, amountToBuy: 20 },
+
         {
           ...coins.SUPERGROK,
           amountToBuy: 15,
@@ -732,7 +740,7 @@ const accountMap = new Map([
         { ...coins.TITCOIN, amountToBuy: 70 },
         {
           ...coins.THEAMERICAPARTY,
-          amountToBuy: 40,
+          amountToBuy: 20,
         },
         { ...coins.BUTTCOIN, amountToBuy: 70 },
         { ...coins.GORBAGANA, amountToBuy: 70 },
@@ -741,7 +749,6 @@ const accountMap = new Map([
         { ...coins.ROGER, amountToBuy: 15 },
         { ...coins.PWEASE, amountToBuy: 70 },
         { ...coins.ROARINGKITTY, amountToBuy: 40 },
-        { ...coins.BASEDELON, amountToBuy: 30 },
         { ...coins._8008, amountToBuy: 10 },
         { ...coins.GROK420, amountToBuy: 20 },
 
@@ -752,7 +759,7 @@ const accountMap = new Map([
         //   timeBetweenSells: 7,
         // },
         { ...coins.DOODOOCOIN, amountToBuy: 4 },
-        { ...coins.GROKCOIN, amountToBuy: 30 },
+        { ...coins.GROKCOIN, amountToBuy: 20 },
         { ...coins.EWON, amountToBuy: 5 },
         { ...coins.HKU5, amountToBuy: 3 },
         { ...coins.DOGWIFHAT, amountToBuy: 70 },
@@ -762,7 +769,7 @@ const accountMap = new Map([
         { ...coins.POPCAT, amountToBuy: 70 },
         { ...coins.MENVSGORILLA, amountToBuy: 20 },
         { ...coins.DEPORTLON, amountToBuy: 3 },
-        { ...coins.MRBEASTCEO, amountToBuy: 30 },
+        { ...coins.MRBEASTCEO, amountToBuy: 20 },
         // { ...coins.TESTCOIN, amountToBuy: 0.001 },
       ],
     },
@@ -791,7 +798,7 @@ const accountMap = new Map([
         { ...coins.ROGER, amountToBuy: 15 },
         { ...coins.PWEASE, amountToBuy: 70 },
         { ...coins.DOODOOCOIN, amountToBuy: 4 },
-        { ...coins.GROKCOIN, amountToBuy: 30 },
+        { ...coins.GROKCOIN, amountToBuy: 20 },
       ],
     },
   ],
@@ -1025,7 +1032,15 @@ const accountMap = new Map([
     {
       name: "SBF",
       username: "SBF_FTX",
-      coins: [{ ...coins.SBF, amountToBuy: 20 }],
+      coins: [{ ...coins.SBF, amountToBuy: 30 }],
+    },
+  ],
+  [
+    "cb_doge",
+    {
+      name: "DogeDesigner",
+      username: "cb_doge",
+      coins: [],
     },
   ],
 ]);
