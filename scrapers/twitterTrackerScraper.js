@@ -237,7 +237,13 @@ export async function twitterTrackerScraper(page) {
         setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
       }
     } else {
-      setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
+      if (username === "realDonaldTrump") {
+        sendTelegramMessage(`Trump posted! Text: 
+${text}`);
+        setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
+      } else {
+        setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
+      }
     }
 
     // Reset processing flag and schedule next scan with dynamic interval
