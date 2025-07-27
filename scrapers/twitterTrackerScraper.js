@@ -240,7 +240,10 @@ export async function twitterTrackerScraper(page) {
       if (username === "realDonaldTrump") {
         sendTelegramMessage(`Trump posted! Text: 
 ${text}`);
-        setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
+        player.play("sounds/Siren.mp3", (err) => {
+          if (err) console.error("Error playing sound:", err);
+        });
+        setTimeout(() => twitterTrackerScraper(page), 10000);
       } else {
         setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
       }
