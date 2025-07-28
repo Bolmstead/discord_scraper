@@ -248,10 +248,15 @@ const coins = {
     address: "7qhwYUXBaPTfWkhUpgWTjHAvdG48wRj5TLmTQ5Topump",
     keywords: ["peaches"],
   },
-  MRBEASTCEO: {
+  MRBEASTCEOELONREPLY: {
     name: "Mr Beast CEO",
     address: "cDkTvtXwJLqAS5NqpiwoTT2cbe6GkPBfBwkb5kppump",
     keywords: ["I’ll fill the roll"],
+  },
+  MRBEASTCEO: {
+    name: "Mr Beast CEO",
+    address: "cDkTvtXwJLqAS5NqpiwoTT2cbe6GkPBfBwkb5kppump",
+    keywords: ["ceo", "CEO", "C.E.O.", "c.e.o."],
   },
 
   DOODOOCOIN: {
@@ -529,6 +534,11 @@ const coins = {
     address: "p5LZKhRE2qhCS9Ys8TjwB8r3DspxQVxSowcrc3tKgkz",
     keywords: ["scam altman"],
   },
+  MRLEAN: {
+    name: "Mr Lean",
+    address: "6pKHwNCpzgZuC9o5FzvCZkYSUGfQddhUYtMyDbEVpump",
+    keywords: ["lean"],
+  },
   LOFIMAGA: {
     name: "lofi maga",
     address: "DD9h7ubCk3EPDi8VCno9FCuF123eQyM3byyehVd8nFhG",
@@ -638,7 +648,7 @@ const accountMap = new Map([
         { ...coins.JAILSTOOL, amountToBuy: 70 },
         { ...coins.ROGER, amountToBuy: 15 },
         { ...coins.DOODOOCOIN, amountToBuy: 4 },
-        { ...coins.GROKCOIN, amountToBuy: 20 },
+        { ...coins.GROKCOIN, amountToBuy: 10 },
         { ...coins.DICKBUTT, amountToBuy: 15 },
         { ...coins.TITCOIN, amountToBuy: 70 },
         { ...coins.BUTTCOIN, amountToBuy: 70 },
@@ -767,7 +777,7 @@ const accountMap = new Map([
         //   timeBetweenSells: 7,
         // },
         { ...coins.DOODOOCOIN, amountToBuy: 4 },
-        { ...coins.GROKCOIN, amountToBuy: 20 },
+        { ...coins.GROKCOIN, amountToBuy: 10 },
         { ...coins.EWON, amountToBuy: 5 },
         { ...coins.HKU5, amountToBuy: 3 },
         { ...coins.DOGWIFHAT, amountToBuy: 50 },
@@ -777,7 +787,7 @@ const accountMap = new Map([
         { ...coins.POPCAT, amountToBuy: 50 },
         { ...coins.MENVSGORILLA, amountToBuy: 5 },
         { ...coins.DEPORTLON, amountToBuy: 3 },
-        { ...coins.MRBEASTCEO, amountToBuy: 20 },
+        { ...coins.MRBEASTCEOELONREPLY, amountToBuy: 20 },
         // { ...coins.TESTCOIN, amountToBuy: 0.001 },
       ],
     },
@@ -794,19 +804,14 @@ const accountMap = new Map([
       coins: [
         { ...coins.BIGBALLS, amountToBuy: 20 },
         { ...coins.KM, amountToBuy: 15 },
-        { ...coins.HARAMBE, amountToBuy: 70 },
-        { ...coins.TRUTHGPT, amountToBuy: 2 },
-        { ...coins.TRUMP2028, amountToBuy: 10 },
-        { ...coins.SWF, amountToBuy: 10 },
-        { ...coins.DOGEFATHER, amountToBuy: 30 },
+        { ...coins.HARAMBE, amountToBuy: 30 },
         { ...coins.TRUMPSEASON, amountToBuy: 2 },
         { ...coins.STRATEGICSOLANARESERVE, amountToBuy: 20 },
         { ...coins.DICKBUTT, amountToBuy: 15 },
-        { ...coins.JAILSTOOL, amountToBuy: 70 },
-        { ...coins.ROGER, amountToBuy: 15 },
-        { ...coins.PWEASE, amountToBuy: 70 },
+        { ...coins.JAILSTOOL, amountToBuy: 50 },
+        { ...coins.PWEASE, amountToBuy: 40 },
         { ...coins.DOODOOCOIN, amountToBuy: 4 },
-        { ...coins.GROKCOIN, amountToBuy: 20 },
+        { ...coins.GROKCOIN, amountToBuy: 10 },
       ],
     },
   ],
@@ -876,9 +881,14 @@ const accountMap = new Map([
       priorityFeeForAnyPostedCA: 0.1,
       coins: [
         { ...coins.DDTG, amountToBuy: 3 },
-        { ...coins.CHESTNUT, amountToBuy: 3 },
-        { ...coins.SHORTNOY, amountToBuy: 3 },
-        { ...coins.JAILSTOOL, amountToBuy: 70 },
+        { ...coins.CHESTNUT, amountToBuy: 1 },
+        { ...coins.SHORTNOY, amountToBuy: 1 },
+        {
+          ...coins.JAILSTOOL,
+          amountToBuy: 70,
+          timeBetweenSells: 5000,
+          percentToSell: 20,
+        },
         { ...coins.GREED3, amountToBuy: 40 },
         { ...coins.GREED2, amountToBuy: 5 },
         { ...coins.FARTSTOOL, amountToBuy: 2 },
@@ -988,7 +998,7 @@ const accountMap = new Map([
     {
       name: "toly",
       coins: [
-        { ...coins.TOLITHETRENCHER, amountToBuy: 10 },
+        // { ...coins.TOLITHETRENCHER, amountToBuy: 10 },
         // { ...coins.GORBAGANA, amountToBuy: 70 },
       ],
     },
@@ -1032,7 +1042,14 @@ const accountMap = new Map([
     {
       name: "CZ Binance ",
       username: "cz",
-      coins: [{ ...coins.BROCCOLI, amountToBuy: 30 }],
+      coins: [
+        {
+          ...coins.BROCCOLI,
+          amountToBuy: 30,
+          percentToSell: 20,
+          timeBetweenSells: 5000,
+        },
+      ],
     },
   ],
   [
@@ -1048,7 +1065,20 @@ const accountMap = new Map([
     {
       name: "DogeDesigner",
       username: "cb_doge",
-      coins: [],
+      coins: [
+        { ...coins.BABYGROK, amountToBuy: 5 }, // CAUTION
+      ],
+    },
+  ],
+  [
+    "MrBeast",
+    {
+      name: "MrBeast",
+      username: "MrBeast",
+      coins: [
+        { ...coins.MRLEAN, amountToBuy: 10 },
+        { ...coins.MRBEASTCEO, amountToBuy: 20 },
+      ],
     },
   ],
 ]);
