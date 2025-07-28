@@ -668,12 +668,7 @@ const accountMap = new Map([
         { ...coins.GROK420, amountToBuy: 20 },
         { ...coins.SCAMALTMAN, amountToBuy: 5 },
         { ...coins.LOFIMAGA, amountToBuy: 3 },
-        {
-          ...coins.SUPERGROK,
-          amountToBuy: 20,
-          percentToSell: 20,
-          timeBetweenSells: 7,
-        },
+
         // { ...coins.TESTCOIN, amountToBuy: 0.001 },
       ],
       buyAnyPostedCA: true,
@@ -700,7 +695,7 @@ const accountMap = new Map([
         { ...coins.KAICOMPANION, amountToBuy: 20 }, // beecee recommendation
         { ...coins.BADRUDICOMPANION, amountToBuy: 10 },
         { ...coins.GOODRUDICOMPANION, amountToBuy: 10 }, // beecee recommendation
-        { ...coins.VALENTINECOMPANION, amountToBuy: 2 },
+        // { ...coins.VALENTINECOMPANION, amountToBuy: 2 },
         { ...coins.BABYGROK, amountToBuy: 25 }, // CAUTION
         { ...coins.PENGU, amountToBuy: 50 },
         {
@@ -731,7 +726,6 @@ const accountMap = new Map([
         { ...coins.BOOKOFMEME, amountToBuy: 50 },
         { ...coins.LAUNCHCOIN, amountToBuy: 50 },
         { ...coins.USELESSCOIN, amountToBuy: 50 },
-        { ...coins.LOCKIN, amountToBuy: 50 },
         { ...coins.BRAINLET, amountToBuy: 50 },
         { ...coins.BUTTHOLE, amountToBuy: 50 },
         { ...coins.CHILLHOUSE, amountToBuy: 50 },
