@@ -572,6 +572,7 @@ const coins = {
       "who did it better",
       "are you ok",
       "who did this",
+      "which way western man",
     ],
   },
 };
@@ -698,7 +699,7 @@ const accountMap = new Map([
       timeToSellForAnyPostedCA: 120 * 1000,
       priorityFeeForAnyPostedCA: 0.1,
       coins: [
-        { ...coins.ANISWEENEY, amountToBuy: 30 },
+        { ...coins.ANISWEENEY, amountToBuy: 40 },
         { ...coins.GROK420, amountToBuy: 30 },
 
         { ...coins.DICKIPEDIA, amountToBuy: 5 },
