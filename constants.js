@@ -564,6 +564,11 @@ const coins = {
     address: "37CK1GDT6y2YXKD3amHLwfkVXPmM1EMYAGmDKXiEbonk",
     keywords: ["based elon"],
   },
+  ANISWEENEY: {
+    name: "Anisweeney",
+    address: "GcvKeTrLHfri5R4nQWvJd7FX3SLo3ZzSFD5zwGMpbonk",
+    keywords: ["ani sweeney"],
+  },
 };
 // Create efficient lookup maps
 const accountMap = new Map([
@@ -688,6 +693,7 @@ const accountMap = new Map([
       timeToSellForAnyPostedCA: 120 * 1000,
       priorityFeeForAnyPostedCA: 0.1,
       coins: [
+        { ...coins.ANISWEENEY, amountToBuy: 20 },
         { ...coins.GROK420, amountToBuy: 30 },
 
         { ...coins.DICKIPEDIA, amountToBuy: 5 },
