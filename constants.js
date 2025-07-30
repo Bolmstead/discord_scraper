@@ -573,6 +573,7 @@ const coins = {
       "are you ok",
       "who did this",
       "which way western man",
+      "download grok.",
     ],
   },
 };
