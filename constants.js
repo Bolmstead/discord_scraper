@@ -567,7 +567,12 @@ const coins = {
   ANISWEENEY: {
     name: "Anisweeney",
     address: "GcvKeTrLHfri5R4nQWvJd7FX3SLo3ZzSFD5zwGMpbonk",
-    keywords: ["ani sweeney"],
+    keywords: [
+      "ani sweeney",
+      "who did it better",
+      "are you ok",
+      "who did this",
+    ],
   },
 };
 // Create efficient lookup maps
@@ -693,7 +698,7 @@ const accountMap = new Map([
       timeToSellForAnyPostedCA: 120 * 1000,
       priorityFeeForAnyPostedCA: 0.1,
       coins: [
-        { ...coins.ANISWEENEY, amountToBuy: 20 },
+        { ...coins.ANISWEENEY, amountToBuy: 40 },
         { ...coins.GROK420, amountToBuy: 30 },
 
         { ...coins.DICKIPEDIA, amountToBuy: 5 },
