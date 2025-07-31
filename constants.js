@@ -193,6 +193,11 @@ const coins = {
     address: "39zSVsSHFqNhARbVh6n8ZF78nCmhV3gSg8D39xhBNe73",
     keywords: ["america party"],
   },
+  THEAMERICAPARTY2: {
+    name: "The america Party",
+    address: "4aQ7cA7vnfCQ8opcNBRarRYcm6Mnwioee74RXpMHbonk",
+    keywords: ["america party"],
+  },
   BUTTCOIN: {
     name: "Butt Coin",
     address: "FasH397CeZLNYWkd3wWK9vrmjd1z93n3b59DssRXpump",
@@ -630,10 +635,10 @@ const accountMap = new Map([
         { ...coins.TGC, amountToBuy: 20 },
 
         { ...coins.SIGMABOY, amountToBuy: 6 },
-        { ...coins.THEAMERICAPARTY, amountToBuy: 50 },
+        { ...coins.THEAMERICAPARTY, amountToBuy: 30 },
         { ...coins.DEPORTLON, amountToBuy: 3 },
         { ...coins.CSR, amountToBuy: 30 },
-        { ...coins.ROARINGKITTY, amountToBuy: 50 },
+        { ...coins.ROARINGKITTY, amountToBuy: 30 },
         { ...coins.TRUMPSEASON, amountToBuy: 2 },
         { ...coins.TRUMPBILL, amountToBuy: 7 },
         { ...coins.STRATEGICSOLANARESERVE, amountToBuy: 20 },
@@ -678,7 +683,6 @@ const accountMap = new Map([
         },
         { ...coins.FLOKI, amountToBuy: 10 },
         { ...coins.MENVSGORILLA, amountToBuy: 5 },
-        { ...coins.GROK420, amountToBuy: 20 },
         { ...coins.SCAMALTMAN, amountToBuy: 5 },
         { ...coins.LOFIMAGA, amountToBuy: 3 },
 
@@ -701,30 +705,26 @@ const accountMap = new Map([
       timeToSellForAnyPostedCA: 120 * 1000,
       priorityFeeForAnyPostedCA: 0.1,
       coins: [
-        { ...coins.ANISWEENEY, amountToBuy: 10 },
-        { ...coins.GROK420, amountToBuy: 30 },
-
-        { ...coins.DICKIPEDIA, amountToBuy: 5 },
-        { ...coins.OPTIMUSCOMPANION, amountToBuy: 10 },
+        { ...coins.GROK420, amountToBuy: 10 },
+        { ...coins.THEAMERICAPARTY2, amountToBuy: 30 },
+        { ...coins.DICKIPEDIA, amountToBuy: 3 },
+        { ...coins.OPTIMUSCOMPANION, amountToBuy: 5 },
         { ...coins.KAICOMPANION, amountToBuy: 20 }, // beecee recommendation
-        { ...coins.BADRUDICOMPANION, amountToBuy: 10 },
-        { ...coins.GOODRUDICOMPANION, amountToBuy: 10 }, // beecee recommendation
-        // { ...coins.VALENTINECOMPANION, amountToBuy: 2 },
-        { ...coins.BABYGROK, amountToBuy: 25 }, // CAUTION
+        { ...coins.BADRUDICOMPANION, amountToBuy: 5 },
+        { ...coins.GOODRUDICOMPANION, amountToBuy: 5 }, // beecee recommendation
+        { ...coins.VALENTINECOMPANION, amountToBuy: 2 },
+        {
+          ...coins.BABYGROK,
+          amountToBuy: 15,
+          percentToSell: 20,
+          timeBetweenSells: 10000,
+        }, // CAUTION
         { ...coins.PENGU, amountToBuy: 50 },
         {
           ...coins.BASEDELON,
           amountToBuy: 10,
-          percentToSell: 33,
-          timeBetweenSells: 3000,
         },
 
-        {
-          ...coins.SUPERGROK,
-          amountToBuy: 10,
-          percentToSell: 33,
-          timeBetweenSells: 3000,
-        },
         { ...coins.MOODENG, amountToBuy: 50 },
         { ...coins.GOATSEUSMAXIMUS, amountToBuy: 50 },
         { ...coins.SHARKCAT, amountToBuy: 50 },
@@ -765,10 +765,7 @@ const accountMap = new Map([
         { ...coins.KNOX, amountToBuy: 10 },
         { ...coins.DICKBUTT, amountToBuy: 15 },
         { ...coins.TITCOIN, amountToBuy: 50 },
-        {
-          ...coins.THEAMERICAPARTY,
-          amountToBuy: 30,
-        },
+
         { ...coins.BUTTCOIN, amountToBuy: 50 },
         { ...coins.GORBAGANA, amountToBuy: 50 },
         { ...coins.OBIPNUTKENOBI, amountToBuy: 50 },
