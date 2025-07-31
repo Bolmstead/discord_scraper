@@ -574,6 +574,7 @@ const coins = {
       "who did this",
       "which way western man",
       "download grok.",
+      "Companions have great jeans",
     ],
   },
 };
@@ -700,7 +701,7 @@ const accountMap = new Map([
       timeToSellForAnyPostedCA: 120 * 1000,
       priorityFeeForAnyPostedCA: 0.1,
       coins: [
-        { ...coins.ANISWEENEY, amountToBuy: 40 },
+        { ...coins.ANISWEENEY, amountToBuy: 30 },
         { ...coins.GROK420, amountToBuy: 30 },
 
         { ...coins.DICKIPEDIA, amountToBuy: 5 },
