@@ -205,7 +205,7 @@ const coins = {
   },
   BABYGROK: {
     name: "Baby Grok",
-    address: "8uSFaAvg2BHZ3QYAnkshoi6AxErPJvJG53NsjKjDbonk",
+    address: "AbK7VeUt7t9k9dDPBrtqKKtHq1ZraozNipuPVFG9fVab",
     keywords: ["baby grok", "babygrok"],
   },
   DICKBUTT: {
@@ -715,7 +715,7 @@ const accountMap = new Map([
         { ...coins.VALENTINECOMPANION, amountToBuy: 2 },
         {
           ...coins.BABYGROK,
-          amountToBuy: 15,
+          amountToBuy: 10,
           percentToSell: 20,
           timeBetweenSells: 10000,
         }, // CAUTION
