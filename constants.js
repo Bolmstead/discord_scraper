@@ -541,8 +541,8 @@ const coins = {
   },
   MRLEAN: {
     name: "Mr Lean",
-    address: "6pKHwNCpzgZuC9o5FzvCZkYSUGfQddhUYtMyDbEVpump",
-    keywords: ["lean"],
+    address: "BT1ePKr6XXrVJGjc4v2XDEQdeMMJCv4wJnDeVXZEpump",
+    keywords: ["mr. lean", "mr lean"],
   },
   LOFIMAGA: {
     name: "lofi maga",
