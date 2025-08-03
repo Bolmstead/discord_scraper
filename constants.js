@@ -12,6 +12,11 @@ const coins = {
     address: "AAsPWrftj7QeabkB8mbUFsjMsTsf1zCZ4DT5tNZ3bonk",
     keywords: ["Optimus as a Grok companion", "optimus companion"],
   },
+  MACROHARD: {
+    name: "Macro Hard",
+    address: "HBsbZz9hvxzi3EnCYWLLwvMPWgV4aeC74mEdvTg9bonk",
+    keywords: ["macro hard", "macrohard"],
+  },
   PVE: {
     name: "PVE",
     address: "8BjQHNfcMzNM36rdk6avoJj3c3CTcDGMU5S26Hhgpump",
@@ -709,6 +714,7 @@ const accountMap = new Map([
         { ...coins.THEAMERICAPARTY2, amountToBuy: 30 },
         { ...coins.DICKIPEDIA, amountToBuy: 3 },
         { ...coins.OPTIMUSCOMPANION, amountToBuy: 5 },
+        { ...coins.MACROHARD, amountToBuy: 30 },
         { ...coins.KAICOMPANION, amountToBuy: 20 }, // beecee recommendation
         { ...coins.BADRUDICOMPANION, amountToBuy: 5 },
         { ...coins.GOODRUDICOMPANION, amountToBuy: 5 }, // beecee recommendation
