@@ -6,12 +6,7 @@ import {
   LAMPORTS_PER_SOL,
   PublicKey,
 } from "@solana/web3.js";
-import {
-  TOKEN_PROGRAM_ID,
-  getAccount,
-  getAssociatedTokenAddress,
-  getMint,
-} from "@solana/spl-token";
+import { TOKEN_PROGRAM_ID, getAssociatedTokenAddress } from "@solana/spl-token";
 import bs58 from "bs58";
 import { transactionSenderAndConfirmationWaiter } from "./utils/transactionSender.js";
 import { getSignature } from "./utils/getSignature.js";
@@ -21,18 +16,8 @@ import axios from "axios";
 
 dotenv.config();
 
-// If you have problem landing transactions, read this: https://station.jup.ag/docs/swap-api/send-swap-transaction#how-jupiter-estimates-priority-fee
-
-// Make sure that you are using your own RPC endpoint.
-// Helius and Triton have staked SOL and they can usually land transactions better.
-const connection = new Connection(
-  process.env.HELIUS_RPC_URL || "https://your-helius-or-triton-endpoint.com"
-);
+const connection = new Connection(process.env.HELIUS_RPC_URL);
 const jupiterAPI = createJupiterApiClient();
-
-// --------- config ---------
-
-const DEFAULT_AMOUNT_TO_BUY = null;
 
 async function getQuote(
   inputMint,
@@ -41,12 +26,6 @@ async function getQuote(
   slippageBps,
   dynamicSlippage = false
 ) {
-  console.log(
-    "🚀 ~ getQuote ~ inputMint, outputMint, amount:",
-    inputMint,
-    outputMint,
-    amount
-  );
   let params = {
     inputMint,
     outputMint,
