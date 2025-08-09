@@ -237,16 +237,7 @@ export async function twitterTrackerScraper(page) {
         setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
       }
     } else {
-      if (username === "realDonaldTrump") {
-        sendTelegramMessage(`Trump posted! Text: 
-${text}`);
-        player.play("sounds/Treasure.mp3", (err) => {
-          if (err) console.error("Error playing sound:", err);
-        });
-        setTimeout(() => twitterTrackerScraper(page), 10000);
-      } else {
-        setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
-      }
+      setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
     }
 
     // Reset processing flag and schedule next scan with dynamic interval
