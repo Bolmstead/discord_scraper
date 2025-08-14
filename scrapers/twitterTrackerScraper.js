@@ -194,7 +194,7 @@ export async function twitterTrackerScraper(page) {
           );
         }
 
-        player.play("sounds/Siren.mp3", (err) => {
+        player.play("sounds/LightAlert.mp3", (err) => {
           if (err) console.error("Error playing sound:", err);
         });
 
