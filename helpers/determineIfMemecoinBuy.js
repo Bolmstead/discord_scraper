@@ -32,15 +32,15 @@ export function determineIfMemecoinBuy(
     }
 
     console.log(`😀 Account ${username} found! 😀`);
-    const {
-      coins = [],
-      name,
-      buyAnyPostedCA,
-      amountToBuyForAnyPostedCA,
-      slippageBpsForAnyPostedCA,
-      timeToSellForAnyPostedCA,
-      priorityFeeForAnyPostedCA,
-    } = account;
+    const { coins = [], name, automaticallyBuyThisCoin } = account;
+
+    if (automaticallyBuyThisCoin) {
+      console.log(`🧪🧪🧪 ${name} has automatically buy this coin enabled`);
+      return {
+        ...automaticallyBuyThisCoin,
+        chosenKeyword: "automaticallyBuyThisCoin",
+      };
+    }
 
     // Check for CA first since it's highest priority
     // if (buyAnyPostedCA) {
