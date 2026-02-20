@@ -19,8 +19,8 @@ import {
   updateGlobalCoin,
 } from "./db/tradingConfigDb.js";
 
-const PORT = Number(process.env.TRADING_CONFIG_PORT || 3030);
-const HOST = process.env.TRADING_CONFIG_HOST || "127.0.0.1";
+const PORT = Number(process.env.PORT || process.env.TRADING_CONFIG_PORT || 3030);
+const HOST = process.env.TRADING_CONFIG_HOST || "0.0.0.0";
 const AUTH_ENABLED = String(process.env.TRADING_CONFIG_AUTH || "false") === "true";
 const FRONTEND_BUILD_DIR = path.resolve(process.cwd(), "frontend-react/dist");
 const FRONTEND_LEGACY_DIR = path.resolve(process.cwd(), "frontend");

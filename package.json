@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "twitter": "node scrapeTwitterTracker.js",
-    "start": "node scrapeTwitterTracker.js",
+    "start": "node tradingConfigServer.js",
     "config:ui": "node tradingConfigServer.js",
     "config:frontend:dev": "npm --prefix frontend-react run dev",
     "config:frontend:build": "npm --prefix frontend-react run build",
