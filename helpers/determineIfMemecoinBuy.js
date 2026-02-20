@@ -1,5 +1,22 @@
-import { accountMap, keywordMap } from "../constants.js";
-import { determineIfTextHasCA } from "./determineIfTextHasCA.js";
+import { getTradingMaps } from "../constants.js";
+
+function dedupeBuyPlans(plans) {
+  const seen = new Set();
+  const deduped = [];
+
+  for (const plan of plans) {
+    const key = `${plan.walletName || "Berkley"}:${plan.address || ""}:${
+      plan.name || ""
+    }`;
+    if (seen.has(key)) {
+      continue;
+    }
+    seen.add(key);
+    deduped.push(plan);
+  }
+
+  return deduped;
+}
 
 export function determineIfMemecoinBuy(
   username,
@@ -8,7 +25,8 @@ export function determineIfMemecoinBuy(
   testingScrapeTweet = false
 ) {
   try {
-    // Input validation
+    const { accountMap, keywordMap } = getTradingMaps();
+
     if (!username || !text) {
       console.log("Invalid tweet object: missing username or text");
       return null;
@@ -17,14 +35,20 @@ export function determineIfMemecoinBuy(
     if (testingAutoBuy) {
       console.log("🚨🚨🚨🚨🚨 IN TEST AUTO BUY MODE 🚨🚨🚨🚨🚨");
       const testAccount = accountMap.get("testCoin");
-      if (testAccount) {
-        return testAccount.coins[0];
+      if (testAccount && testAccount.coins?.length) {
+        return {
+          chosenKeyword: "testAutoBuy",
+          buyPlans: dedupeBuyPlans(
+            testAccount.coins.map((coin) => ({
+              ...coin,
+              walletName: coin.walletName || testAccount.defaultWalletName || "Berkley",
+            }))
+          ),
+        };
       }
     }
 
-    let account = null;
-
-    account = accountMap.get(username);
+    const account = accountMap.get(username);
 
     if (!account) {
       console.log(`Account ${username} not found`);
@@ -32,53 +56,48 @@ export function determineIfMemecoinBuy(
     }
 
     console.log(`😀 Account ${username} found! 😀`);
-    const { coins = [], name, automaticallyBuyThisCoin } = account;
+    const { name, automaticallyBuyThisCoin, defaultWalletName } = account;
 
     if (automaticallyBuyThisCoin) {
       console.log(`🧪🧪🧪 ${name} has automatically buy this coin enabled`);
       return {
-        ...automaticallyBuyThisCoin,
         chosenKeyword: "automaticallyBuyThisCoin",
+        buyPlans: [
+          {
+            ...automaticallyBuyThisCoin,
+            walletName:
+              automaticallyBuyThisCoin.walletName || defaultWalletName || "Berkley",
+          },
+        ],
       };
     }
 
-    // Check for CA first since it's highest priority
-    // if (buyAnyPostedCA) {
-    //   console.log(`🧪🧪🧪 ${name} has buy any posted CA enabled`);
-    //   const ca = determineIfTextHasCA(text);
-    //   if (ca) {
-    //     return {
-    //       name: `${username}'s posted CA!!!!`,
-    //       ticker: "????",
-    //       address: ca,
-    //       amountToBuy: amountToBuyForAnyPostedCA,
-    //       slippageBps: slippageBpsForAnyPostedCA,
-    //       timeToSell: timeToSellForAnyPostedCA,
-    //       priorityFee: priorityFeeForAnyPostedCA,
-    //       keywords: [],
-    //       caWasPosted: true,
-    //     };
-    //   }
-    // }
-
-    // Check for keyword matches using the keywordMap
     const tweetText = text.toLowerCase();
     console.log("🕊️🕊️🕊️🕊️🕊️ Tweet Text:", tweetText);
 
     for (const [keyword, matches] of keywordMap) {
-      if (tweetText.includes(keyword.toLowerCase())) {
-        const match = matches.find((m) => m.username === username);
-        if (match) {
-          console.log(`✨ Matched keyword: "${keyword}"`);
-          return {
-            ...match.coin,
-            chosenKeyword: keyword,
-          };
-        }
+      if (!tweetText.includes(keyword.toLowerCase())) {
+        continue;
       }
-    }
-    console.log(`${name} did not post a keyword`);
 
+      const matchingRules = matches.filter((match) => match.username === username);
+      if (!matchingRules.length) {
+        continue;
+      }
+
+      console.log(`✨ Matched keyword: "${keyword}"`);
+      return {
+        chosenKeyword: keyword,
+        buyPlans: dedupeBuyPlans(
+          matchingRules.map((match) => ({
+            ...match.coin,
+            walletName: match.coin.walletName || defaultWalletName || "Berkley",
+          }))
+        ),
+      };
+    }
+
+    console.log(`${name} did not post a keyword`);
     console.log(`${name} did not tweet about any memecoin`);
     return null;
   } catch (error) {

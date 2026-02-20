@@ -1,0 +1,3112 @@
+{
+  "coins": [
+    {
+      "symbol": "TESTCOIN",
+      "name": "TESTCOIN",
+      "address": "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
+      "keywords": [
+        "a",
+        "e",
+        "i",
+        "o",
+        "u",
+        "!",
+        "?",
+        ".",
+        ",",
+        ":",
+        ";",
+        "-"
+      ]
+    },
+    {
+      "symbol": "OPTIMUSCOMPANION",
+      "name": "Optimus Companion",
+      "address": "AAsPWrftj7QeabkB8mbUFsjMsTsf1zCZ4DT5tNZ3bonk",
+      "keywords": [
+        "Optimus as a Grok companion",
+        "optimus companion"
+      ]
+    },
+    {
+      "symbol": "MACROHARD",
+      "name": "Macro Hard",
+      "address": "HBsbZz9hvxzi3EnCYWLLwvMPWgV4aeC74mEdvTg9bonk",
+      "keywords": [
+        "macro hard",
+        "macrohard"
+      ]
+    },
+    {
+      "symbol": "PVE",
+      "name": "PVE",
+      "address": "8BjQHNfcMzNM36rdk6avoJj3c3CTcDGMU5S26Hhgpump",
+      "keywords": [
+        "elon",
+        "musk"
+      ]
+    },
+    {
+      "symbol": "GROK420",
+      "name": "Grok 420",
+      "address": "23FH7fk4aLajVppQzr5BALeZh9fpnW8jkQevqRcgpump",
+      "keywords": [
+        "grok 4.20",
+        "grok 420",
+        "grok420",
+        "grok4.20"
+      ]
+    },
+    {
+      "symbol": "MOODENG",
+      "name": "Moodeng",
+      "address": "ED5nyyWEzpPPiWimP8vYm7sD7TD3LAt3Q3gRTWHzPJBY",
+      "keywords": [
+        "moo deng",
+        "moodeng"
+      ]
+    },
+    {
+      "symbol": "GOATSEUSMAXIMUS",
+      "name": "Goatse Us Maximus",
+      "address": "CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump",
+      "keywords": [
+        "Goatseus Maximus",
+        "goatseus"
+      ]
+    },
+    {
+      "symbol": "PENGU",
+      "name": "Pengu",
+      "address": "2zMMhcVQEXDtdE6vsFS7S7D5oUodfJHE8vd1gnBouauv",
+      "keywords": [
+        "pudgy penguin"
+      ]
+    },
+    {
+      "symbol": "SHARKCAT",
+      "name": "Shark Cat",
+      "address": "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui",
+      "keywords": [
+        "shark cat",
+        "sharkcat"
+      ]
+    },
+    {
+      "symbol": "PONKE",
+      "name": "Ponke",
+      "address": "5z3EqYQo9HiCEs3R84RCDMu2n7anpDMxRhdK8PSWmrRC",
+      "keywords": [
+        "ponke"
+      ]
+    },
+    {
+      "symbol": "MICHI",
+      "name": "michi",
+      "address": "5mbK36SZ7J19An8jFochhQS4of8g6BwUjbeCSxBSoWdp",
+      "keywords": [
+        "michi ",
+        " michi",
+        "michi.",
+        "michi,"
+      ]
+    },
+    {
+      "symbol": "CHILLGUY",
+      "name": "Chill Guy",
+      "address": "Df6yfrKC8kZE3KNkrHERKzAetSxbrWeniQfyJY4Jpump",
+      "keywords": [
+        "chill guy",
+        "chillguy"
+      ]
+    },
+    {
+      "symbol": "ZEREBRO",
+      "name": "Zerebro",
+      "address": "8x5VqbHA8D7NkD52uNuS5nnt3PwA8pLD34ymskeSo2Wn",
+      "keywords": [
+        "zerebro"
+      ]
+    },
+    {
+      "symbol": "UNICORNFARTDUST",
+      "name": "Unicorn Farter Dust",
+      "address": "eL5fUxj2J4CiQsmW85k5FG9DvuQjjUoBHoQBi2Kpump",
+      "keywords": [
+        "unicorn fart dust"
+      ]
+    },
+    {
+      "symbol": "RETARDIO",
+      "name": "Retardio",
+      "address": "6ogzHhzdrQr9Pgv6hZ2MNze7UrzBMAFyBBWUYp1Fhitx",
+      "keywords": [
+        "retardio"
+      ]
+    },
+    {
+      "symbol": "FWOG",
+      "name": "Fwog",
+      "address": "A8C3xuqscfmyLrte3VmTqrAq8kgMASius9AFNANwpump",
+      "keywords": [
+        "fwog"
+      ]
+    },
+    {
+      "symbol": "BOOKOFMEME",
+      "name": "Book of Meme",
+      "address": "ukHH6c7mMyiWCf1b9pnWe25TSpkDDt3H5pQZgZ74J82",
+      "keywords": [
+        "book of meme"
+      ]
+    },
+    {
+      "symbol": "LAUNCHCOIN",
+      "name": "Launch Coin",
+      "address": "Ey59PH7Z4BFU4HjyKnyMdWt5GGN76KazTAwQihoUXRnk",
+      "keywords": [
+        "launchcoin",
+        "launch coin"
+      ]
+    },
+    {
+      "symbol": "USELESSCOIN",
+      "name": "USELESSCOIN",
+      "address": "Dz9mQ9NzkBcCsuGPFJ3r1bS4wgqKMHBPiVuniW8Mbonk",
+      "keywords": [
+        "uselesscoin",
+        "useless coin"
+      ]
+    },
+    {
+      "symbol": "JEDIOFUSA",
+      "name": "JOTUS",
+      "address": "5spzxsgCMetaWbZNnUCcxSGmnmCHHjL3WaCdtNNhBR7K",
+      "keywords": []
+    },
+    {
+      "symbol": "MENVSGORILLA",
+      "name": "100 Men Vs Gorilla",
+      "address": "qRUZaCpgxaRH1s5V6opjPA6Hnpv5BM37LqkDBw7pump",
+      "keywords": [
+        "vs gorilla"
+      ]
+    },
+    {
+      "symbol": "DOGEQUEST",
+      "name": "DOGEQUEST",
+      "address": "GmcNY55weZBRgs7YC3KWijTKnPdv8XDy6DLuLLvdNHtU",
+      "keywords": [
+        "dogequest"
+      ]
+    },
+    {
+      "symbol": "TOLITHETRENCHER",
+      "name": "Toli",
+      "address": "5C8LMqZ9dbQ3RWoe5pFk5fJPhgiBQtBYdMnzekfJpump",
+      "keywords": [
+        "toli the trencher",
+        "tolithetrencher"
+      ]
+    },
+    {
+      "symbol": "SHORTNOY",
+      "name": "Shortnoy",
+      "address": "4cPhM4VA8HdKVzLufEAwhwYDpg2FqWPzrZXXcSbZpump",
+      "keywords": [
+        "shortnoy"
+      ]
+    },
+    {
+      "symbol": "GORK",
+      "name": "Gork",
+      "address": "38PgzpJYu2HkiYvV8qePFakB8tuobPdGm2FFEn7Dpump",
+      "keywords": [
+        "gork"
+      ]
+    },
+    {
+      "symbol": "RETARDFINDER",
+      "name": "Retard Finder",
+      "address": "C3DwDjT17gDvvCYC2nsdGHxDHVmQRdhKfpAdqQ29pump",
+      "keywords": [
+        "retard finder"
+      ]
+    },
+    {
+      "symbol": "HOSICO",
+      "name": "Hosico",
+      "address": "9wK8yN6iz1ie5kEJkvZCTxyN1x5sTdNfx8yeMY8Ebonk",
+      "keywords": [
+        "hosico"
+      ]
+    },
+    {
+      "symbol": "DOGWIFHAT",
+      "name": "DogWifHat",
+      "address": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
+      "keywords": [
+        "dogwifhat",
+        "dog wif hat"
+      ]
+    },
+    {
+      "symbol": "POPCAT",
+      "name": "Popcat",
+      "address": "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
+      "keywords": [
+        "popcat"
+      ]
+    },
+    {
+      "symbol": "FLOKI",
+      "name": "Floki",
+      "address": "CP7xS4pHRuZS5M5FvnpRQXNfFwCpoPyHRNnupfkDHhah",
+      "keywords": [
+        "floki"
+      ]
+    },
+    {
+      "symbol": "AI16Z",
+      "name": "ai16z",
+      "address": "HeLp6NuQkmYB4pYWo2zYs22mESHXPQYzXbB8n4V98jwC",
+      "keywords": [
+        "ai16z"
+      ]
+    },
+    {
+      "symbol": "GIGACHAD",
+      "name": "GIGA",
+      "address": "63LfDmNb3MQ8mw9MtZ2To9bEA2M71kZUUGq5tiJxcqj9",
+      "keywords": [
+        "giga chad",
+        "$giga"
+      ]
+    },
+    {
+      "symbol": "TITCOIN",
+      "name": "TITCOIN",
+      "address": "FtUEW73K6vEYHfbkfpdBZfWpxgQar2HipGdbutEhpump",
+      "keywords": [
+        "titcoin",
+        "tit coin"
+      ]
+    },
+    {
+      "symbol": "LOCKIN",
+      "name": "Lockin",
+      "address": "8Ki8DpuWNxu9VsS3kQbarsCWMcFGWkzzA8pUPto9zBd5",
+      "keywords": [
+        "$lockin",
+        "lock in"
+      ]
+    },
+    {
+      "symbol": "BUTTHOLE",
+      "name": "BUTTHOLE COIN",
+      "address": "CboMcTUYUcy9E6B3yGdFn6aEsGUnYV6yWeoeukw6pump",
+      "keywords": [
+        "butthole coin",
+        "$butthole"
+      ]
+    },
+    {
+      "symbol": "BRAINLET",
+      "name": "Brainlet",
+      "address": "8NNXWrWVctNw1UFeaBypffimTdcLCcD8XJzHvYsmgwpF",
+      "keywords": [
+        "brainlet"
+      ]
+    },
+    {
+      "symbol": "CHILLHOUSE",
+      "name": "Chill House",
+      "address": "GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump",
+      "keywords": [
+        "chill house"
+      ]
+    },
+    {
+      "symbol": "THEAMERICAPARTY",
+      "name": "The america Party",
+      "address": "39zSVsSHFqNhARbVh6n8ZF78nCmhV3gSg8D39xhBNe73",
+      "keywords": [
+        "america party"
+      ]
+    },
+    {
+      "symbol": "THEAMERICAPARTY2",
+      "name": "The america Party",
+      "address": "4aQ7cA7vnfCQ8opcNBRarRYcm6Mnwioee74RXpMHbonk",
+      "keywords": [
+        "america party"
+      ]
+    },
+    {
+      "symbol": "BUTTCOIN",
+      "name": "Butt Coin",
+      "address": "FasH397CeZLNYWkd3wWK9vrmjd1z93n3b59DssRXpump",
+      "keywords": [
+        "buttcoin",
+        "butt coin"
+      ]
+    },
+    {
+      "symbol": "BABYGROK",
+      "name": "Baby Grok",
+      "address": "AbK7VeUt7t9k9dDPBrtqKKtHq1ZraozNipuPVFG9fVab",
+      "keywords": [
+        "baby grok",
+        "babygrok"
+      ]
+    },
+    {
+      "symbol": "DICKBUTT",
+      "name": "Dick Butt",
+      "address": "43SXvpf4c41t2uErsw7aL6w5qhnie6BXSSPqiTcTpump",
+      "keywords": [
+        "dick butt",
+        "dickbutt"
+      ]
+    },
+    {
+      "symbol": "SARATOGA",
+      "name": "SARATOGA",
+      "address": "3wth71poCxAckMcXKR6QLY7xKFoiSLwLgUShHRzXpump",
+      "keywords": [
+        "saratoga"
+      ]
+    },
+    {
+      "symbol": "MORNINGROUTINE",
+      "name": "MORNING ROUTINE",
+      "address": "34HDZNbUkTyTrgYKy2ox43yp2f8PJ5hoM7xsrfNApump",
+      "keywords": [
+        "morning routine"
+      ]
+    },
+    {
+      "symbol": "TRUMP",
+      "name": "OFFICIAL TRUMP",
+      "address": "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN",
+      "keywords": [
+        "$trump"
+      ]
+    },
+    {
+      "symbol": "EWON",
+      "name": "Ewon Wusk",
+      "address": "EF3Ln1DkUB5azvqcaCJgG3RR2qSUJEXxLo1q4ZHzpump",
+      "keywords": [
+        "ewon wusk"
+      ]
+    },
+    {
+      "symbol": "GREED3",
+      "name": "Greed3",
+      "address": "CPBQqugWWCcyehezHf4uSJtET2kmYNqPuhyb57H5pump",
+      "keywords": [
+        "greed3",
+        "greed 3"
+      ]
+    },
+    {
+      "symbol": "GREED2",
+      "name": "Greed2",
+      "address": "GoL6RVGQFzTD7MdoNEHUQmNp6SgXBn6f9khxAW5Bpump",
+      "keywords": [
+        "greed2",
+        "greed 2"
+      ]
+    },
+    {
+      "symbol": "FARTSTOOL",
+      "name": "fartstool",
+      "address": "4hr97GiyvAc2Ak57gETQVb1kfaoMeYwngMZZ9qe1pump",
+      "keywords": [
+        "fartstool"
+      ]
+    },
+    {
+      "symbol": "MISSPEACHES",
+      "name": "Miss Peaches",
+      "address": "7qhwYUXBaPTfWkhUpgWTjHAvdG48wRj5TLmTQ5Topump",
+      "keywords": [
+        "peaches"
+      ]
+    },
+    {
+      "symbol": "MRBEASTCEOELONREPLY",
+      "name": "Mr Beast CEO",
+      "address": "cDkTvtXwJLqAS5NqpiwoTT2cbe6GkPBfBwkb5kppump",
+      "keywords": [
+        "I’ll fill the roll"
+      ]
+    },
+    {
+      "symbol": "MRBEASTCEO",
+      "name": "Mr Beast CEO",
+      "address": "cDkTvtXwJLqAS5NqpiwoTT2cbe6GkPBfBwkb5kppump",
+      "keywords": [
+        "ceo",
+        "CEO",
+        "C.E.O.",
+        "c.e.o."
+      ]
+    },
+    {
+      "symbol": "DOODOOCOIN",
+      "name": "Grok's Shitcoin",
+      "address": "2N8qruAsuSre8vEopvgEgBHigfnqBTFbmf9XTDw9pump",
+      "keywords": [
+        "$doodoocoin",
+        "doodoo",
+        "$doodoo",
+        "doodoocoin"
+      ]
+    },
+    {
+      "symbol": "GROKCOIN",
+      "name": "Grok Coin",
+      "address": "3MadWqcN9cSrULn8ikDnan9mF3znoQmBPXtVy6BfSTDB",
+      "keywords": [
+        "$grokcoin",
+        "grokcoin",
+        "grok coin"
+      ]
+    },
+    {
+      "symbol": "CHESTNUT",
+      "name": "Chestnut",
+      "address": "7oE4Ji977tfofxk9k1UosJ5mTz7rjPRNiSCyWFbPpump",
+      "keywords": [
+        "chestnut"
+      ]
+    },
+    {
+      "symbol": "_8008",
+      "name": "8008",
+      "address": "5puhwnyz2Tv8jSmmBD5DSqCwFVXwwPGZacymM7DQpump",
+      "keywords": [
+        "8008"
+      ]
+    },
+    {
+      "symbol": "PWEASE",
+      "name": "pwease",
+      "address": "CniPCE4b3s8gSUPhUiyMjXnytrEqUrMfSsnbBjLCpump",
+      "keywords": [
+        "pwease"
+      ]
+    },
+    {
+      "symbol": "HOUSECOIN",
+      "name": "House Coin",
+      "address": "DitHyRMQiSDhn5cnKMJV2CDDt6sVct96YrECiM49pump",
+      "keywords": [
+        "house coin",
+        "housecoin"
+      ]
+    },
+    {
+      "symbol": "SBR",
+      "name": "Strategic Bitcoin Reserve",
+      "address": "2HHgCLfKA5Rd1Fn9xAxfYzS3XoR5NnuxKDYz2EmWpump",
+      "keywords": [
+        "strategic bitcoin reserve"
+      ]
+    },
+    {
+      "symbol": "STRATEGICSOLANARESERVE",
+      "name": "Strategic Solana Reserve",
+      "address": "6heygeGJ7z1NNBSDZzdDU6315Bgkt5kzrPmDTsmrpump",
+      "keywords": [
+        "strategic solana reserve",
+        "solana strategic reserve",
+        "solana reserve"
+      ]
+    },
+    {
+      "symbol": "FARTCOIN",
+      "name": "FartCoin",
+      "address": "9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump",
+      "keywords": [
+        "fart coin",
+        "fartcoin"
+      ]
+    },
+    {
+      "symbol": "TRUMPGAZA",
+      "name": "Trump Gaza",
+      "address": "5eNm9kFBe3qsPGWXdn9SYovCMnA7Q1bWZkfacQqtpump",
+      "keywords": [
+        "trump gaza"
+      ]
+    },
+    {
+      "symbol": "BIGBALLS",
+      "name": "Edward Coristine",
+      "address": "7mHCx9iXPJ7EJDbDAUGmej39Kme8cxZfeVi1EAvEpump",
+      "keywords": [
+        "big balls",
+        "edward coristine"
+      ]
+    },
+    {
+      "symbol": "KM",
+      "name": "Kekius Maximus",
+      "address": "XC78JjRHnSqaysrHiTrhR8eRngFbvX3rrHyRjWEpump",
+      "keywords": [
+        "kekius",
+        "kekius maximus"
+      ]
+    },
+    {
+      "symbol": "PNUT",
+      "name": "Peanut the Squirrel",
+      "address": "2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump",
+      "keywords": [
+        "pnut",
+        "peanut"
+      ]
+    },
+    {
+      "symbol": "ADRIAN",
+      "name": "Adrian Dittmann",
+      "address": "6Em4veHJFxfnEvu2cyQhkn2BszvHxycPba8fL3Psx4gY",
+      "keywords": [
+        "adrian dittmann"
+      ]
+    },
+    {
+      "symbol": "DOGEFATHER",
+      "name": "Dogefather",
+      "address": "EcYK2XNG4wWr2vDg2M2Hrts6SrU2QB4NzXLBf888pump",
+      "keywords": [
+        "dogefather"
+      ]
+    },
+    {
+      "symbol": "NOLAND",
+      "name": "The World's First AI Human",
+      "address": "D3fQZ6fmHseTCsNntBMnu3Tk3EV3uN68VLDQZWgVpump",
+      "keywords": [
+        "arbaugh"
+      ]
+    },
+    {
+      "symbol": "LUIGI",
+      "name": "Luigi Mangione",
+      "address": "5XyKkFaJpAmsH4Tf2EFj3S61W3hC5cJhxNZQQ5h1pump",
+      "keywords": [
+        "mangione"
+      ]
+    },
+    {
+      "symbol": "ASSANGE",
+      "name": "Julian Assange",
+      "address": "4FrXUwfQ7zp56N87ac8BX2aqmFoKmvo6Jp7SuTMZpump",
+      "keywords": [
+        "assange"
+      ]
+    },
+    {
+      "symbol": "GORBAGANA",
+      "name": "Gorbagana",
+      "address": "71Jvq4Epe2FCJ7JFSF7jLXdNk1Wy4Bhqd9iL6bEFELvg",
+      "keywords": [
+        "gorbagana"
+      ]
+    },
+    {
+      "symbol": "TRUMP2028",
+      "name": "Trump 2028",
+      "address": "5wQFpZ2Xstd6khM8WwtVdhegiNEjM48DYErMVVknpump",
+      "keywords": [
+        "trump 2028"
+      ]
+    },
+    {
+      "symbol": "BADRUDICOMPANION",
+      "name": "Bad Rudi",
+      "address": "777Z92HqqGEav312yx8CfakajosBRFFUMbemyLaqbonk",
+      "keywords": [
+        "bad rudi"
+      ]
+    },
+    {
+      "symbol": "GOODRUDICOMPANION",
+      "name": "Good Rudi",
+      "address": "FT8X8hqoEwNT8UifNL3ppPbpccf7mnuNLpJsszv7AFHW",
+      "keywords": [
+        "good rudi"
+      ]
+    },
+    {
+      "symbol": "KAICOMPANION",
+      "name": "Kai",
+      "address": "GVa62H8JdrHQNTh1ryDirwssiyv7Uh3vYLgEab7Abonk",
+      "keywords": [
+        "kai ",
+        " kai"
+      ]
+    },
+    {
+      "symbol": "ANICOMPANION",
+      "name": "Ani Companion",
+      "address": "9tqjeRS1swj36Ee5C1iGiwAxjQJNGAVCzaTLwFY8bonk",
+      "keywords": [
+        " ani "
+      ]
+    },
+    {
+      "symbol": "VALENTINECOMPANION",
+      "name": "Valentine",
+      "address": "9GtvcnDUvGsuibktxiMjLQ2yyBq5akUahuBs8yANbonk",
+      "keywords": [
+        "valentine"
+      ]
+    },
+    {
+      "symbol": "DEPORTLON",
+      "name": "Deportlon",
+      "address": "5RcXsuKg6nWH9UEKdf22XLwwKJE2EmcGuHNadpgGDa9v",
+      "keywords": [
+        "deportlon"
+      ]
+    },
+    {
+      "symbol": "JPMD",
+      "name": "jpmd",
+      "address": "GgLyU28hTpmttqqkBFYm5fDZuC5TvVw36V1UdT2aZvrC",
+      "keywords": [
+        "jpmd"
+      ]
+    },
+    {
+      "symbol": "HARAMBE",
+      "name": "HARAMBE",
+      "address": "Fch1oixTPri8zxBnmdCEADoJW2toyFHxqDZacQkwdvSP",
+      "keywords": [
+        "harambe"
+      ]
+    },
+    {
+      "symbol": "OBIPNUTKENOBI",
+      "name": "Obi Pnut Kenobi",
+      "address": "5WGkdemJNEoAVKveDQdzQmDqTyxCraXGw9ACyrwCEUMS",
+      "keywords": [
+        "Obi PNut Kenobi",
+        "pnut kenobi",
+        "obi pnut"
+      ]
+    },
+    {
+      "symbol": "TRUTHGPT",
+      "name": "Elon OPENAI NAME",
+      "address": "DkVoFwo7aQTUeEMSegZgvUoigHti329Fm9wiMvfdpump",
+      "keywords": [
+        "truthgpt",
+        "truth gpt"
+      ]
+    },
+    {
+      "symbol": "DDTG",
+      "name": "Davey Day Trader Global",
+      "address": "DVtrerbvaB1JyAKA9crCN2xkxnYD5jBCLgsUrBZEpump",
+      "keywords": [
+        "$ddtg"
+      ]
+    },
+    {
+      "symbol": "JAILSTOOL",
+      "name": "Stoole Presidente (jailstool)",
+      "address": "AxriehR6Xw3adzHopnvMn7GcpRFcD41ddpiTWMg6pump",
+      "keywords": [
+        "jailstool"
+      ]
+    },
+    {
+      "symbol": "SBF",
+      "name": "Sam Bankman-Fried",
+      "address": "9Nuzd5BZMfeiP2TSXXGqYcrtqYEyFkGoEbm39CB3pump",
+      "keywords": [
+        "a",
+        "e",
+        "i",
+        "o",
+        "u",
+        "!",
+        "?",
+        ".",
+        ",",
+        ":",
+        ";",
+        "-"
+      ]
+    },
+    {
+      "symbol": "GREENLAND",
+      "name": "America 51st State",
+      "address": "5JEdwCUafTGLFZz8wDLmWNLbJKKwFafrHJ7A3W1Wpump",
+      "keywords": [
+        "greenland"
+      ]
+    },
+    {
+      "symbol": "HKU5",
+      "name": "New China coronavirus",
+      "address": "HRqNoAHzcvxRwMf64gz9C6DHKW1icgjebjvK23ikpump",
+      "keywords": [
+        "hku5"
+      ]
+    },
+    {
+      "symbol": "DICKIPEDIA",
+      "name": "Dickipedia",
+      "address": "2ypdWsPMGX1WrRjSC3UDQ8Tv4hTi4qEXsUJDFY3PCzfA",
+      "keywords": [
+        "dickipedia"
+      ]
+    },
+    {
+      "symbol": "SWF",
+      "name": "Sovereign Wealth Fund",
+      "address": "FtBXDMyD4SvAa6keQPAGk4sgRVuUECsxGU1X2dLWpump",
+      "keywords": [
+        "sovereign wealth fund"
+      ]
+    },
+    {
+      "symbol": "TGC",
+      "name": "TRUMP GOLD CARDS",
+      "address": "GsSUx3qENEAn5MDQLGYHYs7ThtPXsnwCkKwqv1ZWbonk",
+      "keywords": [
+        "trump gold card",
+        "gold card"
+      ]
+    },
+    {
+      "symbol": "SIGMABOY",
+      "name": "Sigmaboy",
+      "address": "4N5jkEmddTxtZQzjb4XowDJvHDzcxkByxMAf9Xa4bonk",
+      "keywords": [
+        "sigmaboy",
+        "sigma boy"
+      ]
+    },
+    {
+      "symbol": "LUCKYCOIN",
+      "name": "Lucky Coin",
+      "address": "3BtunCQ3KdpsYtXQU9SmkGopnDkaQHuEgG14Dy1Lbonk",
+      "keywords": [
+        "lucky coin",
+        "luckycoin"
+      ]
+    },
+    {
+      "symbol": "KNOX",
+      "name": "Official Fort Knox Coin",
+      "address": "4N8g7mw171aVC1oMMRV1pMrQuB1RwFHaJan2WYyBpump",
+      "keywords": [
+        "knox"
+      ]
+    },
+    {
+      "symbol": "BROCCOLI",
+      "name": "Broccoli",
+      "address": "D13VkjDiCxtgRJsH4s1VCxKS4bFZq5UEz2iRsSbapump",
+      "keywords": [
+        "broccoli"
+      ]
+    },
+    {
+      "symbol": "TRUMPBILL",
+      "name": "Trump 250 Bill",
+      "address": "7nEx3cF6bgD2LDh3MimokRPbAV97TFsGKQyjRKN7pump",
+      "keywords": [
+        "250 bill",
+        "250 dollar bill"
+      ]
+    },
+    {
+      "symbol": "LEAF",
+      "name": "Leaf Erikson",
+      "address": "7vqkjrxbtVazEwREnHB2nv2poYmzr9Yr4KdWp64Bpump",
+      "keywords": [
+        "leaf",
+        "erikson",
+        "leaf erikson"
+      ]
+    },
+    {
+      "symbol": "ROGER",
+      "name": "Free Roger",
+      "address": "4NS4nxNunN7KJ1oe2PRCnh1KbBBut2fTqYHqU7Gtpump",
+      "keywords": [
+        "free roger",
+        "roger ver"
+      ]
+    },
+    {
+      "symbol": "UNCONDITIONALSURRENDER",
+      "name": "Unconditional Surrender",
+      "address": "FRRMj87PWN5xuXGyNBXTMh56ksWNiJTUq3KZumyS87zV",
+      "keywords": [
+        "unconditional surrender"
+      ]
+    },
+    {
+      "symbol": "SUPERGROK",
+      "name": "Super Grok",
+      "address": "P79VPZFfDreHPQVEF9BHZtAipDpviczpcnBXHWspump",
+      "keywords": [
+        "super grok",
+        "supergrok"
+      ]
+    },
+    {
+      "symbol": "MELANIA",
+      "name": "Melania Trump",
+      "address": "FUAfBo2jgks6gB4Z4LfZkqSZgzNucisEHqnNebaRxM1P",
+      "keywords": [
+        "$melania"
+      ]
+    },
+    {
+      "symbol": "BABYDEER",
+      "name": "Baby Deer",
+      "address": "6pKHwNCpzgZuC9o5FzvCZkYSUGfQddhUYtMyDbEVpump",
+      "keywords": [
+        "baby deer"
+      ]
+    },
+    {
+      "symbol": "JEROMEPOWELL",
+      "name": "Jerome Powell",
+      "address": "GKat8UhnNDRoS4iVpG9qvVG4Wn1rVhmLvraraoJVpump",
+      "keywords": [
+        "jerome powell"
+      ]
+    },
+    {
+      "symbol": "$100BILL",
+      "name": "$100",
+      "address": "7Eg4Bin1U4SNggFJFrKuGTo6e7ShuzjYyW9Quxtxpump",
+      "keywords": [
+        "golden age act",
+        "100 bill",
+        "100 dollar bill"
+      ]
+    },
+    {
+      "symbol": "SCAMALTMAN",
+      "name": "Scam Altman",
+      "address": "p5LZKhRE2qhCS9Ys8TjwB8r3DspxQVxSowcrc3tKgkz",
+      "keywords": [
+        "scam altman"
+      ]
+    },
+    {
+      "symbol": "MRLEAN",
+      "name": "Mr Lean",
+      "address": "BT1ePKr6XXrVJGjc4v2XDEQdeMMJCv4wJnDeVXZEpump",
+      "keywords": [
+        "mr. lean",
+        "mr lean"
+      ]
+    },
+    {
+      "symbol": "LOFIMAGA",
+      "name": "lofi maga",
+      "address": "DD9h7ubCk3EPDi8VCno9FCuF123eQyM3byyehVd8nFhG",
+      "keywords": [
+        "lo-fi"
+      ]
+    },
+    {
+      "symbol": "CSR",
+      "name": "Crypto Strategic Reserve",
+      "address": "EqQFU4AoRVKJjQrpshmp89YxHAgNecCpJdMS8PJLpump",
+      "keywords": [
+        "crypto strategic reserve"
+      ]
+    },
+    {
+      "symbol": "TRUMPSEASON",
+      "name": "Trump Season",
+      "address": "8qiVWSZ1HYsnA7Z79j3jwhbDJTxqjosZVWAsajSkpump",
+      "keywords": [
+        "trump season",
+        "trump szn"
+      ]
+    },
+    {
+      "symbol": "ROARINGKITTY",
+      "name": "Roaring Kitty",
+      "address": "EKEWAk7hfnwfR8DBb1cTayPPambqyC7pwNiYkaYQKQHp",
+      "keywords": [
+        "roaring kitty",
+        "roaringkitty",
+        "keith gill"
+      ]
+    },
+    {
+      "symbol": "ROARINGKITTY2",
+      "name": "Roaring Kitty 2",
+      "address": "EKEWAk7hfnwfR8DBb1cTayPPambqyC7pwNiYkaYQKQHp",
+      "keywords": [
+        "roaring kitty 2",
+        "roaringkitty 2",
+        "keith gill 2"
+      ]
+    },
+    {
+      "symbol": "BASEDELON",
+      "name": "Based Elon",
+      "address": "37CK1GDT6y2YXKD3amHLwfkVXPmM1EMYAGmDKXiEbonk",
+      "keywords": [
+        "based elon"
+      ]
+    },
+    {
+      "symbol": "ANISWEENEY",
+      "name": "Anisweeney",
+      "address": "GcvKeTrLHfri5R4nQWvJd7FX3SLo3ZzSFD5zwGMpbonk",
+      "keywords": [
+        "ani sweeney",
+        "who did it better",
+        "are you ok",
+        "who did this",
+        "which way western man",
+        "download grok.",
+        "Companions have great jeans"
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "username": "theunipcs",
+      "name": "Bonk Guy",
+      "buyAnyPostedCA": false,
+      "amountToBuyForAnyPostedCA": null,
+      "slippageBpsForAnyPostedCA": null,
+      "timeToSellForAnyPostedCA": null,
+      "priorityFeeForAnyPostedCA": null,
+      "automaticallyBuyThisCoin": null,
+      "coins": []
+    },
+    {
+      "username": "realDonaldTrump",
+      "name": "Donald Trump",
+      "buyAnyPostedCA": true,
+      "amountToBuyForAnyPostedCA": 8,
+      "slippageBpsForAnyPostedCA": 5000,
+      "timeToSellForAnyPostedCA": 120000,
+      "priorityFeeForAnyPostedCA": 0.1,
+      "automaticallyBuyThisCoin": null,
+      "coins": [
+        {
+          "name": "FartCoin",
+          "address": "9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump",
+          "keywords": [
+            "fart coin",
+            "fartcoin"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Pengu",
+          "address": "2zMMhcVQEXDtdE6vsFS7S7D5oUodfJHE8vd1gnBouauv",
+          "keywords": [
+            "pudgy penguin"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Moodeng",
+          "address": "ED5nyyWEzpPPiWimP8vYm7sD7TD3LAt3Q3gRTWHzPJBY",
+          "keywords": [
+            "moo deng",
+            "moodeng"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Goatse Us Maximus",
+          "address": "CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump",
+          "keywords": [
+            "Goatseus Maximus",
+            "goatseus"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Shark Cat",
+          "address": "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui",
+          "keywords": [
+            "shark cat",
+            "sharkcat"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Ponke",
+          "address": "5z3EqYQo9HiCEs3R84RCDMu2n7anpDMxRhdK8PSWmrRC",
+          "keywords": [
+            "ponke"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "michi",
+          "address": "5mbK36SZ7J19An8jFochhQS4of8g6BwUjbeCSxBSoWdp",
+          "keywords": [
+            "michi ",
+            " michi",
+            "michi.",
+            "michi,"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Chill Guy",
+          "address": "Df6yfrKC8kZE3KNkrHERKzAetSxbrWeniQfyJY4Jpump",
+          "keywords": [
+            "chill guy",
+            "chillguy"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Zerebro",
+          "address": "8x5VqbHA8D7NkD52uNuS5nnt3PwA8pLD34ymskeSo2Wn",
+          "keywords": [
+            "zerebro"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Unicorn Farter Dust",
+          "address": "eL5fUxj2J4CiQsmW85k5FG9DvuQjjUoBHoQBi2Kpump",
+          "keywords": [
+            "unicorn fart dust"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Retardio",
+          "address": "6ogzHhzdrQr9Pgv6hZ2MNze7UrzBMAFyBBWUYp1Fhitx",
+          "keywords": [
+            "retardio"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Fwog",
+          "address": "A8C3xuqscfmyLrte3VmTqrAq8kgMASius9AFNANwpump",
+          "keywords": [
+            "fwog"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Hosico",
+          "address": "9wK8yN6iz1ie5kEJkvZCTxyN1x5sTdNfx8yeMY8Ebonk",
+          "keywords": [
+            "hosico"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Book of Meme",
+          "address": "ukHH6c7mMyiWCf1b9pnWe25TSpkDDt3H5pQZgZ74J82",
+          "keywords": [
+            "book of meme"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "pwease",
+          "address": "CniPCE4b3s8gSUPhUiyMjXnytrEqUrMfSsnbBjLCpump",
+          "keywords": [
+            "pwease"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "USELESSCOIN",
+          "address": "Dz9mQ9NzkBcCsuGPFJ3r1bS4wgqKMHBPiVuniW8Mbonk",
+          "keywords": [
+            "uselesscoin",
+            "useless coin"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Brainlet",
+          "address": "8NNXWrWVctNw1UFeaBypffimTdcLCcD8XJzHvYsmgwpF",
+          "keywords": [
+            "brainlet"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "BUTTHOLE COIN",
+          "address": "CboMcTUYUcy9E6B3yGdFn6aEsGUnYV6yWeoeukw6pump",
+          "keywords": [
+            "butthole coin",
+            "$butthole"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Chill House",
+          "address": "GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump",
+          "keywords": [
+            "chill house"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "ai16z",
+          "address": "HeLp6NuQkmYB4pYWo2zYs22mESHXPQYzXbB8n4V98jwC",
+          "keywords": [
+            "ai16z"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "DogWifHat",
+          "address": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
+          "keywords": [
+            "dogwifhat",
+            "dog wif hat"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "GIGA",
+          "address": "63LfDmNb3MQ8mw9MtZ2To9bEA2M71kZUUGq5tiJxcqj9",
+          "keywords": [
+            "giga chad",
+            "$giga"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Popcat",
+          "address": "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
+          "keywords": [
+            "popcat"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Retard Finder",
+          "address": "C3DwDjT17gDvvCYC2nsdGHxDHVmQRdhKfpAdqQ29pump",
+          "keywords": [
+            "retard finder"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Hosico",
+          "address": "9wK8yN6iz1ie5kEJkvZCTxyN1x5sTdNfx8yeMY8Ebonk",
+          "keywords": [
+            "hosico"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "SARATOGA",
+          "address": "3wth71poCxAckMcXKR6QLY7xKFoiSLwLgUShHRzXpump",
+          "keywords": [
+            "saratoga"
+          ],
+          "amountToBuy": 5,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "America 51st State",
+          "address": "5JEdwCUafTGLFZz8wDLmWNLbJKKwFafrHJ7A3W1Wpump",
+          "keywords": [
+            "greenland"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "New China coronavirus",
+          "address": "HRqNoAHzcvxRwMf64gz9C6DHKW1icgjebjvK23ikpump",
+          "keywords": [
+            "hku5"
+          ],
+          "amountToBuy": 3,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Sovereign Wealth Fund",
+          "address": "FtBXDMyD4SvAa6keQPAGk4sgRVuUECsxGU1X2dLWpump",
+          "keywords": [
+            "sovereign wealth fund"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "TRUMP GOLD CARDS",
+          "address": "GsSUx3qENEAn5MDQLGYHYs7ThtPXsnwCkKwqv1ZWbonk",
+          "keywords": [
+            "trump gold card",
+            "gold card"
+          ],
+          "amountToBuy": 20,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Sigmaboy",
+          "address": "4N5jkEmddTxtZQzjb4XowDJvHDzcxkByxMAf9Xa4bonk",
+          "keywords": [
+            "sigmaboy",
+            "sigma boy"
+          ],
+          "amountToBuy": 6,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "The america Party",
+          "address": "39zSVsSHFqNhARbVh6n8ZF78nCmhV3gSg8D39xhBNe73",
+          "keywords": [
+            "america party"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Deportlon",
+          "address": "5RcXsuKg6nWH9UEKdf22XLwwKJE2EmcGuHNadpgGDa9v",
+          "keywords": [
+            "deportlon"
+          ],
+          "amountToBuy": 3,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Crypto Strategic Reserve",
+          "address": "EqQFU4AoRVKJjQrpshmp89YxHAgNecCpJdMS8PJLpump",
+          "keywords": [
+            "crypto strategic reserve"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Roaring Kitty",
+          "address": "EKEWAk7hfnwfR8DBb1cTayPPambqyC7pwNiYkaYQKQHp",
+          "keywords": [
+            "roaring kitty",
+            "roaringkitty",
+            "keith gill"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Trump Season",
+          "address": "8qiVWSZ1HYsnA7Z79j3jwhbDJTxqjosZVWAsajSkpump",
+          "keywords": [
+            "trump season",
+            "trump szn"
+          ],
+          "amountToBuy": 2,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Trump 250 Bill",
+          "address": "7nEx3cF6bgD2LDh3MimokRPbAV97TFsGKQyjRKN7pump",
+          "keywords": [
+            "250 bill",
+            "250 dollar bill"
+          ],
+          "amountToBuy": 7,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Strategic Solana Reserve",
+          "address": "6heygeGJ7z1NNBSDZzdDU6315Bgkt5kzrPmDTsmrpump",
+          "keywords": [
+            "strategic solana reserve",
+            "solana strategic reserve",
+            "solana reserve"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Melania Trump",
+          "address": "FUAfBo2jgks6gB4Z4LfZkqSZgzNucisEHqnNebaRxM1P",
+          "keywords": [
+            "$melania"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": 20,
+          "timeBetweenSells": 7000,
+          "dontSell": false
+        },
+        {
+          "name": "Unconditional Surrender",
+          "address": "FRRMj87PWN5xuXGyNBXTMh56ksWNiJTUq3KZumyS87zV",
+          "keywords": [
+            "unconditional surrender"
+          ],
+          "amountToBuy": 3,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Trump Gaza",
+          "address": "5eNm9kFBe3qsPGWXdn9SYovCMnA7Q1bWZkfacQqtpump",
+          "keywords": [
+            "trump gaza"
+          ],
+          "amountToBuy": 3,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Peanut the Squirrel",
+          "address": "2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump",
+          "keywords": [
+            "pnut",
+            "peanut"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Edward Coristine",
+          "address": "7mHCx9iXPJ7EJDbDAUGmej39Kme8cxZfeVi1EAvEpump",
+          "keywords": [
+            "big balls",
+            "edward coristine"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Dogefather",
+          "address": "EcYK2XNG4wWr2vDg2M2Hrts6SrU2QB4NzXLBf888pump",
+          "keywords": [
+            "dogefather"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Luigi Mangione",
+          "address": "5XyKkFaJpAmsH4Tf2EFj3S61W3hC5cJhxNZQQ5h1pump",
+          "keywords": [
+            "mangione"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "HARAMBE",
+          "address": "Fch1oixTPri8zxBnmdCEADoJW2toyFHxqDZacQkwdvSP",
+          "keywords": [
+            "harambe"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Stoole Presidente (jailstool)",
+          "address": "AxriehR6Xw3adzHopnvMn7GcpRFcD41ddpiTWMg6pump",
+          "keywords": [
+            "jailstool"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Grok's Shitcoin",
+          "address": "2N8qruAsuSre8vEopvgEgBHigfnqBTFbmf9XTDw9pump",
+          "keywords": [
+            "$doodoocoin",
+            "doodoo",
+            "$doodoo",
+            "doodoocoin"
+          ],
+          "amountToBuy": 4,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Grok Coin",
+          "address": "3MadWqcN9cSrULn8ikDnan9mF3znoQmBPXtVy6BfSTDB",
+          "keywords": [
+            "$grokcoin",
+            "grokcoin",
+            "grok coin"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Dick Butt",
+          "address": "43SXvpf4c41t2uErsw7aL6w5qhnie6BXSSPqiTcTpump",
+          "keywords": [
+            "dick butt",
+            "dickbutt"
+          ],
+          "amountToBuy": 15,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "TITCOIN",
+          "address": "FtUEW73K6vEYHfbkfpdBZfWpxgQar2HipGdbutEhpump",
+          "keywords": [
+            "titcoin",
+            "tit coin"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Butt Coin",
+          "address": "FasH397CeZLNYWkd3wWK9vrmjd1z93n3b59DssRXpump",
+          "keywords": [
+            "buttcoin",
+            "butt coin"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Strategic Bitcoin Reserve",
+          "address": "2HHgCLfKA5Rd1Fn9xAxfYzS3XoR5NnuxKDYz2EmWpump",
+          "keywords": [
+            "strategic bitcoin reserve"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Trump 2028",
+          "address": "5wQFpZ2Xstd6khM8WwtVdhegiNEjM48DYErMVVknpump",
+          "keywords": [
+            "trump 2028"
+          ],
+          "amountToBuy": 5,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Elon OPENAI NAME",
+          "address": "DkVoFwo7aQTUeEMSegZgvUoigHti329Fm9wiMvfdpump",
+          "keywords": [
+            "truthgpt",
+            "truth gpt"
+          ],
+          "amountToBuy": 2,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Official Fort Knox Coin",
+          "address": "4N8g7mw171aVC1oMMRV1pMrQuB1RwFHaJan2WYyBpump",
+          "keywords": [
+            "knox"
+          ],
+          "amountToBuy": 5,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "100 Men Vs Gorilla",
+          "address": "qRUZaCpgxaRH1s5V6opjPA6Hnpv5BM37LqkDBw7pump",
+          "keywords": [
+            "vs gorilla"
+          ],
+          "amountToBuy": 5,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Scam Altman",
+          "address": "p5LZKhRE2qhCS9Ys8TjwB8r3DspxQVxSowcrc3tKgkz",
+          "keywords": [
+            "scam altman"
+          ],
+          "amountToBuy": 5,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "lofi maga",
+          "address": "DD9h7ubCk3EPDi8VCno9FCuF123eQyM3byyehVd8nFhG",
+          "keywords": [
+            "lo-fi"
+          ],
+          "amountToBuy": 3,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        }
+      ]
+    },
+    {
+      "username": "elonmusk",
+      "name": "Elon Musk",
+      "buyAnyPostedCA": true,
+      "amountToBuyForAnyPostedCA": 8,
+      "slippageBpsForAnyPostedCA": 5000,
+      "timeToSellForAnyPostedCA": 120000,
+      "priorityFeeForAnyPostedCA": 0.1,
+      "automaticallyBuyThisCoin": null,
+      "coins": [
+        {
+          "name": "Floki",
+          "address": "CP7xS4pHRuZS5M5FvnpRQXNfFwCpoPyHRNnupfkDHhah",
+          "keywords": [
+            "floki"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "The america Party",
+          "address": "4aQ7cA7vnfCQ8opcNBRarRYcm6Mnwioee74RXpMHbonk",
+          "keywords": [
+            "america party"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Dickipedia",
+          "address": "2ypdWsPMGX1WrRjSC3UDQ8Tv4hTi4qEXsUJDFY3PCzfA",
+          "keywords": [
+            "dickipedia"
+          ],
+          "amountToBuy": 3,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Optimus Companion",
+          "address": "AAsPWrftj7QeabkB8mbUFsjMsTsf1zCZ4DT5tNZ3bonk",
+          "keywords": [
+            "Optimus as a Grok companion",
+            "optimus companion"
+          ],
+          "amountToBuy": 5,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Kai",
+          "address": "GVa62H8JdrHQNTh1ryDirwssiyv7Uh3vYLgEab7Abonk",
+          "keywords": [
+            "kai ",
+            " kai"
+          ],
+          "amountToBuy": 5,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Pengu",
+          "address": "2zMMhcVQEXDtdE6vsFS7S7D5oUodfJHE8vd1gnBouauv",
+          "keywords": [
+            "pudgy penguin"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Based Elon",
+          "address": "37CK1GDT6y2YXKD3amHLwfkVXPmM1EMYAGmDKXiEbonk",
+          "keywords": [
+            "based elon"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Moodeng",
+          "address": "ED5nyyWEzpPPiWimP8vYm7sD7TD3LAt3Q3gRTWHzPJBY",
+          "keywords": [
+            "moo deng",
+            "moodeng"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Goatse Us Maximus",
+          "address": "CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump",
+          "keywords": [
+            "Goatseus Maximus",
+            "goatseus"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Shark Cat",
+          "address": "6D7NaB2xsLd7cauWu1wKk6KBsJohJmP2qZH9GEfVi5Ui",
+          "keywords": [
+            "shark cat",
+            "sharkcat"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Zerebro",
+          "address": "8x5VqbHA8D7NkD52uNuS5nnt3PwA8pLD34ymskeSo2Wn",
+          "keywords": [
+            "zerebro"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Unicorn Farter Dust",
+          "address": "eL5fUxj2J4CiQsmW85k5FG9DvuQjjUoBHoQBi2Kpump",
+          "keywords": [
+            "unicorn fart dust"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Retardio",
+          "address": "6ogzHhzdrQr9Pgv6hZ2MNze7UrzBMAFyBBWUYp1Fhitx",
+          "keywords": [
+            "retardio"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Fwog",
+          "address": "A8C3xuqscfmyLrte3VmTqrAq8kgMASius9AFNANwpump",
+          "keywords": [
+            "fwog"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Hosico",
+          "address": "9wK8yN6iz1ie5kEJkvZCTxyN1x5sTdNfx8yeMY8Ebonk",
+          "keywords": [
+            "hosico"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Book of Meme",
+          "address": "ukHH6c7mMyiWCf1b9pnWe25TSpkDDt3H5pQZgZ74J82",
+          "keywords": [
+            "book of meme"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Launch Coin",
+          "address": "Ey59PH7Z4BFU4HjyKnyMdWt5GGN76KazTAwQihoUXRnk",
+          "keywords": [
+            "launchcoin",
+            "launch coin"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "USELESSCOIN",
+          "address": "Dz9mQ9NzkBcCsuGPFJ3r1bS4wgqKMHBPiVuniW8Mbonk",
+          "keywords": [
+            "uselesscoin",
+            "useless coin"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Brainlet",
+          "address": "8NNXWrWVctNw1UFeaBypffimTdcLCcD8XJzHvYsmgwpF",
+          "keywords": [
+            "brainlet"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "BUTTHOLE COIN",
+          "address": "CboMcTUYUcy9E6B3yGdFn6aEsGUnYV6yWeoeukw6pump",
+          "keywords": [
+            "butthole coin",
+            "$butthole"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Chill House",
+          "address": "GkyPYa7NnCFbduLknCfBfP7p8564X1VZhwZYJ6CZpump",
+          "keywords": [
+            "chill house"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "SARATOGA",
+          "address": "3wth71poCxAckMcXKR6QLY7xKFoiSLwLgUShHRzXpump",
+          "keywords": [
+            "saratoga"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Trump Gaza",
+          "address": "5eNm9kFBe3qsPGWXdn9SYovCMnA7Q1bWZkfacQqtpump",
+          "keywords": [
+            "trump gaza"
+          ],
+          "amountToBuy": 3,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "FartCoin",
+          "address": "9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump",
+          "keywords": [
+            "fart coin",
+            "fartcoin"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Retard Finder",
+          "address": "C3DwDjT17gDvvCYC2nsdGHxDHVmQRdhKfpAdqQ29pump",
+          "keywords": [
+            "retard finder"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Peanut the Squirrel",
+          "address": "2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump",
+          "keywords": [
+            "pnut",
+            "peanut"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "The World's First AI Human",
+          "address": "D3fQZ6fmHseTCsNntBMnu3Tk3EV3uN68VLDQZWgVpump",
+          "keywords": [
+            "arbaugh"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "HARAMBE",
+          "address": "Fch1oixTPri8zxBnmdCEADoJW2toyFHxqDZacQkwdvSP",
+          "keywords": [
+            "harambe"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Elon OPENAI NAME",
+          "address": "DkVoFwo7aQTUeEMSegZgvUoigHti329Fm9wiMvfdpump",
+          "keywords": [
+            "truthgpt",
+            "truth gpt"
+          ],
+          "amountToBuy": 2,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Trump 2028",
+          "address": "5wQFpZ2Xstd6khM8WwtVdhegiNEjM48DYErMVVknpump",
+          "keywords": [
+            "trump 2028"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Sovereign Wealth Fund",
+          "address": "FtBXDMyD4SvAa6keQPAGk4sgRVuUECsxGU1X2dLWpump",
+          "keywords": [
+            "sovereign wealth fund"
+          ],
+          "amountToBuy": 5,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Dogefather",
+          "address": "EcYK2XNG4wWr2vDg2M2Hrts6SrU2QB4NzXLBf888pump",
+          "keywords": [
+            "dogefather"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Strategic Bitcoin Reserve",
+          "address": "2HHgCLfKA5Rd1Fn9xAxfYzS3XoR5NnuxKDYz2EmWpump",
+          "keywords": [
+            "strategic bitcoin reserve"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Crypto Strategic Reserve",
+          "address": "EqQFU4AoRVKJjQrpshmp89YxHAgNecCpJdMS8PJLpump",
+          "keywords": [
+            "crypto strategic reserve"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Trump Season",
+          "address": "8qiVWSZ1HYsnA7Z79j3jwhbDJTxqjosZVWAsajSkpump",
+          "keywords": [
+            "trump season",
+            "trump szn"
+          ],
+          "amountToBuy": 2,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Hosico",
+          "address": "9wK8yN6iz1ie5kEJkvZCTxyN1x5sTdNfx8yeMY8Ebonk",
+          "keywords": [
+            "hosico"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Strategic Solana Reserve",
+          "address": "6heygeGJ7z1NNBSDZzdDU6315Bgkt5kzrPmDTsmrpump",
+          "keywords": [
+            "strategic solana reserve",
+            "solana strategic reserve",
+            "solana reserve"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Official Fort Knox Coin",
+          "address": "4N8g7mw171aVC1oMMRV1pMrQuB1RwFHaJan2WYyBpump",
+          "keywords": [
+            "knox"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Dick Butt",
+          "address": "43SXvpf4c41t2uErsw7aL6w5qhnie6BXSSPqiTcTpump",
+          "keywords": [
+            "dick butt",
+            "dickbutt"
+          ],
+          "amountToBuy": 15,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "TITCOIN",
+          "address": "FtUEW73K6vEYHfbkfpdBZfWpxgQar2HipGdbutEhpump",
+          "keywords": [
+            "titcoin",
+            "tit coin"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Butt Coin",
+          "address": "FasH397CeZLNYWkd3wWK9vrmjd1z93n3b59DssRXpump",
+          "keywords": [
+            "buttcoin",
+            "butt coin"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Gorbagana",
+          "address": "71Jvq4Epe2FCJ7JFSF7jLXdNk1Wy4Bhqd9iL6bEFELvg",
+          "keywords": [
+            "gorbagana"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Obi Pnut Kenobi",
+          "address": "5WGkdemJNEoAVKveDQdzQmDqTyxCraXGw9ACyrwCEUMS",
+          "keywords": [
+            "Obi PNut Kenobi",
+            "pnut kenobi",
+            "obi pnut"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Stoole Presidente (jailstool)",
+          "address": "AxriehR6Xw3adzHopnvMn7GcpRFcD41ddpiTWMg6pump",
+          "keywords": [
+            "jailstool"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "pwease",
+          "address": "CniPCE4b3s8gSUPhUiyMjXnytrEqUrMfSsnbBjLCpump",
+          "keywords": [
+            "pwease"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Roaring Kitty",
+          "address": "EKEWAk7hfnwfR8DBb1cTayPPambqyC7pwNiYkaYQKQHp",
+          "keywords": [
+            "roaring kitty",
+            "roaringkitty",
+            "keith gill"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "8008",
+          "address": "5puhwnyz2Tv8jSmmBD5DSqCwFVXwwPGZacymM7DQpump",
+          "keywords": [
+            "8008"
+          ],
+          "amountToBuy": 6,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Grok's Shitcoin",
+          "address": "2N8qruAsuSre8vEopvgEgBHigfnqBTFbmf9XTDw9pump",
+          "keywords": [
+            "$doodoocoin",
+            "doodoo",
+            "$doodoo",
+            "doodoocoin"
+          ],
+          "amountToBuy": 4,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Grok Coin",
+          "address": "3MadWqcN9cSrULn8ikDnan9mF3znoQmBPXtVy6BfSTDB",
+          "keywords": [
+            "$grokcoin",
+            "grokcoin",
+            "grok coin"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Ewon Wusk",
+          "address": "EF3Ln1DkUB5azvqcaCJgG3RR2qSUJEXxLo1q4ZHzpump",
+          "keywords": [
+            "ewon wusk"
+          ],
+          "amountToBuy": 5,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "New China coronavirus",
+          "address": "HRqNoAHzcvxRwMf64gz9C6DHKW1icgjebjvK23ikpump",
+          "keywords": [
+            "hku5"
+          ],
+          "amountToBuy": 3,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "DogWifHat",
+          "address": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
+          "keywords": [
+            "dogwifhat",
+            "dog wif hat"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Floki",
+          "address": "CP7xS4pHRuZS5M5FvnpRQXNfFwCpoPyHRNnupfkDHhah",
+          "keywords": [
+            "floki"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "ai16z",
+          "address": "HeLp6NuQkmYB4pYWo2zYs22mESHXPQYzXbB8n4V98jwC",
+          "keywords": [
+            "ai16z"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "GIGA",
+          "address": "63LfDmNb3MQ8mw9MtZ2To9bEA2M71kZUUGq5tiJxcqj9",
+          "keywords": [
+            "giga chad",
+            "$giga"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Popcat",
+          "address": "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
+          "keywords": [
+            "popcat"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "100 Men Vs Gorilla",
+          "address": "qRUZaCpgxaRH1s5V6opjPA6Hnpv5BM37LqkDBw7pump",
+          "keywords": [
+            "vs gorilla"
+          ],
+          "amountToBuy": 5,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Deportlon",
+          "address": "5RcXsuKg6nWH9UEKdf22XLwwKJE2EmcGuHNadpgGDa9v",
+          "keywords": [
+            "deportlon"
+          ],
+          "amountToBuy": 3,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        }
+      ]
+    },
+    {
+      "username": "pumpdotfun",
+      "name": "Pump Dot Fun",
+      "buyAnyPostedCA": true,
+      "amountToBuyForAnyPostedCA": 8,
+      "slippageBpsForAnyPostedCA": 3000,
+      "timeToSellForAnyPostedCA": 120000,
+      "priorityFeeForAnyPostedCA": 0.1,
+      "automaticallyBuyThisCoin": null,
+      "coins": []
+    },
+    {
+      "username": "JDVance",
+      "name": "JD Vance",
+      "buyAnyPostedCA": true,
+      "amountToBuyForAnyPostedCA": 8,
+      "slippageBpsForAnyPostedCA": 3000,
+      "timeToSellForAnyPostedCA": 120000,
+      "priorityFeeForAnyPostedCA": 0.1,
+      "automaticallyBuyThisCoin": null,
+      "coins": [
+        {
+          "name": "pwease",
+          "address": "CniPCE4b3s8gSUPhUiyMjXnytrEqUrMfSsnbBjLCpump",
+          "keywords": [
+            "pwease"
+          ],
+          "amountToBuy": 50,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": 20,
+          "timeBetweenSells": 8000,
+          "dontSell": false
+        },
+        {
+          "name": "FartCoin",
+          "address": "9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump",
+          "keywords": [
+            "fart coin",
+            "fartcoin"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        }
+      ]
+    },
+    {
+      "username": "stoolpresidente",
+      "name": "Dave Portnoy",
+      "buyAnyPostedCA": true,
+      "amountToBuyForAnyPostedCA": 8,
+      "slippageBpsForAnyPostedCA": 7000,
+      "timeToSellForAnyPostedCA": 120000,
+      "priorityFeeForAnyPostedCA": 0.1,
+      "automaticallyBuyThisCoin": null,
+      "coins": [
+        {
+          "name": "Davey Day Trader Global",
+          "address": "DVtrerbvaB1JyAKA9crCN2xkxnYD5jBCLgsUrBZEpump",
+          "keywords": [
+            "$ddtg"
+          ],
+          "amountToBuy": 3,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Chestnut",
+          "address": "7oE4Ji977tfofxk9k1UosJ5mTz7rjPRNiSCyWFbPpump",
+          "keywords": [
+            "chestnut"
+          ],
+          "amountToBuy": 1,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Shortnoy",
+          "address": "4cPhM4VA8HdKVzLufEAwhwYDpg2FqWPzrZXXcSbZpump",
+          "keywords": [
+            "shortnoy"
+          ],
+          "amountToBuy": 1,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Stoole Presidente (jailstool)",
+          "address": "AxriehR6Xw3adzHopnvMn7GcpRFcD41ddpiTWMg6pump",
+          "keywords": [
+            "jailstool"
+          ],
+          "amountToBuy": 20,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": 20,
+          "timeBetweenSells": 5000,
+          "dontSell": false
+        },
+        {
+          "name": "Greed3",
+          "address": "CPBQqugWWCcyehezHf4uSJtET2kmYNqPuhyb57H5pump",
+          "keywords": [
+            "greed3",
+            "greed 3"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Greed2",
+          "address": "GoL6RVGQFzTD7MdoNEHUQmNp6SgXBn6f9khxAW5Bpump",
+          "keywords": [
+            "greed2",
+            "greed 2"
+          ],
+          "amountToBuy": 5,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "fartstool",
+          "address": "4hr97GiyvAc2Ak57gETQVb1kfaoMeYwngMZZ9qe1pump",
+          "keywords": [
+            "fartstool"
+          ],
+          "amountToBuy": 2,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        },
+        {
+          "name": "Miss Peaches",
+          "address": "7qhwYUXBaPTfWkhUpgWTjHAvdG48wRj5TLmTQ5Topump",
+          "keywords": [
+            "peaches"
+          ],
+          "amountToBuy": 8,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        }
+      ]
+    },
+    {
+      "username": "WatcherGuru",
+      "name": "Watcher Guru",
+      "buyAnyPostedCA": false,
+      "amountToBuyForAnyPostedCA": null,
+      "slippageBpsForAnyPostedCA": null,
+      "timeToSellForAnyPostedCA": null,
+      "priorityFeeForAnyPostedCA": null,
+      "automaticallyBuyThisCoin": null,
+      "coins": []
+    },
+    {
+      "username": "DeItaone",
+      "name": "Walter Bloomberg",
+      "buyAnyPostedCA": false,
+      "amountToBuyForAnyPostedCA": null,
+      "slippageBpsForAnyPostedCA": null,
+      "timeToSellForAnyPostedCA": null,
+      "priorityFeeForAnyPostedCA": null,
+      "automaticallyBuyThisCoin": null,
+      "coins": []
+    },
+    {
+      "username": "db",
+      "name": "tier10k",
+      "buyAnyPostedCA": false,
+      "amountToBuyForAnyPostedCA": null,
+      "slippageBpsForAnyPostedCA": null,
+      "timeToSellForAnyPostedCA": null,
+      "priorityFeeForAnyPostedCA": null,
+      "automaticallyBuyThisCoin": null,
+      "coins": []
+    },
+    {
+      "username": "RealRossU",
+      "name": "Ross Ulbricht",
+      "buyAnyPostedCA": true,
+      "amountToBuyForAnyPostedCA": 8,
+      "slippageBpsForAnyPostedCA": 5000,
+      "timeToSellForAnyPostedCA": 120000,
+      "priorityFeeForAnyPostedCA": 0.1,
+      "automaticallyBuyThisCoin": null,
+      "coins": []
+    },
+    {
+      "username": "kanyewest",
+      "name": "Kanye West",
+      "buyAnyPostedCA": false,
+      "amountToBuyForAnyPostedCA": null,
+      "slippageBpsForAnyPostedCA": null,
+      "timeToSellForAnyPostedCA": null,
+      "priorityFeeForAnyPostedCA": null,
+      "automaticallyBuyThisCoin": null,
+      "coins": []
+    },
+    {
+      "username": "DavidSacks",
+      "name": "David Sacks",
+      "buyAnyPostedCA": false,
+      "amountToBuyForAnyPostedCA": null,
+      "slippageBpsForAnyPostedCA": null,
+      "timeToSellForAnyPostedCA": null,
+      "priorityFeeForAnyPostedCA": null,
+      "automaticallyBuyThisCoin": null,
+      "coins": [
+        {
+          "name": "Sovereign Wealth Fund",
+          "address": "FtBXDMyD4SvAa6keQPAGk4sgRVuUECsxGU1X2dLWpump",
+          "keywords": [
+            "sovereign wealth fund"
+          ],
+          "amountToBuy": 5,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": 33,
+          "timeBetweenSells": 10000,
+          "dontSell": false
+        },
+        {
+          "name": "Strategic Bitcoin Reserve",
+          "address": "2HHgCLfKA5Rd1Fn9xAxfYzS3XoR5NnuxKDYz2EmWpump",
+          "keywords": [
+            "strategic bitcoin reserve"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": 33,
+          "timeBetweenSells": 10000,
+          "dontSell": false
+        },
+        {
+          "name": "Crypto Strategic Reserve",
+          "address": "EqQFU4AoRVKJjQrpshmp89YxHAgNecCpJdMS8PJLpump",
+          "keywords": [
+            "crypto strategic reserve"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": 33,
+          "timeBetweenSells": 10000,
+          "dontSell": false
+        }
+      ]
+    },
+    {
+      "username": "davidsacks47",
+      "name": "David Sacks",
+      "buyAnyPostedCA": false,
+      "amountToBuyForAnyPostedCA": null,
+      "slippageBpsForAnyPostedCA": null,
+      "timeToSellForAnyPostedCA": null,
+      "priorityFeeForAnyPostedCA": null,
+      "automaticallyBuyThisCoin": null,
+      "coins": [
+        {
+          "name": "Sovereign Wealth Fund",
+          "address": "FtBXDMyD4SvAa6keQPAGk4sgRVuUECsxGU1X2dLWpump",
+          "keywords": [
+            "sovereign wealth fund"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": 33,
+          "timeBetweenSells": 10000,
+          "dontSell": false
+        },
+        {
+          "name": "Strategic Bitcoin Reserve",
+          "address": "2HHgCLfKA5Rd1Fn9xAxfYzS3XoR5NnuxKDYz2EmWpump",
+          "keywords": [
+            "strategic bitcoin reserve"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": 33,
+          "timeBetweenSells": 10000,
+          "dontSell": false
+        },
+        {
+          "name": "Crypto Strategic Reserve",
+          "address": "EqQFU4AoRVKJjQrpshmp89YxHAgNecCpJdMS8PJLpump",
+          "keywords": [
+            "crypto strategic reserve"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": 33,
+          "timeBetweenSells": 10000,
+          "dontSell": false
+        }
+      ]
+    },
+    {
+      "username": "aeyakovenko",
+      "name": "toly",
+      "buyAnyPostedCA": false,
+      "amountToBuyForAnyPostedCA": null,
+      "slippageBpsForAnyPostedCA": null,
+      "timeToSellForAnyPostedCA": null,
+      "priorityFeeForAnyPostedCA": null,
+      "automaticallyBuyThisCoin": null,
+      "coins": []
+    },
+    {
+      "username": "MarioNawfal",
+      "name": "Mario Nawfal",
+      "buyAnyPostedCA": false,
+      "amountToBuyForAnyPostedCA": null,
+      "slippageBpsForAnyPostedCA": null,
+      "timeToSellForAnyPostedCA": null,
+      "priorityFeeForAnyPostedCA": null,
+      "automaticallyBuyThisCoin": null,
+      "coins": []
+    },
+    {
+      "username": "nypost",
+      "name": "NY Post",
+      "buyAnyPostedCA": false,
+      "amountToBuyForAnyPostedCA": null,
+      "slippageBpsForAnyPostedCA": null,
+      "timeToSellForAnyPostedCA": null,
+      "priorityFeeForAnyPostedCA": null,
+      "automaticallyBuyThisCoin": null,
+      "coins": []
+    },
+    {
+      "username": "SolportTom",
+      "name": "Bonk Guy",
+      "buyAnyPostedCA": false,
+      "amountToBuyForAnyPostedCA": null,
+      "slippageBpsForAnyPostedCA": null,
+      "timeToSellForAnyPostedCA": null,
+      "priorityFeeForAnyPostedCA": null,
+      "automaticallyBuyThisCoin": null,
+      "coins": []
+    },
+    {
+      "username": "cz",
+      "name": "CZ Binance ",
+      "buyAnyPostedCA": false,
+      "amountToBuyForAnyPostedCA": null,
+      "slippageBpsForAnyPostedCA": null,
+      "timeToSellForAnyPostedCA": null,
+      "priorityFeeForAnyPostedCA": null,
+      "automaticallyBuyThisCoin": null,
+      "coins": [
+        {
+          "name": "Broccoli",
+          "address": "D13VkjDiCxtgRJsH4s1VCxKS4bFZq5UEz2iRsSbapump",
+          "keywords": [
+            "broccoli"
+          ],
+          "amountToBuy": 20,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        }
+      ]
+    },
+    {
+      "username": "SBF_FTX",
+      "name": "SBF",
+      "buyAnyPostedCA": false,
+      "amountToBuyForAnyPostedCA": null,
+      "slippageBpsForAnyPostedCA": null,
+      "timeToSellForAnyPostedCA": null,
+      "priorityFeeForAnyPostedCA": null,
+      "automaticallyBuyThisCoin": null,
+      "coins": [
+        {
+          "name": "Sam Bankman-Fried",
+          "address": "9Nuzd5BZMfeiP2TSXXGqYcrtqYEyFkGoEbm39CB3pump",
+          "keywords": [
+            "a",
+            "e",
+            "i",
+            "o",
+            "u",
+            "!",
+            "?",
+            ".",
+            ",",
+            ":",
+            ";",
+            "-"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        }
+      ]
+    },
+    {
+      "username": "cb_doge",
+      "name": "DogeDesigner",
+      "buyAnyPostedCA": false,
+      "amountToBuyForAnyPostedCA": null,
+      "slippageBpsForAnyPostedCA": null,
+      "timeToSellForAnyPostedCA": null,
+      "priorityFeeForAnyPostedCA": null,
+      "automaticallyBuyThisCoin": null,
+      "coins": []
+    },
+    {
+      "username": "MrBeast",
+      "name": "MrBeast",
+      "buyAnyPostedCA": false,
+      "amountToBuyForAnyPostedCA": null,
+      "slippageBpsForAnyPostedCA": null,
+      "timeToSellForAnyPostedCA": null,
+      "priorityFeeForAnyPostedCA": null,
+      "automaticallyBuyThisCoin": null,
+      "coins": [
+        {
+          "name": "Mr Lean",
+          "address": "BT1ePKr6XXrVJGjc4v2XDEQdeMMJCv4wJnDeVXZEpump",
+          "keywords": [
+            "mr. lean",
+            "mr lean"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        }
+      ]
+    },
+    {
+      "username": "RoaringKitty",
+      "name": "RoaringKitty",
+      "buyAnyPostedCA": false,
+      "amountToBuyForAnyPostedCA": null,
+      "slippageBpsForAnyPostedCA": null,
+      "timeToSellForAnyPostedCA": null,
+      "priorityFeeForAnyPostedCA": null,
+      "automaticallyBuyThisCoin": {
+        "name": "Roaring Kitty",
+        "address": "EKEWAk7hfnwfR8DBb1cTayPPambqyC7pwNiYkaYQKQHp",
+        "keywords": [
+          "roaring kitty",
+          "roaringkitty",
+          "keith gill"
+        ],
+        "amountToBuy": 10,
+        "slippageBps": null,
+        "priorityFee": null,
+        "percentToSell": null,
+        "timeBetweenSells": null,
+        "dontSell": false
+      },
+      "coins": [
+        {
+          "name": "Roaring Kitty",
+          "address": "EKEWAk7hfnwfR8DBb1cTayPPambqyC7pwNiYkaYQKQHp",
+          "keywords": [
+            "roaring kitty",
+            "roaringkitty",
+            "keith gill"
+          ],
+          "amountToBuy": 10,
+          "slippageBps": null,
+          "priorityFee": null,
+          "percentToSell": null,
+          "timeBetweenSells": null,
+          "dontSell": false
+        }
+      ]
+    }
+  ]
+}

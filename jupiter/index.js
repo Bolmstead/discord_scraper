@@ -19,6 +19,28 @@ dotenv.config();
 const connection = new Connection(process.env.HELIUS_RPC_URL);
 const jupiterAPI = createJupiterApiClient();
 
+function getWalletFromName(walletName) {
+  if (walletName === "Berkley" || walletName === "me") {
+    if (!process.env.TEST_WALLET_PRIVATE_KEY) {
+      throw new Error("Missing TEST_WALLET_PRIVATE_KEY for Berkley wallet");
+    }
+    return Keypair.fromSecretKey(
+      bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY)
+    );
+  }
+
+  if (walletName === "Sharif") {
+    if (!process.env.SHARIF_WALLET_PRIVATE_KEY) {
+      throw new Error("Missing SHARIF_WALLET_PRIVATE_KEY for Sharif wallet");
+    }
+    return Keypair.fromSecretKey(
+      bs58.decode(process.env.SHARIF_WALLET_PRIVATE_KEY)
+    );
+  }
+
+  throw new Error(`Unsupported wallet name: ${walletName}`);
+}
+
 async function getQuote(
   inputMint,
   outputMint,
@@ -159,15 +181,16 @@ async function executeSwap(
     return null;
   }
 
-  if (walletName === "Berkley" || walletName === "me") {
-    wallet = Keypair.fromSecretKey(
-      bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
-    );
-
+  try {
+    wallet = getWalletFromName(walletName);
     console.log(
       "🚀 ~ wallet.publicKey.toString():",
       wallet.publicKey.toString()
     );
+  } catch (walletError) {
+    console.error("Wallet lookup error:", walletError.message);
+    sendTelegramMessage(`Error in executeSwap (wallet): ${walletError.message}`);
+    return null;
   }
 
   const amountToBuyLamports = amountToBuy * LAMPORTS_PER_SOL;
@@ -390,14 +413,14 @@ async function sellTokenPercent(
   console.log(`📊 Percentage to sell: ${percentToSell}%`);
 
   let wallet = null;
-  if (walletName === "Berkley") {
-    wallet = Keypair.fromSecretKey(
-      bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
+  try {
+    wallet = getWalletFromName(walletName);
+  } catch (walletError) {
+    console.error("Wallet lookup error:", walletError.message);
+    sendTelegramMessage(
+      `Error in sellTokenPercent (wallet): ${walletError.message}`
     );
-  } else if (walletName === "Sharif") {
-    wallet = Keypair.fromSecretKey(
-      bs58.decode(process.env.SHARIF_WALLET_PRIVATE_KEY || "")
-    );
+    return { success: false, error: walletError.message };
   }
 
   console.log(`👛 Using wallet: ${wallet.publicKey.toString()}`);
@@ -664,9 +687,16 @@ async function swapAllTokensToSolana(
     `📊 Slippage: ${slippageBps} basis points (${slippageBps / 100}%)`
   );
 
-  let wallet = Keypair.fromSecretKey(
-    bs58.decode(process.env.TEST_WALLET_PRIVATE_KEY || "")
-  );
+  let wallet;
+  try {
+    wallet = getWalletFromName(walletName);
+  } catch (walletError) {
+    console.error("Wallet lookup error:", walletError.message);
+    await sendTelegramMessage(
+      `Error in swapAllTokensToSolana (wallet): ${walletError.message}`
+    );
+    return { success: false, error: walletError.message };
+  }
 
   if (!wallet) {
     console.error("❌ Wallet not found");

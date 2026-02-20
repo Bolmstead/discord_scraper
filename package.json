@@ -7,6 +7,7 @@
   "scripts": {
     "twitter": "node scrapeTwitterTracker.js",
     "start": "node scrapeTwitterTracker.js",
+    "config:ui": "node tradingConfigServer.js",
     "truth": "node scrapeTruthSocial.js",
     "testSwap": "node testSwap.js",
     "createWallet": "node helpers/createWallet.js",

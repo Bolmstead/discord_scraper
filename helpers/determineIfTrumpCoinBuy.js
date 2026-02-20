@@ -1,19 +1,17 @@
-import { trumpAccountMap, trumpKeywordMap } from "../constants.js";
+import { getTradingMaps } from "../constants.js";
 import { determineIfTextHasCA } from "./determineIfTextHasCA.js";
 
-// Pre-process maps at module level
-const trumpCombinedKeywords = new Map();
-for (const [keyword, matches] of trumpKeywordMap) {
-  trumpCombinedKeywords.set(keyword.toLowerCase(), { matches, type: "trump" });
-}
-console.log("🚀 ~ trumpCombinedKeywords:", trumpCombinedKeywords);
-
-export function determineIfTrumpCoinBuy(text, testMode = false) {
+export function determineIfTrumpCoinBuy(text) {
   try {
-    if (!text) return null;
+    if (!text) {
+      return null;
+    }
 
+    const { trumpAccountMap, trumpKeywordMap } = getTradingMaps();
     const account = trumpAccountMap.get("trump");
-    if (!account) return null;
+    if (!account) {
+      return null;
+    }
 
     const {
       buyAnyPostedCA,
@@ -21,9 +19,9 @@ export function determineIfTrumpCoinBuy(text, testMode = false) {
       slippageBpsForAnyPostedCA,
       timeToSellForAnyPostedCA,
       priorityFeeForAnyPostedCA,
+      defaultWalletName,
     } = account;
 
-    // Check CA first (highest priority)
     if (buyAnyPostedCA) {
       const ca = determineIfTextHasCA(text);
       if (ca) {
@@ -37,34 +35,33 @@ export function determineIfTrumpCoinBuy(text, testMode = false) {
           priorityFee: priorityFeeForAnyPostedCA,
           keywords: [],
           caWasPosted: true,
+          walletName: defaultWalletName || "Berkley",
         };
       }
     }
 
-    const combinedKeywords = testMode
-      ? testCombinedKeywords
-      : trumpCombinedKeywords;
-
-    // Single pass through text for keyword matching
-    const keywordTracker = [];
     const lowerText = text.toLowerCase();
-    for (const [keyword, { matches, type }] of combinedKeywords) {
-      keywordTracker.push(keyword);
-      if (lowerText.includes(keyword)) {
-        const match = matches.find((m) => m.username === "trump");
-
-        if (match) {
-          console.log(`✨ Matched ${type} keyword: "${keyword}"`);
-          return {
-            ...match.coin,
-            chosenKeyword: keyword,
-          };
-        }
+    for (const [keyword, matches] of trumpKeywordMap) {
+      if (!lowerText.includes(keyword.toLowerCase())) {
+        continue;
       }
+
+      const match = matches.find((candidate) => candidate.username === "trump");
+      if (!match) {
+        continue;
+      }
+
+      console.log(`✨ Matched trump keyword: "${keyword}"`);
+      return {
+        ...match.coin,
+        chosenKeyword: keyword,
+        walletName: match.coin.walletName || defaultWalletName || "Berkley",
+      };
     }
+
     return null;
   } catch (error) {
-    console.error("Error in determineIf:", error);
+    console.error("Error in determineIfTrumpCoinBuy:", error);
     console.error("Error details:", {
       message: error.message,
       stack: error.stack,
