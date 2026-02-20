@@ -129,6 +129,7 @@
     const [status, setStatus] = useState("");
 
     const [authenticated, setAuthenticated] = useState(false);
+    const [authEnabled, setAuthEnabled] = useState(true);
     const [viewer, setViewer] = useState("");
     const [loginUsername, setLoginUsername] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
@@ -267,11 +268,13 @@
       setLoading(true);
       try {
         const auth = await apiRequest("/api/auth/me", { method: "GET" });
+        setAuthEnabled(auth.authEnabled !== false);
         setAuthenticated(!!auth.authenticated);
         setViewer(auth.username || "");
         await loadSnapshot();
         setError("");
       } catch {
+        setAuthEnabled(true);
         setAuthenticated(false);
         setViewer("");
       } finally {
@@ -324,6 +327,10 @@
     }
 
     async function handleLogout() {
+      if (!authEnabled) {
+        return;
+      }
+
       try {
         await apiRequest("/api/auth/logout", { method: "POST", body: "{}" });
       } catch {
@@ -369,14 +376,14 @@
         databasePath
           ? h("div", { className: "subtitle" }, `Database: ${databasePath}`)
           : null,
-        h(
-          "div",
-          { className: "actions-row" },
-          h(
-            "button",
-            { className: "btn secondary", onClick: handleLogout },
-            "Sign out"
-          ),
+        h("div", { className: "actions-row" },
+          authEnabled
+            ? h(
+                "button",
+                { className: "btn secondary", onClick: handleLogout },
+                "Sign out"
+              )
+            : h("span", { className: "subtitle" }, "Local mode (auth disabled)"),
           saving ? h("span", { className: "saving" }, "Saving...") : null
         )
       ),

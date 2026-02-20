@@ -21,6 +21,7 @@ import {
 
 const PORT = Number(process.env.TRADING_CONFIG_PORT || 3030);
 const HOST = process.env.TRADING_CONFIG_HOST || "127.0.0.1";
+const AUTH_ENABLED = String(process.env.TRADING_CONFIG_AUTH || "false") === "true";
 const FRONTEND_DIR = path.resolve(process.cwd(), "frontend");
 const SESSION_COOKIE_NAME = "trading_config_session";
 const SESSION_TTL_SECONDS = 12 * 60 * 60;
@@ -185,6 +186,10 @@ function getSessionFromRequest(req) {
 }
 
 function requireAuth(req, res) {
+  if (!AUTH_ENABLED) {
+    return { username: "local" };
+  }
+
   const session = getSessionFromRequest(req);
   if (!session) {
     sendJson(res, 401, { error: "Authentication required" });
@@ -218,6 +223,14 @@ const server = http.createServer(async (req, res) => {
     const { pathname } = requestUrl;
 
     if (req.method === "POST" && pathname === "/api/auth/login") {
+      if (!AUTH_ENABLED) {
+        return sendJson(res, 200, {
+          authenticated: true,
+          username: "local",
+          authEnabled: false,
+        });
+      }
+
       const body = await parseRequestBody(req);
       const username = String(body.username || "").trim();
       const password = String(body.password || "");
@@ -246,6 +259,10 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (req.method === "POST" && pathname === "/api/auth/logout") {
+      if (!AUTH_ENABLED) {
+        return sendJson(res, 200, { authenticated: true, username: "local", authEnabled: false });
+      }
+
       const currentSession = getSessionFromRequest(req);
       if (currentSession?.token) {
         sessions.delete(currentSession.token);
@@ -256,14 +273,23 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (req.method === "GET" && pathname === "/api/auth/me") {
+      if (!AUTH_ENABLED) {
+        return sendJson(res, 200, {
+          authenticated: true,
+          username: "local",
+          authEnabled: false,
+        });
+      }
+
       const currentSession = getSessionFromRequest(req);
       if (!currentSession) {
-        return sendJson(res, 401, { authenticated: false });
+        return sendJson(res, 401, { authenticated: false, authEnabled: true });
       }
 
       return sendJson(res, 200, {
         authenticated: true,
         username: currentSession.username,
+        authEnabled: true,
       });
     }
 
