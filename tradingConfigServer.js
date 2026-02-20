@@ -22,7 +22,11 @@ import {
 const PORT = Number(process.env.TRADING_CONFIG_PORT || 3030);
 const HOST = process.env.TRADING_CONFIG_HOST || "127.0.0.1";
 const AUTH_ENABLED = String(process.env.TRADING_CONFIG_AUTH || "false") === "true";
-const FRONTEND_DIR = path.resolve(process.cwd(), "frontend");
+const FRONTEND_BUILD_DIR = path.resolve(process.cwd(), "frontend-react/dist");
+const FRONTEND_LEGACY_DIR = path.resolve(process.cwd(), "frontend");
+const FRONTEND_DIR = fs.existsSync(FRONTEND_BUILD_DIR)
+  ? FRONTEND_BUILD_DIR
+  : FRONTEND_LEGACY_DIR;
 const SESSION_COOKIE_NAME = "trading_config_session";
 const SESSION_TTL_SECONDS = 12 * 60 * 60;
 
@@ -425,5 +429,6 @@ server.on("error", (error) => {
 
 server.listen(PORT, HOST, () => {
   console.log(`Trading config UI running at http://localhost:${PORT}`);
+  console.log(`Frontend directory: ${FRONTEND_DIR}`);
   console.log(`Database: ${getTradingConfigDatabasePath()}`);
 });
