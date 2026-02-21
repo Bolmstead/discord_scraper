@@ -1,9 +1,10 @@
 import React from "react";
 
   const h = React.createElement;
-  const { useEffect, useMemo, useState } = React;
+  const { useCallback, useEffect, useMemo, useState } = React;
 
   const WALLET_OPTIONS = ["Berkley", "Sharif"];
+  const MAX_DEBUG_LOGS = 250;
 
   function numberValueOrNull(value) {
     if (value === "" || value === null || value === undefined) {
@@ -41,6 +42,22 @@ import React from "react";
       .split(",")
       .map((keyword) => keyword.trim())
       .filter(Boolean);
+  }
+
+  function toLogSafeString(value) {
+    if (value === null || value === undefined) {
+      return "";
+    }
+
+    if (typeof value === "string") {
+      return value;
+    }
+
+    try {
+      return JSON.stringify(value, null, 2);
+    } catch {
+      return String(value);
+    }
   }
 
   async function apiRequest(path, options) {
@@ -123,11 +140,66 @@ import React from "react";
     );
   }
 
+  function DebugPanel(props) {
+    return h(
+      "div",
+      { className: "panel debug-panel" },
+      h(
+        "div",
+        { className: "panel-header actions-row" },
+        h("div", null, `Debug Logs (${props.logs.length})`),
+        h(
+          "div",
+          { className: "actions-row" },
+          h(
+            "button",
+            { className: "btn secondary", onClick: props.onToggle },
+            props.visible ? "Hide logs" : "Show logs"
+          ),
+          h(
+            "button",
+            { className: "btn secondary", onClick: props.onClear },
+            "Clear logs"
+          )
+        )
+      ),
+      props.visible
+        ? h(
+            "div",
+            { className: "debug-log-list" },
+            props.logs.length === 0
+              ? h("div", { className: "status" }, "No logs yet.")
+              : props.logs.map((logEntry) =>
+                  h(
+                    "div",
+                    {
+                      key: logEntry.id,
+                      className: `debug-log-item debug-${logEntry.level}`,
+                    },
+                    h(
+                      "div",
+                      { className: "debug-log-head" },
+                      h("span", { className: "debug-log-time" }, logEntry.time),
+                      h("span", { className: "debug-log-level" }, logEntry.level.toUpperCase())
+                    ),
+                    h("div", { className: "debug-log-message" }, logEntry.message),
+                    logEntry.details
+                      ? h("pre", { className: "debug-log-details" }, logEntry.details)
+                      : null
+                  )
+                )
+          )
+        : null
+    );
+  }
+
   function App() {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState("");
     const [status, setStatus] = useState("");
+    const [debugLogs, setDebugLogs] = useState([]);
+    const [showDebugLogs, setShowDebugLogs] = useState(true);
 
     const [authenticated, setAuthenticated] = useState(false);
     const [authEnabled, setAuthEnabled] = useState(true);
@@ -179,10 +251,96 @@ import React from "react";
       [accounts]
     );
 
+    const addDebugLog = useCallback((level, message, details) => {
+      const entry = {
+        id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+        time: new Date().toISOString(),
+        level,
+        message,
+        details: toLogSafeString(details),
+      };
+
+      setDebugLogs((currentLogs) => {
+        const nextLogs = [...currentLogs, entry];
+        if (nextLogs.length > MAX_DEBUG_LOGS) {
+          return nextLogs.slice(nextLogs.length - MAX_DEBUG_LOGS);
+        }
+        return nextLogs;
+      });
+
+      const detailText = entry.details ? `\n${entry.details}` : "";
+      if (level === "error") {
+        console.error(`[UI] ${message}${detailText}`);
+      } else {
+        console.log(`[UI] ${message}${detailText}`);
+      }
+    }, []);
+
+    useEffect(() => {
+      const originalFetch = window.fetch.bind(window);
+
+      window.fetch = async (input, init = {}) => {
+        const method = (init.method || "GET").toUpperCase();
+        const url = typeof input === "string" ? input : input?.url || "unknown-url";
+        const startedAt = Date.now();
+        addDebugLog("info", `HTTP ${method} ${url} (start)`);
+
+        try {
+          const response = await originalFetch(input, init);
+          addDebugLog(
+            response.ok ? "info" : "error",
+            `HTTP ${method} ${url} -> ${response.status}`,
+            { durationMs: Date.now() - startedAt }
+          );
+          return response;
+        } catch (requestError) {
+          addDebugLog("error", `HTTP ${method} ${url} failed`, {
+            durationMs: Date.now() - startedAt,
+            error: requestError?.message || String(requestError),
+          });
+          throw requestError;
+        }
+      };
+
+      return () => {
+        window.fetch = originalFetch;
+      };
+    }, [addDebugLog]);
+
+    useEffect(() => {
+      function handleWindowError(event) {
+        addDebugLog("error", "Unhandled window error", {
+          message: event.message,
+          source: event.filename,
+          line: event.lineno,
+          column: event.colno,
+        });
+      }
+
+      function handleUnhandledRejection(event) {
+        addDebugLog("error", "Unhandled promise rejection", {
+          reason: event.reason?.message || String(event.reason),
+        });
+      }
+
+      window.addEventListener("error", handleWindowError);
+      window.addEventListener("unhandledrejection", handleUnhandledRejection);
+
+      return () => {
+        window.removeEventListener("error", handleWindowError);
+        window.removeEventListener("unhandledrejection", handleUnhandledRejection);
+      };
+    }, [addDebugLog]);
+
     function applySnapshot(snapshot) {
       const nextAccounts = snapshot.accounts || [];
       const nextAccountCoins = snapshot.accountCoins || [];
       const nextCoins = snapshot.coins || [];
+      addDebugLog("info", "Applied trading config snapshot", {
+        accounts: nextAccounts.length,
+        accountCoinRules: nextAccountCoins.length,
+        coins: nextCoins.length,
+      });
 
       setAccounts(nextAccounts);
       setAccountCoins(nextAccountCoins);
@@ -259,6 +417,7 @@ import React from "react";
     }
 
     async function loadSnapshot() {
+      addDebugLog("info", "Loading snapshot...");
       const snapshot = await apiRequest("/api/trading-config/snapshot", {
         method: "GET",
       });
@@ -268,13 +427,22 @@ import React from "react";
     async function checkAuthAndLoad() {
       setLoading(true);
       try {
+        addDebugLog("info", "Checking auth session...");
         const auth = await apiRequest("/api/auth/me", { method: "GET" });
         setAuthEnabled(auth.authEnabled !== false);
         setAuthenticated(!!auth.authenticated);
         setViewer(auth.username || "");
+        addDebugLog("info", "Auth check complete", {
+          authenticated: !!auth.authenticated,
+          username: auth.username || null,
+          authEnabled: auth.authEnabled !== false,
+        });
         await loadSnapshot();
         setError("");
-      } catch {
+      } catch (authError) {
+        addDebugLog("error", "Auth check failed", {
+          error: authError?.message || String(authError),
+        });
         setAuthEnabled(true);
         setAuthenticated(false);
         setViewer("");
@@ -292,11 +460,16 @@ import React from "react";
         setSaving(true);
         setStatus("");
         setError("");
+        addDebugLog("info", "Mutation started");
         const snapshot = await task();
         applySnapshot(snapshot);
         setStatus("Saved successfully.");
+        addDebugLog("info", "Mutation succeeded");
       } catch (mutationError) {
         setError(mutationError.message || "Update failed");
+        addDebugLog("error", "Mutation failed", {
+          error: mutationError?.message || String(mutationError),
+        });
       } finally {
         setSaving(false);
       }
@@ -306,6 +479,7 @@ import React from "react";
       event.preventDefault();
       setLoginLoading(true);
       setLoginError("");
+      addDebugLog("info", "Login attempt", { username: loginUsername });
 
       try {
         await apiRequest("/api/auth/login", {
@@ -319,9 +493,14 @@ import React from "react";
         setAuthenticated(true);
         setViewer(loginUsername);
         setLoginPassword("");
+        addDebugLog("info", "Login successful", { username: loginUsername });
         await loadSnapshot();
       } catch (loginRequestError) {
         setLoginError(loginRequestError.message || "Login failed");
+        addDebugLog("error", "Login failed", {
+          username: loginUsername,
+          error: loginRequestError?.message || String(loginRequestError),
+        });
       } finally {
         setLoginLoading(false);
       }
@@ -333,6 +512,7 @@ import React from "react";
       }
 
       try {
+        addDebugLog("info", "Logout requested");
         await apiRequest("/api/auth/logout", { method: "POST", body: "{}" });
       } catch {
         // no-op
@@ -351,15 +531,29 @@ import React from "react";
     }
 
     if (!authenticated) {
-      return h(LoginCard, {
-        error: loginError,
-        username: loginUsername,
-        password: loginPassword,
-        onUsernameChange: setLoginUsername,
-        onPasswordChange: setLoginPassword,
-        onSubmit: handleLogin,
-        loading: loginLoading,
-      });
+      return h(
+        React.Fragment,
+        null,
+        h(LoginCard, {
+          error: loginError,
+          username: loginUsername,
+          password: loginPassword,
+          onUsernameChange: setLoginUsername,
+          onPasswordChange: setLoginPassword,
+          onSubmit: handleLogin,
+          loading: loginLoading,
+        }),
+        h(
+          "div",
+          { className: "container" },
+          h(DebugPanel, {
+            logs: debugLogs,
+            visible: showDebugLogs,
+            onToggle: () => setShowDebugLogs((current) => !current),
+            onClear: () => setDebugLogs([]),
+          })
+        )
+      );
     }
 
     return h(
@@ -377,14 +571,33 @@ import React from "react";
         databasePath
           ? h("div", { className: "subtitle" }, `Database: ${databasePath}`)
           : null,
-        h("div", { className: "actions-row" },
-          authEnabled
-            ? h(
-                "button",
-                { className: "btn secondary", onClick: handleLogout },
-                "Sign out"
-              )
-            : h("span", { className: "subtitle" }, "Local mode (auth disabled)"),
+        h(
+          "div",
+          { className: "actions-row" },
+          h(
+            "div",
+            { className: "actions-row" },
+            h(
+              "button",
+              {
+                className: "btn secondary",
+                onClick: () => setShowDebugLogs((current) => !current),
+              },
+              showDebugLogs ? "Hide logs" : "Show logs"
+            ),
+            h(
+              "button",
+              { className: "btn secondary", onClick: () => setDebugLogs([]) },
+              "Clear logs"
+            ),
+            authEnabled
+              ? h(
+                  "button",
+                  { className: "btn secondary", onClick: handleLogout },
+                  "Sign out"
+                )
+              : h("span", { className: "subtitle" }, "Local mode (auth disabled)")
+          ),
           saving ? h("span", { className: "saving" }, "Saving...") : null
         )
       ),
@@ -1249,6 +1462,13 @@ import React from "react";
           )
         )
       )
+      ,
+      h(DebugPanel, {
+        logs: debugLogs,
+        visible: showDebugLogs,
+        onToggle: () => setShowDebugLogs((current) => !current),
+        onClear: () => setDebugLogs([]),
+      })
     );
   }
 
