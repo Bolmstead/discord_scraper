@@ -1,10 +1,10 @@
 [build]
   base = "/"
-  command = "npm install && npm run --prefix frontend-react build"
+  command = "npm install --prefix frontend-react --no-audit --no-fund && npm run --prefix frontend-react build"
   publish = "frontend-react/dist"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "18"
 
 [[redirects]]
   from = "/api/*"
