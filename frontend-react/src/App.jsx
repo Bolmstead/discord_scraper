@@ -171,9 +171,13 @@ function App() {
   const [loginLoading, setLoginLoading] = useState(false);
 
   const [databasePath, setDatabasePath] = useState("");
+  const [pendingAccountDelete, setPendingAccountDelete] = useState(null);
   const [accounts, setAccounts] = useState([]);
-  const [accountDrafts, setAccountDrafts] = useState({});
-  const [newAccount, setNewAccount] = useState({ username: "", name: "" });
+  const [newAccount, setNewAccount] = useState({
+    username: "",
+    name: "",
+    imageUrl: "",
+  });
   const [newCoinForms, setNewCoinForms] = useState({});
   const [coinDrafts, setCoinDrafts] = useState({});
 
@@ -181,17 +185,6 @@ function App() {
     const nextAccounts = snapshot.accounts || [];
     setAccounts(nextAccounts);
     setDatabasePath(snapshot.databasePath || "");
-
-    setAccountDrafts(
-      Object.fromEntries(
-        nextAccounts.map((account) => [
-          account.username,
-          {
-            name: account.name || "",
-          },
-        ])
-      )
-    );
 
     setCoinDrafts(
       Object.fromEntries(
@@ -206,6 +199,15 @@ function App() {
                 coin.amountToBuySol === null || coin.amountToBuySol === undefined
                   ? ""
                   : String(coin.amountToBuySol),
+              percentToSell:
+                coin.percentToSell === null || coin.percentToSell === undefined
+                  ? ""
+                  : String(coin.percentToSell),
+              timeBetweenSellsSeconds:
+                coin.timeBetweenSellsSeconds === null ||
+                coin.timeBetweenSellsSeconds === undefined
+                  ? ""
+                  : String(coin.timeBetweenSellsSeconds),
             },
           ])
         )
@@ -221,6 +223,8 @@ function App() {
             coinAddress: "",
             coinKeywords: "",
             amountToBuySol: "",
+            percentToSell: "",
+            timeBetweenSellsSeconds: "",
           };
       }
       return next;
@@ -255,6 +259,21 @@ function App() {
   useEffect(() => {
     checkAuthAndLoad();
   }, []);
+
+  useEffect(() => {
+    if (!pendingAccountDelete) {
+      return undefined;
+    }
+
+    function onKeyDown(event) {
+      if (event.key === "Escape") {
+        setPendingAccountDelete(null);
+      }
+    }
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [pendingAccountDelete]);
 
   async function withMutation(task, successMessage = "Saved successfully.") {
     try {
@@ -324,7 +343,7 @@ function App() {
         }),
       "Account created."
     );
-    setNewAccount({ username: "", name: "" });
+    setNewAccount({ username: "", name: "", imageUrl: "" });
   }
 
   function handleCreateCoin(accountUsername, event) {
@@ -335,6 +354,8 @@ function App() {
         coinAddress: "",
         coinKeywords: "",
         amountToBuySol: "",
+        percentToSell: "",
+        timeBetweenSellsSeconds: "",
       };
 
     withMutation(
@@ -347,6 +368,10 @@ function App() {
             coinAddress: draft.coinAddress,
             coinKeywords: splitKeywords(draft.coinKeywords),
             amountToBuySol: numberValueOrNull(draft.amountToBuySol),
+            percentToSell: numberValueOrNull(draft.percentToSell),
+            timeBetweenSellsSeconds: numberValueOrNull(
+              draft.timeBetweenSellsSeconds
+            ),
           }),
         }),
       "Coin added."
@@ -359,8 +384,31 @@ function App() {
         coinAddress: "",
         coinKeywords: "",
         amountToBuySol: "",
+        percentToSell: "",
+        timeBetweenSellsSeconds: "",
       },
     }));
+  }
+
+  function confirmDeleteAccount() {
+    if (!pendingAccountDelete || saving) {
+      return;
+    }
+
+    const accountUsername = pendingAccountDelete.username;
+    setPendingAccountDelete(null);
+
+    withMutation(
+      () =>
+        apiRequest(
+          `/api/trading-config/accounts/${encodeURIComponent(accountUsername)}`,
+          {
+            method: "DELETE",
+            body: "{}",
+          }
+        ),
+      "Account removed."
+    );
   }
 
   if (loading) {
@@ -442,6 +490,18 @@ function App() {
           })
         ),
         h(
+          InlineField,
+          { label: "Image URL" },
+          h("input", {
+            value: newAccount.imageUrl,
+            onChange: (event) =>
+              setNewAccount((current) => ({
+                ...current,
+                imageUrl: event.target.value,
+              })),
+          })
+        ),
+        h(
           "button",
           { type: "submit", className: "btn", disabled: saving },
           "Add account"
@@ -454,14 +514,18 @@ function App() {
         accounts.length === 0
           ? h("div", { className: "status" }, "No accounts yet.")
           : accounts.map((account) => {
-              const accountDraft = accountDrafts[account.username] || { name: "" };
               const newCoin =
                 newCoinForms[account.username] || {
                   coinName: "",
                   coinAddress: "",
                   coinKeywords: "",
                   amountToBuySol: "",
-                };
+                  percentToSell: "",
+                  timeBetweenSellsSeconds: "",
+                  };
+              const displayName = account.name || account.username;
+              const avatarInitial = (displayName || "?").charAt(0).toUpperCase();
+              const avatarUrl = String(account.imageUrl || "").trim();
 
               return h(
                 "div",
@@ -469,67 +533,35 @@ function App() {
                 h(
                   "div",
                   { className: "account-top" },
-                  h("div", { className: "account-title" }, account.username),
+                  h(
+                    "div",
+                    { className: "account-identity" },
+                    avatarUrl
+                      ? h("img", {
+                          className: "account-avatar",
+                          src: avatarUrl,
+                          alt: `${displayName} avatar`,
+                        })
+                      : h("div", { className: "account-avatar fallback" }, avatarInitial),
+                    h(
+                      "div",
+                      { className: "account-names" },
+                      h("span", { className: "account-title" }, account.username),
+                      h("span", { className: "account-display-name" }, displayName)
+                    )
+                  ),
                   h(
                     "div",
                     { className: "actions-cell" },
-                    h(IconButton, {
-                      icon: "save",
-                      label: `Save ${account.username}`,
-                      disabled: saving,
-                      onClick: () =>
-                        withMutation(
-                          () =>
-                            apiRequest(
-                              `/api/trading-config/accounts/${encodeURIComponent(
-                                account.username
-                              )}`,
-                              {
-                                method: "PUT",
-                                body: JSON.stringify({ name: accountDraft.name }),
-                              }
-                            ),
-                          "Account updated."
-                        ),
-                    }),
                     h(IconButton, {
                       icon: "delete",
                       label: `Delete ${account.username}`,
                       disabled: saving,
                       onClick: () =>
-                        withMutation(
-                          () =>
-                            apiRequest(
-                              `/api/trading-config/accounts/${encodeURIComponent(
-                                account.username
-                              )}`,
-                              {
-                                method: "DELETE",
-                                body: "{}",
-                              }
-                            ),
-                          "Account removed."
-                        ),
-                    })
-                  )
-                ),
-
-                h(
-                  "div",
-                  { className: "inline-form" },
-                  h(
-                    InlineField,
-                    { label: "Display Name" },
-                    h("input", {
-                      value: accountDraft.name,
-                      onChange: (event) =>
-                        setAccountDrafts((current) => ({
-                          ...current,
-                          [account.username]: {
-                            ...current[account.username],
-                            name: event.target.value,
-                          },
-                        })),
+                        setPendingAccountDelete({
+                          username: account.username,
+                          name: displayName,
+                        }),
                     })
                   )
                 ),
@@ -593,6 +625,8 @@ function App() {
                     { label: "Buy Amount (SOL)" },
                     h("input", {
                       value: newCoin.amountToBuySol,
+                      type: "number",
+                      step: "any",
                       required: true,
                       onChange: (event) =>
                         setNewCoinForms((current) => ({
@@ -600,6 +634,45 @@ function App() {
                           [account.username]: {
                             ...current[account.username],
                             amountToBuySol: event.target.value,
+                          },
+                        })),
+                    })
+                  ),
+                  h(
+                    InlineField,
+                    { label: "Sell (%)" },
+                    h("input", {
+                      value: newCoin.percentToSell,
+                      type: "number",
+                      step: "any",
+                      min: "0",
+                      max: "100",
+                      required: true,
+                      onChange: (event) =>
+                        setNewCoinForms((current) => ({
+                          ...current,
+                          [account.username]: {
+                            ...current[account.username],
+                            percentToSell: event.target.value,
+                          },
+                        })),
+                    })
+                  ),
+                  h(
+                    InlineField,
+                    { label: "Seconds Between Sells" },
+                    h("input", {
+                      value: newCoin.timeBetweenSellsSeconds,
+                      type: "number",
+                      step: "1",
+                      min: "0",
+                      required: true,
+                      onChange: (event) =>
+                        setNewCoinForms((current) => ({
+                          ...current,
+                          [account.username]: {
+                            ...current[account.username],
+                            timeBetweenSellsSeconds: event.target.value,
                           },
                         })),
                     })
@@ -627,6 +700,8 @@ function App() {
                         h("th", null, "Address"),
                         h("th", null, "Keywords"),
                         h("th", null, "Buy (SOL)"),
+                        h("th", null, "Sell (%)"),
+                        h("th", null, "Seconds"),
                         h("th", null, "BullX"),
                         h("th", null, "Actions")
                       )
@@ -644,6 +719,16 @@ function App() {
                             coin.amountToBuySol === undefined
                               ? ""
                               : String(coin.amountToBuySol),
+                          percentToSell:
+                            coin.percentToSell === null ||
+                            coin.percentToSell === undefined
+                              ? ""
+                              : String(coin.percentToSell),
+                          timeBetweenSellsSeconds:
+                            coin.timeBetweenSellsSeconds === null ||
+                            coin.timeBetweenSellsSeconds === undefined
+                              ? ""
+                              : String(coin.timeBetweenSellsSeconds),
                         };
                         const bullxUrl = buildBullxUrl(coinDraft.coinAddress);
 
@@ -700,12 +785,51 @@ function App() {
                             null,
                             h("input", {
                               value: coinDraft.amountToBuySol,
+                              type: "number",
+                              step: "any",
                               onChange: (event) =>
                                 setCoinDrafts((current) => ({
                                   ...current,
                                   [coin.id]: {
                                     ...current[coin.id],
                                     amountToBuySol: event.target.value,
+                                  },
+                                })),
+                            })
+                          ),
+                          h(
+                            "td",
+                            null,
+                            h("input", {
+                              value: coinDraft.percentToSell,
+                              type: "number",
+                              step: "any",
+                              min: "0",
+                              max: "100",
+                              onChange: (event) =>
+                                setCoinDrafts((current) => ({
+                                  ...current,
+                                  [coin.id]: {
+                                    ...current[coin.id],
+                                    percentToSell: event.target.value,
+                                  },
+                                })),
+                            })
+                          ),
+                          h(
+                            "td",
+                            null,
+                            h("input", {
+                              value: coinDraft.timeBetweenSellsSeconds,
+                              type: "number",
+                              step: "1",
+                              min: "0",
+                              onChange: (event) =>
+                                setCoinDrafts((current) => ({
+                                  ...current,
+                                  [coin.id]: {
+                                    ...current[coin.id],
+                                    timeBetweenSellsSeconds: event.target.value,
                                   },
                                 })),
                             })
@@ -750,6 +874,13 @@ function App() {
                                           amountToBuySol: numberValueOrNull(
                                             coinDraft.amountToBuySol
                                           ),
+                                          percentToSell: numberValueOrNull(
+                                            coinDraft.percentToSell
+                                          ),
+                                          timeBetweenSellsSeconds:
+                                            numberValueOrNull(
+                                              coinDraft.timeBetweenSellsSeconds
+                                            ),
                                         }),
                                       }
                                     ),
@@ -782,7 +913,62 @@ function App() {
               );
             })
       )
-    )
+    ),
+
+    pendingAccountDelete
+      ? h(
+          "div",
+          {
+            className: "modal-backdrop",
+            onClick: () => {
+              if (!saving) {
+                setPendingAccountDelete(null);
+              }
+            },
+          },
+          h(
+            "div",
+            {
+              className: "modal-card",
+              role: "dialog",
+              "aria-modal": "true",
+              "aria-label": "Confirm account deletion",
+              onClick: (event) => event.stopPropagation(),
+            },
+            h("h3", null, "Delete Account"),
+            h(
+              "p",
+              null,
+              `Delete ${pendingAccountDelete.name || pendingAccountDelete.username}?`,
+              " This removes all coins under this account."
+            ),
+            h(
+              "div",
+              { className: "modal-actions" },
+              h(
+                "button",
+                {
+                  type: "button",
+                  className: "btn secondary",
+                  disabled: saving,
+                  onClick: () => setPendingAccountDelete(null),
+                },
+                "Cancel"
+              ),
+              h(
+                "button",
+                {
+                  type: "button",
+                  className: "btn danger",
+                  disabled: saving,
+                  onClick: confirmDeleteAccount,
+                },
+                "Delete"
+              )
+            )
+          )
+        )
+      : null
   );
 }
 

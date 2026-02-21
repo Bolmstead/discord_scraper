@@ -7,7 +7,7 @@ const DB_PATH = path.resolve(
   process.env.TRADING_CONFIG_DB_PATH || "data/trading-config.sqlite"
 );
 
-const SCHEMA_VERSION = "simple_accounts_v1";
+const SCHEMA_VERSION = "simple_accounts_v2";
 
 let db;
 let cachedSnapshot;
@@ -58,6 +58,26 @@ function nullableNumber(value) {
   return num;
 }
 
+function nullableInteger(value) {
+  const num = nullableNumber(value);
+  if (num === null) {
+    return null;
+  }
+
+  return Math.trunc(num);
+}
+
+function ensureColumn(database, tableName, columnName, definitionSql) {
+  const columns = database.prepare(`PRAGMA table_info(${tableName})`).all();
+  const hasColumn = columns.some((column) => column.name === columnName);
+
+  if (!hasColumn) {
+    database.exec(
+      `ALTER TABLE ${tableName} ADD COLUMN ${columnName} ${definitionSql}`
+    );
+  }
+}
+
 function getDatabase() {
   if (db) {
     return db;
@@ -85,6 +105,7 @@ function ensureSchema(database) {
     .get();
 
   if (schemaRow?.value === SCHEMA_VERSION) {
+    ensureColumn(database, "accounts", "image_url", "TEXT");
     return;
   }
 
@@ -98,7 +119,8 @@ function ensureSchema(database) {
     database.exec(`
       CREATE TABLE accounts (
         username TEXT PRIMARY KEY,
-        name TEXT
+        name TEXT,
+        image_url TEXT
       );
 
       CREATE TABLE account_coins (
@@ -108,6 +130,8 @@ function ensureSchema(database) {
         coin_address TEXT NOT NULL,
         coin_keywords_json TEXT NOT NULL DEFAULT '[]',
         amount_to_buy_sol REAL NOT NULL DEFAULT 0,
+        percent_to_sell REAL NOT NULL DEFAULT 100,
+        time_between_sells_seconds INTEGER NOT NULL DEFAULT 0,
         wallet_name TEXT NOT NULL DEFAULT 'Berkley',
         sort_order INTEGER NOT NULL DEFAULT 0,
         FOREIGN KEY (account_username) REFERENCES accounts(username) ON DELETE CASCADE
@@ -169,6 +193,9 @@ function mapCoinRow(row) {
     keywords: parseJson(row.coin_keywords_json, []),
     amountToBuySol: row.amount_to_buy_sol,
     amountToBuy: row.amount_to_buy_sol,
+    percentToSell: row.percent_to_sell,
+    timeBetweenSellsSeconds: row.time_between_sells_seconds,
+    timeBetweenSells: row.time_between_sells_seconds,
     walletName: row.wallet_name || "Berkley",
     sortOrder: row.sort_order,
   };
@@ -181,6 +208,7 @@ export function getAccountsWithCoins() {
     .prepare(
       `
       SELECT username, name
+      , image_url
       FROM accounts
       ORDER BY username ASC
       `
@@ -195,6 +223,8 @@ export function getAccountsWithCoins() {
       coin_address,
       coin_keywords_json,
       amount_to_buy_sol,
+      percent_to_sell,
+      time_between_sells_seconds,
       wallet_name,
       sort_order
     FROM account_coins
@@ -206,6 +236,7 @@ export function getAccountsWithCoins() {
   return accounts.map((account) => ({
     username: account.username,
     name: account.name || account.username,
+    imageUrl: account.image_url || "",
     defaultWalletName: "Berkley",
     coins: selectCoins.all(account.username).map(mapCoinRow),
   }));
@@ -225,6 +256,8 @@ export function getAccountCoinAssociations() {
         ac.coin_address,
         ac.coin_keywords_json,
         ac.amount_to_buy_sol,
+        ac.percent_to_sell,
+        ac.time_between_sells_seconds,
         ac.wallet_name,
         ac.sort_order
       FROM account_coins ac
@@ -242,6 +275,9 @@ export function getAccountCoinAssociations() {
       coinKeywords: parseJson(row.coin_keywords_json, []),
       amountToBuySol: row.amount_to_buy_sol,
       amountToBuy: row.amount_to_buy_sol,
+      percentToSell: row.percent_to_sell,
+      timeBetweenSellsSeconds: row.time_between_sells_seconds,
+      timeBetweenSells: row.time_between_sells_seconds,
       walletName: row.wallet_name || "Berkley",
       sortOrder: row.sort_order,
     }));
@@ -255,12 +291,16 @@ function normalizeAccountPayload(payload = {}) {
   return {
     username: String(payload.username || "").trim(),
     name: String(payload.name || "").trim(),
+    imageUrl: String(payload.imageUrl || payload.image_url || "").trim(),
   };
 }
 
 function normalizeAccountCoinPayload(payload = {}) {
   const amountRaw = payload.amountToBuySol ?? payload.amountToBuy;
   const amountToBuySol = nullableNumber(amountRaw);
+  const percentRaw = payload.percentToSell;
+  const timeBetweenRaw =
+    payload.timeBetweenSellsSeconds ?? payload.timeBetweenSells;
 
   return {
     accountUsername: String(payload.accountUsername || payload.account_username || "").trim(),
@@ -268,6 +308,8 @@ function normalizeAccountCoinPayload(payload = {}) {
     coinAddress: String(payload.coinAddress || payload.address || "").trim(),
     coinKeywords: normalizeKeywordsArray(payload.coinKeywords ?? payload.keywords),
     amountToBuySol,
+    percentToSell: nullableNumber(percentRaw),
+    timeBetweenSellsSeconds: nullableInteger(timeBetweenRaw),
     walletName: String(payload.walletName || "Berkley").trim() || "Berkley",
     sortOrder: Number.isInteger(Number(payload.sortOrder))
       ? Math.trunc(Number(payload.sortOrder))
@@ -284,8 +326,12 @@ export function createAccount(payload) {
   }
 
   database
-    .prepare("INSERT INTO accounts(username, name) VALUES(?, ?)")
-    .run(account.username, account.name || account.username);
+    .prepare("INSERT INTO accounts(username, name, image_url) VALUES(?, ?, ?)")
+    .run(
+      account.username,
+      account.name || account.username,
+      account.imageUrl || null
+    );
 
   refreshTradingConfigSnapshot();
   return getAccountsWithCoins();
@@ -303,8 +349,8 @@ export function updateAccount(username, payload) {
   ensureAccountExists(database, targetUsername);
 
   database
-    .prepare("UPDATE accounts SET name = ? WHERE username = ?")
-    .run(account.name || targetUsername, targetUsername);
+    .prepare("UPDATE accounts SET name = ?, image_url = ? WHERE username = ?")
+    .run(account.name || targetUsername, account.imageUrl || null, targetUsername);
 
   refreshTradingConfigSnapshot();
   return getAccountsWithCoins();
@@ -336,6 +382,19 @@ export function createAccountCoin(payload) {
   if (coin.amountToBuySol === null || coin.amountToBuySol < 0) {
     throw new Error("Amount to buy (SOL) is required");
   }
+  if (
+    coin.percentToSell === null ||
+    coin.percentToSell < 0 ||
+    coin.percentToSell > 100
+  ) {
+    throw new Error("Percent to sell is required and must be between 0 and 100");
+  }
+  if (
+    coin.timeBetweenSellsSeconds === null ||
+    coin.timeBetweenSellsSeconds < 0
+  ) {
+    throw new Error("Time between sells (seconds) is required");
+  }
 
   ensureAccountExists(database, coin.accountUsername);
 
@@ -353,10 +412,12 @@ export function createAccountCoin(payload) {
         coin_address,
         coin_keywords_json,
         amount_to_buy_sol,
+        percent_to_sell,
+        time_between_sells_seconds,
         wallet_name,
         sort_order
       )
-      VALUES (?, ?, ?, ?, ?, ?, ?)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
       `
     )
     .run(
@@ -365,6 +426,8 @@ export function createAccountCoin(payload) {
       coin.coinAddress,
       JSON.stringify(coin.coinKeywords),
       coin.amountToBuySol,
+      coin.percentToSell,
+      coin.timeBetweenSellsSeconds,
       coin.walletName,
       sortOrder
     );
@@ -397,6 +460,19 @@ export function updateAccountCoin(id, payload) {
   if (coin.amountToBuySol === null || coin.amountToBuySol < 0) {
     throw new Error("Amount to buy (SOL) is required");
   }
+  if (
+    coin.percentToSell === null ||
+    coin.percentToSell < 0 ||
+    coin.percentToSell > 100
+  ) {
+    throw new Error("Percent to sell is required and must be between 0 and 100");
+  }
+  if (
+    coin.timeBetweenSellsSeconds === null ||
+    coin.timeBetweenSellsSeconds < 0
+  ) {
+    throw new Error("Time between sells (seconds) is required");
+  }
 
   ensureAccountExists(database, coin.accountUsername);
 
@@ -410,6 +486,8 @@ export function updateAccountCoin(id, payload) {
         coin_address = ?,
         coin_keywords_json = ?,
         amount_to_buy_sol = ?,
+        percent_to_sell = ?,
+        time_between_sells_seconds = ?,
         wallet_name = ?,
         sort_order = ?
       WHERE id = ?
@@ -421,6 +499,8 @@ export function updateAccountCoin(id, payload) {
       coin.coinAddress,
       JSON.stringify(coin.coinKeywords),
       coin.amountToBuySol,
+      coin.percentToSell,
+      coin.timeBetweenSellsSeconds,
       coin.walletName,
       coin.sortOrder === null ? existing.sort_order : coin.sortOrder,
       associationId
