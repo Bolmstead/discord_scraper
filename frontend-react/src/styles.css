@@ -89,6 +89,24 @@ body {
   gap: 6px;
 }
 
+.inline-field {
+  min-width: 140px;
+}
+
+.inline-form.dense .inline-field {
+  min-width: 120px;
+}
+
+.inline-field input,
+.inline-field select {
+  min-width: 120px;
+}
+
+.field-label {
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
 input,
 select,
 button {
@@ -143,6 +161,25 @@ input[type="checkbox"] {
 .btn.danger {
   background: var(--warning);
   border-color: var(--warning);
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn + .icon-btn {
+  margin-left: 6px;
+}
+
+.icon-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
 }
 
 .btn:disabled {

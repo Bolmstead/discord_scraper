@@ -4,6 +4,8 @@ import React from "react";
   const { useCallback, useEffect, useMemo, useState } = React;
 
   const WALLET_OPTIONS = ["Berkley", "Sharif"];
+  const BULLX_BASE_URL =
+    "https://neo.bullx.io/terminal?chainId=1399811149&address=";
   const MAX_DEBUG_LOGS = 250;
 
   function numberValueOrNull(value) {
@@ -58,6 +60,15 @@ import React from "react";
     } catch {
       return String(value);
     }
+  }
+
+  function buildBullxUrl(address) {
+    const trimmedAddress = String(address || "").trim();
+    if (!trimmedAddress) {
+      return "";
+    }
+
+    return `${BULLX_BASE_URL}${encodeURIComponent(trimmedAddress)}`;
   }
 
   async function apiRequest(path, options) {
@@ -128,6 +139,45 @@ import React from "react";
           )
         )
       )
+    );
+  }
+
+  function InlineField(props) {
+    return h(
+      "label",
+      { className: "field inline-field" },
+      h("span", { className: "field-label" }, props.label),
+      props.children
+    );
+  }
+
+  function IconButton(props) {
+    const isDelete = props.icon === "delete";
+    return h(
+      "button",
+      {
+        type: "button",
+        className: `btn${isDelete ? " danger" : ""} icon-btn`,
+        disabled: props.disabled,
+        onClick: props.onClick,
+        "aria-label": props.label,
+        title: props.label,
+      },
+      isDelete
+        ? h(
+            "svg",
+            { viewBox: "0 0 24 24", "aria-hidden": "true" },
+            h("path", {
+              d: "M3 6h18v2H3V6zm3 2h12l-1 13H7L6 8zm3-5h6l1 2H8l1-2z",
+            })
+          )
+        : h(
+            "svg",
+            { viewBox: "0 0 24 24", "aria-hidden": "true" },
+            h("path", {
+              d: "M4 3h13l3 3v15H4V3zm2 2v14h12V8h-4V5H6zm2 0h4v4H8V5zm1 9h6v4H9v-4z",
+            })
+          )
     );
   }
 
@@ -628,34 +678,47 @@ import React from "react";
               });
             },
           },
-          h("input", {
-            placeholder: "Username",
-            value: newAccount.username,
-            onChange: (event) =>
-              setNewAccount((current) => ({
-                ...current,
-                username: event.target.value,
-              })),
-            required: true,
-          }),
-          h("input", {
-            placeholder: "Display name",
-            value: newAccount.name,
-            onChange: (event) =>
-              setNewAccount((current) => ({ ...current, name: event.target.value })),
-          }),
           h(
-            "select",
-            {
-              value: newAccount.defaultWalletName,
+            InlineField,
+            { label: "Username" },
+            h("input", {
+              value: newAccount.username,
               onChange: (event) =>
                 setNewAccount((current) => ({
                   ...current,
-                  defaultWalletName: event.target.value,
+                  username: event.target.value,
                 })),
-            },
-            WALLET_OPTIONS.map((wallet) =>
-              h("option", { key: wallet, value: wallet }, wallet)
+              required: true,
+              "aria-label": "Account username",
+            })
+          ),
+          h(
+            InlineField,
+            { label: "Display Name" },
+            h("input", {
+              value: newAccount.name,
+              onChange: (event) =>
+                setNewAccount((current) => ({ ...current, name: event.target.value })),
+              "aria-label": "Account display name",
+            })
+          ),
+          h(
+            InlineField,
+            { label: "Default Wallet" },
+            h(
+              "select",
+              {
+                value: newAccount.defaultWalletName,
+                onChange: (event) =>
+                  setNewAccount((current) => ({
+                    ...current,
+                    defaultWalletName: event.target.value,
+                  })),
+                "aria-label": "Default wallet",
+              },
+              WALLET_OPTIONS.map((wallet) =>
+                h("option", { key: wallet, value: wallet }, wallet)
+              )
             )
           ),
           h(
@@ -699,6 +762,7 @@ import React from "react";
                   h("td", null,
                     h("input", {
                       value: draft.name || "",
+                      "aria-label": `${account.username} name`,
                       onChange: (event) =>
                         setAccountDrafts((current) => ({
                           ...current,
@@ -714,6 +778,7 @@ import React from "react";
                       "select",
                       {
                         value: draft.defaultWalletName || WALLET_OPTIONS[0],
+                        "aria-label": `${account.username} default wallet`,
                         onChange: (event) =>
                           setAccountDrafts((current) => ({
                             ...current,
@@ -732,6 +797,7 @@ import React from "react";
                     h("input", {
                       type: "checkbox",
                       checked: !!draft.buyAnyPostedCA,
+                      "aria-label": `${account.username} buy any contract address`,
                       onChange: (event) =>
                         setAccountDrafts((current) => ({
                           ...current,
@@ -745,6 +811,7 @@ import React from "react";
                   h("td", null,
                     h("input", {
                       value: draft.amountToBuyForAnyPostedCA || "",
+                      "aria-label": `${account.username} amount to buy`,
                       onChange: (event) =>
                         setAccountDrafts((current) => ({
                           ...current,
@@ -758,6 +825,7 @@ import React from "react";
                   h("td", null,
                     h("input", {
                       value: draft.slippageBpsForAnyPostedCA || "",
+                      "aria-label": `${account.username} slippage bps`,
                       onChange: (event) =>
                         setAccountDrafts((current) => ({
                           ...current,
@@ -771,6 +839,7 @@ import React from "react";
                   h("td", null,
                     h("input", {
                       value: draft.timeToSellForAnyPostedCA || "",
+                      "aria-label": `${account.username} time to sell`,
                       onChange: (event) =>
                         setAccountDrafts((current) => ({
                           ...current,
@@ -784,6 +853,7 @@ import React from "react";
                   h("td", null,
                     h("input", {
                       value: draft.priorityFeeForAnyPostedCA || "",
+                      "aria-label": `${account.username} priority fee`,
                       onChange: (event) =>
                         setAccountDrafts((current) => ({
                           ...current,
@@ -797,61 +867,54 @@ import React from "react";
                   h(
                     "td",
                     null,
-                    h(
-                      "button",
-                      {
-                        className: "btn",
-                        disabled: saving,
-                        onClick: () =>
-                          withMutation(() =>
-                            apiRequest(
-                              `/api/trading-config/accounts/${encodeURIComponent(
-                                account.username
-                              )}`,
-                              {
-                                method: "PUT",
-                                body: JSON.stringify({
-                                  ...draft,
-                                  amountToBuyForAnyPostedCA: numberValueOrNull(
-                                    draft.amountToBuyForAnyPostedCA
-                                  ),
-                                  slippageBpsForAnyPostedCA: integerValueOrNull(
-                                    draft.slippageBpsForAnyPostedCA
-                                  ),
-                                  timeToSellForAnyPostedCA: integerValueOrNull(
-                                    draft.timeToSellForAnyPostedCA
-                                  ),
-                                  priorityFeeForAnyPostedCA: numberValueOrNull(
-                                    draft.priorityFeeForAnyPostedCA
-                                  ),
-                                }),
-                              }
-                            )
-                          ),
-                      },
-                      "Save"
-                    ),
-                    " ",
-                    h(
-                      "button",
-                      {
-                        className: "btn danger",
-                        disabled: saving,
-                        onClick: () =>
-                          withMutation(() =>
-                            apiRequest(
-                              `/api/trading-config/accounts/${encodeURIComponent(
-                                account.username
-                              )}`,
-                              {
-                                method: "DELETE",
-                                body: "{}",
-                              }
-                            )
-                          ),
-                      },
-                      "Delete"
-                    )
+                    h(IconButton, {
+                      icon: "save",
+                      label: `Save ${account.username}`,
+                      disabled: saving,
+                      onClick: () =>
+                        withMutation(() =>
+                          apiRequest(
+                            `/api/trading-config/accounts/${encodeURIComponent(
+                              account.username
+                            )}`,
+                            {
+                              method: "PUT",
+                              body: JSON.stringify({
+                                ...draft,
+                                amountToBuyForAnyPostedCA: numberValueOrNull(
+                                  draft.amountToBuyForAnyPostedCA
+                                ),
+                                slippageBpsForAnyPostedCA: integerValueOrNull(
+                                  draft.slippageBpsForAnyPostedCA
+                                ),
+                                timeToSellForAnyPostedCA: integerValueOrNull(
+                                  draft.timeToSellForAnyPostedCA
+                                ),
+                                priorityFeeForAnyPostedCA: numberValueOrNull(
+                                  draft.priorityFeeForAnyPostedCA
+                                ),
+                              }),
+                            }
+                          )
+                        ),
+                    }),
+                    h(IconButton, {
+                      icon: "delete",
+                      label: `Delete ${account.username}`,
+                      disabled: saving,
+                      onClick: () =>
+                        withMutation(() =>
+                          apiRequest(
+                            `/api/trading-config/accounts/${encodeURIComponent(
+                              account.username
+                            )}`,
+                            {
+                              method: "DELETE",
+                              body: "{}",
+                            }
+                          )
+                        ),
+                    })
                   )
                 );
               })
@@ -882,36 +945,52 @@ import React from "react";
               setNewCoin({ symbol: "", name: "", address: "", keywords: "" });
             },
           },
-          h("input", {
-            placeholder: "Symbol",
-            value: newCoin.symbol,
-            onChange: (event) =>
-              setNewCoin((current) => ({ ...current, symbol: event.target.value })),
-            required: true,
-          }),
-          h("input", {
-            placeholder: "Name",
-            value: newCoin.name,
-            onChange: (event) =>
-              setNewCoin((current) => ({ ...current, name: event.target.value })),
-            required: true,
-          }),
-          h("input", {
-            placeholder: "Address",
-            value: newCoin.address,
-            onChange: (event) =>
-              setNewCoin((current) => ({ ...current, address: event.target.value })),
-            required: true,
-          }),
-          h("input", {
-            placeholder: "keywords, comma separated",
-            value: newCoin.keywords,
-            onChange: (event) =>
-              setNewCoin((current) => ({
-                ...current,
-                keywords: event.target.value,
-              })),
-          }),
+          h(
+            InlineField,
+            { label: "Symbol" },
+            h("input", {
+              value: newCoin.symbol,
+              onChange: (event) =>
+                setNewCoin((current) => ({ ...current, symbol: event.target.value })),
+              required: true,
+              "aria-label": "Coin symbol",
+            })
+          ),
+          h(
+            InlineField,
+            { label: "Name" },
+            h("input", {
+              value: newCoin.name,
+              onChange: (event) =>
+                setNewCoin((current) => ({ ...current, name: event.target.value })),
+              required: true,
+              "aria-label": "Coin name",
+            })
+          ),
+          h(
+            InlineField,
+            { label: "Address" },
+            h("input", {
+              value: newCoin.address,
+              onChange: (event) =>
+                setNewCoin((current) => ({ ...current, address: event.target.value })),
+              required: true,
+              "aria-label": "Coin address",
+            })
+          ),
+          h(
+            InlineField,
+            { label: "Keywords" },
+            h("input", {
+              value: newCoin.keywords,
+              onChange: (event) =>
+                setNewCoin((current) => ({
+                  ...current,
+                  keywords: event.target.value,
+                })),
+              "aria-label": "Coin keywords",
+            })
+          ),
           h(
             "button",
             { type: "submit", className: "btn", disabled: saving },
@@ -934,6 +1013,7 @@ import React from "react";
                 h("th", null, "Name"),
                 h("th", null, "Address"),
                 h("th", null, "Keywords"),
+                h("th", null, "BullX"),
                 h("th", null, "Actions")
               )
             ),
@@ -942,6 +1022,7 @@ import React from "react";
               null,
               coins.map((coin) => {
                 const draft = coinDrafts[coin.symbol] || {};
+                const bullxUrl = buildBullxUrl(draft.address || coin.address);
                 return h(
                   "tr",
                   { key: coin.symbol },
@@ -949,6 +1030,7 @@ import React from "react";
                   h("td", null,
                     h("input", {
                       value: draft.name || "",
+                      "aria-label": `${coin.symbol} name`,
                       onChange: (event) =>
                         setCoinDrafts((current) => ({
                           ...current,
@@ -962,6 +1044,7 @@ import React from "react";
                   h("td", null,
                     h("input", {
                       value: draft.address || "",
+                      "aria-label": `${coin.symbol} address`,
                       onChange: (event) =>
                         setCoinDrafts((current) => ({
                           ...current,
@@ -975,6 +1058,7 @@ import React from "react";
                   h("td", null,
                     h("input", {
                       value: draft.keywords || "",
+                      "aria-label": `${coin.symbol} keywords`,
                       onChange: (event) =>
                         setCoinDrafts((current) => ({
                           ...current,
@@ -988,52 +1072,62 @@ import React from "react";
                   h(
                     "td",
                     null,
-                    h(
-                      "button",
-                      {
-                        className: "btn",
-                        disabled: saving,
-                        onClick: () =>
-                          withMutation(() =>
-                            apiRequest(
-                              `/api/trading-config/coins/${encodeURIComponent(
-                                coin.symbol
-                              )}`,
-                              {
-                                method: "PUT",
-                                body: JSON.stringify({
-                                  symbol: coin.symbol,
-                                  name: draft.name,
-                                  address: draft.address,
-                                  keywords: splitKeywords(draft.keywords),
-                                }),
-                              }
-                            )
-                          ),
-                      },
-                      "Save"
-                    ),
-                    " ",
-                    h(
-                      "button",
-                      {
-                        className: "btn danger",
-                        disabled: saving,
-                        onClick: () =>
-                          withMutation(() =>
-                            apiRequest(
-                              `/api/trading-config/coins/${encodeURIComponent(
-                                coin.symbol
-                              )}`,
-                              {
-                                method: "DELETE",
-                                body: "{}",
-                              }
-                            )
-                          ),
-                      },
-                      "Delete"
-                    )
+                    bullxUrl
+                      ? h(
+                          "a",
+                          {
+                            href: bullxUrl,
+                            target: "_blank",
+                            rel: "noopener noreferrer",
+                            className: "external-link",
+                            "aria-label": `Open ${coin.symbol} in BullX`,
+                          },
+                          "Open"
+                        )
+                      : h("span", { className: "subtitle" }, "-")
+                  ),
+                  h(
+                    "td",
+                    null,
+                    h(IconButton, {
+                      icon: "save",
+                      label: `Save ${coin.symbol}`,
+                      disabled: saving,
+                      onClick: () =>
+                        withMutation(() =>
+                          apiRequest(
+                            `/api/trading-config/coins/${encodeURIComponent(
+                              coin.symbol
+                            )}`,
+                            {
+                              method: "PUT",
+                              body: JSON.stringify({
+                                symbol: coin.symbol,
+                                name: draft.name,
+                                address: draft.address,
+                                keywords: splitKeywords(draft.keywords),
+                              }),
+                            }
+                          )
+                        ),
+                    }),
+                    h(IconButton, {
+                      icon: "delete",
+                      label: `Delete ${coin.symbol}`,
+                      disabled: saving,
+                      onClick: () =>
+                        withMutation(() =>
+                          apiRequest(
+                            `/api/trading-config/coins/${encodeURIComponent(
+                              coin.symbol
+                            )}`,
+                            {
+                              method: "DELETE",
+                              body: "{}",
+                            }
+                          )
+                        ),
+                    })
                   )
                 );
               })
@@ -1083,119 +1177,166 @@ import React from "react";
             },
           },
           h(
-            "select",
-            {
-              value: newRule.accountUsername,
+            InlineField,
+            { label: "Account" },
+            h(
+              "select",
+              {
+                value: newRule.accountUsername,
+                onChange: (event) =>
+                  setNewRule((current) => ({
+                    ...current,
+                    accountUsername: event.target.value,
+                  })),
+                required: true,
+                "aria-label": "Rule account username",
+              },
+              h("option", { value: "" }, "Select account"),
+              accountUsernames.map((username) =>
+                h("option", { key: username, value: username }, username)
+              )
+            )
+          ),
+          h(
+            InlineField,
+            { label: "Coin Name" },
+            h("input", {
+              value: newRule.coinName,
+              onChange: (event) =>
+                setNewRule((current) => ({ ...current, coinName: event.target.value })),
+              required: true,
+              "aria-label": "Rule coin name",
+            })
+          ),
+          h(
+            InlineField,
+            { label: "Coin Address" },
+            h("input", {
+              value: newRule.coinAddress,
               onChange: (event) =>
                 setNewRule((current) => ({
                   ...current,
-                  accountUsername: event.target.value,
+                  coinAddress: event.target.value,
                 })),
               required: true,
-            },
-            h("option", { value: "" }, "Select account"),
-            accountUsernames.map((username) =>
-              h("option", { key: username, value: username }, username)
-            )
+              "aria-label": "Rule coin address",
+            })
           ),
-          h("input", {
-            placeholder: "Coin name",
-            value: newRule.coinName,
-            onChange: (event) =>
-              setNewRule((current) => ({ ...current, coinName: event.target.value })),
-            required: true,
-          }),
-          h("input", {
-            placeholder: "Coin address",
-            value: newRule.coinAddress,
-            onChange: (event) =>
-              setNewRule((current) => ({
-                ...current,
-                coinAddress: event.target.value,
-              })),
-            required: true,
-          }),
-          h("input", {
-            placeholder: "keywords, comma separated",
-            value: newRule.coinKeywords,
-            onChange: (event) =>
-              setNewRule((current) => ({
-                ...current,
-                coinKeywords: event.target.value,
-              })),
-          }),
           h(
-            "select",
-            {
-              value: newRule.walletName,
+            InlineField,
+            { label: "Keywords" },
+            h("input", {
+              value: newRule.coinKeywords,
               onChange: (event) =>
                 setNewRule((current) => ({
                   ...current,
-                  walletName: event.target.value,
+                  coinKeywords: event.target.value,
                 })),
-            },
-            WALLET_OPTIONS.map((wallet) =>
-              h("option", { key: wallet, value: wallet }, wallet)
+              "aria-label": "Rule coin keywords",
+            })
+          ),
+          h(
+            InlineField,
+            { label: "Wallet" },
+            h(
+              "select",
+              {
+                value: newRule.walletName,
+                onChange: (event) =>
+                  setNewRule((current) => ({
+                    ...current,
+                    walletName: event.target.value,
+                  })),
+                "aria-label": "Rule wallet",
+              },
+              WALLET_OPTIONS.map((wallet) =>
+                h("option", { key: wallet, value: wallet }, wallet)
+              )
             )
           ),
-          h("input", {
-            placeholder: "amountToBuy",
-            value: newRule.amountToBuy,
-            onChange: (event) =>
-              setNewRule((current) => ({
-                ...current,
-                amountToBuy: event.target.value,
-              })),
-          }),
-          h("input", {
-            placeholder: "slippageBps",
-            value: newRule.slippageBps,
-            onChange: (event) =>
-              setNewRule((current) => ({
-                ...current,
-                slippageBps: event.target.value,
-              })),
-          }),
-          h("input", {
-            placeholder: "priorityFee",
-            value: newRule.priorityFee,
-            onChange: (event) =>
-              setNewRule((current) => ({
-                ...current,
-                priorityFee: event.target.value,
-              })),
-          }),
-          h("input", {
-            placeholder: "percentToSell",
-            value: newRule.percentToSell,
-            onChange: (event) =>
-              setNewRule((current) => ({
-                ...current,
-                percentToSell: event.target.value,
-              })),
-          }),
-          h("input", {
-            placeholder: "timeBetweenSells",
-            value: newRule.timeBetweenSells,
-            onChange: (event) =>
-              setNewRule((current) => ({
-                ...current,
-                timeBetweenSells: event.target.value,
-              })),
-          }),
-          h("input", {
-            placeholder: "sortOrder",
-            value: newRule.sortOrder,
-            onChange: (event) =>
-              setNewRule((current) => ({
-                ...current,
-                sortOrder: event.target.value,
-              })),
-          }),
+          h(
+            InlineField,
+            { label: "Amount To Buy" },
+            h("input", {
+              value: newRule.amountToBuy,
+              onChange: (event) =>
+                setNewRule((current) => ({
+                  ...current,
+                  amountToBuy: event.target.value,
+                })),
+              "aria-label": "Rule amount to buy",
+            })
+          ),
+          h(
+            InlineField,
+            { label: "Slippage Bps" },
+            h("input", {
+              value: newRule.slippageBps,
+              onChange: (event) =>
+                setNewRule((current) => ({
+                  ...current,
+                  slippageBps: event.target.value,
+                })),
+              "aria-label": "Rule slippage bps",
+            })
+          ),
+          h(
+            InlineField,
+            { label: "Priority Fee" },
+            h("input", {
+              value: newRule.priorityFee,
+              onChange: (event) =>
+                setNewRule((current) => ({
+                  ...current,
+                  priorityFee: event.target.value,
+                })),
+              "aria-label": "Rule priority fee",
+            })
+          ),
+          h(
+            InlineField,
+            { label: "Percent To Sell" },
+            h("input", {
+              value: newRule.percentToSell,
+              onChange: (event) =>
+                setNewRule((current) => ({
+                  ...current,
+                  percentToSell: event.target.value,
+                })),
+              "aria-label": "Rule percent to sell",
+            })
+          ),
+          h(
+            InlineField,
+            { label: "Time Between Sells" },
+            h("input", {
+              value: newRule.timeBetweenSells,
+              onChange: (event) =>
+                setNewRule((current) => ({
+                  ...current,
+                  timeBetweenSells: event.target.value,
+                })),
+              "aria-label": "Rule time between sells",
+            })
+          ),
+          h(
+            InlineField,
+            { label: "Sort Order" },
+            h("input", {
+              value: newRule.sortOrder,
+              onChange: (event) =>
+                setNewRule((current) => ({
+                  ...current,
+                  sortOrder: event.target.value,
+                })),
+              "aria-label": "Rule sort order",
+            })
+          ),
           h("label", { className: "checkbox-label" },
             h("input", {
               type: "checkbox",
               checked: !!newRule.dontSell,
+              "aria-label": "Rule do not sell",
               onChange: (event) =>
                 setNewRule((current) => ({
                   ...current,
@@ -1247,6 +1388,7 @@ import React from "react";
                       "select",
                       {
                         value: draft.accountUsername || "",
+                        "aria-label": `Rule ${rule.id} account`,
                         onChange: (event) =>
                           setRuleDrafts((current) => ({
                             ...current,
@@ -1266,6 +1408,7 @@ import React from "react";
                       "select",
                       {
                         value: draft.walletName || WALLET_OPTIONS[0],
+                        "aria-label": `Rule ${rule.id} wallet`,
                         onChange: (event) =>
                           setRuleDrafts((current) => ({
                             ...current,
@@ -1283,6 +1426,7 @@ import React from "react";
                   h("td", null,
                     h("input", {
                       value: draft.coinName || "",
+                      "aria-label": `Rule ${rule.id} coin name`,
                       onChange: (event) =>
                         setRuleDrafts((current) => ({
                           ...current,
@@ -1296,6 +1440,7 @@ import React from "react";
                   h("td", null,
                     h("input", {
                       value: draft.coinAddress || "",
+                      "aria-label": `Rule ${rule.id} coin address`,
                       onChange: (event) =>
                         setRuleDrafts((current) => ({
                           ...current,
@@ -1309,6 +1454,7 @@ import React from "react";
                   h("td", null,
                     h("input", {
                       value: draft.coinKeywords || "",
+                      "aria-label": `Rule ${rule.id} coin keywords`,
                       onChange: (event) =>
                         setRuleDrafts((current) => ({
                           ...current,
@@ -1323,6 +1469,7 @@ import React from "react";
                     h("input", {
                       value: draft.amountToBuy || "",
                       placeholder: "amount",
+                      "aria-label": `Rule ${rule.id} amount to buy`,
                       onChange: (event) =>
                         setRuleDrafts((current) => ({
                           ...current,
@@ -1335,6 +1482,7 @@ import React from "react";
                     h("input", {
                       value: draft.slippageBps || "",
                       placeholder: "slippage",
+                      "aria-label": `Rule ${rule.id} slippage bps`,
                       onChange: (event) =>
                         setRuleDrafts((current) => ({
                           ...current,
@@ -1347,6 +1495,7 @@ import React from "react";
                     h("input", {
                       value: draft.priorityFee || "",
                       placeholder: "priority",
+                      "aria-label": `Rule ${rule.id} priority fee`,
                       onChange: (event) =>
                         setRuleDrafts((current) => ({
                           ...current,
@@ -1361,6 +1510,7 @@ import React from "react";
                     h("input", {
                       value: draft.percentToSell || "",
                       placeholder: "% sell",
+                      "aria-label": `Rule ${rule.id} percent to sell`,
                       onChange: (event) =>
                         setRuleDrafts((current) => ({
                           ...current,
@@ -1373,6 +1523,7 @@ import React from "react";
                     h("input", {
                       value: draft.timeBetweenSells || "",
                       placeholder: "ms between sells",
+                      "aria-label": `Rule ${rule.id} time between sells`,
                       onChange: (event) =>
                         setRuleDrafts((current) => ({
                           ...current,
@@ -1385,6 +1536,7 @@ import React from "react";
                     h("input", {
                       value: draft.sortOrder || "",
                       placeholder: "sort",
+                      "aria-label": `Rule ${rule.id} sort order`,
                       onChange: (event) =>
                         setRuleDrafts((current) => ({
                           ...current,
@@ -1398,6 +1550,7 @@ import React from "react";
                       h("input", {
                         type: "checkbox",
                         checked: !!draft.dontSell,
+                        "aria-label": `Rule ${rule.id} do not sell`,
                         onChange: (event) =>
                           setRuleDrafts((current) => ({
                             ...current,
@@ -1413,48 +1566,41 @@ import React from "react";
                   h(
                     "td",
                     null,
-                    h(
-                      "button",
-                      {
-                        className: "btn",
-                        disabled: saving,
-                        onClick: () =>
-                          withMutation(() =>
-                            apiRequest(`/api/trading-config/account-coins/${rule.id}`, {
-                              method: "PUT",
-                              body: JSON.stringify({
-                                ...draft,
-                                coinKeywords: splitKeywords(draft.coinKeywords),
-                                amountToBuy: numberValueOrNull(draft.amountToBuy),
-                                slippageBps: integerValueOrNull(draft.slippageBps),
-                                priorityFee: numberValueOrNull(draft.priorityFee),
-                                percentToSell: numberValueOrNull(draft.percentToSell),
-                                timeBetweenSells: integerValueOrNull(
-                                  draft.timeBetweenSells
-                                ),
-                                sortOrder: integerValueOrNull(draft.sortOrder),
-                              }),
-                            })
-                          ),
-                      },
-                      "Save"
-                    ),
-                    " ",
-                    h(
-                      "button",
-                      {
-                        className: "btn danger",
-                        disabled: saving,
-                        onClick: () =>
-                          withMutation(() =>
-                            apiRequest(`/api/trading-config/account-coins/${rule.id}`, {
-                              method: "DELETE",
-                              body: "{}",
-                            })
-                          ),
-                      },
-                      "Delete"
-                    )
+                    h(IconButton, {
+                      icon: "save",
+                      label: `Save rule ${rule.id}`,
+                      disabled: saving,
+                      onClick: () =>
+                        withMutation(() =>
+                          apiRequest(`/api/trading-config/account-coins/${rule.id}`, {
+                            method: "PUT",
+                            body: JSON.stringify({
+                              ...draft,
+                              coinKeywords: splitKeywords(draft.coinKeywords),
+                              amountToBuy: numberValueOrNull(draft.amountToBuy),
+                              slippageBps: integerValueOrNull(draft.slippageBps),
+                              priorityFee: numberValueOrNull(draft.priorityFee),
+                              percentToSell: numberValueOrNull(draft.percentToSell),
+                              timeBetweenSells: integerValueOrNull(
+                                draft.timeBetweenSells
+                              ),
+                              sortOrder: integerValueOrNull(draft.sortOrder),
+                            }),
+                          })
+                        ),
+                    }),
+                    h(IconButton, {
+                      icon: "delete",
+                      label: `Delete rule ${rule.id}`,
+                      disabled: saving,
+                      onClick: () =>
+                        withMutation(() =>
+                          apiRequest(`/api/trading-config/account-coins/${rule.id}`, {
+                            method: "DELETE",
+                            body: "{}",
+                          })
+                        ),
+                    })
                   )
                 );
               })
