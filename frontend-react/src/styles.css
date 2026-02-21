@@ -4,7 +4,6 @@
   --ink: #11223a;
   --ink-soft: #4a5a72;
   --accent: #005f95;
-  --accent-soft: #e8f3ff;
   --border: #d3dce8;
   --warning: #d63d3d;
   --success: #206638;
@@ -45,16 +44,6 @@ body {
   color: var(--ink-soft);
 }
 
-.external-link {
-  color: var(--accent);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.external-link:hover {
-  text-decoration: underline;
-}
-
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -86,28 +75,6 @@ body {
   flex-wrap: wrap;
 }
 
-.tabs-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
-}
-
-.tab-btn {
-  border: 1px solid var(--border);
-  background: #fff;
-  color: var(--ink-soft);
-  border-radius: 999px;
-  padding: 8px 14px;
-  cursor: pointer;
-}
-
-.tab-btn.active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-}
-
 .inline-form {
   display: flex;
   flex-wrap: wrap;
@@ -117,26 +84,30 @@ body {
   background: #f9fcff;
 }
 
-.inline-form.dense {
-  gap: 6px;
-}
-
 .inline-field {
-  min-width: 140px;
-}
-
-.inline-form.dense .inline-field {
-  min-width: 120px;
+  min-width: 160px;
 }
 
 .inline-field input,
 .inline-field select {
-  min-width: 120px;
+  min-width: 160px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .field-label {
   color: var(--ink-soft);
   font-size: 12px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(160px, 1fr));
+  gap: 10px;
 }
 
 input,
@@ -151,29 +122,6 @@ select {
   border-radius: 8px;
   padding: 8px 10px;
   min-height: 36px;
-}
-
-input[type="checkbox"] {
-  min-height: auto;
-  width: 16px;
-  height: 16px;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(160px, 1fr));
-  gap: 10px;
-}
-
-.login-card {
-  max-width: 540px;
-  margin: 40px auto;
 }
 
 .btn {
@@ -195,6 +143,11 @@ input[type="checkbox"] {
   border-color: var(--warning);
 }
 
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
 .icon-btn {
   width: 36px;
   height: 36px;
@@ -214,17 +167,38 @@ input[type="checkbox"] {
   fill: currentColor;
 }
 
-.btn:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
+.accounts-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
 }
 
-.checkbox-label {
-  display: inline-flex;
+.account-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.account-top {
+  display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  background: #f7fbff;
+}
+
+.account-title {
+  font-weight: 700;
+}
+
+.coins-title {
+  padding: 10px 12px;
+  font-weight: 600;
   color: var(--ink-soft);
-  font-size: 12px;
 }
 
 .table-wrap {
@@ -254,13 +228,23 @@ th {
 td input,
 td select {
   width: 100%;
-  min-width: 110px;
+  min-width: 120px;
   margin-bottom: 4px;
 }
 
 td.actions-cell {
   white-space: nowrap;
   min-width: 88px;
+}
+
+.external-link {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.external-link:hover {
+  text-decoration: underline;
 }
 
 .warning {
@@ -284,58 +268,9 @@ td.actions-cell {
   color: var(--ink-soft);
 }
 
-.debug-panel {
-  margin-top: 8px;
-}
-
-.debug-log-list {
-  max-height: 420px;
-  overflow: auto;
-  padding: 10px;
-  background: #f6f9fc;
-}
-
-.debug-log-item {
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: #fff;
-  padding: 10px;
-  margin-bottom: 8px;
-}
-
-.debug-log-head {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  font-size: 12px;
-  color: var(--ink-soft);
-}
-
-.debug-log-level {
-  font-weight: 700;
-  letter-spacing: 0.03em;
-}
-
-.debug-log-message {
-  margin-top: 4px;
-  font-size: 13px;
-}
-
-.debug-log-details {
-  margin-top: 8px;
-  margin-bottom: 0;
-  padding: 8px;
-  border-radius: 6px;
-  background: #f4f7fb;
-  border: 1px solid var(--border);
-  font-size: 12px;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.debug-error {
-  border-color: #f2b3b3;
-  background: #fff5f5;
+.login-card {
+  max-width: 540px;
+  margin: 40px auto;
 }
 
 @media (max-width: 900px) {
