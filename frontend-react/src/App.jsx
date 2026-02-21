@@ -296,7 +296,7 @@ function App() {
     setLoginError("");
 
     try {
-      await apiRequest("/api/auth/login", {
+      const loginResult = await apiRequest("/api/auth/login", {
         method: "POST",
         body: JSON.stringify({
           username: loginUsername,
@@ -305,7 +305,7 @@ function App() {
       });
 
       setAuthenticated(true);
-      setViewer(loginUsername);
+      setViewer(loginResult.username || String(loginUsername || "").trim());
       setLoginPassword("");
       await loadSnapshot();
     } catch (loginRequestError) {
@@ -427,6 +427,8 @@ function App() {
     });
   }
 
+  const viewerLabel = String(viewer || "").trim() || "unknown";
+
   return h(
     "div",
     { className: "container" },
@@ -434,14 +436,21 @@ function App() {
       "div",
       { className: "header" },
       h("h1", null, "Trading Config Dashboard"),
-      h("div", { className: "subtitle" }, `Signed in as ${viewer}`),
       databasePath
         ? h("div", { className: "subtitle" }, `Database: ${databasePath}`)
         : null,
       h(
         "div",
         { className: "actions-row" },
-        h("div", null),
+        h(
+          "div",
+          { className: "viewer-badge", "aria-live": "polite" },
+          h("span", { className: "viewer-badge-label" }, "Logged in as"),
+          h("span", { className: "viewer-badge-name" }, viewerLabel),
+          authEnabled
+            ? null
+            : h("span", { className: "viewer-badge-mode" }, "auth disabled")
+        ),
         h(
           "div",
           { className: "actions-row" },
