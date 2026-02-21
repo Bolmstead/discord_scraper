@@ -2,7 +2,7 @@
   "name": "patreon_scraper",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "tradingConfigServer.js",
   "type": "module",
   "scripts": {
     "twitter": "node scrapeTwitterTracker.js",
