@@ -45,6 +45,16 @@ body {
   color: var(--ink-soft);
 }
 
+.external-link {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.external-link:hover {
+  text-decoration: underline;
+}
+
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
