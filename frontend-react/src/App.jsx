@@ -4,6 +4,11 @@ import React from "react";
   const { useCallback, useEffect, useMemo, useState } = React;
 
   const WALLET_OPTIONS = ["Berkley", "Sharif"];
+  const SECTION_TABS = [
+    { id: "accounts", label: "Accounts" },
+    { id: "coins", label: "Global Coins" },
+    { id: "rules", label: "Account-Coin Rules" },
+  ];
   const BULLX_BASE_URL =
     "https://neo.bullx.io/terminal?chainId=1399811149&address=";
   const MAX_DEBUG_LOGS = 250;
@@ -250,6 +255,7 @@ import React from "react";
     const [status, setStatus] = useState("");
     const [debugLogs, setDebugLogs] = useState([]);
     const [showDebugLogs, setShowDebugLogs] = useState(true);
+    const [activeTab, setActiveTab] = useState("accounts");
 
     const [authenticated, setAuthenticated] = useState(false);
     const [authEnabled, setAuthEnabled] = useState(true);
@@ -657,6 +663,25 @@ import React from "react";
 
       h(
         "div",
+        { className: "tabs-row", role: "tablist", "aria-label": "Dashboard Sections" },
+        SECTION_TABS.map((tab) =>
+          h(
+            "button",
+            {
+              key: tab.id,
+              type: "button",
+              role: "tab",
+              "aria-selected": activeTab === tab.id,
+              className: `tab-btn${activeTab === tab.id ? " active" : ""}`,
+              onClick: () => setActiveTab(tab.id),
+            },
+            tab.label
+          )
+        )
+      ),
+
+      activeTab === "accounts" ? h(
+        "div",
         { className: "panel" },
         h(SectionHeader, { title: "Accounts" }),
         h(
@@ -866,7 +891,7 @@ import React from "react";
                   ),
                   h(
                     "td",
-                    null,
+                    { className: "actions-cell" },
                     h(IconButton, {
                       icon: "save",
                       label: `Save ${account.username}`,
@@ -921,9 +946,9 @@ import React from "react";
             )
           )
         )
-      ),
+      ) : null,
 
-      h(
+      activeTab === "coins" ? h(
         "div",
         { className: "panel" },
         h(SectionHeader, { title: "Global Coins" }),
@@ -1088,7 +1113,7 @@ import React from "react";
                   ),
                   h(
                     "td",
-                    null,
+                    { className: "actions-cell" },
                     h(IconButton, {
                       icon: "save",
                       label: `Save ${coin.symbol}`,
@@ -1134,9 +1159,9 @@ import React from "react";
             )
           )
         )
-      ),
+      ) : null,
 
-      h(
+      activeTab === "rules" ? h(
         "div",
         { className: "panel" },
         h(SectionHeader, { title: "Account-Coin Rules" }),
@@ -1565,7 +1590,7 @@ import React from "react";
                   ),
                   h(
                     "td",
-                    null,
+                    { className: "actions-cell" },
                     h(IconButton, {
                       icon: "save",
                       label: `Save rule ${rule.id}`,
@@ -1607,8 +1632,7 @@ import React from "react";
             )
           )
         )
-      )
-      ,
+      ) : null,
       h(DebugPanel, {
         logs: debugLogs,
         visible: showDebugLogs,
