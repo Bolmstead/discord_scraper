@@ -98,7 +98,11 @@ async function executeBuyPlans(buyPlans, isTestMode) {
   const successfulBuys = [];
 
   for (const buyPlan of buyPlans) {
-    const walletName = buyPlan.walletName || "Berkley";
+    const walletName = String(buyPlan.walletName || "").trim();
+    if (!walletName) {
+      console.log("Skipping buy plan: walletName is required");
+      continue;
+    }
     let amountToBuy = buyPlan.amountToBuy;
 
     if (isTestMode) {

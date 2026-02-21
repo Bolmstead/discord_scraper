@@ -19,7 +19,6 @@ export function determineIfTrumpCoinBuy(text) {
       slippageBpsForAnyPostedCA,
       timeToSellForAnyPostedCA,
       priorityFeeForAnyPostedCA,
-      defaultWalletName,
     } = account;
 
     if (buyAnyPostedCA) {
@@ -35,7 +34,7 @@ export function determineIfTrumpCoinBuy(text) {
           priorityFee: priorityFeeForAnyPostedCA,
           keywords: [],
           caWasPosted: true,
-          walletName: defaultWalletName || "Berkley",
+          walletName: account.walletName || "",
         };
       }
     }
@@ -55,7 +54,7 @@ export function determineIfTrumpCoinBuy(text) {
       return {
         ...match.coin,
         chosenKeyword: keyword,
-        walletName: match.coin.walletName || defaultWalletName || "Berkley",
+        walletName: match.coin.walletName || "",
       };
     }
 

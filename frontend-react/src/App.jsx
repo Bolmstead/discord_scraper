@@ -5,6 +5,7 @@ const { useEffect, useState } = React;
 
 const BULLX_BASE_URL =
   "https://neo.bullx.io/terminal?chainId=1399811149&address=";
+const WALLET_OPTIONS = ["Berkley", "Sharif"];
 
 function numberValueOrNull(value) {
   if (value === "" || value === null || value === undefined) {
@@ -195,6 +196,7 @@ function App() {
               coinName: coin.name || "",
               coinAddress: coin.address || "",
               coinKeywords: keywordsToText(coin.keywords),
+              walletName: coin.walletName || "",
               amountToBuySol:
                 coin.amountToBuySol === null || coin.amountToBuySol === undefined
                   ? ""
@@ -217,15 +219,16 @@ function App() {
     setNewCoinForms((current) => {
       const next = {};
       for (const account of nextAccounts) {
-        next[account.username] =
-          current[account.username] || {
-            coinName: "",
-            coinAddress: "",
-            coinKeywords: "",
-            amountToBuySol: "",
-            percentToSell: "",
-            timeBetweenSellsSeconds: "",
-          };
+        next[account.username] = {
+          coinName: "",
+          coinAddress: "",
+          coinKeywords: "",
+          walletName: "",
+          amountToBuySol: "",
+          percentToSell: "",
+          timeBetweenSellsSeconds: "",
+          ...(current[account.username] || {}),
+        };
       }
       return next;
     });
@@ -353,6 +356,7 @@ function App() {
         coinName: "",
         coinAddress: "",
         coinKeywords: "",
+        walletName: "",
         amountToBuySol: "",
         percentToSell: "",
         timeBetweenSellsSeconds: "",
@@ -367,6 +371,7 @@ function App() {
             coinName: draft.coinName,
             coinAddress: draft.coinAddress,
             coinKeywords: splitKeywords(draft.coinKeywords),
+            walletName: draft.walletName,
             amountToBuySol: numberValueOrNull(draft.amountToBuySol),
             percentToSell: numberValueOrNull(draft.percentToSell),
             timeBetweenSellsSeconds: numberValueOrNull(
@@ -383,6 +388,7 @@ function App() {
         coinName: "",
         coinAddress: "",
         coinKeywords: "",
+        walletName: "",
         amountToBuySol: "",
         percentToSell: "",
         timeBetweenSellsSeconds: "",
@@ -523,11 +529,12 @@ function App() {
         accounts.length === 0
           ? h("div", { className: "status" }, "No accounts yet.")
           : accounts.map((account) => {
-              const newCoin =
+                const newCoin =
                 newCoinForms[account.username] || {
                   coinName: "",
                   coinAddress: "",
                   coinKeywords: "",
+                  walletName: "",
                   amountToBuySol: "",
                   percentToSell: "",
                   timeBetweenSellsSeconds: "",
@@ -631,6 +638,29 @@ function App() {
                   ),
                   h(
                     InlineField,
+                    { label: "Wallet" },
+                    h(
+                      "select",
+                      {
+                        value: newCoin.walletName,
+                        required: true,
+                        onChange: (event) =>
+                          setNewCoinForms((current) => ({
+                            ...current,
+                            [account.username]: {
+                              ...current[account.username],
+                              walletName: event.target.value,
+                            },
+                          })),
+                      },
+                      h("option", { value: "" }, "Select wallet"),
+                      WALLET_OPTIONS.map((walletName) =>
+                        h("option", { key: walletName, value: walletName }, walletName)
+                      )
+                    )
+                  ),
+                  h(
+                    InlineField,
                     { label: "Buy Amount (SOL)" },
                     h("input", {
                       value: newCoin.amountToBuySol,
@@ -708,6 +738,7 @@ function App() {
                         h("th", null, "Name"),
                         h("th", null, "Address"),
                         h("th", null, "Keywords"),
+                        h("th", null, "Wallet"),
                         h("th", null, "Buy (SOL)"),
                         h("th", null, "Sell (%)"),
                         h("th", null, "Seconds"),
@@ -723,6 +754,7 @@ function App() {
                           coinName: coin.name || "",
                           coinAddress: coin.address || "",
                           coinKeywords: keywordsToText(coin.keywords),
+                          walletName: coin.walletName || "",
                           amountToBuySol:
                             coin.amountToBuySol === null ||
                             coin.amountToBuySol === undefined
@@ -788,6 +820,32 @@ function App() {
                                   },
                                 })),
                             })
+                          ),
+                          h(
+                            "td",
+                            null,
+                            h(
+                              "select",
+                              {
+                                value: coinDraft.walletName,
+                                onChange: (event) =>
+                                  setCoinDrafts((current) => ({
+                                    ...current,
+                                    [coin.id]: {
+                                      ...current[coin.id],
+                                      walletName: event.target.value,
+                                    },
+                                  })),
+                              },
+                              h("option", { value: "" }, "Select wallet"),
+                              WALLET_OPTIONS.map((walletName) =>
+                                h(
+                                  "option",
+                                  { key: walletName, value: walletName },
+                                  walletName
+                                )
+                              )
+                            )
                           ),
                           h(
                             "td",
@@ -880,6 +938,7 @@ function App() {
                                           coinKeywords: splitKeywords(
                                             coinDraft.coinKeywords
                                           ),
+                                          walletName: coinDraft.walletName,
                                           amountToBuySol: numberValueOrNull(
                                             coinDraft.amountToBuySol
                                           ),

@@ -5,9 +5,7 @@ function dedupeBuyPlans(plans) {
   const deduped = [];
 
   for (const plan of plans) {
-    const key = `${plan.walletName || "Berkley"}:${plan.address || ""}:${
-      plan.name || ""
-    }`;
+    const key = `${plan.walletName || ""}:${plan.address || ""}:${plan.name || ""}`;
     if (seen.has(key)) {
       continue;
     }
@@ -36,14 +34,18 @@ export function determineIfMemecoinBuy(
       console.log("🚨🚨🚨🚨🚨 IN TEST AUTO BUY MODE 🚨🚨🚨🚨🚨");
       const testAccount = accountMap.get("testCoin");
       if (testAccount && testAccount.coins?.length) {
+        const testBuyPlans = dedupeBuyPlans(
+          testAccount.coins
+            .filter((coin) => coin.walletName)
+            .map((coin) => ({ ...coin }))
+        );
+        if (!testBuyPlans.length) {
+          console.log("No testCoin buy plans have walletName configured");
+          return null;
+        }
         return {
           chosenKeyword: "testAutoBuy",
-          buyPlans: dedupeBuyPlans(
-            testAccount.coins.map((coin) => ({
-              ...coin,
-              walletName: coin.walletName || testAccount.defaultWalletName || "Berkley",
-            }))
-          ),
+          buyPlans: testBuyPlans,
         };
       }
     }
@@ -56,17 +58,20 @@ export function determineIfMemecoinBuy(
     }
 
     console.log(`😀 Account ${username} found! 😀`);
-    const { name, automaticallyBuyThisCoin, defaultWalletName } = account;
+    const { name, automaticallyBuyThisCoin } = account;
 
     if (automaticallyBuyThisCoin) {
+      if (!automaticallyBuyThisCoin.walletName) {
+        console.log(`Skipping auto buy for ${name}: walletName is missing`);
+        return null;
+      }
       console.log(`🧪🧪🧪 ${name} has automatically buy this coin enabled`);
       return {
         chosenKeyword: "automaticallyBuyThisCoin",
         buyPlans: [
           {
             ...automaticallyBuyThisCoin,
-            walletName:
-              automaticallyBuyThisCoin.walletName || defaultWalletName || "Berkley",
+            walletName: automaticallyBuyThisCoin.walletName,
           },
         ],
       };
@@ -86,14 +91,18 @@ export function determineIfMemecoinBuy(
       }
 
       console.log(`✨ Matched keyword: "${keyword}"`);
+      const buyPlans = dedupeBuyPlans(
+        matchingRules
+          .filter((match) => match.coin.walletName)
+          .map((match) => ({ ...match.coin, walletName: match.coin.walletName }))
+      );
+      if (!buyPlans.length) {
+        console.log(`Matched keyword "${keyword}" but no coins had walletName set`);
+        return null;
+      }
       return {
         chosenKeyword: keyword,
-        buyPlans: dedupeBuyPlans(
-          matchingRules.map((match) => ({
-            ...match.coin,
-            walletName: match.coin.walletName || defaultWalletName || "Berkley",
-          }))
-        ),
+        buyPlans,
       };
     }
 

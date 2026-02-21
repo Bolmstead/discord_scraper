@@ -11,6 +11,7 @@ const SCHEMA_VERSION = "simple_accounts_v2";
 
 let db;
 let cachedSnapshot;
+const SUPPORTED_WALLETS = new Set(["Berkley", "Sharif"]);
 
 function ensureParentDirectory(filePath) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
@@ -65,6 +66,24 @@ function nullableInteger(value) {
   }
 
   return Math.trunc(num);
+}
+
+function normalizeWalletName(value) {
+  if (value === undefined || value === null) {
+    return "";
+  }
+
+  return String(value).trim();
+}
+
+function assertWalletName(walletName) {
+  if (!walletName) {
+    throw new Error("Wallet is required");
+  }
+
+  if (!SUPPORTED_WALLETS.has(walletName)) {
+    throw new Error("Wallet must be one of: Berkley, Sharif");
+  }
 }
 
 function ensureColumn(database, tableName, columnName, definitionSql) {
@@ -132,7 +151,7 @@ function ensureSchema(database) {
         amount_to_buy_sol REAL NOT NULL DEFAULT 0,
         percent_to_sell REAL NOT NULL DEFAULT 100,
         time_between_sells_seconds INTEGER NOT NULL DEFAULT 0,
-        wallet_name TEXT NOT NULL DEFAULT 'Berkley',
+        wallet_name TEXT NOT NULL,
         sort_order INTEGER NOT NULL DEFAULT 0,
         FOREIGN KEY (account_username) REFERENCES accounts(username) ON DELETE CASCADE
       );
@@ -196,7 +215,7 @@ function mapCoinRow(row) {
     percentToSell: row.percent_to_sell,
     timeBetweenSellsSeconds: row.time_between_sells_seconds,
     timeBetweenSells: row.time_between_sells_seconds,
-    walletName: row.wallet_name || "Berkley",
+    walletName: row.wallet_name || "",
     sortOrder: row.sort_order,
   };
 }
@@ -237,7 +256,6 @@ export function getAccountsWithCoins() {
     username: account.username,
     name: account.name || account.username,
     imageUrl: account.image_url || "",
-    defaultWalletName: "Berkley",
     coins: selectCoins.all(account.username).map(mapCoinRow),
   }));
 }
@@ -278,7 +296,7 @@ export function getAccountCoinAssociations() {
       percentToSell: row.percent_to_sell,
       timeBetweenSellsSeconds: row.time_between_sells_seconds,
       timeBetweenSells: row.time_between_sells_seconds,
-      walletName: row.wallet_name || "Berkley",
+      walletName: row.wallet_name || "",
       sortOrder: row.sort_order,
     }));
 }
@@ -310,7 +328,7 @@ function normalizeAccountCoinPayload(payload = {}) {
     amountToBuySol,
     percentToSell: nullableNumber(percentRaw),
     timeBetweenSellsSeconds: nullableInteger(timeBetweenRaw),
-    walletName: String(payload.walletName || "Berkley").trim() || "Berkley",
+    walletName: normalizeWalletName(payload.walletName ?? payload.wallet_name),
     sortOrder: Number.isInteger(Number(payload.sortOrder))
       ? Math.trunc(Number(payload.sortOrder))
       : null,
@@ -395,6 +413,7 @@ export function createAccountCoin(payload) {
   ) {
     throw new Error("Time between sells (seconds) is required");
   }
+  assertWalletName(coin.walletName);
 
   ensureAccountExists(database, coin.accountUsername);
 
@@ -473,6 +492,7 @@ export function updateAccountCoin(id, payload) {
   ) {
     throw new Error("Time between sells (seconds) is required");
   }
+  assertWalletName(coin.walletName);
 
   ensureAccountExists(database, coin.accountUsername);
 

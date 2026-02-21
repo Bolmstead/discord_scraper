@@ -148,7 +148,6 @@
     const [newAccount, setNewAccount] = useState({
       username: "",
       name: "",
-      defaultWalletName: WALLET_OPTIONS[0],
     });
 
     const [newCoin, setNewCoin] = useState({
@@ -194,7 +193,6 @@
             account.username,
             {
               name: account.name || "",
-              defaultWalletName: account.defaultWalletName || WALLET_OPTIONS[0],
               buyAnyPostedCA: !!account.buyAnyPostedCA,
               amountToBuyForAnyPostedCA: formatNumber(
                 account.amountToBuyForAnyPostedCA
@@ -410,7 +408,6 @@
               setNewAccount({
                 username: "",
                 name: "",
-                defaultWalletName: WALLET_OPTIONS[0],
               });
             },
           },
@@ -431,20 +428,6 @@
               setNewAccount((current) => ({ ...current, name: event.target.value })),
           }),
           h(
-            "select",
-            {
-              value: newAccount.defaultWalletName,
-              onChange: (event) =>
-                setNewAccount((current) => ({
-                  ...current,
-                  defaultWalletName: event.target.value,
-                })),
-            },
-            WALLET_OPTIONS.map((wallet) =>
-              h("option", { key: wallet, value: wallet }, wallet)
-            )
-          ),
-          h(
             "button",
             { type: "submit", className: "btn", disabled: saving },
             "Add account"
@@ -464,7 +447,6 @@
                 null,
                 h("th", null, "Username"),
                 h("th", null, "Name"),
-                h("th", null, "Default Wallet"),
                 h("th", null, "Buy Any CA"),
                 h("th", null, "Amount"),
                 h("th", null, "Slippage"),
@@ -494,25 +476,6 @@
                           },
                         })),
                     })
-                  ),
-                  h("td", null,
-                    h(
-                      "select",
-                      {
-                        value: draft.defaultWalletName || WALLET_OPTIONS[0],
-                        onChange: (event) =>
-                          setAccountDrafts((current) => ({
-                            ...current,
-                            [account.username]: {
-                              ...current[account.username],
-                              defaultWalletName: event.target.value,
-                            },
-                          })),
-                      },
-                      WALLET_OPTIONS.map((wallet) =>
-                        h("option", { key: wallet, value: wallet }, wallet)
-                      )
-                    )
                   ),
                   h("td", null,
                     h("input", {

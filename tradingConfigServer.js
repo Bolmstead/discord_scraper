@@ -44,6 +44,13 @@ const CONTENT_TYPES = {
   ".json": "application/json; charset=utf-8",
 };
 
+class HttpError extends Error {
+  constructor(statusCode, message) {
+    super(message);
+    this.statusCode = statusCode;
+  }
+}
+
 function sendJson(res, statusCode, payload, headers = {}) {
   const body = JSON.stringify(payload);
   res.writeHead(statusCode, {
@@ -210,6 +217,32 @@ function parseRouteParam(pathname, expression) {
   }
 
   return decodeURIComponent(match[1]);
+}
+
+function enforceWalletWriteAccess(session, payload) {
+  if (!AUTH_ENABLED) {
+    return;
+  }
+
+  const username = String(session?.username || "").trim();
+  if (!username || username === "local") {
+    return;
+  }
+
+  const walletName = String(
+    payload?.walletName ?? payload?.wallet_name ?? ""
+  ).trim();
+
+  if (!walletName) {
+    throw new HttpError(400, "Wallet is required");
+  }
+
+  if (walletName !== username) {
+    throw new HttpError(
+      403,
+      `User ${username} can only save ${username}-wallet coins`
+    );
+  }
 }
 
 function sendTradingConfigSnapshot(res) {
@@ -381,6 +414,7 @@ const server = http.createServer(async (req, res) => {
         pathname === "/api/trading-config/account-coins"
       ) {
         const body = await parseRequestBody(req);
+        enforceWalletWriteAccess(session, body);
         createAccountCoin(body);
         return sendTradingConfigSnapshot(res);
       }
@@ -391,6 +425,7 @@ const server = http.createServer(async (req, res) => {
       );
       if (associationId && req.method === "PUT") {
         const body = await parseRequestBody(req);
+        enforceWalletWriteAccess(session, body);
         updateAccountCoin(associationId, body);
         return sendTradingConfigSnapshot(res);
       }
@@ -418,7 +453,10 @@ const server = http.createServer(async (req, res) => {
 
     return sendFile(res, staticPath);
   } catch (error) {
-    return sendJson(res, 500, { error: error.message || "Unexpected error" });
+    const statusCode = Number(error?.statusCode) || 500;
+    return sendJson(res, statusCode, {
+      error: error.message || "Unexpected error",
+    });
   }
 });
 
