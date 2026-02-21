@@ -35,6 +35,64 @@ const SELECTORS = {
 };
 
 let numOfRunsBeforeSellingAllTokens = 0;
+const processedPostFingerprints = [];
+const processedPostFingerprintSet = new Set();
+const MAX_PROCESSED_POST_FINGERPRINTS = 500;
+
+function getTweetFingerprint(tweet) {
+  const username = String(tweet?.username || "")
+    .trim()
+    .toLowerCase();
+  const normalizedText = String(tweet?.text || "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+  return `${username}:${normalizedText.slice(0, 400)}`;
+}
+
+function hasProcessedTweet(tweet) {
+  return processedPostFingerprintSet.has(getTweetFingerprint(tweet));
+}
+
+function markTweetProcessed(tweet) {
+  const fingerprint = getTweetFingerprint(tweet);
+  if (!fingerprint || processedPostFingerprintSet.has(fingerprint)) {
+    return;
+  }
+
+  processedPostFingerprintSet.add(fingerprint);
+  processedPostFingerprints.push(fingerprint);
+
+  if (processedPostFingerprints.length > MAX_PROCESSED_POST_FINGERPRINTS) {
+    const removed = processedPostFingerprints.shift();
+    if (removed) {
+      processedPostFingerprintSet.delete(removed);
+    }
+  }
+}
+
+function getPercentToSell(buyPlan) {
+  const parsedPercent = Number(buyPlan?.percentToSell);
+  if (Number.isFinite(parsedPercent)) {
+    return parsedPercent;
+  }
+  return CONFIG.PERCENT_TO_SELL;
+}
+
+function getTimeBetweenSellsMs(buyPlan) {
+  const secondsValue = Number(buyPlan?.timeBetweenSellsSeconds);
+  if (Number.isFinite(secondsValue) && secondsValue >= 0) {
+    return secondsValue * 1000;
+  }
+
+  const legacyValue = Number(buyPlan?.timeBetweenSells);
+  if (Number.isFinite(legacyValue) && legacyValue >= 0) {
+    // Legacy configs sometimes stored milliseconds in this field.
+    return legacyValue > 1000 ? legacyValue : legacyValue * 1000;
+  }
+
+  return CONFIG.TIME_TO_WAIT_BETWEEN_SELLS;
+}
 
 async function executeBuyPlans(buyPlans, isTestMode) {
   const successfulBuys = [];
@@ -80,11 +138,13 @@ function scheduleSellOperations(successfulBuys) {
 
       try {
         console.log(`🤞 Selling tokens initiated for ${buy.walletName}...`);
+        const percentToSell = getPercentToSell(buy);
+        const timeBetweenSellsMs = getTimeBetweenSellsMs(buy);
         const sellResult = await sellPercentOfTokenToZero(
           buy.walletName,
           buy.address,
-          buy.percentToSell || CONFIG.PERCENT_TO_SELL,
-          buy.timeBetweenSells || CONFIG.TIME_TO_WAIT_BETWEEN_SELLS
+          percentToSell,
+          timeBetweenSellsMs
         );
         console.log(`Sell result for ${buy.walletName}:`, sellResult);
         await swapAllTokensToSolana(buy.walletName);
@@ -173,6 +233,7 @@ export async function twitterTrackerScraper(page) {
     let decision = null;
     let tweetedUsername = null;
     let postText = null;
+    let matchedTweet = null;
 
     for (const tweet of validTweets) {
       const result = determineIfMemecoinBuy(
@@ -183,9 +244,14 @@ export async function twitterTrackerScraper(page) {
       );
 
       if (result?.buyPlans?.length) {
+        if (hasProcessedTweet(tweet)) {
+          console.log("Skipping already processed post");
+          continue;
+        }
         decision = result;
         tweetedUsername = tweet.username;
         postText = tweet.text;
+        matchedTweet = tweet;
         break;
       }
     }
@@ -201,6 +267,10 @@ export async function twitterTrackerScraper(page) {
     if (!successfulBuys.length) {
       setTimeout(() => twitterTrackerScraper(page), CONFIG.SCAN_INTERVAL);
       return;
+    }
+
+    if (matchedTweet) {
+      markTweetProcessed(matchedTweet);
     }
 
     const firstBuy = successfulBuys[0];

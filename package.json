@@ -11,7 +11,6 @@
     "config:frontend:dev": "npm --prefix frontend-react run dev",
     "config:frontend:build": "npm --prefix frontend-react run build",
     "config:frontend:preview": "npm --prefix frontend-react run preview",
-    "truth": "node scrapeTruthSocial.js",
     "testSwap": "node testSwap.js",
     "createWallet": "node helpers/createWallet.js",
     "testJupiter": "node test-jupiter-api.js",

@@ -1,12 +1,13 @@
 import "dotenv/config";
 
-import { executeSwap } from "./jupiter/jupiterFunctions.js";
+import { executeSwap } from "./jupiter/index.js";
 
 await executeSwap(
-  "Peanut the Squirrel",
+  "Berkley",
+  "buy",
   "Pnut",
   "2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump",
-  90 * 1000,
+  true,
   ["pnut", "peanut"],
   0.001,
   5000,

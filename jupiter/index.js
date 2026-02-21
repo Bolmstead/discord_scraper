@@ -234,7 +234,7 @@ async function executeSwap(
     if (!swapResponse) {
       console.error("Failed to get swap response");
       sendTelegramMessage(
-        `Error in executeSwap (getSwapResponse): ${error.message}`
+        "Error in executeSwap (getSwapResponse): Missing swap response"
       );
       sendTelegramMessage(`quote: ${JSON.stringify(quote)}`);
 
@@ -284,7 +284,7 @@ async function executeSwap(
     if (!txResponse) {
       console.error("Transaction not confirmed");
       sendTelegramMessage(
-        `Error in executeSwap (transaction): ${error.message}`
+        "Error in executeSwap (transaction): Transaction not confirmed"
       );
       try {
         sendTelegramMessage(`quote: ${JSON.stringify(quote)}`);
