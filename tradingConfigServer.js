@@ -23,10 +23,7 @@ const PORT = Number(process.env.PORT || process.env.TRADING_CONFIG_PORT || 3030)
 const HOST = process.env.TRADING_CONFIG_HOST || "0.0.0.0";
 const AUTH_ENABLED = String(process.env.TRADING_CONFIG_AUTH || "false") === "true";
 const FRONTEND_BUILD_DIR = path.resolve(process.cwd(), "frontend-react/dist");
-const FRONTEND_LEGACY_DIR = path.resolve(process.cwd(), "frontend");
-const FRONTEND_DIR = fs.existsSync(FRONTEND_BUILD_DIR)
-  ? FRONTEND_BUILD_DIR
-  : FRONTEND_LEGACY_DIR;
+const FRONTEND_DIR = FRONTEND_BUILD_DIR;
 const SESSION_COOKIE_NAME = "trading_config_session";
 const SESSION_TTL_SECONDS = 12 * 60 * 60;
 
@@ -79,6 +76,10 @@ function sendFile(res, filePath) {
 }
 
 function resolveFrontendPath(pathname) {
+  if (!fs.existsSync(FRONTEND_DIR)) {
+    return null;
+  }
+
   const requestedPath = pathname === "/" ? "/index.html" : pathname;
   const fullPath = path.resolve(FRONTEND_DIR, `.${requestedPath}`);
 
@@ -443,11 +444,14 @@ const server = http.createServer(async (req, res) => {
     }
 
     const staticPath = resolveFrontendPath(pathname);
-    if (
-      !staticPath ||
-      !fs.existsSync(staticPath) ||
-      fs.statSync(staticPath).isDirectory()
-    ) {
+    if (!fs.existsSync(FRONTEND_DIR)) {
+      return sendJson(res, 503, {
+        error:
+          "Frontend build not found. Run `npm --prefix frontend-react run build` or use the React dev server.",
+      });
+    }
+
+    if (!staticPath || !fs.existsSync(staticPath) || fs.statSync(staticPath).isDirectory()) {
       return sendJson(res, 404, { error: "Not found" });
     }
 
@@ -466,7 +470,16 @@ server.on("error", (error) => {
 });
 
 server.listen(PORT, HOST, () => {
-  console.log(`Trading config UI running at http://localhost:${PORT}`);
-  console.log(`Frontend directory: ${FRONTEND_DIR}`);
+  const localHostForLogs =
+    HOST === "0.0.0.0" || HOST === "::" ? "127.0.0.1" : HOST;
+  const backendBaseUrl = `http://${localHostForLogs}:${PORT}`;
+  const frontendBuildExists = fs.existsSync(FRONTEND_DIR);
+
+  console.log(`Backend server: ${backendBaseUrl}`);
+  console.log(`Backend API base: ${backendBaseUrl}/api`);
+  console.log(`Frontend build dir: ${FRONTEND_DIR}`);
+  console.log(`Frontend (built via backend): ${frontendBuildExists ? backendBaseUrl : "not available (build missing)"}`);
+  console.log("Frontend (React dev server): http://127.0.0.1:5173 (run `npm run config:frontend:dev`)");
+  console.log("Frontend (React preview): http://127.0.0.1:4173 (run `npm run config:frontend:preview`)");
   console.log(`Database: ${getTradingConfigDatabasePath()}`);
 });
