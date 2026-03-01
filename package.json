@@ -7,6 +7,9 @@
   "scripts": {
     "twitter": "node scrapeTwitterTracker.js",
     "start": "node tradingConfigServer.js",
+    "backend": "npm run config:ui",
+    "frontend": "npm run config:frontend:dev",
+    "dev": "npm run config:ui & npm run config:frontend:dev",
     "config:ui": "node tradingConfigServer.js",
     "config:frontend:dev": "npm --prefix frontend-react run dev",
     "config:frontend:build": "npm --prefix frontend-react run build",
