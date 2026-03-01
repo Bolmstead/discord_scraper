@@ -74,7 +74,7 @@ importers:
     devDependencies:
       axios:
         specifier: ^1.7.9
-        version: 1.7.9
+        version: 1.8.1
 
 packages:
 
@@ -891,8 +891,8 @@ packages:
   axios@0.27.2:
     resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
 
-  axios@1.7.9:
-    resolution: {integrity: sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==}
+  axios@1.8.1:
+    resolution: {integrity: sha512-NN+fvwH/kV01dYUQ3PTOZns4LWtWhOFCAhQ/pHb88WQ1hNe5V/dvFwc4VJcDL11LT9xSX0QtsR8sWUuyOuOq7g==}
 
   b4a@1.6.7:
     resolution: {integrity: sha512-OnAYlL5b7LEkALw87fUVafQw5rVR9RjwGd4KUwNQ6DrrNmaVaUCgLipfVlzrPQ4tWOR9P0IXGNOx50jYCCdSJg==}
@@ -3030,7 +3030,7 @@ snapshots:
   '@mercurial-finance/frakt-sdk@0.0.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)':
     dependencies:
       '@project-serum/anchor': 0.24.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-      axios: 1.7.9
+      axios: 1.8.1
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -4343,7 +4343,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  axios@1.7.9:
+  axios@1.8.1:
     dependencies:
       follow-redirects: 1.15.9(debug@4.3.4)
       form-data: 4.0.2
@@ -5292,7 +5292,7 @@ snapshots:
 
   mailgun.js@10.4.0:
     dependencies:
-      axios: 1.7.9
+      axios: 1.8.1
       base-64: 1.0.0
       url-join: 4.0.1
     transitivePeerDependencies:
