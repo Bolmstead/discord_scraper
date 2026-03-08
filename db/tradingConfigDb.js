@@ -6,15 +6,35 @@ const DB_PATH = path.resolve(
   process.cwd(),
   process.env.TRADING_CONFIG_DB_PATH || "data/trading-config.sqlite"
 );
+const DB_WAL_PATH = `${DB_PATH}-wal`;
+const DB_SHM_PATH = `${DB_PATH}-shm`;
 
 const SCHEMA_VERSION = "simple_accounts_v2";
 
 let db;
 let cachedSnapshot;
+let cachedSnapshotStorageSignature = "";
 const SUPPORTED_WALLETS = new Set(["Berkley", "Sharif"]);
 
 function ensureParentDirectory(filePath) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
+}
+
+function getFileSignature(filePath) {
+  try {
+    const stats = fs.statSync(filePath);
+    return `${Math.trunc(stats.mtimeMs)}:${stats.size}`;
+  } catch {
+    return "missing";
+  }
+}
+
+function getStorageSignature() {
+  return [
+    getFileSignature(DB_PATH),
+    getFileSignature(DB_WAL_PATH),
+    getFileSignature(DB_SHM_PATH),
+  ].join("|");
 }
 
 function parseJson(value, fallbackValue) {
@@ -615,14 +635,24 @@ function buildSnapshot() {
 }
 
 function getSnapshot() {
-  if (!cachedSnapshot) {
+  getDatabase();
+  const currentStorageSignature = getStorageSignature();
+
+  // Refresh if a different process changed the sqlite database/WAL files.
+  if (
+    !cachedSnapshot ||
+    cachedSnapshotStorageSignature !== currentStorageSignature
+  ) {
     cachedSnapshot = buildSnapshot();
+    cachedSnapshotStorageSignature = currentStorageSignature;
   }
   return cachedSnapshot;
 }
 
 export function refreshTradingConfigSnapshot() {
+  getDatabase();
   cachedSnapshot = buildSnapshot();
+  cachedSnapshotStorageSignature = getStorageSignature();
   return cachedSnapshot;
 }
 

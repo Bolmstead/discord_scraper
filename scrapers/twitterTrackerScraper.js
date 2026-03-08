@@ -3,6 +3,7 @@ import "dotenv/config";
 import playSound from "play-sound";
 import { determineIfMemecoinBuy } from "../helpers/determineIfMemecoinBuy.js";
 import { extractNameFromParentheses } from "../helpers/stringParser.js";
+import { getTradingMaps } from "../constants.js";
 import {
   executeSwap,
   sellPercentOfTokenToZero,
@@ -163,6 +164,37 @@ function scheduleSellOperations(successfulBuys) {
   }, CONFIG.DEFAULT_TIME_TO_WAIT_BEFORE_FIRST_SELL);
 }
 
+function logAccountCoinAssociations() {
+  try {
+    const { accountMap } = getTradingMaps();
+    const accounts = Array.from(accountMap.values());
+
+    console.log(
+      `🗂️ Trading config accounts snapshot: ${accounts.length} account(s)`
+    );
+
+    if (!accounts.length) {
+      console.log("  - No accounts configured");
+      return;
+    }
+
+    for (const account of accounts) {
+      const accountUsername = String(account?.username || "").trim() || "unknown";
+      const coinNames = (account?.coins || [])
+        .map((coin) => String(coin?.name || "").trim())
+        .filter(Boolean);
+      const uniqueCoinNames = [...new Set(coinNames)];
+      const coinSummary = uniqueCoinNames.length
+        ? uniqueCoinNames.join(", ")
+        : "(no coins)";
+
+      console.log(`  - ${accountUsername}: ${coinSummary}`);
+    }
+  } catch (error) {
+    console.error("Error logging trading config accounts snapshot:", error);
+  }
+}
+
 export async function twitterTrackerScraper(page) {
   numOfRunsBeforeSellingAllTokens += 1;
   console.log(
@@ -192,6 +224,7 @@ export async function twitterTrackerScraper(page) {
     } else {
       console.log("✅✅✅✅✅ IN PRODUCTION MODE ✅✅✅✅✅");
     }
+    logAccountCoinAssociations();
 
     const tweetElements = await page.$$(SELECTORS.TWEET_CONTAINER);
     const startIndex = Math.max(
