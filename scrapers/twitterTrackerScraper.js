@@ -2,12 +2,20 @@
 import "dotenv/config";
 import playSound from "play-sound";
 import { determineIfMemecoinBuy } from "../helpers/determineIfMemecoinBuy.js";
+import {
+  getPercentToSell,
+  getTimeBetweenSellsMs,
+  getInitialSellDelayMs,
+} from "../helpers/sellTiming.js";
+import {
+  hasProcessedTweet,
+  markTweetProcessed,
+} from "../helpers/processedTweets.js";
 import { extractNameFromParentheses } from "../helpers/stringParser.js";
 import { getTradingMaps } from "../constants.js";
 import {
   executeSwap,
   sellPercentOfTokenToZero,
-  swapAllTokensToSolana,
 } from "../jupiter/index.js";
 import {
   sendTelegramMessage,
@@ -35,75 +43,6 @@ const SELECTORS = {
 };
 
 let numOfRunsBeforeSellingAllTokens = 0;
-const processedPostFingerprints = [];
-const processedPostFingerprintSet = new Set();
-const MAX_PROCESSED_POST_FINGERPRINTS = 500;
-
-function getTweetFingerprint(tweet) {
-  const username = String(tweet?.username || "")
-    .trim()
-    .toLowerCase();
-  const normalizedText = String(tweet?.text || "")
-    .replace(/\s+/g, " ")
-    .trim()
-    .toLowerCase();
-  return `${username}:${normalizedText.slice(0, 400)}`;
-}
-
-function hasProcessedTweet(tweet) {
-  return processedPostFingerprintSet.has(getTweetFingerprint(tweet));
-}
-
-function markTweetProcessed(tweet) {
-  const fingerprint = getTweetFingerprint(tweet);
-  if (!fingerprint || processedPostFingerprintSet.has(fingerprint)) {
-    return;
-  }
-
-  processedPostFingerprintSet.add(fingerprint);
-  processedPostFingerprints.push(fingerprint);
-
-  if (processedPostFingerprints.length > MAX_PROCESSED_POST_FINGERPRINTS) {
-    const removed = processedPostFingerprints.shift();
-    if (removed) {
-      processedPostFingerprintSet.delete(removed);
-    }
-  }
-}
-
-function getPercentToSell(buyPlan) {
-  const parsedPercent = Number(buyPlan?.percentToSell);
-  if (Number.isFinite(parsedPercent)) {
-    return parsedPercent;
-  }
-  return CONFIG.PERCENT_TO_SELL;
-}
-
-function getTimeBetweenSellsMs(buyPlan) {
-  const secondsValue = Number(buyPlan?.timeBetweenSellsSeconds);
-  if (Number.isFinite(secondsValue) && secondsValue >= 0) {
-    return secondsValue * 1000;
-  }
-
-  const legacyValue = Number(buyPlan?.timeBetweenSells);
-  if (Number.isFinite(legacyValue) && legacyValue >= 0) {
-    // Legacy configs sometimes stored milliseconds in this field.
-    return legacyValue > 1000 ? legacyValue : legacyValue * 1000;
-  }
-
-  return CONFIG.TIME_TO_WAIT_BETWEEN_SELLS;
-}
-
-function getInitialSellDelayMs(buyPlan) {
-  const timeBetweenSellsMs = getTimeBetweenSellsMs(buyPlan);
-  const boughtAtMs = Number(buyPlan?.boughtAtMs);
-
-  if (!Number.isFinite(boughtAtMs) || boughtAtMs <= 0) {
-    return timeBetweenSellsMs;
-  }
-
-  return Math.max(0, boughtAtMs + timeBetweenSellsMs - Date.now());
-}
 
 async function executeBuyPlans(buyPlans, isTestMode) {
   const successfulBuys = [];
@@ -146,12 +85,19 @@ async function executeBuyPlans(buyPlans, isTestMode) {
 }
 
 function scheduleSellOperations(successfulBuys) {
+  console.log(
+    "👾👾👾👾👾 scheduleSellOperations, successfulBuys:",
+    successfulBuys,
+  );
   for (const buy of successfulBuys) {
     if (buy.dontSell) {
       continue;
     }
 
-    const initialSellDelayMs = getInitialSellDelayMs(buy);
+    const initialSellDelayMs = getInitialSellDelayMs(
+      buy,
+      CONFIG.TIME_TO_WAIT_BETWEEN_SELLS,
+    );
 
     console.log(
       `⏱️ Scheduling first sell for ${buy.walletName} in ${
@@ -162,8 +108,11 @@ function scheduleSellOperations(successfulBuys) {
     setTimeout(async () => {
       try {
         console.log(`🤞 Selling tokens initiated for ${buy.walletName}...`);
-        const percentToSell = getPercentToSell(buy);
-        const timeBetweenSellsMs = getTimeBetweenSellsMs(buy);
+        const percentToSell = getPercentToSell(buy, CONFIG.PERCENT_TO_SELL);
+        const timeBetweenSellsMs = getTimeBetweenSellsMs(
+          buy,
+          CONFIG.TIME_TO_WAIT_BETWEEN_SELLS,
+        );
         const sellResult = await sellPercentOfTokenToZero(
           buy.walletName,
           buy.address,
@@ -171,13 +120,11 @@ function scheduleSellOperations(successfulBuys) {
           timeBetweenSellsMs,
         );
         console.log(`Sell result for ${buy.walletName}:`, sellResult);
-        await swapAllTokensToSolana(buy.walletName);
       } catch (error) {
         console.error(
           `Error executing sell operations for ${buy.walletName}:`,
           error,
         );
-        await swapAllTokensToSolana(buy.walletName);
       }
     }, initialSellDelayMs);
   }
@@ -244,14 +191,18 @@ function logAccountCoinAssociations() {
 }
 
 export async function twitterTrackerScraper(page) {
+  if (numOfRunsBeforeSellingAllTokens === 0) {
+    logAccountCoinAssociations();
+  }
   numOfRunsBeforeSellingAllTokens += 1;
   console.log(
     "⏳ numOfRunsBeforeSellingAllTokens:",
     numOfRunsBeforeSellingAllTokens,
   );
   if (numOfRunsBeforeSellingAllTokens > 10000) {
-    await swapAllTokensToSolana("Berkley");
-    await swapAllTokensToSolana("Sharif");
+    console.log(
+      "⏭️ Skipping periodic swapAllTokensToSolana sweep; function temporarily disabled",
+    );
     numOfRunsBeforeSellingAllTokens = 0;
   }
 
@@ -272,8 +223,6 @@ export async function twitterTrackerScraper(page) {
     } else {
       console.log("✅✅✅✅✅ IN PRODUCTION MODE ✅✅✅✅✅");
     }
-    logAccountCoinAssociations();
-
     const tweetElements = await page.$$(SELECTORS.TWEET_CONTAINER);
     const startIndex = Math.max(
       0,

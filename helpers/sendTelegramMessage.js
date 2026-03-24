@@ -8,8 +8,8 @@ function formatSendError(error) {
       typeof data === "object" && data !== null && "description" in data
         ? data.description
         : typeof data === "string"
-          ? data
-          : null;
+        ? data
+        : null;
     const parts = [
       error.message,
       error.response?.status != null ? `HTTP ${error.response.status}` : null,
@@ -22,13 +22,22 @@ function formatSendError(error) {
 
 async function sendTelegramMessage(text) {
   console.log("📮 Sending Telegram message:", text);
+  console.log(
+    "👾👾👾👾👾 process.env.BOTS_TELEGRAM_CHAT_ID:",
+    process.env.BOTS_TELEGRAM_CHAT_ID,
+  );
+  console.log(
+    "👾👾👾👾👾 process.env.SHITCOIN_TRACKER_TELEGRAM_BOT_TOKEN:",
+    process.env.SHITCOIN_TRACKER_TELEGRAM_BOT_TOKEN,
+  );
+  console.log("👾👾👾👾👾 text:", text);
   try {
     await axios.post(
       `https://api.telegram.org/bot${process.env.SHITCOIN_TRACKER_TELEGRAM_BOT_TOKEN}/sendMessage`,
       {
         chat_id: process.env.BOTS_TELEGRAM_CHAT_ID,
         text: text,
-      }
+      },
     );
   } catch (error) {
     console.error("Error sending Telegram message:", formatSendError(error));
@@ -41,7 +50,7 @@ async function sendTelegramMessageThread(
   name,
   address,
   chosenKeyword,
-  postText
+  postText,
 ) {
   try {
     const firstMessage = `

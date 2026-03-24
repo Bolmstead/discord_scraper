@@ -6,7 +6,11 @@ import {
   LAMPORTS_PER_SOL,
   PublicKey,
 } from "@solana/web3.js";
-import { TOKEN_PROGRAM_ID, getAssociatedTokenAddress } from "@solana/spl-token";
+import {
+  TOKEN_PROGRAM_ID,
+  TOKEN_2022_PROGRAM_ID,
+  getAssociatedTokenAddress,
+} from "@solana/spl-token";
 import bs58 from "bs58";
 import { transactionSenderAndConfirmationWaiter } from "./utils/transactionSender.js";
 import { getSignature } from "./utils/getSignature.js";
@@ -30,6 +34,38 @@ function isMissingTokenAccountError(error) {
     message.includes("failed to get token account balance") &&
     message.includes("could not find account")
   );
+}
+
+async function getTokenProgramIdForMint(mintPublicKey) {
+  const mintInfo = await connection.getAccountInfo(mintPublicKey);
+  const owner = mintInfo?.owner?.toString();
+
+  if (owner === TOKEN_PROGRAM_ID.toString()) {
+    return TOKEN_PROGRAM_ID;
+  }
+
+  if (owner === TOKEN_2022_PROGRAM_ID.toString()) {
+    return TOKEN_2022_PROGRAM_ID;
+  }
+
+  throw new Error(
+    `Unsupported token program for mint ${mintPublicKey.toString()}: ${
+      owner || "unknown owner"
+    }`
+  );
+}
+
+async function getAllTokenAccountsByOwner(ownerPublicKey) {
+  const tokenPrograms = [TOKEN_PROGRAM_ID, TOKEN_2022_PROGRAM_ID];
+  const tokenAccountResults = await Promise.all(
+    tokenPrograms.map((programId) =>
+      connection.getTokenAccountsByOwner(ownerPublicKey, {
+        programId,
+      })
+    )
+  );
+
+  return tokenAccountResults.flatMap((result) => result.value);
 }
 
 function getWalletFromName(walletName) {
@@ -452,10 +488,15 @@ async function sellTokenPercent(
   try {
     console.log("🔍 Getting associated token account...");
     let userTokenAccount;
+    let tokenProgramId;
     try {
+      tokenProgramId = await getTokenProgramIdForMint(memeTokenPublicKey);
+      console.log(`🧾 Token program: ${tokenProgramId.toString()}`);
       userTokenAccount = await getAssociatedTokenAddress(
         memeTokenPublicKey,
-        wallet.publicKey
+        wallet.publicKey,
+        false,
+        tokenProgramId
       );
       console.log(
         `📂 Associated token account: ${userTokenAccount.toString()}`
@@ -781,22 +822,17 @@ async function swapAllTokensToSolana(
     console.log("🔍 Getting all token accounts...");
 
     // Get all token accounts for the wallet
-    const tokenAccounts = await connection.getTokenAccountsByOwner(
-      wallet.publicKey,
-      {
-        programId: TOKEN_PROGRAM_ID,
-      }
-    );
+    const tokenAccounts = await getAllTokenAccountsByOwner(wallet.publicKey);
 
-    console.log(`📊 Found ${tokenAccounts.value.length} token accounts`);
+    console.log(`📊 Found ${tokenAccounts.length} token accounts`);
 
-    if (tokenAccounts.value.length === 0) {
+    if (tokenAccounts.length === 0) {
       console.log("ℹ️ No token accounts found");
       return { success: true, message: "No token accounts found", ...results };
     }
 
     // Process each token account
-    for (const tokenAccount of tokenAccounts.value) {
+    for (const tokenAccount of tokenAccounts) {
       try {
         const accountInfo = tokenAccount.account;
         const tokenAccountPubkey = tokenAccount.pubkey;
