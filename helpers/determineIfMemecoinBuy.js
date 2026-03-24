@@ -5,7 +5,9 @@ function dedupeBuyPlans(plans) {
   const deduped = [];
 
   for (const plan of plans) {
-    const key = `${plan.walletName || ""}:${plan.address || ""}:${plan.name || ""}`;
+    const key = `${plan.walletName || ""}:${plan.address || ""}:${
+      plan.name || ""
+    }`;
     if (seen.has(key)) {
       continue;
     }
@@ -20,7 +22,7 @@ export function determineIfMemecoinBuy(
   username,
   text,
   testingAutoBuy = false,
-  testingScrapeTweet = false
+  testingScrapeTweet = false,
 ) {
   try {
     const { accountMap, keywordMap } = getTradingMaps();
@@ -37,7 +39,7 @@ export function determineIfMemecoinBuy(
         const testBuyPlans = dedupeBuyPlans(
           testAccount.coins
             .filter((coin) => coin.walletName)
-            .map((coin) => ({ ...coin }))
+            .map((coin) => ({ ...coin })),
         );
         if (!testBuyPlans.length) {
           console.log("No testCoin buy plans have walletName configured");
@@ -79,13 +81,16 @@ export function determineIfMemecoinBuy(
 
     const tweetText = text.toLowerCase();
     console.log("🕊️🕊️🕊️🕊️🕊️ Tweet Text:", tweetText);
+    console.log("🕊️🕊️🕊️🕊️🕊️ text:", text);
 
     for (const [keyword, matches] of keywordMap) {
       if (!tweetText.includes(keyword.toLowerCase())) {
         continue;
       }
 
-      const matchingRules = matches.filter((match) => match.username === username);
+      const matchingRules = matches.filter(
+        (match) => match.username === username,
+      );
       if (!matchingRules.length) {
         continue;
       }
@@ -94,10 +99,15 @@ export function determineIfMemecoinBuy(
       const buyPlans = dedupeBuyPlans(
         matchingRules
           .filter((match) => match.coin.walletName)
-          .map((match) => ({ ...match.coin, walletName: match.coin.walletName }))
+          .map((match) => ({
+            ...match.coin,
+            walletName: match.coin.walletName,
+          })),
       );
       if (!buyPlans.length) {
-        console.log(`Matched keyword "${keyword}" but no coins had walletName set`);
+        console.log(
+          `Matched keyword "${keyword}" but no coins had walletName set`,
+        );
         return null;
       }
       return {

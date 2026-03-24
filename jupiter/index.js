@@ -18,6 +18,19 @@ dotenv.config();
 
 const connection = new Connection(process.env.HELIUS_RPC_URL);
 const jupiterAPI = createJupiterApiClient();
+const NO_TOKEN_POSITION_REASON = "NO_TOKEN_POSITION";
+
+function getNoTokenPositionMessage(memeTokenAddress, walletAddress) {
+  return `No token position found for ${memeTokenAddress} in wallet ${walletAddress}`;
+}
+
+function isMissingTokenAccountError(error) {
+  const message = error?.message || "";
+  return (
+    message.includes("failed to get token account balance") &&
+    message.includes("could not find account")
+  );
+}
 
 function getWalletFromName(walletName) {
   if (walletName === "Berkley" || walletName === "me") {
@@ -458,8 +471,37 @@ async function sellTokenPercent(
     console.log("💰 Checking token balance...");
     let tokenBalance;
     try {
+      const tokenAccountInfo = await connection.getAccountInfo(userTokenAccount);
+      if (!tokenAccountInfo) {
+        const noTokenMessage = getNoTokenPositionMessage(
+          memeTokenAddress,
+          wallet.publicKey.toString()
+        );
+        console.log(`ℹ️ ${noTokenMessage}`);
+        return {
+          success: false,
+          error: noTokenMessage,
+          terminal: true,
+          reason: NO_TOKEN_POSITION_REASON,
+        };
+      }
+
       tokenBalance = await connection.getTokenAccountBalance(userTokenAccount);
     } catch (error) {
+      if (isMissingTokenAccountError(error)) {
+        const noTokenMessage = getNoTokenPositionMessage(
+          memeTokenAddress,
+          wallet.publicKey.toString()
+        );
+        console.log(`ℹ️ ${noTokenMessage}`);
+        return {
+          success: false,
+          error: noTokenMessage,
+          terminal: true,
+          reason: NO_TOKEN_POSITION_REASON,
+        };
+      }
+
       console.error("Error getting token balance:", error);
       sendTelegramMessage(`Error getting token balance: ${error.message}`);
       throw error;
@@ -477,8 +519,17 @@ async function sellTokenPercent(
       console.log(`💎 UI Amount: ${uiAmount}`);
 
       if (!amount || amount <= 0) {
-        console.error(`❌ No tokens found for ${memeTokenAddress}`);
-        throw new Error(`No tokens found for ${memeTokenAddress}`);
+        const noTokenMessage = getNoTokenPositionMessage(
+          memeTokenAddress,
+          wallet.publicKey.toString()
+        );
+        console.log(`ℹ️ ${noTokenMessage}`);
+        return {
+          success: false,
+          error: noTokenMessage,
+          terminal: true,
+          reason: NO_TOKEN_POSITION_REASON,
+        };
       }
 
       // Calculate the amount to sell based on percentage
@@ -610,6 +661,18 @@ const sellPercentOfTokenToZero = async (
             break; // Exit retry loop on success
           } else {
             console.error(`❌ Sell attempt ${attempt} failed`);
+            if (result?.terminal) {
+              console.log(
+                `🛑 Stopping sell retries for ${walletName}: ${result.error}`
+              );
+              return {
+                success: false,
+                error: result.error,
+                terminal: true,
+                reason: result.reason,
+                totalPercentSold,
+              };
+            }
           }
         } catch (error) {
           console.error(`❌ Error on sell attempt ${attempt}:`, error);

@@ -4,7 +4,7 @@ import { DatabaseSync } from "node:sqlite";
 
 const DB_PATH = path.resolve(
   process.cwd(),
-  process.env.TRADING_CONFIG_DB_PATH || "data/trading-config.sqlite"
+  process.env.TRADING_CONFIG_DB_PATH || "data/trading-config.sqlite",
 );
 const DB_WAL_PATH = `${DB_PATH}-wal`;
 const DB_SHM_PATH = `${DB_PATH}-shm`;
@@ -51,9 +51,7 @@ function parseJson(value, fallbackValue) {
 
 function normalizeKeywordsArray(value) {
   if (Array.isArray(value)) {
-    return value
-      .map((keyword) => String(keyword || "").trim())
-      .filter(Boolean);
+    return value.map((keyword) => String(keyword || "").trim()).filter(Boolean);
   }
 
   if (typeof value === "string") {
@@ -112,7 +110,7 @@ function ensureColumn(database, tableName, columnName, definitionSql) {
 
   if (!hasColumn) {
     database.exec(
-      `ALTER TABLE ${tableName} ADD COLUMN ${columnName} ${definitionSql}`
+      `ALTER TABLE ${tableName} ADD COLUMN ${columnName} ${definitionSql}`,
     );
   }
 }
@@ -189,7 +187,7 @@ function ensureSchema(database) {
           INSERT INTO app_meta(key, value)
           VALUES('schema_version', ?)
           ON CONFLICT(key) DO UPDATE SET value = excluded.value
-        `
+        `,
       )
       .run(SCHEMA_VERSION);
 
@@ -217,7 +215,7 @@ function getNextSortOrder(database, accountUsername) {
       SELECT COALESCE(MAX(sort_order), -1) + 1 AS next_sort_order
       FROM account_coins
       WHERE account_username = ?
-      `
+      `,
     )
     .get(accountUsername);
 
@@ -250,7 +248,7 @@ export function getAccountsWithCoins() {
       , image_url
       FROM accounts
       ORDER BY username ASC
-      `
+      `,
     )
     .all();
 
@@ -269,7 +267,7 @@ export function getAccountsWithCoins() {
     FROM account_coins
     WHERE account_username = ?
     ORDER BY sort_order ASC, id ASC
-    `
+    `,
   );
 
   return accounts.map((account) => ({
@@ -301,7 +299,7 @@ export function getAccountCoinAssociations() {
       FROM account_coins ac
       JOIN accounts a ON a.username = ac.account_username
       ORDER BY ac.account_username ASC, ac.sort_order ASC, ac.id ASC
-      `
+      `,
     )
     .all()
     .map((row) => ({
@@ -341,10 +339,14 @@ function normalizeAccountCoinPayload(payload = {}) {
     payload.timeBetweenSellsSeconds ?? payload.timeBetweenSells;
 
   return {
-    accountUsername: String(payload.accountUsername || payload.account_username || "").trim(),
+    accountUsername: String(
+      payload.accountUsername || payload.account_username || "",
+    ).trim(),
     coinName: String(payload.coinName || payload.name || "").trim(),
     coinAddress: String(payload.coinAddress || payload.address || "").trim(),
-    coinKeywords: normalizeKeywordsArray(payload.coinKeywords ?? payload.keywords),
+    coinKeywords: normalizeKeywordsArray(
+      payload.coinKeywords ?? payload.keywords,
+    ),
     amountToBuySol,
     percentToSell: nullableNumber(percentRaw),
     timeBetweenSellsSeconds: nullableInteger(timeBetweenRaw),
@@ -368,7 +370,7 @@ export function createAccount(payload) {
     .run(
       account.username,
       account.name || account.username,
-      account.imageUrl || null
+      account.imageUrl || null,
     );
 
   refreshTradingConfigSnapshot();
@@ -388,7 +390,11 @@ export function updateAccount(username, payload) {
 
   database
     .prepare("UPDATE accounts SET name = ?, image_url = ? WHERE username = ?")
-    .run(account.name || targetUsername, account.imageUrl || null, targetUsername);
+    .run(
+      account.name || targetUsername,
+      account.imageUrl || null,
+      targetUsername,
+    );
 
   refreshTradingConfigSnapshot();
   return getAccountsWithCoins();
@@ -403,7 +409,9 @@ export function deleteAccount(username) {
   }
 
   ensureAccountExists(database, targetUsername);
-  database.prepare("DELETE FROM accounts WHERE username = ?").run(targetUsername);
+  database
+    .prepare("DELETE FROM accounts WHERE username = ?")
+    .run(targetUsername);
 
   refreshTradingConfigSnapshot();
   return getAccountsWithCoins();
@@ -425,7 +433,9 @@ export function createAccountCoin(payload) {
     coin.percentToSell < 0 ||
     coin.percentToSell > 100
   ) {
-    throw new Error("Percent to sell is required and must be between 0 and 100");
+    throw new Error(
+      "Percent to sell is required and must be between 0 and 100",
+    );
   }
   if (
     coin.timeBetweenSellsSeconds === null ||
@@ -457,7 +467,7 @@ export function createAccountCoin(payload) {
         sort_order
       )
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `
+      `,
     )
     .run(
       coin.accountUsername,
@@ -468,7 +478,7 @@ export function createAccountCoin(payload) {
       coin.percentToSell,
       coin.timeBetweenSellsSeconds,
       coin.walletName,
-      sortOrder
+      sortOrder,
     );
 
   refreshTradingConfigSnapshot();
@@ -485,7 +495,9 @@ export function updateAccountCoin(id, payload) {
   }
 
   const existing = database
-    .prepare("SELECT id, account_username, sort_order FROM account_coins WHERE id = ?")
+    .prepare(
+      "SELECT id, account_username, sort_order FROM account_coins WHERE id = ?",
+    )
     .get(associationId);
 
   if (!existing) {
@@ -504,7 +516,9 @@ export function updateAccountCoin(id, payload) {
     coin.percentToSell < 0 ||
     coin.percentToSell > 100
   ) {
-    throw new Error("Percent to sell is required and must be between 0 and 100");
+    throw new Error(
+      "Percent to sell is required and must be between 0 and 100",
+    );
   }
   if (
     coin.timeBetweenSellsSeconds === null ||
@@ -531,7 +545,7 @@ export function updateAccountCoin(id, payload) {
         wallet_name = ?,
         sort_order = ?
       WHERE id = ?
-      `
+      `,
     )
     .run(
       coin.accountUsername,
@@ -543,7 +557,7 @@ export function updateAccountCoin(id, payload) {
       coin.timeBetweenSellsSeconds,
       coin.walletName,
       coin.sortOrder === null ? existing.sort_order : coin.sortOrder,
-      associationId
+      associationId,
     );
 
   refreshTradingConfigSnapshot();
@@ -603,7 +617,9 @@ function buildKeywordMap(accountMap) {
 
 function buildSnapshot() {
   const accounts = getAccountsWithCoins();
-  const accountMap = new Map(accounts.map((account) => [account.username, account]));
+  const accountMap = new Map(
+    accounts.map((account) => [account.username, account]),
+  );
   const keywordMap = buildKeywordMap(accountMap);
 
   const trumpAccount =

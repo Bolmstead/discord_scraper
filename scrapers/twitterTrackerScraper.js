@@ -22,7 +22,6 @@ const CONFIG = {
   SCAN_INTERVAL_AFTER_BUY: 3 * 60 * 1000,
   PERCENT_TO_SELL: 33,
   TIME_TO_WAIT_BETWEEN_SELLS: 4 * 1000,
-  DEFAULT_TIME_TO_WAIT_BEFORE_FIRST_SELL: 4 * 1000,
 };
 const IS_TEST_AUTOMATIC_BUY = false;
 const IS_TEST_SCRAPE_TWEET = false;
@@ -95,6 +94,17 @@ function getTimeBetweenSellsMs(buyPlan) {
   return CONFIG.TIME_TO_WAIT_BETWEEN_SELLS;
 }
 
+function getInitialSellDelayMs(buyPlan) {
+  const timeBetweenSellsMs = getTimeBetweenSellsMs(buyPlan);
+  const boughtAtMs = Number(buyPlan?.boughtAtMs);
+
+  if (!Number.isFinite(boughtAtMs) || boughtAtMs <= 0) {
+    return timeBetweenSellsMs;
+  }
+
+  return Math.max(0, boughtAtMs + timeBetweenSellsMs - Date.now());
+}
+
 async function executeBuyPlans(buyPlans, isTestMode) {
   const successfulBuys = [];
 
@@ -119,7 +129,7 @@ async function executeBuyPlans(buyPlans, isTestMode) {
       buyPlan.keywords || [],
       amountToBuy,
       buyPlan.slippageBps,
-      buyPlan.priorityFee
+      buyPlan.priorityFee,
     );
 
     if (wasSuccessful) {
@@ -127,6 +137,7 @@ async function executeBuyPlans(buyPlans, isTestMode) {
         ...buyPlan,
         walletName,
         amountToBuy,
+        boughtAtMs: Date.now(),
       });
     }
   }
@@ -135,12 +146,20 @@ async function executeBuyPlans(buyPlans, isTestMode) {
 }
 
 function scheduleSellOperations(successfulBuys) {
-  setTimeout(async () => {
-    for (const buy of successfulBuys) {
-      if (buy.dontSell) {
-        continue;
-      }
+  for (const buy of successfulBuys) {
+    if (buy.dontSell) {
+      continue;
+    }
 
+    const initialSellDelayMs = getInitialSellDelayMs(buy);
+
+    console.log(
+      `⏱️ Scheduling first sell for ${buy.walletName} in ${
+        initialSellDelayMs / 1000
+      } seconds...`,
+    );
+
+    setTimeout(async () => {
       try {
         console.log(`🤞 Selling tokens initiated for ${buy.walletName}...`);
         const percentToSell = getPercentToSell(buy);
@@ -149,19 +168,19 @@ function scheduleSellOperations(successfulBuys) {
           buy.walletName,
           buy.address,
           percentToSell,
-          timeBetweenSellsMs
+          timeBetweenSellsMs,
         );
         console.log(`Sell result for ${buy.walletName}:`, sellResult);
         await swapAllTokensToSolana(buy.walletName);
       } catch (error) {
         console.error(
           `Error executing sell operations for ${buy.walletName}:`,
-          error
+          error,
         );
         await swapAllTokensToSolana(buy.walletName);
       }
-    }
-  }, CONFIG.DEFAULT_TIME_TO_WAIT_BEFORE_FIRST_SELL);
+    }, initialSellDelayMs);
+  }
 }
 
 function logAccountCoinAssociations() {
@@ -169,8 +188,36 @@ function logAccountCoinAssociations() {
     const { accountMap } = getTradingMaps();
     const accounts = Array.from(accountMap.values());
 
+    console.log("👾👾👾👾👾 accounts:");
+    for (const account of accounts) {
+      console.log({
+        username: account?.username,
+        name: account?.name,
+        imageUrl: account?.imageUrl,
+      });
+      const coins = account?.coins || [];
+      if (!coins.length) {
+        console.log("    coins: (none)");
+        continue;
+      }
+      for (let i = 0; i < coins.length; i++) {
+        const c = coins[i];
+        console.log(`    coin[${i}]:`, {
+          id: c.id,
+          name: c.name,
+          address: c.address,
+          keywords: c.keywords,
+          walletName: c.walletName,
+          amountToBuySol: c.amountToBuySol,
+          percentToSell: c.percentToSell,
+          timeBetweenSellsSeconds: c.timeBetweenSellsSeconds,
+          sortOrder: c.sortOrder,
+        });
+      }
+    }
+
     console.log(
-      `🗂️ Trading config accounts snapshot: ${accounts.length} account(s)`
+      `🗂️ Trading config accounts snapshot: ${accounts.length} account(s)`,
     );
 
     if (!accounts.length) {
@@ -179,7 +226,8 @@ function logAccountCoinAssociations() {
     }
 
     for (const account of accounts) {
-      const accountUsername = String(account?.username || "").trim() || "unknown";
+      const accountUsername =
+        String(account?.username || "").trim() || "unknown";
       const coinNames = (account?.coins || [])
         .map((coin) => String(coin?.name || "").trim())
         .filter(Boolean);
@@ -199,9 +247,9 @@ export async function twitterTrackerScraper(page) {
   numOfRunsBeforeSellingAllTokens += 1;
   console.log(
     "⏳ numOfRunsBeforeSellingAllTokens:",
-    numOfRunsBeforeSellingAllTokens
+    numOfRunsBeforeSellingAllTokens,
   );
-  if (numOfRunsBeforeSellingAllTokens > 1200) {
+  if (numOfRunsBeforeSellingAllTokens > 10000) {
     await swapAllTokensToSolana("Berkley");
     await swapAllTokensToSolana("Sharif");
     numOfRunsBeforeSellingAllTokens = 0;
@@ -229,7 +277,7 @@ export async function twitterTrackerScraper(page) {
     const tweetElements = await page.$$(SELECTORS.TWEET_CONTAINER);
     const startIndex = Math.max(
       0,
-      tweetElements.length - CONFIG.MAX_TWEETS_TO_SCAN
+      tweetElements.length - CONFIG.MAX_TWEETS_TO_SCAN,
     );
 
     const tweets = await Promise.all(
@@ -261,7 +309,7 @@ export async function twitterTrackerScraper(page) {
           console.error("Error processing tweet:", err);
           return null;
         }
-      })
+      }),
     );
 
     const validTweets = tweets.filter((tweet) => tweet !== null);
@@ -277,7 +325,7 @@ export async function twitterTrackerScraper(page) {
         tweet.username,
         tweet.text,
         IS_TEST_AUTOMATIC_BUY,
-        IS_TEST_SCRAPE_TWEET
+        IS_TEST_SCRAPE_TWEET,
       );
 
       if (result?.buyPlans?.length) {
@@ -318,12 +366,12 @@ export async function twitterTrackerScraper(page) {
         firstBuy.name,
         firstBuy.address,
         decision.chosenKeyword,
-        postText
+        postText,
       );
       await sendTelegramMessage(
         `Wallets used: ${successfulBuys
           .map((buy) => buy.walletName)
-          .join(", ")}`
+          .join(", ")}`,
       );
     }
 

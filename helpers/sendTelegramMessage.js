@@ -1,20 +1,37 @@
 import axios from "axios";
 
+function formatSendError(error) {
+  if (!error) return "unknown error";
+  if (axios.isAxiosError?.(error)) {
+    const data = error.response?.data;
+    const fromApi =
+      typeof data === "object" && data !== null && "description" in data
+        ? data.description
+        : typeof data === "string"
+          ? data
+          : null;
+    const parts = [
+      error.message,
+      error.response?.status != null ? `HTTP ${error.response.status}` : null,
+      fromApi,
+    ].filter(Boolean);
+    return parts.join(" — ") || error.message;
+  }
+  return error.message || String(error);
+}
+
 async function sendTelegramMessage(text) {
   console.log("📮 Sending Telegram message:", text);
   try {
-    const topicId = process.env.TWITTER_TRACKER_TELEGRAM_THREAD_ID;
-
     await axios.post(
       `https://api.telegram.org/bot${process.env.SHITCOIN_TRACKER_TELEGRAM_BOT_TOKEN}/sendMessage`,
       {
         chat_id: process.env.BOTS_TELEGRAM_CHAT_ID,
-        message_thread_id: topicId,
         text: text,
       }
     );
   } catch (error) {
-    console.error("Error sending Telegram message:", error);
+    console.error("Error sending Telegram message:", formatSendError(error));
   }
 }
 
@@ -41,7 +58,7 @@ ${postText}`;
     await sendTelegramMessage(firstMessage);
     await sendTelegramMessage(secondMessage);
   } catch (error) {
-    console.error("Error sending Telegram message:", error);
+    console.error("Error sending Telegram message:", formatSendError(error));
   }
 }
 
