@@ -106,6 +106,39 @@ function IconButton(props) {
   );
 }
 
+function StatusModal(props) {
+  if (!props.modal) {
+    return null;
+  }
+
+  const tone = props.modal.tone || "success";
+
+  return h(
+    "div",
+    {
+      className: "modal-backdrop",
+      onClick: () => {
+        if (props.onClose) {
+          props.onClose();
+        }
+      },
+    },
+    h(
+      "div",
+      {
+        className: `modal-card modal-card-${tone}`,
+        role: "dialog",
+        "aria-modal": "true",
+        "aria-live": "polite",
+        "aria-label": props.modal.title || "Status update",
+        onClick: (event) => event.stopPropagation(),
+      },
+      h("h3", null, props.modal.title),
+      props.modal.message ? h("p", null, props.modal.message) : null
+    )
+  );
+}
+
 function LoginCard(props) {
   return h(
     "div",
@@ -161,7 +194,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
-  const [status, setStatus] = useState("");
+  const [statusModal, setStatusModal] = useState(null);
 
   const [authenticated, setAuthenticated] = useState(false);
   const [authEnabled, setAuthEnabled] = useState(true);
@@ -172,7 +205,6 @@ function App() {
   const [loginLoading, setLoginLoading] = useState(false);
 
   const [databasePath, setDatabasePath] = useState("");
-  const [pendingAccountDelete, setPendingAccountDelete] = useState(null);
   const [accounts, setAccounts] = useState([]);
   const [newAccount, setNewAccount] = useState({
     username: "",
@@ -264,29 +296,47 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!pendingAccountDelete) {
+    if (!statusModal) {
       return undefined;
     }
 
     function onKeyDown(event) {
       if (event.key === "Escape") {
-        setPendingAccountDelete(null);
+        setStatusModal(null);
       }
     }
 
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [pendingAccountDelete]);
+    const timer = window.setTimeout(() => {
+      setStatusModal(null);
+    }, 2000);
 
-  async function withMutation(task, successMessage = "Saved successfully.") {
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.clearTimeout(timer);
+    };
+  }, [statusModal]);
+
+  async function withMutation(task, options = {}) {
+    const { alertTitle = "", alertMessage = "" } = options;
+
     try {
       setSaving(true);
-      setStatus("");
       setError("");
+      setStatusModal(null);
       const snapshot = await task();
       applySnapshot(snapshot);
-      setStatus(successMessage);
+      if (alertTitle || alertMessage) {
+        setStatusModal({
+          title: alertTitle || "Saved",
+          message: alertMessage,
+          tone: "success",
+        });
+      } else {
+        setStatusModal(null);
+      }
     } catch (mutationError) {
+      setStatusModal(null);
       setError(mutationError.message || "Update failed");
     } finally {
       setSaving(false);
@@ -332,19 +382,28 @@ function App() {
     setAuthenticated(false);
     setViewer("");
     setAccounts([]);
-    setStatus("");
     setError("");
   }
 
   function handleCreateAccount(event) {
     event.preventDefault();
+    const accountDetails = {
+      username: String(newAccount.username || "").trim(),
+      name: String(newAccount.name || "").trim(),
+    };
+
     withMutation(
       () =>
         apiRequest("/api/trading-config/accounts", {
           method: "POST",
           body: JSON.stringify(newAccount),
         }),
-      "Account created."
+      {
+        alertTitle: "Saved",
+        alertMessage: `${
+          accountDetails.name || accountDetails.username || "New account"
+        } created.`,
+      }
     );
     setNewAccount({ username: "", name: "", imageUrl: "" });
   }
@@ -379,7 +438,7 @@ function App() {
             ),
           }),
         }),
-      "Coin added."
+      { alertTitle: "Saved" }
     );
 
     setNewCoinForms((current) => ({
@@ -394,27 +453,6 @@ function App() {
         timeBetweenSellsSeconds: "",
       },
     }));
-  }
-
-  function confirmDeleteAccount() {
-    if (!pendingAccountDelete || saving) {
-      return;
-    }
-
-    const accountUsername = pendingAccountDelete.username;
-    setPendingAccountDelete(null);
-
-    withMutation(
-      () =>
-        apiRequest(
-          `/api/trading-config/accounts/${encodeURIComponent(accountUsername)}`,
-          {
-            method: "DELETE",
-            body: "{}",
-          }
-        ),
-      "Account removed."
-    );
   }
 
   if (loading) {
@@ -438,6 +476,10 @@ function App() {
   return h(
     "div",
     { className: "container" },
+    h(StatusModal, {
+      modal: statusModal,
+      onClose: () => setStatusModal(null),
+    }),
     h(
       "div",
       { className: "header" },
@@ -467,12 +509,11 @@ function App() {
                 "Sign out"
               )
             : h("span", { className: "subtitle" }, "Local mode (auth disabled)"),
-          saving ? h("span", { className: "saving" }, "Saving...") : null
+          null
         )
       )
     ),
 
-    status ? h("div", { className: "card success" }, status) : null,
     error ? h("div", { className: "card warning" }, error) : null,
 
     h(
@@ -565,20 +606,6 @@ function App() {
                       h("span", { className: "account-title" }, account.username),
                       h("span", { className: "account-display-name" }, displayName)
                     )
-                  ),
-                  h(
-                    "div",
-                    { className: "actions-cell" },
-                    h(IconButton, {
-                      icon: "delete",
-                      label: `Delete ${account.username}`,
-                      disabled: saving,
-                      onClick: () =>
-                        setPendingAccountDelete({
-                          username: account.username,
-                          name: displayName,
-                        }),
-                    })
                   )
                 ),
 
@@ -948,11 +975,13 @@ function App() {
                                           timeBetweenSellsSeconds:
                                             numberValueOrNull(
                                               coinDraft.timeBetweenSellsSeconds
-                                            ),
+                                          ),
                                         }),
                                       }
                                     ),
-                                  "Coin updated."
+                                  {
+                                    alertTitle: "Saved",
+                                  }
                                 ),
                             }),
                             h(IconButton, {
@@ -969,7 +998,9 @@ function App() {
                                         body: "{}",
                                       }
                                     ),
-                                  "Coin removed."
+                                  {
+                                    alertTitle: "Deleted",
+                                  }
                                 ),
                             })
                           )
@@ -981,62 +1012,7 @@ function App() {
               );
             })
       )
-    ),
-
-    pendingAccountDelete
-      ? h(
-          "div",
-          {
-            className: "modal-backdrop",
-            onClick: () => {
-              if (!saving) {
-                setPendingAccountDelete(null);
-              }
-            },
-          },
-          h(
-            "div",
-            {
-              className: "modal-card",
-              role: "dialog",
-              "aria-modal": "true",
-              "aria-label": "Confirm account deletion",
-              onClick: (event) => event.stopPropagation(),
-            },
-            h("h3", null, "Delete Account"),
-            h(
-              "p",
-              null,
-              `Delete ${pendingAccountDelete.name || pendingAccountDelete.username}?`,
-              " This removes all coins under this account."
-            ),
-            h(
-              "div",
-              { className: "modal-actions" },
-              h(
-                "button",
-                {
-                  type: "button",
-                  className: "btn secondary",
-                  disabled: saving,
-                  onClick: () => setPendingAccountDelete(null),
-                },
-                "Cancel"
-              ),
-              h(
-                "button",
-                {
-                  type: "button",
-                  className: "btn danger",
-                  disabled: saving,
-                  onClick: confirmDeleteAccount,
-                },
-                "Delete"
-              )
-            )
-          )
-        )
-      : null
+    )
   );
 }
 

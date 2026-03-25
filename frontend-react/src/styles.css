@@ -358,6 +358,11 @@ td.actions-cell {
   border-radius: 12px;
   padding: 16px;
   box-shadow: 0 18px 40px rgba(12, 23, 40, 0.25);
+  text-align: center;
+}
+
+.modal-card-success {
+  border-color: #bddbc7;
 }
 
 .modal-card h3 {
@@ -367,13 +372,6 @@ td.actions-cell {
 .modal-card p {
   margin: 0;
   color: var(--ink-soft);
-}
-
-.modal-actions {
-  margin-top: 14px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
 }
 
 @media (max-width: 900px) {
