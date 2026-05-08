@@ -24,6 +24,15 @@ const connection = new Connection(process.env.HELIUS_RPC_URL);
 const jupiterAPI = createJupiterApiClient();
 const NO_TOKEN_POSITION_REASON = "NO_TOKEN_POSITION";
 
+function getRpcEndpointForLogs() {
+  return (
+    connection?.rpcEndpoint ||
+    connection?._rpcEndpoint ||
+    process.env.HELIUS_RPC_URL ||
+    "unknown"
+  );
+}
+
 function getNoTokenPositionMessage(memeTokenAddress, walletAddress) {
   return `No token position found for ${memeTokenAddress} in wallet ${walletAddress}`;
 }
@@ -66,6 +75,36 @@ async function getAllTokenAccountsByOwner(ownerPublicKey) {
   );
 
   return tokenAccountResults.flatMap((result) => result.value);
+}
+
+async function findTokenAccountForMint(ownerPublicKey, mintPublicKey) {
+  const tokenPrograms = [TOKEN_PROGRAM_ID, TOKEN_2022_PROGRAM_ID];
+
+  for (const programId of tokenPrograms) {
+    const accounts = await connection.getParsedTokenAccountsByOwner(
+      ownerPublicKey,
+      { programId }
+    );
+
+    const matching = accounts.value
+      .map((entry) => ({
+        pubkey: entry.pubkey,
+        parsed: entry.account.data?.parsed,
+      }))
+      .filter((x) => x.parsed?.type === "account")
+      .filter((x) => x.parsed?.info?.mint === mintPublicKey.toString())
+      .map((x) => ({
+        pubkey: x.pubkey,
+        amount: Number(x.parsed?.info?.tokenAmount?.amount || 0),
+      }))
+      .filter((x) => x.amount > 0);
+
+    if (matching.length > 0) {
+      return matching[0].pubkey;
+    }
+  }
+
+  return null;
 }
 
 function getWalletFromName(walletName) {
@@ -486,50 +525,85 @@ async function sellTokenPercent(
   console.log(`💵 SOLANA token address: ${solanaAddress.toString()}`);
 
   try {
-    console.log("🔍 Getting associated token account...");
-    let userTokenAccount;
-    let tokenProgramId;
-    try {
-      tokenProgramId = await getTokenProgramIdForMint(memeTokenPublicKey);
-      console.log(`🧾 Token program: ${tokenProgramId.toString()}`);
-      userTokenAccount = await getAssociatedTokenAddress(
-        memeTokenPublicKey,
-        wallet.publicKey,
-        false,
-        tokenProgramId
+    console.log("🔍 Finding token account for mint...");
+    const userTokenAccount = await findTokenAccountForMint(
+      wallet.publicKey,
+      memeTokenPublicKey
+    );
+
+    if (!userTokenAccount) {
+      console.log(`🌐 RPC endpoint: ${getRpcEndpointForLogs()}`);
+      try {
+        const gh = await connection.getGenesisHash();
+        console.log(`🧬 Genesis hash: ${gh}`);
+      } catch (e) {
+        console.log(`🧬 Genesis hash unavailable: ${e?.message || e}`);
+      }
+
+      const noTokenMessage = getNoTokenPositionMessage(
+        memeTokenAddress,
+        wallet.publicKey.toString()
       );
-      console.log(
-        `📂 Associated token account: ${userTokenAccount.toString()}`
-      );
-    } catch (error) {
-      console.error("Error getting associated token address:", error);
-      sendTelegramMessage(
-        `Error getting associated token address: ${error.message}`
-      );
-      throw error;
+      console.log(`ℹ️ ${noTokenMessage}`);
+      return {
+        success: false,
+        error: noTokenMessage,
+        terminal: true,
+        reason: NO_TOKEN_POSITION_REASON,
+      };
     }
+
+    console.log(`📂 Using token account: ${userTokenAccount.toString()}`);
 
     console.log("💰 Checking token balance...");
     let tokenBalance;
     try {
-      const tokenAccountInfo = await connection.getAccountInfo(userTokenAccount);
-      if (!tokenAccountInfo) {
-        const noTokenMessage = getNoTokenPositionMessage(
-          memeTokenAddress,
-          wallet.publicKey.toString()
-        );
-        console.log(`ℹ️ ${noTokenMessage}`);
-        return {
-          success: false,
-          error: noTokenMessage,
-          terminal: true,
-          reason: NO_TOKEN_POSITION_REASON,
-        };
-      }
-
       tokenBalance = await connection.getTokenAccountBalance(userTokenAccount);
     } catch (error) {
       if (isMissingTokenAccountError(error)) {
+        console.log(`🌐 RPC endpoint: ${getRpcEndpointForLogs()}`);
+        console.log(
+          `🧾 Token account missing per RPC: ${userTokenAccount.toString()}`
+        );
+        try {
+          const info = await connection.getAccountInfo(userTokenAccount);
+          console.log(
+            `🔎 getAccountInfo(${userTokenAccount.toString()}) -> ${
+              info ? "exists" : "null"
+            }`
+          );
+        } catch (e) {
+          console.log(`🔎 getAccountInfo failed: ${e?.message || e}`);
+        }
+        try {
+          const parsed = await connection.getParsedTokenAccountsByOwner(
+            wallet.publicKey,
+            { mint: memeTokenPublicKey }
+          );
+          console.log(
+            `📚 Parsed token accounts for mint: ${parsed.value.length}`
+          );
+          for (const v of parsed.value.slice(0, 5)) {
+            const ta = v.account.data?.parsed?.info?.tokenAmount;
+            console.log(
+              JSON.stringify(
+                {
+                  tokenAccount: v.pubkey.toString(),
+                  uiAmount: ta?.uiAmount,
+                  amount: ta?.amount,
+                  decimals: ta?.decimals,
+                },
+                null,
+                2
+              )
+            );
+          }
+        } catch (e) {
+          console.log(
+            `📚 getParsedTokenAccountsByOwner(mint) failed: ${e?.message || e}`
+          );
+        }
+
         const noTokenMessage = getNoTokenPositionMessage(
           memeTokenAddress,
           wallet.publicKey.toString()
