@@ -21,10 +21,44 @@ function splitKeywords(text) {
     return [];
   }
 
-  return String(text)
-    .split(",")
-    .map((keyword) => keyword.trim())
-    .filter(Boolean);
+  const keywords = [];
+  let current = "";
+  let inQuotes = false;
+  const source = String(text);
+
+  for (let index = 0; index < source.length; index += 1) {
+    const character = source[index];
+    const nextCharacter = source[index + 1];
+
+    if (character === '"' && inQuotes && nextCharacter === '"') {
+      current += '"';
+      index += 1;
+      continue;
+    }
+
+    if (character === '"') {
+      inQuotes = !inQuotes;
+      continue;
+    }
+
+    if (character === "," && !inQuotes) {
+      const keyword = current.trim();
+      if (keyword) {
+        keywords.push(keyword);
+      }
+      current = "";
+      continue;
+    }
+
+    current += character;
+  }
+
+  const keyword = current.trim();
+  if (keyword) {
+    keywords.push(keyword);
+  }
+
+  return keywords;
 }
 
 function keywordsToText(keywords) {
@@ -32,7 +66,9 @@ function keywordsToText(keywords) {
     return "";
   }
 
-  return keywords.join(", ");
+  return keywords
+    .map((keyword) => `"${String(keyword).replaceAll('"', '""')}"`)
+    .join(", ");
 }
 
 function buildBullxUrl(address) {
@@ -42,6 +78,27 @@ function buildBullxUrl(address) {
   }
 
   return `${BULLX_BASE_URL}${encodeURIComponent(trimmedAddress)}`;
+}
+
+function preventNumberInputStep(event) {
+  event.preventDefault();
+}
+
+function numberInputProps(props) {
+  return {
+    ...props,
+    type: "number",
+    onWheel: preventNumberInputStep,
+    onKeyDown: (event) => {
+      if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+        preventNumberInputStep(event);
+      }
+
+      if (props.onKeyDown) {
+        props.onKeyDown(event);
+      }
+    },
+  };
 }
 
 async function apiRequest(path, options) {
@@ -689,9 +746,8 @@ function App() {
                   h(
                     InlineField,
                     { label: "Buy Amount (SOL)" },
-                    h("input", {
+                    h("input", numberInputProps({
                       value: newCoin.amountToBuySol,
-                      type: "number",
                       step: "any",
                       required: true,
                       onChange: (event) =>
@@ -702,14 +758,13 @@ function App() {
                             amountToBuySol: event.target.value,
                           },
                         })),
-                    })
+                    }))
                   ),
                   h(
                     InlineField,
                     { label: "Sell (%)" },
-                    h("input", {
+                    h("input", numberInputProps({
                       value: newCoin.percentToSell,
-                      type: "number",
                       step: "any",
                       min: "0",
                       max: "100",
@@ -722,14 +777,13 @@ function App() {
                             percentToSell: event.target.value,
                           },
                         })),
-                    })
+                    }))
                   ),
                   h(
                     InlineField,
                     { label: "Seconds Between Sells" },
-                    h("input", {
+                    h("input", numberInputProps({
                       value: newCoin.timeBetweenSellsSeconds,
-                      type: "number",
                       step: "1",
                       min: "0",
                       required: true,
@@ -741,7 +795,7 @@ function App() {
                             timeBetweenSellsSeconds: event.target.value,
                           },
                         })),
-                    })
+                    }))
                   ),
                   h(
                     "button",
@@ -877,9 +931,8 @@ function App() {
                           h(
                             "td",
                             null,
-                            h("input", {
+                            h("input", numberInputProps({
                               value: coinDraft.amountToBuySol,
-                              type: "number",
                               step: "any",
                               onChange: (event) =>
                                 setCoinDrafts((current) => ({
@@ -889,14 +942,13 @@ function App() {
                                     amountToBuySol: event.target.value,
                                   },
                                 })),
-                            })
+                            }))
                           ),
                           h(
                             "td",
                             null,
-                            h("input", {
+                            h("input", numberInputProps({
                               value: coinDraft.percentToSell,
-                              type: "number",
                               step: "any",
                               min: "0",
                               max: "100",
@@ -908,14 +960,13 @@ function App() {
                                     percentToSell: event.target.value,
                                   },
                                 })),
-                            })
+                            }))
                           ),
                           h(
                             "td",
                             null,
-                            h("input", {
+                            h("input", numberInputProps({
                               value: coinDraft.timeBetweenSellsSeconds,
-                              type: "number",
                               step: "1",
                               min: "0",
                               onChange: (event) =>
@@ -926,7 +977,7 @@ function App() {
                                     timeBetweenSellsSeconds: event.target.value,
                                   },
                                 })),
-                            })
+                            }))
                           ),
                           h(
                             "td",

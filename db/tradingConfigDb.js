@@ -49,16 +49,54 @@ function parseJson(value, fallbackValue) {
   }
 }
 
+function splitKeywordText(value) {
+  const keywords = [];
+  let current = "";
+  let inQuotes = false;
+  const source = String(value || "");
+
+  for (let index = 0; index < source.length; index += 1) {
+    const character = source[index];
+    const nextCharacter = source[index + 1];
+
+    if (character === '"' && inQuotes && nextCharacter === '"') {
+      current += '"';
+      index += 1;
+      continue;
+    }
+
+    if (character === '"') {
+      inQuotes = !inQuotes;
+      continue;
+    }
+
+    if (character === "," && !inQuotes) {
+      const keyword = current.trim();
+      if (keyword) {
+        keywords.push(keyword);
+      }
+      current = "";
+      continue;
+    }
+
+    current += character;
+  }
+
+  const keyword = current.trim();
+  if (keyword) {
+    keywords.push(keyword);
+  }
+
+  return keywords;
+}
+
 function normalizeKeywordsArray(value) {
   if (Array.isArray(value)) {
     return value.map((keyword) => String(keyword || "").trim()).filter(Boolean);
   }
 
   if (typeof value === "string") {
-    return value
-      .split(",")
-      .map((keyword) => keyword.trim())
-      .filter(Boolean);
+    return splitKeywordText(value);
   }
 
   return [];
