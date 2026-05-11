@@ -14,7 +14,7 @@ This project combines browser automation, a custom rule engine, blockchain
 transaction execution, alerting, and a React admin UI into one end-to-end
 workflow.
 
-## Recruiter Snapshot
+## Project Highlights
 
 | Area | What this project demonstrates |
 | --- | --- |
@@ -259,6 +259,6 @@ This is more than a scraper. It is a complete operational system: a browser
 automation loop, a decision engine, a blockchain execution path, a persistence
 layer, a management dashboard, and alerting around the critical failure points.
 
-For recruiters and hiring teams, it shows the ability to connect messy
-real-world inputs to high-stakes automated actions while still building the
-supporting tools that make the system usable, inspectable, and maintainable.
+It connects messy real-world inputs to high-stakes automated actions while
+still providing the supporting tools that make the system usable, inspectable,
+and maintainable.
